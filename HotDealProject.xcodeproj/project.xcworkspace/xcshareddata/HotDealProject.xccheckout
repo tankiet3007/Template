@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>12E9A479-5AB6-402F-93AB-D11F3D8E566F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>HotDealProject</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BAFF2DEA8F355C70657E4B3D91DBE2BD894BC4C7</key>
+		<string>https://github.com/tankiet3007/Template.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>HotDealProject.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BAFF2DEA8F355C70657E4B3D91DBE2BD894BC4C7</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/tankiet3007/Template.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BAFF2DEA8F355C70657E4B3D91DBE2BD894BC4C7</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BAFF2DEA8F355C70657E4B3D91DBE2BD894BC4C7</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IOS_Template</string>
+		</dict>
+	</array>
+</dict>
+</plist>

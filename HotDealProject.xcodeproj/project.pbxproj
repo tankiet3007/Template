@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E97B700B1ADA01790099B5C2 /* DealItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B700A1ADA01790099B5C2 /* DealItem.m */; };
+		E97B700D1ADA01AF0099B5C2 /* DealItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = E97B700C1ADA01AF0099B5C2 /* DealItem.xib */; };
 		E98FCF391AD8CA9100992BF0 /* ImageSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = E98FCF291AD8CA9100992BF0 /* ImageSlide.m */; };
 		E98FCF3A1AD8CA9100992BF0 /* ImageSwipe.m in Sources */ = {isa = PBXBuildFile; fileRef = E98FCF2B1AD8CA9100992BF0 /* ImageSwipe.m */; };
 		E98FCF3B1AD8CA9100992BF0 /* BasicMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E98FCF2F1AD8CA9100992BF0 /* BasicMapAnnotation.m */; };
@@ -100,6 +102,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E97B70091ADA01790099B5C2 /* DealItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealItem.h; path = Control/DealItem.h; sourceTree = "<group>"; };
+		E97B700A1ADA01790099B5C2 /* DealItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealItem.m; path = Control/DealItem.m; sourceTree = "<group>"; };
+		E97B700C1ADA01AF0099B5C2 /* DealItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DealItem.xib; path = ../../HotDealProject/HotDealProject/DealItem.xib; sourceTree = "<group>"; };
 		E98FCF281AD8CA9100992BF0 /* ImageSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSlide.h; sourceTree = "<group>"; };
 		E98FCF291AD8CA9100992BF0 /* ImageSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSlide.m; sourceTree = "<group>"; };
 		E98FCF2A1AD8CA9100992BF0 /* ImageSwipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSwipe.h; sourceTree = "<group>"; };
@@ -283,6 +288,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E97B70081AD9FDA60099B5C2 /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				E97B70091ADA01790099B5C2 /* DealItem.h */,
+				E97B700A1ADA01790099B5C2 /* DealItem.m */,
+				E97B700C1ADA01AF0099B5C2 /* DealItem.xib */,
+			);
+			name = Control;
+			sourceTree = "<group>";
+		};
 		E98FCF221AD8CA1900992BF0 /* CustomeControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -648,6 +663,7 @@
 		E9D3BD681AD6BA5400F7429B /* HotDealProject */ = {
 			isa = PBXGroup;
 			children = (
+				E97B70081AD9FDA60099B5C2 /* Control */,
 				E9AE20931AD80BE2002E11AC /* Resources */,
 				E9AE20921AD80BA6002E11AC /* Controller */,
 				E9AE1FB71AD804D2002E11AC /* Library */,
@@ -776,6 +792,7 @@
 			files = (
 				E9AE1FB31AD80455002E11AC /* StartupViewController.xib in Resources */,
 				E9AE1FAF1AD80455002E11AC /* LeftMenuViewController.xib in Resources */,
+				E97B700D1ADA01AF0099B5C2 /* DealItem.xib in Resources */,
 				E9A53F8F1AD9622D009DB98C /* clickme-1-320x200.png in Resources */,
 				E9AE1FB11AD80455002E11AC /* MainViewController.xib in Resources */,
 				E9D3BD7D1AD6BA5400F7429B /* LaunchScreen.xib in Resources */,
@@ -834,6 +851,7 @@
 				E98FCF3E1AD8CA9100992BF0 /* JingDianMapCell.m in Sources */,
 				E9AE20271AD80A5E002E11AC /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				E9AE208D1AD80B68002E11AC /* TTTAttributedLabel.m in Sources */,
+				E97B700B1ADA01790099B5C2 /* DealItem.m in Sources */,
 				E9AE20411AD80A5E002E11AC /* UIImageView+WebCache.m in Sources */,
 				E98FCF391AD8CA9100992BF0 /* ImageSlide.m in Sources */,
 				E9AE202D1AD80A5E002E11AC /* MagicalRecord+ErrorHandling.m in Sources */,

@@ -9,7 +9,9 @@
 #import "MainViewController.h"
 #import "SWRevealViewController.h"
 #import "Reachability.h"
+#import "DealItem.h"
 #define HEADER_HEIGHT 156
+#define PADDING 10
 @interface MainViewController ()
 
 @end
@@ -19,6 +21,8 @@
     SWRevealViewController *revealController;
     Reachability * reachability;
     ImageSlide *imageSlideTop;
+    UIScrollView * scrollView;
+    NSMutableArray * arrNewDeals;
 }
 @synthesize tableViewMain;
 - (void)viewDidLoad {
@@ -28,7 +32,9 @@
     [self checkNetwork];
     [self initUITableView];
     [self initNavigationbar];
+    [self initData];
     [self setupSlide];
+    [self setupNewDeal];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -47,7 +53,34 @@
     imageSlideTop.galleryImages = galleryImages;
     imageSlideTop.delegate = self;
     [imageSlideTop initScrollLocal2];
-
+}
+-(void)initData
+{
+    arrNewDeals = [[NSMutableArray alloc]init];
+    arrNewDeals = [NSMutableArray arrayWithObjects:@"Deal 1",@"Deal 2",@"Deal 3",@"Deal 4",@"Deal 5",@"Deal 6",@"Deal 7",@"Deal 8",@"Deal 9",@"Deal 10",@"Deal 11",@"Deal 12", nil];
+}
+-(UIScrollView *)setupNewDeal
+{
+    if (scrollView != nil) {
+        [scrollView removeFromSuperview];
+        scrollView = nil;
+    }
+    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 30, 320, 200)];
+    scrollView.backgroundColor = [UIColor clearColor];
+    
+    int x = 0;
+    for (int i = 0; i < [arrNewDeals count]; i++) {
+        DealItem *itemS = [[[NSBundle mainBundle] loadNibNamed:@"DealItem" owner:self options:nil] objectAtIndex:0];
+        [itemS setFrame:CGRectMake(x, 0, 280, 200)];
+        
+        itemS.backgroundColor = [UIColor greenColor];
+        itemS.lblBooks.text = @"Something like this";
+        itemS.lblName.text = [arrNewDeals objectAtIndex:i];
+        x += itemS.frame.size.width + PADDING;
+        [scrollView addSubview:itemS];
+    }
+    scrollView.contentSize = CGSizeMake(x, scrollView.frame.size.height);
+    return scrollView;
 }
 -(void)initUITableView
 {
@@ -128,6 +161,8 @@
 {
     if (indexPath.section == 0) {
         return HEADER_HEIGHT;
+    }    if (indexPath.section == 1) {
+        return 250;
     }
     return 110;
 }
@@ -140,10 +175,10 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        static NSString *CellIdentifier = @"FamousProgramTableViewCell";
+        static NSString *CellIdentifier = @"CellIdentifier";
         
         
-        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:nil];
         if (cell == nil)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
@@ -160,7 +195,19 @@
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
-        cell.textLabel.text = @"OK something";
+//        cell.textLabel.text = @"OK something";
+        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 300, 20)];
+        NSDate * date = [NSDate date];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"dd/MM"];
+        NSString * strToday = [formatter stringFromDate:date];
+        
+        NSLog(@"%@", strToday);
+        lblTitle.text = F(@"Deal mới nhất ngày %@",strToday);
+        lblTitle.font = [UIFont boldSystemFontOfSize:14];
+        lblTitle.textColor = [UIColor redColor];
+        [cell.contentView addSubview:lblTitle];
+        [cell.contentView addSubview:scrollView];
             return cell;
     }
     if (indexPath.section == 2) {
