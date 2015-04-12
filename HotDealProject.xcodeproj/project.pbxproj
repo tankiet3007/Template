@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		E97B700B1ADA01790099B5C2 /* DealItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B700A1ADA01790099B5C2 /* DealItem.m */; };
 		E97B700D1ADA01AF0099B5C2 /* DealItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = E97B700C1ADA01AF0099B5C2 /* DealItem.xib */; };
+		E97B70211ADA43D30099B5C2 /* ComOpenThreadOTScreenshotHelperSwizzleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B70111ADA43D30099B5C2 /* ComOpenThreadOTScreenshotHelperSwizzleHelper.m */; };
+		E97B70221ADA43D30099B5C2 /* DragTableFooterView_ot.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B70141ADA43D30099B5C2 /* DragTableFooterView_ot.m */; };
+		E97B70231ADA43D30099B5C2 /* DragTableGestureObserver_ot.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B70161ADA43D30099B5C2 /* DragTableGestureObserver_ot.m */; };
+		E97B70241ADA43D30099B5C2 /* DragTableHeaderView_ot.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B70181ADA43D30099B5C2 /* DragTableHeaderView_ot.m */; };
+		E97B70251ADA43D30099B5C2 /* UIScrollView+DragTableSafeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B701A1ADA43D30099B5C2 /* UIScrollView+DragTableSafeAnimation.m */; };
+		E97B70261ADA43D30099B5C2 /* UITableView+DragLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B701D1ADA43D30099B5C2 /* UITableView+DragLoad.m */; };
+		E97B70271ADA43D30099B5C2 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E97B701F1ADA43D30099B5C2 /* blueArrow.png */; };
+		E97B70281ADA43D30099B5C2 /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E97B70201ADA43D30099B5C2 /* blueArrow@2x.png */; };
 		E98FCF391AD8CA9100992BF0 /* ImageSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = E98FCF291AD8CA9100992BF0 /* ImageSlide.m */; };
 		E98FCF3A1AD8CA9100992BF0 /* ImageSwipe.m in Sources */ = {isa = PBXBuildFile; fileRef = E98FCF2B1AD8CA9100992BF0 /* ImageSwipe.m */; };
 		E98FCF3B1AD8CA9100992BF0 /* BasicMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E98FCF2F1AD8CA9100992BF0 /* BasicMapAnnotation.m */; };
@@ -105,6 +113,21 @@
 		E97B70091ADA01790099B5C2 /* DealItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealItem.h; path = Control/DealItem.h; sourceTree = "<group>"; };
 		E97B700A1ADA01790099B5C2 /* DealItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealItem.m; path = Control/DealItem.m; sourceTree = "<group>"; };
 		E97B700C1ADA01AF0099B5C2 /* DealItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DealItem.xib; path = ../../HotDealProject/HotDealProject/DealItem.xib; sourceTree = "<group>"; };
+		E97B70101ADA43D30099B5C2 /* ComOpenThreadOTScreenshotHelperSwizzleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComOpenThreadOTScreenshotHelperSwizzleHelper.h; sourceTree = "<group>"; };
+		E97B70111ADA43D30099B5C2 /* ComOpenThreadOTScreenshotHelperSwizzleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComOpenThreadOTScreenshotHelperSwizzleHelper.m; sourceTree = "<group>"; };
+		E97B70121ADA43D30099B5C2 /* DragTableDragState_ot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragTableDragState_ot.h; sourceTree = "<group>"; };
+		E97B70131ADA43D30099B5C2 /* DragTableFooterView_ot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragTableFooterView_ot.h; sourceTree = "<group>"; };
+		E97B70141ADA43D30099B5C2 /* DragTableFooterView_ot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragTableFooterView_ot.m; sourceTree = "<group>"; };
+		E97B70151ADA43D30099B5C2 /* DragTableGestureObserver_ot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragTableGestureObserver_ot.h; sourceTree = "<group>"; };
+		E97B70161ADA43D30099B5C2 /* DragTableGestureObserver_ot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragTableGestureObserver_ot.m; sourceTree = "<group>"; };
+		E97B70171ADA43D30099B5C2 /* DragTableHeaderView_ot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragTableHeaderView_ot.h; sourceTree = "<group>"; };
+		E97B70181ADA43D30099B5C2 /* DragTableHeaderView_ot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragTableHeaderView_ot.m; sourceTree = "<group>"; };
+		E97B70191ADA43D30099B5C2 /* UIScrollView+DragTableSafeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+DragTableSafeAnimation.h"; sourceTree = "<group>"; };
+		E97B701A1ADA43D30099B5C2 /* UIScrollView+DragTableSafeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+DragTableSafeAnimation.m"; sourceTree = "<group>"; };
+		E97B701C1ADA43D30099B5C2 /* UITableView+DragLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+DragLoad.h"; sourceTree = "<group>"; };
+		E97B701D1ADA43D30099B5C2 /* UITableView+DragLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+DragLoad.m"; sourceTree = "<group>"; };
+		E97B701F1ADA43D30099B5C2 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		E97B70201ADA43D30099B5C2 /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
 		E98FCF281AD8CA9100992BF0 /* ImageSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSlide.h; sourceTree = "<group>"; };
 		E98FCF291AD8CA9100992BF0 /* ImageSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSlide.m; sourceTree = "<group>"; };
 		E98FCF2A1AD8CA9100992BF0 /* ImageSwipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSwipe.h; sourceTree = "<group>"; };
@@ -298,9 +321,57 @@
 			name = Control;
 			sourceTree = "<group>";
 		};
+		E97B700E1ADA43D30099B5C2 /* UITableViewDragLoad */ = {
+			isa = PBXGroup;
+			children = (
+				E97B700F1ADA43D30099B5C2 /* PrivateClass */,
+				E97B701B1ADA43D30099B5C2 /* PublicClass */,
+				E97B701E1ADA43D30099B5C2 /* Resources */,
+			);
+			name = UITableViewDragLoad;
+			path = Library/CustomControl/UITableViewDragLoad;
+			sourceTree = "<group>";
+		};
+		E97B700F1ADA43D30099B5C2 /* PrivateClass */ = {
+			isa = PBXGroup;
+			children = (
+				E97B70101ADA43D30099B5C2 /* ComOpenThreadOTScreenshotHelperSwizzleHelper.h */,
+				E97B70111ADA43D30099B5C2 /* ComOpenThreadOTScreenshotHelperSwizzleHelper.m */,
+				E97B70121ADA43D30099B5C2 /* DragTableDragState_ot.h */,
+				E97B70131ADA43D30099B5C2 /* DragTableFooterView_ot.h */,
+				E97B70141ADA43D30099B5C2 /* DragTableFooterView_ot.m */,
+				E97B70151ADA43D30099B5C2 /* DragTableGestureObserver_ot.h */,
+				E97B70161ADA43D30099B5C2 /* DragTableGestureObserver_ot.m */,
+				E97B70171ADA43D30099B5C2 /* DragTableHeaderView_ot.h */,
+				E97B70181ADA43D30099B5C2 /* DragTableHeaderView_ot.m */,
+				E97B70191ADA43D30099B5C2 /* UIScrollView+DragTableSafeAnimation.h */,
+				E97B701A1ADA43D30099B5C2 /* UIScrollView+DragTableSafeAnimation.m */,
+			);
+			path = PrivateClass;
+			sourceTree = "<group>";
+		};
+		E97B701B1ADA43D30099B5C2 /* PublicClass */ = {
+			isa = PBXGroup;
+			children = (
+				E97B701C1ADA43D30099B5C2 /* UITableView+DragLoad.h */,
+				E97B701D1ADA43D30099B5C2 /* UITableView+DragLoad.m */,
+			);
+			path = PublicClass;
+			sourceTree = "<group>";
+		};
+		E97B701E1ADA43D30099B5C2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E97B701F1ADA43D30099B5C2 /* blueArrow.png */,
+				E97B70201ADA43D30099B5C2 /* blueArrow@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		E98FCF221AD8CA1900992BF0 /* CustomeControl */ = {
 			isa = PBXGroup;
 			children = (
+				E97B700E1ADA43D30099B5C2 /* UITableViewDragLoad */,
 				E98FCF271AD8CA9100992BF0 /* ImageActions */,
 				E98FCF2C1AD8CA9100992BF0 /* MapAction */,
 			);
@@ -792,7 +863,9 @@
 			files = (
 				E9AE1FB31AD80455002E11AC /* StartupViewController.xib in Resources */,
 				E9AE1FAF1AD80455002E11AC /* LeftMenuViewController.xib in Resources */,
+				E97B70281ADA43D30099B5C2 /* blueArrow@2x.png in Resources */,
 				E97B700D1ADA01AF0099B5C2 /* DealItem.xib in Resources */,
+				E97B70271ADA43D30099B5C2 /* blueArrow.png in Resources */,
 				E9A53F8F1AD9622D009DB98C /* clickme-1-320x200.png in Resources */,
 				E9AE1FB11AD80455002E11AC /* MainViewController.xib in Resources */,
 				E9D3BD7D1AD6BA5400F7429B /* LaunchScreen.xib in Resources */,
@@ -815,9 +888,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E97B70251ADA43D30099B5C2 /* UIScrollView+DragTableSafeAnimation.m in Sources */,
 				E9AE203F1AD80A5E002E11AC /* UIImageView+HighlightedWebCache.m in Sources */,
 				E9D3BD721AD6BA5400F7429B /* HotDealProject.xcdatamodeld in Sources */,
 				E98FCF3D1AD8CA9100992BF0 /* CalloutMapAnnotation.m in Sources */,
+				E97B70211ADA43D30099B5C2 /* ComOpenThreadOTScreenshotHelperSwizzleHelper.m in Sources */,
 				E9AE202C1AD80A5E002E11AC /* MagicalRecord+Actions.m in Sources */,
 				E9AE202F1AD80A5E002E11AC /* MagicalRecord+Options.m in Sources */,
 				E9AE208C1AD80B68002E11AC /* StrikeThroughLabel.m in Sources */,
@@ -849,6 +924,7 @@
 				E9AE20231AD80A5E002E11AC /* NSManagedObject+MagicalRecord.m in Sources */,
 				E9AE20981AD80E70002E11AC /* Reachability.m in Sources */,
 				E98FCF3E1AD8CA9100992BF0 /* JingDianMapCell.m in Sources */,
+				E97B70261ADA43D30099B5C2 /* UITableView+DragLoad.m in Sources */,
 				E9AE20271AD80A5E002E11AC /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				E9AE208D1AD80B68002E11AC /* TTTAttributedLabel.m in Sources */,
 				E97B700B1ADA01790099B5C2 /* DealItem.m in Sources */,
@@ -874,6 +950,7 @@
 				E9AE20301AD80A5E002E11AC /* MagicalRecord+Setup.m in Sources */,
 				E98FCF3C1AD8CA9100992BF0 /* CallOutAnnotationVifew.m in Sources */,
 				E9AE201E1AD80A5E002E11AC /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
+				E97B70221ADA43D30099B5C2 /* DragTableFooterView_ot.m in Sources */,
 				E9D3BD6C1AD6BA5400F7429B /* main.m in Sources */,
 				E98FCF3A1AD8CA9100992BF0 /* ImageSwipe.m in Sources */,
 				E9AE20401AD80A5E002E11AC /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
@@ -882,8 +959,10 @@
 				E9AE208E1AD80B68002E11AC /* BBBadgeBarButtonItem.m in Sources */,
 				E9AE208F1AD80B68002E11AC /* CustomBadge.m in Sources */,
 				E9AE201C1AD80A5E002E11AC /* NSNumber+MagicalDataImport.m in Sources */,
+				E97B70241ADA43D30099B5C2 /* DragTableHeaderView_ot.m in Sources */,
 				E9AE20221AD80A5E002E11AC /* NSManagedObject+MagicalFinders.m in Sources */,
 				E9AE20341AD80A5E002E11AC /* SDImageCache.m in Sources */,
+				E97B70231ADA43D30099B5C2 /* DragTableGestureObserver_ot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

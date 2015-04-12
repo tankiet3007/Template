@@ -24,6 +24,11 @@
     UIScrollView * scrollView;
     UIScrollView * scrollViewCategory;
     NSMutableArray * arrNewDeals;
+    UISegmentedControl *segmentedControl;
+    UIView * viewHeader;
+        NSMutableArray * arrSale;
+        NSMutableArray * arrNew;
+        NSMutableArray * arrNear;
 }
 @synthesize tableViewMain;
 - (void)viewDidLoad {
@@ -37,6 +42,7 @@
     [self setupSlide];
     [self setupNewDeal];
     [self setupCategory];
+    [self setupSegment];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -60,6 +66,12 @@
 {
     arrNewDeals = [[NSMutableArray alloc]init];
     arrNewDeals = [NSMutableArray arrayWithObjects:@"Deal 1",@"Deal 2",@"Deal 3",@"Deal 4",@"Deal 5",@"Deal 6",@"Deal 7",@"Deal 8",@"Deal 9",@"Deal 10",@"Deal 11",@"Deal 12", nil];
+    
+    arrSale = [NSMutableArray arrayWithObjects:@"Sale 1",@"Sale 2",@"Sale 3",@"Sale 4",@"Sale 5",@"Sale 6",@"Sale 7",@"Sale 8",@"Sale 9",@"Sale 10", nil];
+    
+     arrNew = [NSMutableArray arrayWithObjects:@"New 1",@"New 2",@"New 3",@"New 4",@"New 5",@"New 6",@"New 7",@"New 8",@"New 9",@"New 10", nil];
+    
+     arrNear = [NSMutableArray arrayWithObjects:@"Near 1",@"Near 2",@"Near 3",@"Near 4",@"Near 5",@"Near 6",@"Near 7",@"Near 8",@"Near 9",@"Near 10", nil];
 }
 -(void)clickOnItem:(id)sender
 {
@@ -133,9 +145,11 @@
     tableViewMain.backgroundColor = [UIColor whiteColor];
     tableViewMain.dataSource = self;
     tableViewMain.delegate = self;
+    [tableViewMain setDragDelegate:self refreshDatePermanentKey:@"MainTable"];
     [tableViewMain setAllowsSelection:YES];
     tableViewMain.separatorColor = [UIColor clearColor];
     tableViewMain.showsVerticalScrollIndicator = NO;
+    tableViewMain.sectionHeaderHeight = 0.0;
 }
 
 -(void)checkNetwork
@@ -191,12 +205,12 @@
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return  4;
+    return  5;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 3) {
+    if (section == 4) {
         return 10;
     }
     return 1;
@@ -211,6 +225,9 @@
     }
     if (indexPath.section == 2) {
         return 120;
+    }
+    if (indexPath.section == 3) {
+        return 60;
     }
     return 110;
 }
@@ -231,12 +248,13 @@
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.contentView addSubview:imageSlideTop];
         return cell;
     }
     if (indexPath.section == 1) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 15, 300, 20)];
         NSDate * date = [NSDate date];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -253,6 +271,7 @@
     }
     if (indexPath.section == 2) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 5, 300, 20)];
         lblTitle.text = @"Chọn danh mục";
         lblTitle.font = [UIFont boldSystemFontOfSize:14];
@@ -263,35 +282,85 @@
     }
     if (indexPath.section == 3) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 5, 300, 20)];
-        lblTitle.text = @"Chọn danh mục";
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell.contentView addSubview:viewHeader];
         
         return cell;
     }
+    if (indexPath.section == 4) {
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (segmentedControl.selectedSegmentIndex == 0) {
+            cell.textLabel.text = [arrSale objectAtIndex:indexPath.row];
+            if (indexPath.row == [arrSale count] - 1)
+            {
+                ALERT(@"OK", @"Cancel");
+            }
+        }
+        if (segmentedControl.selectedSegmentIndex == 1) {
+            if (indexPath.row == [arrNew count] - 1)
+            {
+                ALERT(@"OK", @"Cancel");
+            }
+            cell.textLabel.text = [arrNew objectAtIndex:indexPath.row];
+        }
+        if (segmentedControl.selectedSegmentIndex == 2) {
+            if (indexPath.row == [arrNear count] - 1)
+            {
+                ALERT(@"OK", @"Cancel");
+            }
+            cell.textLabel.text = [arrNear objectAtIndex:indexPath.row];
+        }
+       
+        return cell;
+    }
+
     
     return nil;
 }
+-(UIView *)setupSegment
+{
+    if (viewHeader != nil) {
+        [viewHeader removeFromSuperview];
+        viewHeader = nil;
+    }
+    viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+    if (segmentedControl != nil) {
+        [segmentedControl removeFromSuperview];
+        segmentedControl = nil;
+    }
+    NSArray *itemArray = [NSArray arrayWithObjects: @"Bán chạy", @"Mới nhất", @"Gần nhất", nil];
+    CGRect myFrame = CGRectMake(10.0f, 0, 300.0f, 29);
+    
+    //create an intialize our segmented control
+    segmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
+    
+    //set the size and placement
+    segmentedControl.frame = myFrame;
+    segmentedControl.tintColor = [UIColor darkGrayColor];
+    [segmentedControl addTarget:self action:@selector(mySegmentControlAction) forControlEvents: UIControlEventValueChanged];
+    segmentedControl.selectedSegmentIndex = 1;
+    [viewHeader addSubview:segmentedControl];
+    return viewHeader;
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    float width = tableView.bounds.size.width;
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 60)];
-//    view.backgroundColor = [UIColor colorWithHex:@"#afafaf" alpha:1];
-//    view.userInteractionEnabled = YES;
-//    view.tag = section;
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, width, 35)];
-//    label.text = @"LỊCH PHÁT SÓNG";
-//    label.backgroundColor = [UIColor clearColor];
-//    label.textColor = [UIColor redColor];
-//    label.shadowColor = [UIColor darkGrayColor];
-//    label.shadowOffset = CGSizeMake(0,1);
-//    label.font = [UIFont boldSystemFontOfSize:25];
-//    label.textAlignment =NSTextAlignmentCenter;
-//    [view addSubview:label];
-//
-//    return view;
-//
-//}
+}
+
+-(void)mySegmentControlAction
+{
+        NSMutableIndexSet *indetsetToUpdate = [[NSMutableIndexSet alloc]init];
+    
+        [indetsetToUpdate addIndex:4];
+        [tableViewMain reloadSections:indetsetToUpdate withRowAnimation:UITableViewRowAnimationFade];
+    if (segmentedControl.selectedSegmentIndex == 0) {
+        UA_log(@"0");
+    }
+    if (segmentedControl.selectedSegmentIndex == 1) {
+        UA_log(@"1");
+    }
+    if (segmentedControl.selectedSegmentIndex == 2) {
+        UA_log(@"2");
+    }
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -303,5 +372,89 @@
 -(void)topCellClick:(long)index
 {
     NSLog(@"delegate %ld",index);
+}
+
+#pragma mark - Drag delegate methods
+
+-(void)refreshTable
+{
+    int64_t delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    //            [self getNEWSCampaign:[arrNews count] andSize:10 wKeyword:searchBars.text];
+    });
+    ALERT(@"OK", @"Refresh");
+}
+
+-(void)loadMore
+{
+    int64_t delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        //            [self getNEWSCampaign:[arrNews count] andSize:10 wKeyword:searchBars.text];
+    });
+    ALERT(@"OK", @"loadMore");
+}
+- (void)finishLoadMore
+{
+    @try {
+        [self loadMore];
+        [tableViewMain finishLoadMore];
+        [tableViewMain reloadData];
+        if (tableViewMain == nil) {
+            return;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        UA_log(@"%@",exception.description);
+    }
+    
+}
+
+- (void)finishRefresh
+{
+    @try {
+        
+        [self refreshTable];
+        [tableViewMain finishRefresh];
+        [tableViewMain reloadData];
+        if (tableViewMain == nil) {
+            return;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        UA_log(@"%@",exception.description);
+    }
+}
+
+
+- (void)dragTableDidTriggerRefresh:(UITableView *)tableView
+{
+    //send refresh request(generally network request) here
+    
+    [self performSelector:@selector(finishRefresh) withObject:nil afterDelay:0.5];
+}
+
+- (void)dragTableRefreshCanceled:(UITableView *)tableView
+{
+    //cancel refresh request(generally network request) here
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(finishRefresh) object:nil];
+}
+
+- (void)dragTableDidTriggerLoadMore:(UITableView *)tableView
+{
+    //send load more request(generally network request) here
+    
+    [self performSelector:@selector(finishLoadMore) withObject:nil afterDelay:0.5];
+}
+
+- (void)dragTableLoadMoreCanceled:(UITableView *)tableView
+{
+    //cancel load more request(generally network request) here
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(finishLoadMore) object:nil];
 }
 @end

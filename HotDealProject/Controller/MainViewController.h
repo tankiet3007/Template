@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ImageSlide.h"
-@interface MainViewController : UIViewController<UIGestureRecognizerDelegate, UITableViewDataSource,UITableViewDelegate,slideImageDelegate>
+#import "UITableView+DragLoad.h"
+@interface MainViewController : UIViewController<UIGestureRecognizerDelegate, UITableViewDataSource,UITableViewDelegate,slideImageDelegate,UITableViewDragLoadDelegate>
 @property(nonatomic,strong)UITableView * tableViewMain;
 @end
