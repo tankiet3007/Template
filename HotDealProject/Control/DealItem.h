@@ -11,5 +11,6 @@
 @interface DealItem : UIView
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblBooks;
+@property (weak, nonatomic) IBOutlet UIButton *btnTemp;
 
 @end

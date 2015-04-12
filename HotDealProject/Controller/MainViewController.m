@@ -22,6 +22,7 @@
     Reachability * reachability;
     ImageSlide *imageSlideTop;
     UIScrollView * scrollView;
+    UIScrollView * scrollViewCategory;
     NSMutableArray * arrNewDeals;
 }
 @synthesize tableViewMain;
@@ -35,6 +36,7 @@
     [self initData];
     [self setupSlide];
     [self setupNewDeal];
+    [self setupCategory];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -59,20 +61,59 @@
     arrNewDeals = [[NSMutableArray alloc]init];
     arrNewDeals = [NSMutableArray arrayWithObjects:@"Deal 1",@"Deal 2",@"Deal 3",@"Deal 4",@"Deal 5",@"Deal 6",@"Deal 7",@"Deal 8",@"Deal 9",@"Deal 10",@"Deal 11",@"Deal 12", nil];
 }
+-(void)clickOnItem:(id)sender
+{
+    UIButton * btnTag = (UIButton *)sender;
+    UA_log(@"button is at %ld index", (long)btnTag.tag);
+}
+-(void)clickOnCategory:(id)sender
+{
+    UIButton * btnTag = (UIButton *)sender;
+    UA_log(@"button is at %ld index", (long)btnTag.tag);
+    
+}
+-(UIScrollView *)setupCategory
+{
+    if (scrollViewCategory != nil) {
+        [scrollViewCategory removeFromSuperview];
+        scrollViewCategory = nil;
+    }
+    scrollViewCategory = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 30, 320, 80)];
+    scrollViewCategory.showsHorizontalScrollIndicator = NO;
+    scrollViewCategory.backgroundColor = [UIColor clearColor];
+    //    [scrollView setBounces:NO];
+    
+    int x = 0;
+    for (int i = 0; i < 10; i++) {
+        UIButton * btnCategory = [UIButton buttonWithType:UIButtonTypeSystem];
+        [btnCategory setFrame:CGRectMake(x, 0, 130, 70)];
+        [btnCategory setBackgroundImage:[UIImage imageNamed:@"clickme-1-320x200"] forState:UIControlStateNormal];
+        btnCategory.tag = i;
+        [btnCategory addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
+        x += btnCategory.frame.size.width + PADDING;
+        [scrollViewCategory addSubview:btnCategory];
+    }
+    scrollViewCategory.contentSize = CGSizeMake(x, scrollViewCategory.frame.size.height);
+    return scrollViewCategory;
+}
+
 -(UIScrollView *)setupNewDeal
 {
     if (scrollView != nil) {
         [scrollView removeFromSuperview];
         scrollView = nil;
     }
-    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 30, 320, 200)];
+    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 40, 320, 180)];
     scrollView.backgroundColor = [UIColor clearColor];
+    scrollView.showsHorizontalScrollIndicator = NO;
+    //    [scrollView setBounces:NO];
     
     int x = 0;
     for (int i = 0; i < [arrNewDeals count]; i++) {
         DealItem *itemS = [[[NSBundle mainBundle] loadNibNamed:@"DealItem" owner:self options:nil] objectAtIndex:0];
-        [itemS setFrame:CGRectMake(x, 0, 280, 200)];
-        
+        [itemS setFrame:CGRectMake(x, 0, 250, 180)];
+        [itemS.btnTemp addTarget:self action:@selector(clickOnItem:) forControlEvents:UIControlEventTouchUpInside];
+        itemS.btnTemp.tag = i;
         itemS.backgroundColor = [UIColor greenColor];
         itemS.lblBooks.text = @"Something like this";
         itemS.lblName.text = [arrNewDeals objectAtIndex:i];
@@ -87,13 +128,14 @@
     tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-44) style:UITableViewStylePlain];
     [self.view addSubview:tableViewMain];
     
-   
+    
     //    [tableViewDays setDragDelegate:self refreshDatePermanentKey:@"HotNewsList"];
     tableViewMain.backgroundColor = [UIColor whiteColor];
     tableViewMain.dataSource = self;
-     tableViewMain.delegate = self;
+    tableViewMain.delegate = self;
     [tableViewMain setAllowsSelection:YES];
     tableViewMain.separatorColor = [UIColor clearColor];
+    tableViewMain.showsVerticalScrollIndicator = NO;
 }
 
 -(void)checkNetwork
@@ -131,11 +173,11 @@
     [label sizeToFit];
     
     revealController = [self revealViewController];
-//    UITapGestureRecognizer *tap = [revealController tapGestureRecognizer];
-//    tap.delegate = self;
-//    
-//    [self.view addGestureRecognizer:tap];
-//    [self.navigationController.navigationBar addGestureRecognizer:revealController.panGestureRecognizer];
+    //    UITapGestureRecognizer *tap = [revealController tapGestureRecognizer];
+    //    tap.delegate = self;
+    //
+    //    [self.view addGestureRecognizer:tap];
+    //    [self.navigationController.navigationBar addGestureRecognizer:revealController.panGestureRecognizer];
     
     UIImage *image = [UIImage imageNamed:@"menu_n.png"];
     UIButton * rBtest = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -149,11 +191,14 @@
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return  3;
+    return  4;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 3) {
+        return 10;
+    }
     return 1;
 }
 
@@ -162,7 +207,10 @@
     if (indexPath.section == 0) {
         return HEADER_HEIGHT;
     }    if (indexPath.section == 1) {
-        return 250;
+        return 230;
+    }
+    if (indexPath.section == 2) {
+        return 120;
     }
     return 110;
 }
@@ -184,19 +232,12 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [cell.contentView addSubview:imageSlideTop];
-            return cell;
+        return cell;
     }
     if (indexPath.section == 1) {
-        static NSString *CellIdentifier = @"FamousProgramTableViewCell";
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         
-        
-        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-//        cell.textLabel.text = @"OK something";
-        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 300, 20)];
+        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 15, 300, 20)];
         NSDate * date = [NSDate date];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"dd/MM"];
@@ -208,20 +249,26 @@
         lblTitle.textColor = [UIColor redColor];
         [cell.contentView addSubview:lblTitle];
         [cell.contentView addSubview:scrollView];
-            return cell;
+        return cell;
     }
     if (indexPath.section == 2) {
-        static NSString *CellIdentifier = @"FamousProgramTableViewCell";
-        
-        
-        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        cell.textLabel.text = @"OK something";
-            return cell;
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 5, 300, 20)];
+        lblTitle.text = @"Chọn danh mục";
+        lblTitle.font = [UIFont boldSystemFontOfSize:14];
+        lblTitle.textColor = [UIColor redColor];
+        [cell.contentView addSubview:lblTitle];
+        [cell.contentView addSubview:scrollViewCategory];
+        return cell;
     }
+    if (indexPath.section == 3) {
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 5, 300, 20)];
+        lblTitle.text = @"Chọn danh mục";
+        
+        return cell;
+    }
+    
     return nil;
 }
 
@@ -248,10 +295,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableIndexSet *indetsetToUpdate = [[NSMutableIndexSet alloc]init];
-    
-    [indetsetToUpdate addIndex:1];
-    [tableViewMain reloadSections:indetsetToUpdate withRowAnimation:UITableViewRowAnimationFade];
+    //    NSMutableIndexSet *indetsetToUpdate = [[NSMutableIndexSet alloc]init];
+    //
+    //    [indetsetToUpdate addIndex:1];
+    //    [tableViewMain reloadSections:indetsetToUpdate withRowAnimation:UITableViewRowAnimationFade];
 }
 -(void)topCellClick:(long)index
 {
