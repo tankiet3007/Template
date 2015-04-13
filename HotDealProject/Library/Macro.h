@@ -70,8 +70,8 @@
 #define RectSetY(f, y)                      CGRectMake(RectX(f), y, RectWidth(f), RectHeight(f))
 #define RectSetSize(f, w, h)                CGRectMake(RectX(f), RectY(f), w, h)
 #define RectSetOrigin(f, x, y)              CGRectMake(x, y, RectWidth(f), RectHeight(f))
-#define DATE_COMPONENTS                     NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit
-#define TIME_COMPONENTS                     NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit
+#define DATE_COMPONENTS                     NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitWeekOfMonth
+#define TIME_COMPONENTS                     NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond
 #define FlushPool(p)                        [p drain]; p = [[NSAutoreleasePool alloc] init]
 #define RGB(r, g, b)                        [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
 #define RGBA(r, g, b, a)                    [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]

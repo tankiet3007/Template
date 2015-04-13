@@ -15,9 +15,7 @@
 @property (assign) id<slideImageDelegate> delegate;
 
 -(void)initScroll;
--(void)initScrollVTV;
 -(void)initScroll2;
--(void)initScrollLocalMain;
 -(void)initScrollLocal2;
 -(void)initScrollLocalForSetting:(int)indexSelected;
 @end

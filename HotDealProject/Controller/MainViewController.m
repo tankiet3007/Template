@@ -261,8 +261,8 @@
         [formatter setDateFormat:@"dd/MM"];
         NSString * strToday = [formatter stringFromDate:date];
         
-        NSLog(@"%@", strToday);
-        lblTitle.text = F(@"Deal mới nhất ngày %@",strToday);
+        NSLog(@"%@ ,%@", strToday ,[date stringWeekday]);
+        lblTitle.text = F(@"Deal mới nhất %@ ngày %@",[date stringWeekday],strToday);
         lblTitle.font = [UIFont boldSystemFontOfSize:14];
         lblTitle.textColor = [UIColor redColor];
         [cell.contentView addSubview:lblTitle];

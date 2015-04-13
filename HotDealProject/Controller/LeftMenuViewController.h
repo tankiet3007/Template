@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface LeftMenuViewController : UIViewController
-
+#import "APLSectionHeaderView.h"
+@interface LeftMenuViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,SectionHeaderViewDelegate>
+@property (nonatomic, strong) NSMutableArray * arrMenu;
+@property (nonatomic, strong) UITableView * tableView;
 @end
