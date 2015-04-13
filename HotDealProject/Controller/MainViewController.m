@@ -187,6 +187,8 @@
     [label sizeToFit];
     
     revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
     //    UITapGestureRecognizer *tap = [revealController tapGestureRecognizer];
     //    tap.delegate = self;
     //
