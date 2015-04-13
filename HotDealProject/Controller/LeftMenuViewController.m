@@ -37,6 +37,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     
     [super viewDidLoad];
     // Set up default values.
+    self.view.backgroundColor = [UIColor whiteColor];
     [self initData];
     [self initUITableView];
     UINib *sectionHeaderNib = [UINib nibWithNibName:@"SectionHeaderView" bundle:nil];

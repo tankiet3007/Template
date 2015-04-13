@@ -81,6 +81,32 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
     }
 }
 
+-(void)initNavigationbar:(UIViewController *)controller withTitle: (NSString *)strTitle
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero] ;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    label.textAlignment = NSTextAlignmentCenter;
+    // ^-Use UITextAlignmentCenter for older SDKs.
+    label.textColor = [UIColor whiteColor]; // change this color
+    controller.navigationItem.titleView = label;
+    label.text = strTitle;
+    [label sizeToFit];
+    
+    
+    UIImage *image = [UIImage imageNamed:@"back_n"];
+    UIButton * rBtest = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rBtest addTarget:controller action:@selector(backbtn_click:) forControlEvents:UIControlEventTouchUpInside];
+    [rBtest setBackgroundImage:image forState:UIControlStateNormal];
+    image = [UIImage imageNamed:@"back_n"];
+    //    [rBtest setBackgroundImage:image forState:UIControlStateHighlighted];
+    [rBtest setFrame:CGRectMake(0, 0, 30, 30)];
+    UIBarButtonItem *barItem = [[UIBarButtonItem alloc]initWithCustomView:rBtest];
+    controller.navigationItem.leftBarButtonItem = barItem;
+}
+
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

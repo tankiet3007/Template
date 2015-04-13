@@ -18,7 +18,7 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
-
+-(void)initNavigationbar:(UIViewController *)controller withTitle: (NSString *)strTitle;
 
 @end
 

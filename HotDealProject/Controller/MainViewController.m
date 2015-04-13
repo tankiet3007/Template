@@ -10,6 +10,9 @@
 #import "SWRevealViewController.h"
 #import "Reachability.h"
 #import "DealItem.h"
+#import "HotNewDetailViewController.h"
+#import "CategoryViewController.h"
+#import "PromotionViewController.h"
 #define HEADER_HEIGHT 156
 #define PADDING 10
 @interface MainViewController ()
@@ -31,10 +34,12 @@
         NSMutableArray * arrNear;
 }
 @synthesize tableViewMain;
+#pragma mark init Method
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.view.backgroundColor = [UIColor whiteColor];
     [self checkNetwork];
     [self initUITableView];
     [self initNavigationbar];
@@ -73,17 +78,8 @@
     
      arrNear = [NSMutableArray arrayWithObjects:@"Near 1",@"Near 2",@"Near 3",@"Near 4",@"Near 5",@"Near 6",@"Near 7",@"Near 8",@"Near 9",@"Near 10", nil];
 }
--(void)clickOnItem:(id)sender
-{
-    UIButton * btnTag = (UIButton *)sender;
-    UA_log(@"button is at %ld index", (long)btnTag.tag);
-}
--(void)clickOnCategory:(id)sender
-{
-    UIButton * btnTag = (UIButton *)sender;
-    UA_log(@"button is at %ld index", (long)btnTag.tag);
-    
-}
+
+
 -(UIScrollView *)setupCategory
 {
     if (scrollViewCategory != nil) {
@@ -205,6 +201,7 @@
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
 }
+#pragma mark tableview delegate + datasource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return  5;
@@ -366,14 +363,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    NSMutableIndexSet *indetsetToUpdate = [[NSMutableIndexSet alloc]init];
-    //
-    //    [indetsetToUpdate addIndex:1];
-    //    [tableViewMain reloadSections:indetsetToUpdate withRowAnimation:UITableViewRowAnimationFade];
-}
--(void)topCellClick:(long)index
-{
-    NSLog(@"delegate %ld",index);
+    if (indexPath.section == 4) {
+        HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
+        [self.navigationController pushViewController:detail animated:YES];
+    }
 }
 
 #pragma mark - Drag delegate methods
@@ -459,4 +452,31 @@
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(finishLoadMore) object:nil];
 }
+#pragma mark -- show deal detail
+
+-(void)topCellClick:(long)index
+{
+    NSLog(@"delegate %ld",index);
+    PromotionViewController * promotionDetail = [[PromotionViewController alloc]init];
+    [self.navigationController pushViewController:promotionDetail animated:YES];
+}
+
+-(void)clickOnCategory:(id)sender
+{
+    UIButton * btnTag = (UIButton *)sender;
+    UA_log(@"button is at %ld index", (long)btnTag.tag);
+    
+    CategoryViewController * category = [[CategoryViewController alloc]init];
+    [self.navigationController pushViewController:category animated:YES];
+}
+
+-(void)clickOnItem:(id)sender
+{
+    UIButton * btnTag = (UIButton *)sender;
+    UA_log(@"button is at %ld index", (long)btnTag.tag);
+    HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
+    [self.navigationController pushViewController:detail animated:YES];
+}
+
+
 @end
