@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StartupViewController : UIViewController
-
+@interface StartupViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@property(nonatomic,strong)UITableView * tableViewMain;
 @end

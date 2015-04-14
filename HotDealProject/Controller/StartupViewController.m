@@ -8,16 +8,24 @@
 
 #import "StartupViewController.h"
 #import "MainViewController.h"
+#import "LocationTableViewCell.h"
 @interface StartupViewController ()
 
 @end
 
 @implementation StartupViewController
 {
+    NSArray * arrLocation;
+    NSInteger iIndexSelected;
 }
-
+@synthesize tableViewMain;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    iIndexSelected = -1;
+    [self initData];
+    [self initUITableView];
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)homeClick:(id)sender {
@@ -27,13 +35,88 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+//    [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)initData
+{
+    NSString *savedValue = [[NSUserDefaults standardUserDefaults]
+                            stringForKey:@"indexSelected"];
+    if (savedValue != nil) {
+        iIndexSelected = [savedValue integerValue];
+    }
+    arrLocation = [NSArray arrayWithObjects:@"Hà Nội",@"Hồ Chí Minh",@"Bình Dương",@"Đà Nẵng",@"Tỉnh thành khác", nil];
+}
+-(void)initUITableView
+{
+    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(20, 80, ScreenWidth-40, 150) style:UITableViewStylePlain];
+    [self.view addSubview:tableViewMain];
+    tableViewMain.layer.borderWidth = 0.3;
+    tableViewMain.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    tableViewMain.backgroundColor = [UIColor whiteColor];
+    tableViewMain.dataSource = self;
+    tableViewMain.delegate = self;
+    tableViewMain.separatorColor = [UIColor clearColor];
+    tableViewMain.showsVerticalScrollIndicator = NO;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return  1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [arrLocation count];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 30;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    static NSString *CellIdentifier = @"LocationTableViewCell";
+    
+    
+    LocationTableViewCell *cell = (LocationTableViewCell *)[tableView dequeueReusableCellWithIdentifier:nil];
+    if (cell == nil)
+    {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LocationTableViewCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }    //    [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
+    cell.locationName.text = [arrLocation objectAtIndex:indexPath.row];
+//    cell.contentView.layer.borderWidth = 0.5;
+    
+    if (iIndexSelected == indexPath.row) {
+        cell.radioButton.image = [UIImage imageNamed:@"radio_checked"];
+    }
+    else
+    {
+        cell.radioButton.image = [UIImage imageNamed:@"radio"];
+    }
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    LocationTableViewCell *cell = (LocationTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    cell.radioButton.image = [UIImage imageNamed:@"radio_checked"];
+    iIndexSelected = indexPath.row;
+    NSString *valueToSave = F(@"%ld", (long)indexPath.row);
+    [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"indexSelected"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [tableViewMain reloadData];
+    
+}
+
 
 /*
 #pragma mark - Navigation
