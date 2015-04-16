@@ -26,6 +26,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     AppDelegate * appdelegate = ApplicationDelegate;
+    [self setupSegment];
     arrDeals = [[NSMutableArray alloc]init];
     [self initUITableView];
     
@@ -50,7 +51,7 @@
     [self.view addSubview:tableviewCategory];
     
     
-    //    [tableViewDays setDragDelegate:self refreshDatePermanentKey:@"HotNewsList"];
+    [tableviewCategory setDragDelegate:self refreshDatePermanentKey:@"CategoryList"];
     tableviewCategory.backgroundColor = [UIColor whiteColor];
     tableviewCategory.dataSource = self;
     tableviewCategory.delegate = self;
@@ -99,18 +100,19 @@
         [segmentedControl removeFromSuperview];
         segmentedControl = nil;
     }
-    lblNumOfVoucher = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 220, 15)];
+    lblNumOfVoucher = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 220, 18)];
     lblNumOfVoucher.text = F(@"Có %lu khuyến mãi", (unsigned long)[arrDeals count]);
     lblNumOfVoucher.textColor = [UIColor blackColor];
-    lblNumOfVoucher.font = [UIFont boldSystemFontOfSize:9];
+    lblNumOfVoucher.font = [UIFont boldSystemFontOfSize:12];
     [viewHeader addSubview:lblNumOfVoucher];
     btnFilter = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnFilter setFrame:CGRectMake(ScreenWidth -10 -30, 10, 30, 18)];
     [btnFilter addTarget:self action:@selector(showFilterMenu) forControlEvents:UIControlEventTouchUpInside];
-    btnFilter.imageView.image = [UIImage imageNamed:@"clickme-1-320x200"];
+    [btnFilter setBackgroundImage:[UIImage imageNamed:@"clickme-1-320x200"] forState:UIControlStateNormal];
+    [viewHeader addSubview:btnFilter];
     
     NSArray *itemArray = [NSArray arrayWithObjects: @"Bán chạy", @"Mới nhất", nil];
-    CGRect myFrame = CGRectMake(60, 30, 200, 29);
+    CGRect myFrame = CGRectMake(60, 35, 200, 24);
     
     //create an intialize our segmented control
     segmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
@@ -132,7 +134,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [self setupSegment];
+    return viewHeader;
 }
 -(void)mySegmentControlAction
 {
@@ -155,5 +157,88 @@
 -(void)showFilterMenu
 {
     UA_log(@"ok show filter");
+}
+#pragma mark - Drag delegate methods
+
+-(void)refreshTable
+{
+    int64_t delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        //            [self getNEWSCampaign:[arrNews count] andSize:10 wKeyword:searchBars.text];
+    });
+    ALERT(@"OK", @"Refresh");
+}
+
+-(void)loadMore
+{
+    int64_t delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        //            [self getNEWSCampaign:[arrNews count] andSize:10 wKeyword:searchBars.text];
+    });
+    ALERT(@"OK", @"loadMore");
+}
+- (void)finishLoadMore
+{
+    @try {
+        [self loadMore];
+        [tableviewCategory finishLoadMore];
+        [tableviewCategory reloadData];
+        if (tableviewCategory == nil) {
+            return;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        UA_log(@"%@",exception.description);
+    }
+    
+}
+
+- (void)finishRefresh
+{
+    @try {
+        
+        [self refreshTable];
+        [tableviewCategory finishRefresh];
+        [tableviewCategory reloadData];
+        if (tableviewCategory == nil) {
+            return;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        UA_log(@"%@",exception.description);
+    }
+}
+
+
+- (void)dragTableDidTriggerRefresh:(UITableView *)tableView
+{
+    //send refresh request(generally network request) here
+    
+    [self performSelector:@selector(finishRefresh) withObject:nil afterDelay:0.5];
+}
+
+- (void)dragTableRefreshCanceled:(UITableView *)tableView
+{
+    //cancel refresh request(generally network request) here
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(finishRefresh) object:nil];
+}
+
+- (void)dragTableDidTriggerLoadMore:(UITableView *)tableView
+{
+    //send load more request(generally network request) here
+    
+    [self performSelector:@selector(finishLoadMore) withObject:nil afterDelay:0.5];
+}
+
+- (void)dragTableLoadMoreCanceled:(UITableView *)tableView
+{
+    //cancel load more request(generally network request) here
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(finishLoadMore) object:nil];
 }
 @end

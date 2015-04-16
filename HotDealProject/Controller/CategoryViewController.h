@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface CategoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+#import "UITableView+DragLoad.h"
+@interface CategoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITableViewDragLoadDelegate>
 @property (nonatomic,strong) UITableView * tableviewCategory;
 @end
