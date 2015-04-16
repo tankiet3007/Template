@@ -287,7 +287,7 @@
         return cell;
     }
     if (indexPath.section == 4) {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];//reused
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (segmentedControl.selectedSegmentIndex == 0) {
             cell.textLabel.text = [arrSale objectAtIndex:indexPath.row];

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CategoryViewController : UIViewController
-
+@interface CategoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic,strong) UITableView * tableviewCategory;
 @end

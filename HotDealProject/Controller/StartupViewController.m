@@ -9,6 +9,7 @@
 #import "StartupViewController.h"
 #import "MainViewController.h"
 #import "LocationTableViewCell.h"
+#import "TKAPI.h"
 @interface StartupViewController ()
 
 @end
@@ -29,10 +30,26 @@
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)homeClick:(id)sender {
-    MainViewController * mainVC = [[MainViewController alloc]init];
-    [self.navigationController pushViewController:mainVC animated:YES];
+        MainViewController * mainVC = [[MainViewController alloc]init];
+        [self.navigationController pushViewController:mainVC animated:YES];
+//    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                    @"Value1", @"Key1",
+//                                    @"Value2", @"Key2",
+//                                    nil];
+//
+//    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:@"http://chrisrisner.com/Labs/day7test.php?name=KietTran" completion:^(NSDictionary * dict, NSError *error) {
+//        [self showMainView:dict wError:error];
+//    }];
+//    [TKAPI postRequest:jsonDictionary withURL:@"http://chrisrisner.com/Labs/day7test.php?name=KietTran"];
 }
 
+-(void)showMainView:(NSDictionary *)data wError :(NSError *)error
+{
+//    UA_log(@"%@",data);
+//    MainViewController * mainVC = [[MainViewController alloc]init];
+//    [self.navigationController pushViewController:mainVC animated:YES];
+
+}
 -(void)viewWillAppear:(BOOL)animated
 {
 //    [[self navigationController] setNavigationBarHidden:YES animated:YES];
@@ -117,7 +134,7 @@
     
 }
 
-
+//1 item --> height = 20 --> 10 item height = 200  // filter
 /*
 #pragma mark - Navigation
 
