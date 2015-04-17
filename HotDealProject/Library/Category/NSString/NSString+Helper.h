@@ -27,4 +27,5 @@
 - (NSString *)MD5;
 -(NSString *)normalizeVietnameseString:(NSString *)str;
 -(NSString *)convertPercentage:(NSString *)str;
+-(NSString *)formatStringToDecimal;
 @end

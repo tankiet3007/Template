@@ -129,9 +129,9 @@
     NSString *valueToSave = F(@"%ld", (long)indexPath.row);
     [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"indexSelected"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
     [tableViewMain reloadData];
-    
+    MainViewController * mainVC = [[MainViewController alloc]init];
+    [self.navigationController pushViewController:mainVC animated:YES];
 }
 
 //1 item --> height = 20 --> 10 item height = 200  // filter

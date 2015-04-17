@@ -103,5 +103,11 @@
     return output;
 }
 
+-(NSString *)formatStringToDecimal{
+    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber * myNumber = [f numberFromString:self];
+    return [f stringFromNumber:myNumber];
+}
 
 @end

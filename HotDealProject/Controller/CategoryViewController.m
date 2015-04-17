@@ -49,9 +49,7 @@
 {
     tableviewCategory = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-44) style:UITableViewStylePlain];
     [self.view addSubview:tableviewCategory];
-    
-    
-    [tableviewCategory setDragDelegate:self refreshDatePermanentKey:@"CategoryList"];
+
     tableviewCategory.backgroundColor = [UIColor whiteColor];
     tableviewCategory.dataSource = self;
     tableviewCategory.delegate = self;
@@ -157,88 +155,5 @@
 -(void)showFilterMenu
 {
     UA_log(@"ok show filter");
-}
-#pragma mark - Drag delegate methods
-
--(void)refreshTable
-{
-    int64_t delayInSeconds = 0.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        //            [self getNEWSCampaign:[arrNews count] andSize:10 wKeyword:searchBars.text];
-    });
-    ALERT(@"OK", @"Refresh");
-}
-
--(void)loadMore
-{
-    int64_t delayInSeconds = 0.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        //            [self getNEWSCampaign:[arrNews count] andSize:10 wKeyword:searchBars.text];
-    });
-    ALERT(@"OK", @"loadMore");
-}
-- (void)finishLoadMore
-{
-    @try {
-        [self loadMore];
-        [tableviewCategory finishLoadMore];
-        [tableviewCategory reloadData];
-        if (tableviewCategory == nil) {
-            return;
-        }
-        
-    }
-    @catch (NSException *exception) {
-        UA_log(@"%@",exception.description);
-    }
-    
-}
-
-- (void)finishRefresh
-{
-    @try {
-        
-        [self refreshTable];
-        [tableviewCategory finishRefresh];
-        [tableviewCategory reloadData];
-        if (tableviewCategory == nil) {
-            return;
-        }
-        
-    }
-    @catch (NSException *exception) {
-        UA_log(@"%@",exception.description);
-    }
-}
-
-
-- (void)dragTableDidTriggerRefresh:(UITableView *)tableView
-{
-    //send refresh request(generally network request) here
-    
-    [self performSelector:@selector(finishRefresh) withObject:nil afterDelay:0.5];
-}
-
-- (void)dragTableRefreshCanceled:(UITableView *)tableView
-{
-    //cancel refresh request(generally network request) here
-    
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(finishRefresh) object:nil];
-}
-
-- (void)dragTableDidTriggerLoadMore:(UITableView *)tableView
-{
-    //send load more request(generally network request) here
-    
-    [self performSelector:@selector(finishLoadMore) withObject:nil afterDelay:0.5];
-}
-
-- (void)dragTableLoadMoreCanceled:(UITableView *)tableView
-{
-    //cancel load more request(generally network request) here
-    
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(finishLoadMore) object:nil];
 }
 @end
