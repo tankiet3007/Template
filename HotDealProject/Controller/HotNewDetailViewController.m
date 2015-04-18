@@ -157,6 +157,9 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 3) {
+        return 4;
+    }
     return 1;
 }
 
@@ -244,7 +247,7 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"AutoSizeTableViewCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
-        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         [self configureCell:cell forRowAtIndexPath:indexPath];
         
         return cell;
@@ -258,10 +261,44 @@
 
 - (void)configureCell:(AutoSizeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *quote = @"is the carob tree, St John's-bread, or locust bean (not to be confused with the African locust bean) is a species of flower ob tree, St John's-bread, or locust bean (not to be confused with the African locust bean) is a ob tree, St John's-bread, or locust bean (not to be confused with the African locust bean) is a";
+//    cell.titleLabel.text = @"Địa chỉ sử dụng";
+//    cell.desLabel.text = @"Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng";
+    if (indexPath.row == 0) {
+        cell.titleLabel.text = @"Điểm nổi bật";
+        cell.desLabel.text = @"Điểm nổi bật Điểm nổi bật Điểm nổi bật Điểm nổi bật Điểm nổi bật Điểm nổi bật\n\n";
+    }
+    if (indexPath.row == 1) {
+        cell.titleLabel.text = @"Lưu ý khi mua";
+        cell.desLabel.text = @"Lưu ý khi mua Lưu ý khi mua Lưu ý khi mua\n\n";
+    }
+
+    if (indexPath.row == 2) {
+        cell.titleLabel.text = @"Địa chỉ sử dụng";
+        cell.desLabel.text = @"Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng\n\n";
+    }
+    if (indexPath.row == 3) {
+        cell.titleLabel.text = @"Chi tiết khuyến mãi";
+        cell.desLabel.text = @"";
+    }
     
-    cell.numberLabel.text = [NSString stringWithFormat:@"Quote %ld", (long)indexPath.row];
-    cell.quoteLabel.text = quote;
+    UILabel * lblTemp = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 260, 0)];
+    lblTemp.lineBreakMode = NSLineBreakByWordWrapping;
+    lblTemp.numberOfLines = 0;
+    lblTemp.text = cell.desLabel.text;
+    if ([cell.desLabel.text isEqualToString:@""]) {
+        lblTemp.text = @"\n";
+    }
+    lblTemp.font = [UIFont systemFontOfSize:12];
+    [lblTemp sizeToFit];
+    CGRect rect = lblTemp.frame;
+//    fHeightOfDescription = rect.size.height;
+    
+    UA_log(@"height desLabel : %f", rect.size.height );
+    UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 0, 300, rect.size.height + 15)];
+    [cell.contentView insertSubview:viewBG atIndex:0];
+    viewBG.layer.borderWidth = 0.5;
+    viewBG.layer.borderColor =[UIColor lightGrayColor].CGColor;
+    
 }
 
 /*

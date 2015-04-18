@@ -36,6 +36,6 @@
     [self.contentView layoutIfNeeded];
     
     // (3)
-    self.quoteLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.quoteLabel.frame);
+    self.desLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.desLabel.frame);
 }
 @end

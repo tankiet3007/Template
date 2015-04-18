@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AutoSizeTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *numberLabel;
-@property (weak, nonatomic) IBOutlet UILabel *quoteLabel;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *desLabel;
 
 @end

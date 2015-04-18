@@ -3,7 +3,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,39 +14,35 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="alkfoasjfopsf alskfalsf " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyg-qk-zAm">
-                        <rect key="frame" x="17" y="4" width="137" height="16"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="For the CollectionViewCell in Interface Builder, you won’" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkU-yZ-l9M">
+                        <rect key="frame" x="10" y="38" width="300" height="28"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="For the CollectionViewCell in Interface Builder, you won’" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkU-yZ-l9M">
-                        <rect key="frame" x="17" y="25" width="280" height="29"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="986-VD-rea">
+                        <rect key="frame" x="10" y="11" width="156" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="156" id="Ia1-rH-f6D"/>
+                            <constraint firstAttribute="height" constant="21" id="pkK-DW-cU5"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="bkU-yZ-l9M" firstAttribute="top" secondItem="nyg-qk-zAm" secondAttribute="bottom" constant="5" id="3U8-Oj-BHI"/>
-                    <constraint firstAttribute="bottom" secondItem="bkU-yZ-l9M" secondAttribute="bottom" id="Egz-lR-M46"/>
-                    <constraint firstItem="nyg-qk-zAm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-4" id="Kmk-i4-OFn"/>
-                    <constraint firstItem="bkU-yZ-l9M" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="9" id="Ov1-R4-haA"/>
-                    <constraint firstItem="bkU-yZ-l9M" firstAttribute="leading" secondItem="nyg-qk-zAm" secondAttribute="leading" id="Pxg-ee-2nO"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="bkU-yZ-l9M" secondAttribute="trailing" constant="15" id="cxh-k8-2xg"/>
-                    <constraint firstItem="bkU-yZ-l9M" firstAttribute="top" secondItem="nyg-qk-zAm" secondAttribute="bottom" constant="5" id="eSt-6T-wEI"/>
-                    <constraint firstItem="bkU-yZ-l9M" firstAttribute="top" secondItem="nyg-qk-zAm" secondAttribute="bottom" multiplier="10" constant="-178" id="mmF-OL-5LR"/>
+                    <constraint firstItem="bkU-yZ-l9M" firstAttribute="top" secondItem="986-VD-rea" secondAttribute="bottom" constant="6" id="9bv-m2-kFD"/>
+                    <constraint firstAttribute="bottom" secondItem="bkU-yZ-l9M" secondAttribute="bottom" constant="-12" id="Egz-lR-M46"/>
+                    <constraint firstItem="bkU-yZ-l9M" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="Ov1-R4-haA"/>
+                    <constraint firstItem="986-VD-rea" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="TFX-1d-Oqm"/>
+                    <constraint firstItem="986-VD-rea" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="WaE-k6-lNd"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="bkU-yZ-l9M" secondAttribute="trailing" constant="2" id="cxh-k8-2xg"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="3U8-Oj-BHI"/>
-                        <exclude reference="mmF-OL-5LR"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="numberLabel" destination="nyg-qk-zAm" id="Jlz-Ub-dCj"/>
-                <outlet property="quoteLabel" destination="bkU-yZ-l9M" id="G3A-1f-EMK"/>
+                <outlet property="desLabel" destination="bkU-yZ-l9M" id="YqR-21-uf4"/>
+                <outlet property="titleLabel" destination="986-VD-rea" id="SZ3-L1-4xr"/>
             </connections>
             <point key="canvasLocation" x="154" y="203.5"/>
         </tableViewCell>
