@@ -9,8 +9,13 @@
 #import "HotNewDetailViewController.h"
 #import "AppDelegate.h"
 #import "CheckQuantityDealCell.h"
+#import "KindOfTransferDealCell.h"
+#import "AutoSizeTableViewCell.h"
+#define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([SYSTEM_VERSION compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define IS_IOS8_OR_ABOVE                            (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
 @interface HotNewDetailViewController ()
-
+@property (nonatomic, strong) AutoSizeTableViewCell *prototypeCell;
 @end
 
 @implementation HotNewDetailViewController
@@ -19,6 +24,7 @@
     ImageSlide *imageSlideTop;
     UILabel * lblDescription;
     float fHeightOfDescription;
+    
 }
 #define PADDING 10//HEADER_HEIGHT
 #define HEADER_HEIGHT 370//HEADER_HEIGHT
@@ -146,7 +152,7 @@
 #pragma mark tableview delegate + datasource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return  2;
+    return  4;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -160,14 +166,28 @@
         return HEADER_HEIGHT + fHeightOfDescription + 15;
     }
     if (indexPath.section == 1) {
-        return 44;
+        return 44+10;
     }
-//    if (indexPath.section == 2) {
-//        return 120;
-//    }
-//    if (indexPath.section == 3) {
-//        return 29;
-//    }
+    if (indexPath.section == 2) {
+        return 88;
+    }
+    if (indexPath.section == 3) {
+        if (IS_IOS8_OR_ABOVE) {
+            return UITableViewAutomaticDimension;
+        }
+        
+        // (7)
+        //self.prototypeCell.bounds = CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), CGRectGetHeight(self.prototypeCell.bounds));
+        
+        [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
+        
+        // (8)
+        [self.prototypeCell updateConstraintsIfNeeded];
+        [self.prototypeCell layoutIfNeeded];
+        
+        // (9)
+        return [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    }
     return 230;
 }
 
@@ -205,27 +225,44 @@
         cell.vContainer.layer.borderColor =[UIColor lightGrayColor].CGColor;
         return cell;
     }
-//    if (indexPath.section == 2) {
-//        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 5, 300, 20)];
-//        lblTitle.text = @"Chọn danh mục";
-//        lblTitle.font = [UIFont boldSystemFontOfSize:14];
-//        lblTitle.textColor = [UIColor redColor];
-//        [cell.contentView addSubview:lblTitle];
-////        [cell.contentView addSubview:scrollViewCategory];
-//        return cell;
-//    }
-//    if (indexPath.section == 3) {
-//        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-////        [cell.contentView addSubview:viewHeader];
-//        
-//        return cell;
-//    }
+    if (indexPath.section == 2) {
+        KindOfTransferDealCell *cell = (KindOfTransferDealCell *)[tableView dequeueReusableCellWithIdentifier:nil];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KindOfTransferDealCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.lblTotal.text = F(@"%d",dealObj.iCount);
+        
+        return cell;
+    }
+    if (indexPath.section == 3) {
+        AutoSizeTableViewCell *cell = (AutoSizeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:nil];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"AutoSizeTableViewCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        
+        [self configureCell:cell forRowAtIndexPath:indexPath];
+        
+        return cell;
+    }
     return nil;
 }
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
 
+- (void)configureCell:(AutoSizeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *quote = @"is the carob tree, St John's-bread, or locust bean (not to be confused with the African locust bean) is a species of flower ob tree, St John's-bread, or locust bean (not to be confused with the African locust bean) is a ob tree, St John's-bread, or locust bean (not to be confused with the African locust bean) is a";
+    
+    cell.numberLabel.text = [NSString stringWithFormat:@"Quote %ld", (long)indexPath.row];
+    cell.quoteLabel.text = quote;
+}
 
 /*
 #pragma mark - Navigation
