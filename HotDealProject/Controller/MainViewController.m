@@ -184,14 +184,29 @@
     //    [scrollView setBounces:NO];
     
     int x = 0;
-    for (int i = 0; i < [arrNewDeals count]; i++) {
+    for (int i = 0; i < [arrDeals count]; i++) {
         DealItem *itemS = [[[NSBundle mainBundle] loadNibNamed:@"DealItem" owner:self options:nil] objectAtIndex:0];
         [itemS setFrame:CGRectMake(x, 0, 250, 180)];
         [itemS.btnTemp addTarget:self action:@selector(clickOnItem:) forControlEvents:UIControlEventTouchUpInside];
         itemS.btnTemp.tag = i;
-        itemS.backgroundColor = [UIColor greenColor];
-        itemS.lblBooks.text = @"Something like this";
-        itemS.lblName.text = [arrNewDeals objectAtIndex:i];
+//        itemS.backgroundColor = [UIColor greenColor];
+        
+        DealObject * item = [arrDeals objectAtIndex:i];
+        NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
+        strStardarPrice = [strStardarPrice formatStringToDecimal];
+        NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+        NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
+        itemS.lblStandarPrice.attributedText = attributedString;
+        [itemS.lblStandarPrice sizeToFit];
+        itemS.lblNumOfBook.text = F(@"%d",item.iCount);
+        
+        NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
+        strDiscountPrice = [strDiscountPrice formatStringToDecimal];
+        strDiscountPrice = F(@"%@đ", strDiscountPrice);
+        itemS.lblDiscountPrice.text = strDiscountPrice;
+        itemS.lblTitle.text = item.strTitle;
+
+        
         x += itemS.frame.size.width + PADDING;
         [scrollView addSubview:itemS];
     }

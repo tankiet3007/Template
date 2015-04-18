@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface DealItem : UIView
-@property (weak, nonatomic) IBOutlet UILabel *lblName;
-@property (weak, nonatomic) IBOutlet UILabel *lblBooks;
+@property (weak, nonatomic) IBOutlet UIImageView *imgBrand;
+@property (weak, nonatomic) IBOutlet UILabel *lblNumOfBook;
+@property (weak, nonatomic) IBOutlet UILabel *lblStandarPrice;
+@property (weak, nonatomic) IBOutlet UILabel *lblDiscountPrice;
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+
 @property (weak, nonatomic) IBOutlet UIButton *btnTemp;
 
 @end
