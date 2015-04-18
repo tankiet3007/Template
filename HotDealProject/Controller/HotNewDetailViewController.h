@@ -12,4 +12,5 @@
 @interface HotNewDetailViewController : UIViewController<UIGestureRecognizerDelegate, UITableViewDataSource,UITableViewDelegate,slideImageDelegate>
 @property(nonatomic,strong)UITableView * tableViewDetail;
 @property (nonatomic, strong)DealObject * dealObj;
+@property (nonatomic,strong)NSMutableArray * arrDealRelateds;
 @end

@@ -11,6 +11,7 @@
 #import "CheckQuantityDealCell.h"
 #import "KindOfTransferDealCell.h"
 #import "AutoSizeTableViewCell.h"
+#import "DealItem.h"
 #define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([SYSTEM_VERSION compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define IS_IOS8_OR_ABOVE                            (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
@@ -24,12 +25,13 @@
     ImageSlide *imageSlideTop;
     UILabel * lblDescription;
     float fHeightOfDescription;
-    
+    UIScrollView * scrollView;
 }
 #define PADDING 10//HEADER_HEIGHT
 #define HEADER_HEIGHT 370//HEADER_HEIGHT
 @synthesize tableViewDetail;
 @synthesize dealObj;
+@synthesize arrDealRelateds;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -48,8 +50,10 @@
     fHeightOfDescription = rect.size.height;
     
     [self setupSlide];
+    [self setupRelatedDeal];
     [self setupViewHeader];
     [self initUITableView];
+    [self.view addSubview:[self setupBottomView]];
     // Do any additional setup after loading the view.
 }
 
@@ -136,7 +140,7 @@
 
 -(void)initUITableView
 {
-    tableViewDetail = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 66) style:UITableViewStylePlain];
+    tableViewDetail = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 66 - 40) style:UITableViewStylePlain];
     [self.view addSubview:tableViewDetail];
     
     
@@ -152,7 +156,7 @@
 #pragma mark tableview delegate + datasource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return  4;
+    return  5;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -173,6 +177,9 @@
     }
     if (indexPath.section == 2) {
         return 88;
+    }
+    if (indexPath.section == 4) {
+        return 230;
     }
     if (indexPath.section == 3) {
         if (IS_IOS8_OR_ABOVE) {
@@ -252,6 +259,18 @@
         
         return cell;
     }
+    if (indexPath.section == 4) {
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 15, 300, 20)];
+        
+        lblTitle.text = @"Sản phẩm liên quan";
+        lblTitle.font = [UIFont boldSystemFontOfSize:14];
+        lblTitle.textColor = [UIColor blackColor];
+        [cell.contentView addSubview:lblTitle];
+        [cell.contentView addSubview:scrollView];
+        return cell;
+    }
     return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -278,9 +297,9 @@
     }
     if (indexPath.row == 3) {
         cell.titleLabel.text = @"Chi tiết khuyến mãi";
-        cell.desLabel.text = @"";
+        cell.desLabel.text = @"\n";
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     UILabel * lblTemp = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 260, 0)];
     lblTemp.lineBreakMode = NSLineBreakByWordWrapping;
     lblTemp.numberOfLines = 0;
@@ -293,7 +312,7 @@
     CGRect rect = lblTemp.frame;
 //    fHeightOfDescription = rect.size.height;
     
-    UA_log(@"height desLabel : %f", rect.size.height );
+//    UA_log(@"height desLabel : %f", rect.size.height );
     UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 0, 300, rect.size.height + 15)];
     [cell.contentView insertSubview:viewBG atIndex:0];
     viewBG.layer.borderWidth = 0.5;
@@ -301,14 +320,77 @@
     
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(UIScrollView *)setupRelatedDeal
+{
+    if (scrollView != nil) {
+        [scrollView removeFromSuperview];
+        scrollView = nil;
+    }
+    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 40, 320, 180)];
+    scrollView.backgroundColor = [UIColor clearColor];
+    scrollView.showsHorizontalScrollIndicator = NO;
+    //    [scrollView setBounces:NO];
+    
+    int x = 0;
+    for (int i = 0; i < [arrDealRelateds count]; i++) {
+        DealItem *itemS = [[[NSBundle mainBundle] loadNibNamed:@"DealItem" owner:self options:nil] objectAtIndex:0];
+        [itemS setFrame:CGRectMake(x, 0, 250, 180)];
+        [itemS.btnTemp addTarget:self action:@selector(clickOnItem:) forControlEvents:UIControlEventTouchUpInside];
+        itemS.btnTemp.tag = i;
+        //        itemS.backgroundColor = [UIColor greenColor];
+        
+        DealObject * item = [arrDealRelateds objectAtIndex:i];
+        NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
+        strStardarPrice = [strStardarPrice formatStringToDecimal];
+        NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+        NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
+        itemS.lblStandarPrice.attributedText = attributedString;
+        [itemS.lblStandarPrice sizeToFit];
+        itemS.lblNumOfBook.text = F(@"%d",item.iCount);
+        
+        NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
+        strDiscountPrice = [strDiscountPrice formatStringToDecimal];
+        strDiscountPrice = F(@"%@đ", strDiscountPrice);
+        itemS.lblDiscountPrice.text = strDiscountPrice;
+        itemS.lblTitle.text = item.strTitle;
+        
+        
+        x += itemS.frame.size.width + PADDING;
+        [scrollView addSubview:itemS];
+    }
+    scrollView.contentSize = CGSizeMake(x, scrollView.frame.size.height);
+    return scrollView;
 }
-*/
+-(void)clickOnItem:(id)sender
+{
+    UIButton * btnTag = (UIButton *)sender;
+    UA_log(@"button is at %ld index", (long)btnTag.tag);
+    HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
+    DealObject * dealObjs = [arrDealRelateds objectAtIndex:(long)btnTag.tag];
+    detail.dealObj = dealObjs;
+    detail.arrDealRelateds = arrDealRelateds;
+    [self.navigationController pushViewController:detail animated:YES];
+}
 
+-(UIView *)setupBottomView
+{
+    UIView * viewBottom = [[UIView alloc]initWithFrame:CGRectMake(0, ScreenHeight - 114, ScreenWidth, 50)];
+    viewBottom.backgroundColor = [UIColor darkGrayColor];
+    UIButton * btnOne = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btnOne setFrame:CGRectMake(PADDING, 8, ScreenWidth/2 - PADDING*2, 35)];
+    btnOne.backgroundColor = [UIColor whiteColor];
+    [btnOne setTitle:@"CHO VÀO GIỎ HÀNG" forState:UIControlStateNormal];
+    [btnOne.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    [btnOne setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [viewBottom addSubview:btnOne];
+    
+    UIButton * btnTwo = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btnTwo setFrame:CGRectMake(PADDING*2 + WIDTH(btnOne), 8, ScreenWidth/2 - PADDING, 35)];
+    btnTwo.backgroundColor = [UIColor greenColor];
+    [btnTwo setTitle:@"MUA NGAY" forState:UIControlStateNormal];
+    [btnTwo setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btnTwo.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    [viewBottom addSubview:btnTwo];
+    return viewBottom;
+}
 @end

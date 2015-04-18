@@ -460,6 +460,7 @@
         HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
         DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
         detail.dealObj = dealObj;
+        detail.arrDealRelateds = arrDeals;
         [self.navigationController pushViewController:detail animated:YES];
     }
 }
@@ -502,6 +503,7 @@
     HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
     DealObject * dealObj = [arrDeals objectAtIndex:(long)btnTag.tag];
     detail.dealObj = dealObj;
+    detail.arrDealRelateds = arrDeals;
     [self.navigationController pushViewController:detail animated:YES];
 }
 
