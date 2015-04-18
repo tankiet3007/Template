@@ -8,6 +8,7 @@
 
 #import "HotNewDetailViewController.h"
 #import "AppDelegate.h"
+#import "CheckQuantityDealCell.h"
 @interface HotNewDetailViewController ()
 
 @end
@@ -145,7 +146,7 @@
 #pragma mark tableview delegate + datasource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return  1;
+    return  2;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -156,11 +157,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return HEADER_HEIGHT + fHeightOfDescription;
+        return HEADER_HEIGHT + fHeightOfDescription + 15;
     }
-//    if (indexPath.section == 1) {
-//        return 230;
-//    }
+    if (indexPath.section == 1) {
+        return 44;
+    }
 //    if (indexPath.section == 2) {
 //        return 120;
 //    }
@@ -190,23 +191,20 @@
         [cell.contentView addSubview:viewHeader];
         return cell;
     }
-//    if (indexPath.section == 1) {
-//        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 15, 300, 20)];
-//        NSDate * date = [NSDate date];
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//        [formatter setDateFormat:@"dd/MM"];
-//        NSString * strToday = [formatter stringFromDate:date];
-//        
-//        NSLog(@"%@ ,%@", strToday ,[date stringWeekday]);
-//        lblTitle.text = F(@"Deal mới nhất %@ ngày %@",[date stringWeekday],strToday);
-//        lblTitle.font = [UIFont boldSystemFontOfSize:14];
-//        lblTitle.textColor = [UIColor redColor];
-//        [cell.contentView addSubview:lblTitle];
-////        [cell.contentView addSubview:scrollView];
-//        return cell;
-//    }
+    if (indexPath.section == 1) {
+        CheckQuantityDealCell *cell = (CheckQuantityDealCell *)[tableView dequeueReusableCellWithIdentifier:nil];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CheckQuantityDealCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }    //    [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.imgPic.image = [UIImage imageNamed:@"beef"];
+        cell.vContainer.layer.borderWidth = 0.5;
+        cell.vContainer.layer.borderColor =[UIColor lightGrayColor].CGColor;
+        return cell;
+    }
 //    if (indexPath.section == 2) {
 //        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 //        cell.selectionStyle = UITableViewCellSelectionStyleNone;

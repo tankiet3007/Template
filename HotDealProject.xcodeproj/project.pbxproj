@@ -102,6 +102,10 @@
 		E9AE209C1AD81134002E11AC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE209A1AD81134002E11AC /* Foundation.framework */; };
 		E9AE209E1AD8114F002E11AC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE209D1AD8114F002E11AC /* CoreData.framework */; };
 		E9AE20A01AD8124E002E11AC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE209F1AD8124E002E11AC /* CoreFoundation.framework */; };
+		E9B3DA331AE213E0009C668D /* CheckQuantityDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3DA311AE213E0009C668D /* CheckQuantityDealCell.m */; };
+		E9B3DA341AE213E0009C668D /* CheckQuantityDealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B3DA321AE213E0009C668D /* CheckQuantityDealCell.xib */; };
+		E9B3DA381AE21431009C668D /* KindOfTransferDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3DA361AE21431009C668D /* KindOfTransferDealCell.m */; };
+		E9B3DA391AE21431009C668D /* KindOfTransferDealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B3DA371AE21431009C668D /* KindOfTransferDealCell.xib */; };
 		E9C049F31AE0F9360017C5CE /* DealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C049F11AE0F9360017C5CE /* DealCell.m */; };
 		E9C049F41AE0F9360017C5CE /* DealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9C049F21AE0F9360017C5CE /* DealCell.xib */; };
 		E9C049F71AE13B2D0017C5CE /* DealObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C049F61AE13B2D0017C5CE /* DealObject.m */; };
@@ -317,6 +321,12 @@
 		E9AE209D1AD8114F002E11AC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E9AE209F1AD8124E002E11AC /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		E9AE20A11AD813D1002E11AC /* Hotdeal-pch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hotdeal-pch.pch"; sourceTree = "<group>"; };
+		E9B3DA301AE213E0009C668D /* CheckQuantityDealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckQuantityDealCell.h; path = Control/CheckQuantityDealCell.h; sourceTree = "<group>"; };
+		E9B3DA311AE213E0009C668D /* CheckQuantityDealCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckQuantityDealCell.m; path = Control/CheckQuantityDealCell.m; sourceTree = "<group>"; };
+		E9B3DA321AE213E0009C668D /* CheckQuantityDealCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CheckQuantityDealCell.xib; path = Control/CheckQuantityDealCell.xib; sourceTree = "<group>"; };
+		E9B3DA351AE21431009C668D /* KindOfTransferDealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KindOfTransferDealCell.h; path = Control/KindOfTransferDealCell.h; sourceTree = "<group>"; };
+		E9B3DA361AE21431009C668D /* KindOfTransferDealCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KindOfTransferDealCell.m; path = Control/KindOfTransferDealCell.m; sourceTree = "<group>"; };
+		E9B3DA371AE21431009C668D /* KindOfTransferDealCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KindOfTransferDealCell.xib; path = Control/KindOfTransferDealCell.xib; sourceTree = "<group>"; };
 		E9C049F01AE0F9360017C5CE /* DealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealCell.h; path = Control/DealCell.h; sourceTree = "<group>"; };
 		E9C049F11AE0F9360017C5CE /* DealCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealCell.m; path = Control/DealCell.m; sourceTree = "<group>"; };
 		E9C049F21AE0F9360017C5CE /* DealCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DealCell.xib; path = Control/DealCell.xib; sourceTree = "<group>"; };
@@ -444,6 +454,12 @@
 				E9C049F01AE0F9360017C5CE /* DealCell.h */,
 				E9C049F11AE0F9360017C5CE /* DealCell.m */,
 				E9C049F21AE0F9360017C5CE /* DealCell.xib */,
+				E9B3DA301AE213E0009C668D /* CheckQuantityDealCell.h */,
+				E9B3DA311AE213E0009C668D /* CheckQuantityDealCell.m */,
+				E9B3DA321AE213E0009C668D /* CheckQuantityDealCell.xib */,
+				E9B3DA351AE21431009C668D /* KindOfTransferDealCell.h */,
+				E9B3DA361AE21431009C668D /* KindOfTransferDealCell.m */,
+				E9B3DA371AE21431009C668D /* KindOfTransferDealCell.xib */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -970,7 +986,9 @@
 				E9C049F41AE0F9360017C5CE /* DealCell.xib in Resources */,
 				E95945511ADB661F00CDA3FF /* carat.png in Resources */,
 				E9D3BD7D1AD6BA5400F7429B /* LaunchScreen.xib in Resources */,
+				E9B3DA341AE213E0009C668D /* CheckQuantityDealCell.xib in Resources */,
 				E98FCF3F1AD8CA9100992BF0 /* JingDianMapCell.xib in Resources */,
+				E9B3DA391AE21431009C668D /* KindOfTransferDealCell.xib in Resources */,
 				E9D3BD7A1AD6BA5400F7429B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1016,6 +1034,7 @@
 				E9AE20851AD80B68002E11AC /* NSString+Helper.m in Sources */,
 				E9AE203C1AD80A5E002E11AC /* UIImage+GIF.m in Sources */,
 				E959454E1ADB661F00CDA3FF /* APLSectionHeaderView.m in Sources */,
+				E9B3DA381AE21431009C668D /* KindOfTransferDealCell.m in Sources */,
 				E9AE203A1AD80A5E002E11AC /* SDWebImagePrefetcher.m in Sources */,
 				E9AE20281AD80A5E002E11AC /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				E9485B9A1AE006E2005D1688 /* AFNetworkReachabilityManager.m in Sources */,
@@ -1065,6 +1084,7 @@
 				E9AE20301AD80A5E002E11AC /* MagicalRecord+Setup.m in Sources */,
 				E98FCF3C1AD8CA9100992BF0 /* CallOutAnnotationVifew.m in Sources */,
 				E9AE201E1AD80A5E002E11AC /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
+				E9B3DA331AE213E0009C668D /* CheckQuantityDealCell.m in Sources */,
 				E9485B991AE006E2005D1688 /* AFHTTPSessionManager.m in Sources */,
 				E9485B9E1AE006E2005D1688 /* AFURLResponseSerialization.m in Sources */,
 				E9D3BD6C1AD6BA5400F7429B /* main.m in Sources */,
