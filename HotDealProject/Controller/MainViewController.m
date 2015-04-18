@@ -85,12 +85,14 @@
     DealObject * item = [[DealObject alloc]init];
     item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
     item.iCount = 123;
+    item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
     item.lDiscountPrice = 100000;
     item.lStandarPrice = 400000;
     [arrDeals addObject:item];
     
     item = [[DealObject alloc]init];
     item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
+    item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
     item.iCount = 456;
     item.lDiscountPrice = 200000;
     item.lStandarPrice = 1000000;
@@ -99,12 +101,14 @@
     item = [[DealObject alloc]init];
     item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
     item.iCount = 789;
+    item.strDescription = @"Đầm xòe Zara họa tiết chấm bi xuất khẩu - Thiết kế thời trang với phần phối màu xen kẽ họa tiết chấm bi đẹp mắt giúp thể hiện nét đẹp thanh lịch, sành điệu của bạn gái. Chỉ 199.000đ cho trị giá 398.000đ Chỉ 199.000đ cho trị giá 398.000đ";
     item.lDiscountPrice = 30000;
     item.lStandarPrice = 200000;
     [arrDeals addObject:item];
     
     item = [[DealObject alloc]init];
     item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
+    item.strDescription = @"Bộ miếng dán iPhone mạ vàng và ốp lưng silicon có thiết kế vừa vặn với khung máy sẽ giúp mang đến cho dế yêu của bạn một vẻ đẹp hoàn hảo và đẳng cấp. Chỉ 85.000đ cho trị giá 160.000đ";
     item.iCount = 111;
     item.lDiscountPrice = 100000;
     item.lStandarPrice = 400000;
@@ -454,6 +458,8 @@
 {
     if (indexPath.section == 4) {
         HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
+        DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
+        detail.dealObj = dealObj;
         [self.navigationController pushViewController:detail animated:YES];
     }
 }
@@ -494,6 +500,8 @@
     UIButton * btnTag = (UIButton *)sender;
     UA_log(@"button is at %ld index", (long)btnTag.tag);
     HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
+    DealObject * dealObj = [arrDeals objectAtIndex:(long)btnTag.tag];
+    detail.dealObj = dealObj;
     [self.navigationController pushViewController:detail animated:YES];
 }
 

@@ -185,11 +185,12 @@
     _scrollView.pagingEnabled = YES;
     
     [self addSubview:_scrollView];
-    _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 0 + self.frame.size.height -10, self.frame.size.width, 30)];
+    _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 0 + self.frame.size.height-30, self.frame.size.width, 30)];
     _pageControl.hidden = NO;
-    _pageControl.pageIndicatorTintColor = [UIColor grayColor];
+    _pageControl.pageIndicatorTintColor = [UIColor whiteColor];
     _pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
     _pageControl.backgroundColor = [UIColor clearColor];
+    _pageControl.userInteractionEnabled = NO;
     //    _pageControl.backgroundColor = [UIColor grayColor];
     [self addSubview:_pageControl];
     
@@ -199,12 +200,12 @@
         frame.origin.y = 0;
         frame.size = _scrollView.frame.size;
         NSString *filePath = [_galleryImages objectAtIndex:i];
-        NSString * strStandarURL = filePath;
-        NSString *photourl;
-        if ([strStandarURL containsString:@"http://"]||[strStandarURL containsString:@"https://"]) {
-            photourl = strStandarURL;
-        }
-        
+//        NSString * strStandarURL = filePath;
+//        NSString *photourl;
+//        if ([strStandarURL containsString:@"http://"]||[strStandarURL containsString:@"https://"]) {
+//            photourl = strStandarURL;
+//        }
+        UIImage *imageT = [UIImage imageNamed:filePath];
         UIImageView *imageView;
         imageView = [[UIImageView alloc] init];
         
@@ -216,15 +217,17 @@
 //        imageView = [[UIImageView alloc] initWithImage:imageT];
         imageView.clipsToBounds = YES;
         imageView.tag = 1;
-        [imageView setContentMode:UIViewContentModeScaleAspectFit];
+                imageView.image = imageT;
+//        [imageView setContentMode:UIViewContentModeScaleAspectFit];
         
         UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:frame];
         scrollView.delegate = self;
         scrollView.maximumZoomScale = 3.0f;
         imageView.frame = scrollView.bounds;
         [scrollView addSubview:imageView];
-        [imageView setImageWithURL:[NSURL URLWithString:photourl]
-       usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+
+//        [imageView setImageWithURL:[NSURL URLWithString:photourl]
+//       usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [_scrollView addSubview:scrollView];
     }
     

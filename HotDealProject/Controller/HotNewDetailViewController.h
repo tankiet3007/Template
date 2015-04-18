@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface HotNewDetailViewController : UIViewController
-
+#import "ImageSlide.h"
+#import "DealObject.h"
+@interface HotNewDetailViewController : UIViewController<UIGestureRecognizerDelegate, UITableViewDataSource,UITableViewDelegate,slideImageDelegate>
+@property(nonatomic,strong)UITableView * tableViewDetail;
+@property (nonatomic, strong)DealObject * dealObj;
 @end
