@@ -29,6 +29,7 @@
 		E95945591ADB7CD800CDA3FF /* HotNewDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95945581ADB7CD800CDA3FF /* HotNewDetailViewController.m */; };
 		E959455C1ADB7F7E00CDA3FF /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E959455B1ADB7F7E00CDA3FF /* CategoryViewController.m */; };
 		E959455F1ADB7F9900CDA3FF /* PromotionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E959455E1ADB7F9900CDA3FF /* PromotionViewController.m */; };
+		E95A23E31AE380B70050DCB1 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95A23E21AE380B70050DCB1 /* SearchViewController.m */; };
 		E97B700B1ADA01790099B5C2 /* DealItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B700A1ADA01790099B5C2 /* DealItem.m */; };
 		E97B700D1ADA01AF0099B5C2 /* DealItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = E97B700C1ADA01AF0099B5C2 /* DealItem.xib */; };
 		E98FCF391AD8CA9100992BF0 /* ImageSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = E98FCF291AD8CA9100992BF0 /* ImageSlide.m */; };
@@ -175,6 +176,8 @@
 		E959455B1ADB7F7E00CDA3FF /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryViewController.m; path = Controller/CategoryViewController.m; sourceTree = "<group>"; };
 		E959455D1ADB7F9900CDA3FF /* PromotionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PromotionViewController.h; path = Controller/PromotionViewController.h; sourceTree = "<group>"; };
 		E959455E1ADB7F9900CDA3FF /* PromotionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PromotionViewController.m; path = Controller/PromotionViewController.m; sourceTree = "<group>"; };
+		E95A23E11AE380B70050DCB1 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = Controller/SearchViewController.h; sourceTree = "<group>"; };
+		E95A23E21AE380B70050DCB1 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = Controller/SearchViewController.m; sourceTree = "<group>"; };
 		E97B70091ADA01790099B5C2 /* DealItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealItem.h; path = Control/DealItem.h; sourceTree = "<group>"; };
 		E97B700A1ADA01790099B5C2 /* DealItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealItem.m; path = Control/DealItem.m; sourceTree = "<group>"; };
 		E97B700C1ADA01AF0099B5C2 /* DealItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DealItem.xib; path = ../../HotDealProject/HotDealProject/DealItem.xib; sourceTree = "<group>"; };
@@ -791,6 +794,8 @@
 				E959455B1ADB7F7E00CDA3FF /* CategoryViewController.m */,
 				E959455D1ADB7F9900CDA3FF /* PromotionViewController.h */,
 				E959455E1ADB7F9900CDA3FF /* PromotionViewController.m */,
+				E95A23E11AE380B70050DCB1 /* SearchViewController.h */,
+				E95A23E21AE380B70050DCB1 /* SearchViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1086,6 +1091,7 @@
 				E9AE20321AD80A5E002E11AC /* MagicalRecord.m in Sources */,
 				E9AE20331AD80A5E002E11AC /* NSData+ImageContentType.m in Sources */,
 				E9AE20901AD80B68002E11AC /* RadioButton.m in Sources */,
+				E95A23E31AE380B70050DCB1 /* SearchViewController.m in Sources */,
 				E9AE20811AD80B68002E11AC /* INTULocationRequest.m in Sources */,
 				E9485B971AE006E2005D1688 /* AFHTTPRequestOperation.m in Sources */,
 				E9AE1FB01AD80455002E11AC /* MainViewController.m in Sources */,

@@ -7,10 +7,11 @@
 //
 
 #import "MainViewController.h"
-#import "SWRevealViewController.h"
+
 #import "Reachability.h"
 #import "DealItem.h"
 #import "HotNewDetailViewController.h"
+#import "SWRevealViewController.h"
 #import "CategoryViewController.h"
 #import "PromotionViewController.h"
 #import "DealCell.h"
@@ -75,13 +76,7 @@
 -(void)initData
 {
     arrDeals = [[NSMutableArray alloc]init];
-    arrNewDeals = [NSMutableArray arrayWithObjects:@"Deal 1",@"Deal 2",@"Deal 3",@"Deal 4",@"Deal 5",@"Deal 6",@"Deal 7",@"Deal 8",@"Deal 9",@"Deal 10",@"Deal 11",@"Deal 12", nil];
     
-    arrSale = [NSMutableArray arrayWithObjects:@"Sale 1",@"Sale 2",@"Sale 3",@"Sale 4",@"Sale 5",@"Sale 6",@"Sale 7",@"Sale 8",@"Sale 9",@"Sale 10", nil];
-    
-     arrNew = [NSMutableArray arrayWithObjects:@"New 1",@"New 2",@"New 3",@"New 4",@"New 5",@"New 6",@"New 7",@"New 8",@"New 9",@"New 10", nil];
-    
-     arrNear = [NSMutableArray arrayWithObjects:@"Near 1",@"Near 2",@"Near 3",@"Near 4",@"Near 5",@"Near 6",@"Near 7",@"Near 8",@"Near 9",@"Near 10", nil];
     DealObject * item = [[DealObject alloc]init];
     item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
     item.iCount = 123;
@@ -281,11 +276,6 @@
     revealController = [self revealViewController];
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
-    //    UITapGestureRecognizer *tap = [revealController tapGestureRecognizer];
-    //    tap.delegate = self;
-    //
-    //    [self.view addGestureRecognizer:tap];
-    //    [self.navigationController.navigationBar addGestureRecognizer:revealController.panGestureRecognizer];
     
     UIImage *image = [UIImage imageNamed:@"menu_n.png"];
     UIButton * rBtest = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -297,6 +287,7 @@
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
 }
+
 #pragma mark tableview delegate + datasource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

@@ -14,6 +14,7 @@
 #import "CategoryViewController.h"
 #import "SWRevealViewController.h"
 #import "MainViewController.h"
+#import "SearchViewController.h"
 @interface LeftMenuViewController ()
 @property (nonatomic) NSMutableArray *sectionInfoArray;
 @property (nonatomic) NSInteger openSectionIndex;
@@ -34,7 +35,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 #pragma mark -
 
-#define DEFAULT_ROW_HEIGHT 30
+#define DEFAULT_ROW_HEIGHT 40
 #define HEADER_HEIGHT 48
 @synthesize arrMenu;
 @synthesize searchBars;
@@ -44,7 +45,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
-
+    revealVC = [self revealViewController];
     // Set up default values.
     self.view.backgroundColor = [UIColor whiteColor];
     [self initData];
@@ -200,7 +201,12 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%@ indexpath", indexPath);
+//    NSLog(@"%@ indexpath", indexPath);
+    CategoryViewController * categoryVC = [[CategoryViewController alloc]init];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:categoryVC];
+    [revealVC setFrontViewController:navigationController animated:YES];
+    [revealVC revealToggle:nil];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -234,7 +240,6 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainVC];
         
-        revealVC = [self revealViewController];
         [revealVC setFrontViewController:navigationController animated:YES];
         [revealVC revealToggle:nil];
         return;
@@ -300,7 +305,6 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainVC];
         
-        revealVC = [self revealViewController];
         [revealVC setFrontViewController:navigationController animated:YES];
         [revealVC revealToggle:nil];
         return;
@@ -325,11 +329,8 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 }
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    CategoryViewController * categoryVC = [[CategoryViewController alloc]init];
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:categoryVC];
-    
-    revealVC = [self revealViewController];
+    SearchViewController *searchVC = [SearchViewController alloc];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:searchVC];
     [revealVC setFrontViewController:navigationController animated:YES];
     [revealVC revealToggle:nil];
     return NO;
