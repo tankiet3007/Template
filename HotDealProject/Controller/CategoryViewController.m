@@ -9,6 +9,7 @@
 #import "CategoryViewController.h"
 #import "AppDelegate.h"
 #import "HotNewDetailViewController.h"
+#import "SWRevealViewController.h"
 @interface CategoryViewController ()
 
 @end
@@ -20,6 +21,8 @@
     UISegmentedControl *segmentedControl;
     UIButton * btnFilter;
     UILabel * lblNumOfVoucher;
+    SWRevealViewController *revealController;
+
 }
 @synthesize tableviewCategory;
 - (void)viewDidLoad {
@@ -29,11 +32,45 @@
     [self setupSegment];
     arrDeals = [[NSMutableArray alloc]init];
     [self initUITableView];
-    
-    [appdelegate initNavigationbar:self withTitle:@"DANH MỤC"];
+    [self initNavigationbar];
+//    [appdelegate initNavigationbar:self withTitle:@"DANH MỤC"];
     // Do any additional setup after loading the view.
 }
 
+-(void)initNavigationbar
+{
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero] ;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    label.textAlignment = NSTextAlignmentCenter;
+    // ^-Use UITextAlignmentCenter for older SDKs.
+    label.textColor = [UIColor whiteColor]; // change this color
+    self.navigationItem.titleView = label;
+    label.text = NSLocalizedString(@"DANH MUC", @"");
+    [label sizeToFit];
+    
+    revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    //    UITapGestureRecognizer *tap = [revealController tapGestureRecognizer];
+    //    tap.delegate = self;
+    //
+    //    [self.view addGestureRecognizer:tap];
+    //    [self.navigationController.navigationBar addGestureRecognizer:revealController.panGestureRecognizer];
+    
+    UIImage *image = [UIImage imageNamed:@"menu_n.png"];
+    UIButton * rBtest = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rBtest addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    [rBtest setBackgroundImage:image forState:UIControlStateNormal];
+    [rBtest setFrame:CGRectMake(0, 0, 30, 30)];
+    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rBtest];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

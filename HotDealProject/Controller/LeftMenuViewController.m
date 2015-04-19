@@ -11,8 +11,9 @@
 #import "APLSectionInfo.h"
 #import "APLSectionHeaderView.h"
 #import "MenuItem.h"
-
-
+#import "CategoryViewController.h"
+#import "SWRevealViewController.h"
+#import "MainViewController.h"
 @interface LeftMenuViewController ()
 @property (nonatomic) NSMutableArray *sectionInfoArray;
 @property (nonatomic) NSInteger openSectionIndex;
@@ -24,6 +25,9 @@
 @end
 
 @implementation LeftMenuViewController
+{
+    SWRevealViewController *revealVC;
+}
 #pragma mark - APLTableViewController
 
 static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
@@ -33,14 +37,18 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 #define DEFAULT_ROW_HEIGHT 30
 #define HEADER_HEIGHT 48
 @synthesize arrMenu;
+@synthesize searchBars;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
+
     // Set up default values.
     self.view.backgroundColor = [UIColor whiteColor];
     [self initData];
+    [self initSearchBar];
     [self initUITableView];
     UINib *sectionHeaderNib = [UINib nibWithNibName:@"SectionHeaderView" bundle:nil];
     self.openSectionIndex = NSNotFound;
@@ -49,13 +57,13 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 -(void)initUITableView
 {
-//    self.view.backgroundColor = [UIColor darkGrayColor];
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-44) style:UITableViewStylePlain];
+    self.view.backgroundColor = [UIColor darkGrayColor];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 60, ScreenWidth, ScreenHeight-44) style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = [UIColor darkGrayColor];
     
     //    [tableViewDays setDragDelegate:self refreshDatePermanentKey:@"HotNewsList"];
-//    self.tableView.backgroundColor = [UIColor whiteColor];
+    //    self.tableView.backgroundColor = [UIColor whiteColor];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -70,14 +78,26 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     arrMenu = [[NSMutableArray alloc]init];
     MenuItem * menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Trang chủ";
-//    subMenu = [NSArray arrayWithObjects:@"Sub 1 - 1",@"Sub 1 - 2",@"Sub 1 - 3", nil];
-//    menuItem.subItem = subMenu;
+    //    subMenu = [NSArray arrayWithObjects:@"Sub 1 - 1",@"Sub 1 - 2",@"Sub 1 - 3", nil];
+    //    menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Khuyến mãi mới";
-//    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
-//    menuItem.subItem = subMenu;
+    //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
+    //    menuItem.subItem = subMenu;
+    [arrMenu addObject:menuItem];
+    
+    menuItem = [[MenuItem alloc]init];
+    menuItem.name = @"Tài khoản";
+    //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
+    //    menuItem.subItem = subMenu;
+    [arrMenu addObject:menuItem];
+    
+    menuItem = [[MenuItem alloc]init];
+    menuItem.name = @"Hỗ trợ";
+    //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
+    //    menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
@@ -90,13 +110,13 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     menuItem.name = @"Nhà hàng - Ẩm thực";
     subMenu = [NSArray arrayWithObjects:@"Buffet",@"Nhà hàng - Quán ăn",@"Cafe - Kem  - Bánh",@"Thực phẩm",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
-        [arrMenu addObject:menuItem];
+    [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Sức khoẻ - Làm đẹp";
     subMenu = [NSArray arrayWithObjects:@"Spa - Thẩm mỹ viện",@"Salon - Làm đẹp",@"Nha khoa - Sức khỏe",@"Mỹ phẩm",@"Dụng cụ làm đẹp",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
-        [arrMenu addObject:menuItem];
+    [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Du lịch - Khách sạn";
@@ -109,7 +129,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     subMenu = [NSArray arrayWithObjects:@"Phụ kiện công nghệ",@"Thiết bị điện tử",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
-
+    
     
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -155,7 +175,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     NSInteger numStoriesInSection = [[sectionInfo.menuItem subItem] count];
     
     NSInteger numberOfRows = sectionInfo.open ? numStoriesInSection : 0;
-    UA_log(@"%ld",numberOfRows);
+    //    UA_log(@"%ld",numberOfRows);
     return numberOfRows;
 }
 
@@ -164,6 +184,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     static NSString *simpleTableIdentifier = @"APLQuoteCell";
     
     APLQuoteCell *cell = (APLQuoteCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        [cell setTranslatesAutoresizingMaskIntoConstraints:NO];
     if (cell == nil)
     {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"APLQuoteCell" owner:self options:nil];
@@ -208,6 +229,16 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 - (void)sectionHeaderView:(APLSectionHeaderView *)sectionHeaderView sectionOpened:(NSInteger)sectionOpened {
     
+    if (sectionOpened == 0) {
+        MainViewController * mainVC = [[MainViewController alloc]init];
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainVC];
+        
+        revealVC = [self revealViewController];
+        [revealVC setFrontViewController:navigationController animated:YES];
+        [revealVC revealToggle:nil];
+        return;
+    }
     APLSectionInfo *sectionInfo = (self.sectionInfoArray)[sectionOpened];
     
     sectionInfo.open = YES;
@@ -264,6 +295,16 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     /*
      Create an array of the index paths of the rows in the section that was closed, then delete those rows from the table view.
      */
+    if (sectionClosed == 0) {
+        MainViewController * mainVC = [[MainViewController alloc]init];
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainVC];
+        
+        revealVC = [self revealViewController];
+        [revealVC setFrontViewController:navigationController animated:YES];
+        [revealVC revealToggle:nil];
+        return;
+    }
     APLSectionInfo *sectionInfo = (self.sectionInfoArray)[sectionClosed];
     
     sectionInfo.open = NO;
@@ -278,4 +319,31 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     }
     self.openSectionIndex = NSNotFound;
 }
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+    NSLog(@"SEARCH BAR TEXT DID END EDITING");
+}
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    CategoryViewController * categoryVC = [[CategoryViewController alloc]init];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:categoryVC];
+    
+    revealVC = [self revealViewController];
+    [revealVC setFrontViewController:navigationController animated:YES];
+    [revealVC revealToggle:nil];
+    return NO;
+}
+-(void)initSearchBar
+{
+    searchBars = [[UISearchBar alloc] init];
+    //    searchBars.backgroundColor = [UIColor darkGrayColor];
+    [searchBars setFrame:CGRectMake(0, 20, 259, 40)];
+    searchBars.placeholder = @"Tìm kiếm                              ";
+    [searchBars setBackgroundColor:[UIColor darkGrayColor]];
+    [searchBars setBarTintColor:[UIColor darkGrayColor]];
+    searchBars.delegate = self;
+    [self.view addSubview:searchBars];
+}
 @end
+
