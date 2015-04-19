@@ -51,8 +51,8 @@
 
 @interface APLQuoteCell : UITableViewCell 
 
-@property (nonatomic, weak) IBOutlet UILabel *characterLabel;
-@property (nonatomic, weak) IBOutlet UILabel *actAndSceneLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lblSubMenu;
+
 
 @property (nonatomic) APLQuotation *quotation;
 

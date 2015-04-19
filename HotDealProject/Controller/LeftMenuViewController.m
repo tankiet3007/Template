@@ -30,12 +30,14 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 #pragma mark -
 
-#define DEFAULT_ROW_HEIGHT 88
+#define DEFAULT_ROW_HEIGHT 30
 #define HEADER_HEIGHT 48
 @synthesize arrMenu;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
     // Set up default values.
     self.view.backgroundColor = [UIColor whiteColor];
     [self initData];
@@ -47,12 +49,14 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 -(void)initUITableView
 {
+//    self.view.backgroundColor = [UIColor darkGrayColor];
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-44) style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];
-    
+    self.tableView.backgroundColor = [UIColor darkGrayColor];
     
     //    [tableViewDays setDragDelegate:self refreshDatePermanentKey:@"HotNewsList"];
-    self.tableView.backgroundColor = [UIColor whiteColor];
+//    self.tableView.backgroundColor = [UIColor whiteColor];
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorColor = [UIColor clearColor];
@@ -65,28 +69,47 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     NSArray * subMenu;
     arrMenu = [[NSMutableArray alloc]init];
     MenuItem * menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Menu 1";
-    subMenu = [NSArray arrayWithObjects:@"Sub 1 - 1",@"Sub 1 - 2",@"Sub 1 - 3", nil];
+    menuItem.name = @"Trang chủ";
+//    subMenu = [NSArray arrayWithObjects:@"Sub 1 - 1",@"Sub 1 - 2",@"Sub 1 - 3", nil];
+//    menuItem.subItem = subMenu;
+    [arrMenu addObject:menuItem];
+    
+    menuItem = [[MenuItem alloc]init];
+    menuItem.name = @"Khuyến mãi mới";
+//    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
+//    menuItem.subItem = subMenu;
+    [arrMenu addObject:menuItem];
+    
+    menuItem = [[MenuItem alloc]init];
+    menuItem.name = @"Thời trang - Phụ kiện";
+    subMenu = [NSArray arrayWithObjects:@"Thời trang nữ",@"Thời trang nam",@"Thời trang trẻ em",@"Phụ kiện thời trang",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Menu 2";
-    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
+    menuItem.name = @"Nhà hàng - Ẩm thực";
+    subMenu = [NSArray arrayWithObjects:@"Buffet",@"Nhà hàng - Quán ăn",@"Cafe - Kem  - Bánh",@"Thực phẩm",@"XEM TẤT CẢ", nil];
+    menuItem.subItem = subMenu;
+        [arrMenu addObject:menuItem];
+    
+    menuItem = [[MenuItem alloc]init];
+    menuItem.name = @"Sức khoẻ - Làm đẹp";
+    subMenu = [NSArray arrayWithObjects:@"Spa - Thẩm mỹ viện",@"Salon - Làm đẹp",@"Nha khoa - Sức khỏe",@"Mỹ phẩm",@"Dụng cụ làm đẹp",@"XEM TẤT CẢ", nil];
+    menuItem.subItem = subMenu;
+        [arrMenu addObject:menuItem];
+    
+    menuItem = [[MenuItem alloc]init];
+    menuItem.name = @"Du lịch - Khách sạn";
+    subMenu = [NSArray arrayWithObjects:@"Khách sạn - Resorts",@"Tour trong nước",@"Tour nước ngoài",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Menu 3";
-    subMenu = [NSArray arrayWithObjects:@"Sub 3 - 1",@"Sub 3 - 2",@"Sub 3 - 3", nil];
+    menuItem.name = @"Điện tử - Công nghệ";
+    subMenu = [NSArray arrayWithObjects:@"Phụ kiện công nghệ",@"Thiết bị điện tử",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Menu 0";
-    //    subMenu = [NSArray arrayWithObjects:@"Sub 3 - 1",@"Sub 3 - 2",@"Sub 3 - 3", nil];
-    //    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
+
     
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -132,6 +155,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     NSInteger numStoriesInSection = [[sectionInfo.menuItem subItem] count];
     
     NSInteger numberOfRows = sectionInfo.open ? numStoriesInSection : 0;
+    UA_log(@"%ld",numberOfRows);
     return numberOfRows;
 }
 
@@ -145,9 +169,10 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"APLQuoteCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     MenuItem *item = (MenuItem *)[(self.sectionInfoArray)[indexPath.section] menuItem];
-    //    cell.quotation = (item.subItem)[indexPath.row];
+    UA_log(@"%@",(item.subItem)[indexPath.row]);
+    cell.lblSubMenu.text = (item.subItem)[indexPath.row];
     
     return cell;
 }

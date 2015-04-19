@@ -11,5 +11,6 @@
 @interface MenuItem : NSObject
 
 @property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSString * logo;
 @property (nonatomic, strong) NSArray * subItem;
 @end

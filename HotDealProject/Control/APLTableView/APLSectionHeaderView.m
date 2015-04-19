@@ -53,6 +53,7 @@
 - (void)awakeFromNib {
 
     // set the selected image for the disclosure button
+//    self.disclosureButton.hidden = NO;
     [self.disclosureButton setImage:[UIImage imageNamed:@"carat-open.png"] forState:UIControlStateSelected];
 
     // set up the tap gesture recognizer
