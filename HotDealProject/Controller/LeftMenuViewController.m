@@ -15,6 +15,7 @@
 #import "SWRevealViewController.h"
 #import "MainViewController.h"
 #import "SearchViewController.h"
+#import "NewDealViewController.h"
 @interface LeftMenuViewController ()
 @property (nonatomic) NSMutableArray *sectionInfoArray;
 @property (nonatomic) NSInteger openSectionIndex;
@@ -244,6 +245,15 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC revealToggle:nil];
         return;
     }
+    if (sectionOpened == 1) {
+        NewDealViewController * newVC = [[NewDealViewController alloc]init];
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
+        
+        [revealVC setFrontViewController:navigationController animated:YES];
+        [revealVC revealToggle:nil];
+        return;
+    }
     APLSectionInfo *sectionInfo = (self.sectionInfoArray)[sectionOpened];
     
     sectionInfo.open = YES;
@@ -304,6 +314,15 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         MainViewController * mainVC = [[MainViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainVC];
+        
+        [revealVC setFrontViewController:navigationController animated:YES];
+        [revealVC revealToggle:nil];
+        return;
+    }
+    if (sectionClosed == 1) {
+        NewDealViewController * newVC = [[NewDealViewController alloc]init];
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
         
         [revealVC setFrontViewController:navigationController animated:YES];
         [revealVC revealToggle:nil];

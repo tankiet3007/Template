@@ -116,6 +116,7 @@
 		E9C049FE1AE143B80017C5CE /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C049FC1AE143B80017C5CE /* UIScrollView+SVPullToRefresh.m */; };
 		E9C0FE301ADCB8E30042502C /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C0FE2E1ADCB8E30042502C /* LocationTableViewCell.m */; };
 		E9C0FE311ADCB8E30042502C /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9C0FE2F1ADCB8E30042502C /* LocationTableViewCell.xib */; };
+		E9C2E8151AE4A13700D98DCC /* NewDealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C2E8141AE4A13700D98DCC /* NewDealViewController.m */; };
 		E9D3BD6C1AD6BA5400F7429B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D3BD6B1AD6BA5400F7429B /* main.m */; };
 		E9D3BD6F1AD6BA5400F7429B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D3BD6E1AD6BA5400F7429B /* AppDelegate.m */; };
 		E9D3BD721AD6BA5400F7429B /* HotDealProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9D3BD701AD6BA5400F7429B /* HotDealProject.xcdatamodeld */; };
@@ -348,6 +349,8 @@
 		E9C0FE2D1ADCB8E30042502C /* LocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationTableViewCell.h; path = Control/LocationTableViewCell.h; sourceTree = "<group>"; };
 		E9C0FE2E1ADCB8E30042502C /* LocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationTableViewCell.m; path = Control/LocationTableViewCell.m; sourceTree = "<group>"; };
 		E9C0FE2F1ADCB8E30042502C /* LocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationTableViewCell.xib; path = Control/LocationTableViewCell.xib; sourceTree = "<group>"; };
+		E9C2E8131AE4A13700D98DCC /* NewDealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewDealViewController.h; path = Controller/NewDealViewController.h; sourceTree = "<group>"; };
+		E9C2E8141AE4A13700D98DCC /* NewDealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewDealViewController.m; path = Controller/NewDealViewController.m; sourceTree = "<group>"; };
 		E9D3BD661AD6BA5400F7429B /* HotDealProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotDealProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D3BD6A1AD6BA5400F7429B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9D3BD6B1AD6BA5400F7429B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -796,6 +799,8 @@
 				E959455E1ADB7F9900CDA3FF /* PromotionViewController.m */,
 				E95A23E11AE380B70050DCB1 /* SearchViewController.h */,
 				E95A23E21AE380B70050DCB1 /* SearchViewController.m */,
+				E9C2E8131AE4A13700D98DCC /* NewDealViewController.h */,
+				E9C2E8141AE4A13700D98DCC /* NewDealViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1101,6 +1106,7 @@
 				E98FCF3C1AD8CA9100992BF0 /* CallOutAnnotationVifew.m in Sources */,
 				E9AE201E1AD80A5E002E11AC /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				E9B3DA331AE213E0009C668D /* CheckQuantityDealCell.m in Sources */,
+				E9C2E8151AE4A13700D98DCC /* NewDealViewController.m in Sources */,
 				E9485B991AE006E2005D1688 /* AFHTTPSessionManager.m in Sources */,
 				E9485B9E1AE006E2005D1688 /* AFURLResponseSerialization.m in Sources */,
 				E9D3BD6C1AD6BA5400F7429B /* main.m in Sources */,
