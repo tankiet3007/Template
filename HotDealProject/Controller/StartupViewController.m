@@ -10,6 +10,7 @@
 #import "MainViewController.h"
 #import "LocationTableViewCell.h"
 #import "TKAPI.h"
+#import "SWRevealViewController.h"
 @interface StartupViewController ()
 
 @end
@@ -18,13 +19,18 @@
 {
     NSArray * arrLocation;
     NSInteger iIndexSelected;
+    SWRevealViewController *revealController;
 }
 @synthesize tableViewMain;
+@synthesize isFromLeftMenu;
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     iIndexSelected = -1;
+    if (isFromLeftMenu == TRUE) {
+        [self initNavigationbar];
+    }
     [self initData];
     [self initUITableView];
     // Do any additional setup after loading the view from its nib.
@@ -59,7 +65,35 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)initNavigationbar
+{
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero] ;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    label.textAlignment = NSTextAlignmentCenter;
+    // ^-Use UITextAlignmentCenter for older SDKs.
+    label.textColor = [UIColor whiteColor]; // change this color
+    self.navigationItem.titleView = label;
+    label.text = NSLocalizedString(@"DANH MUC", @"");
+    [label sizeToFit];
+    
+    revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+   
+    UIImage *image = [UIImage imageNamed:@"menu_n.png"];
+    UIButton * rBtest = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rBtest addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    [rBtest setBackgroundImage:image forState:UIControlStateNormal];
+    [rBtest setFrame:CGRectMake(0, 0, 30, 30)];
+    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rBtest];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+}
 -(void)initData
 {
     NSString *savedValue = [[NSUserDefaults standardUserDefaults]
@@ -130,6 +164,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"indexSelected"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [tableViewMain reloadData];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationUpdateLocation" object:nil];
     MainViewController * mainVC = [[MainViewController alloc]init];
     [self.navigationController pushViewController:mainVC animated:YES];
 }

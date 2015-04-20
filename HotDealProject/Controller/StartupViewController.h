@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//@protocol StartupDelegate;
 @interface StartupViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+//{
+//    id<StartupDelegate> delegate;
+//}
+//@property id<StartupDelegate>delegate;
+
 @property(nonatomic,strong)UITableView * tableViewMain;
+@property (nonatomic,assign)BOOL isFromLeftMenu;
 @end
+//@protocol StartupDelegate <NSObject>
+//-(void)updateLocation;
+//@end

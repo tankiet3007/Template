@@ -16,6 +16,7 @@
 #import "MainViewController.h"
 #import "SearchViewController.h"
 #import "NewDealViewController.h"
+#import "StartupViewController.h"
 @interface LeftMenuViewController ()
 @property (nonatomic) NSMutableArray *sectionInfoArray;
 @property (nonatomic) NSInteger openSectionIndex;
@@ -60,7 +61,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 -(void)initUITableView
 {
     self.view.backgroundColor = [UIColor darkGrayColor];
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 60, ScreenWidth, ScreenHeight-44) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 60, ScreenWidth, ScreenHeight-60) style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = [UIColor darkGrayColor];
     
@@ -76,10 +77,24 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 -(void)initData
 {
+    NSString *savedValue = [[NSUserDefaults standardUserDefaults]
+                            stringForKey:@"indexSelected"];
+    NSInteger iIndexLocation = -1;
+    if (savedValue != nil) {
+        iIndexLocation = [savedValue integerValue];
+    }
+   NSArray * arrLocation = [NSArray arrayWithObjects:@"Hà Nội",@"Hồ Chí Minh",@"Bình Dương",@"Đà Nẵng",@"Tỉnh thành khác", nil];
+    NSString * location = [arrLocation objectAtIndex:iIndexLocation];
+    
     NSArray * subMenu;
     arrMenu = [[NSMutableArray alloc]init];
     MenuItem * menuItem = [[MenuItem alloc]init];
+    menuItem.name = F(@"Địa điểm : %@", location);
+    [arrMenu addObject:menuItem];
+    
+    menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Trang chủ";
+    
     //    subMenu = [NSArray arrayWithObjects:@"Sub 1 - 1",@"Sub 1 - 2",@"Sub 1 - 3", nil];
     //    menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
@@ -132,12 +147,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
-    
-}
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    
+    self.sectionInfoArray = nil;
     if ((self.sectionInfoArray == nil) ||
         ([self.sectionInfoArray count] != [self numberOfSectionsInTableView:self.tableView])) {
         
@@ -161,7 +171,13 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         
         self.sectionInfoArray = infoArray;
     }
+
 }
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    }
 
 
 #pragma mark - UITableViewDataSource
@@ -235,8 +251,22 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 #pragma mark - SectionHeaderViewDelegate
 
 - (void)sectionHeaderView:(APLSectionHeaderView *)sectionHeaderView sectionOpened:(NSInteger)sectionOpened {
-    
     if (sectionOpened == 0) {
+        StartupViewController * mainVC = [[StartupViewController alloc]init];
+        mainVC.isFromLeftMenu = TRUE;
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainVC];
+        
+        [revealVC setFrontViewController:navigationController animated:YES];
+        [revealVC revealToggle:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(notificationUpdateLocation:) name:@"notificationUpdateLocation"
+                                                   object:nil];
+        
+        return;
+    }
+    
+    if (sectionOpened == 1) {
         MainViewController * mainVC = [[MainViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainVC];
@@ -245,7 +275,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC revealToggle:nil];
         return;
     }
-    if (sectionOpened == 1) {
+    if (sectionOpened == 2) {
         NewDealViewController * newVC = [[NewDealViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
@@ -311,6 +341,19 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
      Create an array of the index paths of the rows in the section that was closed, then delete those rows from the table view.
      */
     if (sectionClosed == 0) {
+        StartupViewController * startVC = [[StartupViewController alloc]init];
+        startVC.isFromLeftMenu = TRUE;
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:startVC];
+        
+        [revealVC setFrontViewController:navigationController animated:YES];
+        [revealVC revealToggle:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(notificationUpdateLocation:) name:@"notificationUpdateLocation"
+                                                   object:nil];
+
+        return;
+    }
+    if (sectionClosed == 1) {
         MainViewController * mainVC = [[MainViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainVC];
@@ -319,7 +362,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC revealToggle:nil];
         return;
     }
-    if (sectionClosed == 1) {
+    if (sectionClosed == 2) {
         NewDealViewController * newVC = [[NewDealViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
@@ -364,6 +407,11 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     [searchBars setBarTintColor:[UIColor darkGrayColor]];
     searchBars.delegate = self;
     [self.view addSubview:searchBars];
+}
+- (void)notificationUpdateLocation:(NSNotification *)notification {
+    [self initData];
+    [self.tableView reloadData];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"notificationUpdateLocation" object:nil];
 }
 @end
 
