@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProductListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface ProductListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate>
 @property(nonatomic,strong)UITableView * tableViewDeal;
 
 @end

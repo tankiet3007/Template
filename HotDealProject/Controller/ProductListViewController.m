@@ -25,6 +25,11 @@
     UIView * viewHeader;
     UILabel * lblNumOfDeal;
     UIButton * btnChoiceProducts;
+    UIPickerView *myPickerView ;
+    NSUInteger numRowsInPicker;
+    NSUInteger iTagedButton;
+     NSUInteger iSelectedQuantity;
+    UIToolbar *toolBar;
 }
 @synthesize tableViewDeal;
 - (void)viewDidLoad {
@@ -32,8 +37,12 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [UIColor whiteColor];
+    iTagedButton = -1;
+    iSelectedQuantity = -1;
     [self setupLoginBtn];
     [self initUITableView];
+    [self setupPickerview];
+    [self setupToolbar];
     AppDelegate * appdelegate = ApplicationDelegate;
     [appdelegate initNavigationbar:self withTitle:@"Chọn số lượng"];
     
@@ -198,6 +207,10 @@
     }    //    [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
 
     cell.btnChoice.tag = indexPath.row;
+    if (cell.btnChoice.tag == iTagedButton) {
+        NSString * strQuantity = F(@"%lu",(unsigned long)iSelectedQuantity );
+        [cell.btnChoice setTitle:strQuantity forState:UIControlStateNormal];
+    }
     [cell.btnChoice addTarget:self action:@selector(showDropbox:) forControlEvents:UIControlEventTouchUpInside];
     DealObject * item = [arrDeals objectAtIndex:indexPath.row];
     cell.lblDescription.text = item.strTitle;
@@ -243,5 +256,95 @@
 {
     UIButton * btnSelected = (UIButton *)sender;
     UA_log(@"%ld",btnSelected.tag);
+    iTagedButton = btnSelected.tag;
+    myPickerView.hidden = NO;
+    toolBar.hidden = NO;
+    tableViewDeal.userInteractionEnabled = NO;
+    [myPickerView reloadComponent:0];
 }
+-(void)setupToolbar
+{
+    toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,ScreenHeight -250 - 44,320,44)];
+    [toolBar setBarStyle:UIBarStyleBlackOpaque];
+    
+    UIButton *button_done = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button_done addTarget:self action:@selector(selectQuantity) forControlEvents:UIControlEventTouchUpInside];
+    [button_done setTitle:@"Chọn" forState:UIControlStateNormal];
+    button_done.frame = CGRectMake(0.0f,0.0f,70,44);
+    
+    UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithCustomView:button_done];
+    
+//            UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithCustomView:button_done];
+    
+        UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    UIButton *button_cancel = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button_cancel addTarget:self action:@selector(cancelQuantity) forControlEvents:UIControlEventTouchUpInside];
+    [button_cancel setTitle:@"Hủy" forState:UIControlStateNormal];
+    button_cancel.frame = CGRectMake(0.0f,0.0f,70,44);
+    UIBarButtonItem *barButtonCancel = [[UIBarButtonItem alloc] initWithCustomView:button_cancel];
+    
+    toolBar.items = @[barButtonCancel,flexibleItem,barButtonDone];
+    button_done.tintColor=[UIColor whiteColor];
+    button_cancel.tintColor=[UIColor whiteColor];
+    toolBar.backgroundColor = [UIColor lightGrayColor];
+        [self.view addSubview:toolBar];
+    toolBar.hidden = YES;
+}
+-(void)setupPickerview
+{
+    myPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, 320, 200)];
+    numRowsInPicker = 3;
+    myPickerView.delegate = self;
+    [myPickerView setBackgroundColor:[UIColor whiteColor]];
+    myPickerView.showsSelectionIndicator = YES;
+    myPickerView.hidden = YES;
+    [self.view addSubview:myPickerView];
+}
+
+-(void)cancelQuantity
+{
+//    UA_log(@"%ld",[myPickerView selectedRowInComponent:0]);
+}
+-(void)selectQuantity
+{
+//    UA_log(@"%ld",[myPickerView selectedRowInComponent:0]);
+    myPickerView.hidden = YES;
+    toolBar.hidden = YES;
+    tableViewDeal.userInteractionEnabled = YES;
+    iSelectedQuantity = [myPickerView selectedRowInComponent:0];
+    [tableViewDeal reloadData];
+}
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent:(NSInteger)component {
+//    UA_log(@"%ld",row);
+    // Handle the selection
+}
+
+// tell the picker how many rows are available for a given component
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    
+    
+    return numRowsInPicker;
+}
+
+// tell the picker how many components it will have
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+// tell the picker the title for a given component
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    NSString *title;
+    title = [@"" stringByAppendingFormat:@"%ld",(long)row];
+    
+    return title;
+}
+
+// tell the picker the width of each row for a given component
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+    int sectionWidth = 300;
+    
+    return sectionWidth;
+}
+
 @end
