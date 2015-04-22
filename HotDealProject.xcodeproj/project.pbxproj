@@ -117,12 +117,20 @@
 		E9C0FE301ADCB8E30042502C /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C0FE2E1ADCB8E30042502C /* LocationTableViewCell.m */; };
 		E9C0FE311ADCB8E30042502C /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9C0FE2F1ADCB8E30042502C /* LocationTableViewCell.xib */; };
 		E9C2E8151AE4A13700D98DCC /* NewDealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C2E8141AE4A13700D98DCC /* NewDealViewController.m */; };
+		E9C2E81D1AE4B51C00D98DCC /* AccoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C2E81B1AE4B51C00D98DCC /* AccoutViewController.m */; };
+		E9C2E81E1AE4B51C00D98DCC /* AccoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9C2E81C1AE4B51C00D98DCC /* AccoutViewController.xib */; };
+		E9C2E8211AE4B8B000D98DCC /* CellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C2E8201AE4B8B000D98DCC /* CellObject.m */; };
+		E9C2E8251AE4BA9000D98DCC /* MenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C2E8231AE4BA9000D98DCC /* MenuTableViewCell.m */; };
+		E9C2E8261AE4BA9000D98DCC /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9C2E8241AE4BA9000D98DCC /* MenuTableViewCell.xib */; };
 		E9D3BD6C1AD6BA5400F7429B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D3BD6B1AD6BA5400F7429B /* main.m */; };
 		E9D3BD6F1AD6BA5400F7429B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D3BD6E1AD6BA5400F7429B /* AppDelegate.m */; };
 		E9D3BD721AD6BA5400F7429B /* HotDealProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9D3BD701AD6BA5400F7429B /* HotDealProject.xcdatamodeld */; };
 		E9D3BD7A1AD6BA5400F7429B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9D3BD791AD6BA5400F7429B /* Images.xcassets */; };
 		E9D3BD7D1AD6BA5400F7429B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D3BD7B1AD6BA5400F7429B /* LaunchScreen.xib */; };
 		E9D3BD891AD6BA5400F7429B /* HotDealProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D3BD881AD6BA5400F7429B /* HotDealProjectTests.m */; };
+		E9F179A81AE79D0A004D743E /* ProductListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F179A71AE79D0A004D743E /* ProductListViewController.m */; };
+		E9F179AC1AE7A195004D743E /* ShortDealInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F179AA1AE7A195004D743E /* ShortDealInfoCell.m */; };
+		E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9F179AB1AE7A195004D743E /* ShortDealInfoCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -351,6 +359,14 @@
 		E9C0FE2F1ADCB8E30042502C /* LocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationTableViewCell.xib; path = Control/LocationTableViewCell.xib; sourceTree = "<group>"; };
 		E9C2E8131AE4A13700D98DCC /* NewDealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewDealViewController.h; path = Controller/NewDealViewController.h; sourceTree = "<group>"; };
 		E9C2E8141AE4A13700D98DCC /* NewDealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewDealViewController.m; path = Controller/NewDealViewController.m; sourceTree = "<group>"; };
+		E9C2E81A1AE4B51C00D98DCC /* AccoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccoutViewController.h; path = Controller/Account/AccoutViewController.h; sourceTree = "<group>"; };
+		E9C2E81B1AE4B51C00D98DCC /* AccoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AccoutViewController.m; path = Controller/Account/AccoutViewController.m; sourceTree = "<group>"; };
+		E9C2E81C1AE4B51C00D98DCC /* AccoutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccoutViewController.xib; path = Controller/Account/AccoutViewController.xib; sourceTree = "<group>"; };
+		E9C2E81F1AE4B8B000D98DCC /* CellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellObject.h; path = Model/CellObject.h; sourceTree = "<group>"; };
+		E9C2E8201AE4B8B000D98DCC /* CellObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellObject.m; path = Model/CellObject.m; sourceTree = "<group>"; };
+		E9C2E8221AE4BA9000D98DCC /* MenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuTableViewCell.h; path = Control/MenuTableViewCell.h; sourceTree = "<group>"; };
+		E9C2E8231AE4BA9000D98DCC /* MenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuTableViewCell.m; path = Control/MenuTableViewCell.m; sourceTree = "<group>"; };
+		E9C2E8241AE4BA9000D98DCC /* MenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuTableViewCell.xib; path = Control/MenuTableViewCell.xib; sourceTree = "<group>"; };
 		E9D3BD661AD6BA5400F7429B /* HotDealProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotDealProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D3BD6A1AD6BA5400F7429B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9D3BD6B1AD6BA5400F7429B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -362,6 +378,11 @@
 		E9D3BD821AD6BA5400F7429B /* HotDealProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HotDealProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D3BD871AD6BA5400F7429B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9D3BD881AD6BA5400F7429B /* HotDealProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotDealProjectTests.m; sourceTree = "<group>"; };
+		E9F179A61AE79D0A004D743E /* ProductListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductListViewController.h; path = Controller/ProductListViewController.h; sourceTree = "<group>"; };
+		E9F179A71AE79D0A004D743E /* ProductListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductListViewController.m; path = Controller/ProductListViewController.m; sourceTree = "<group>"; };
+		E9F179A91AE7A195004D743E /* ShortDealInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShortDealInfoCell.h; path = Control/ShortDealInfoCell.h; sourceTree = "<group>"; };
+		E9F179AA1AE7A195004D743E /* ShortDealInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShortDealInfoCell.m; path = Control/ShortDealInfoCell.m; sourceTree = "<group>"; };
+		E9F179AB1AE7A195004D743E /* ShortDealInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShortDealInfoCell.xib; path = Control/ShortDealInfoCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -393,6 +414,8 @@
 				E9384F461ADF985300C3D703 /* TKAPI.m */,
 				E9C049F51AE13B2D0017C5CE /* DealObject.h */,
 				E9C049F61AE13B2D0017C5CE /* DealObject.m */,
+				E9C2E81F1AE4B8B000D98DCC /* CellObject.h */,
+				E9C2E8201AE4B8B000D98DCC /* CellObject.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -474,6 +497,12 @@
 				E9B3DA3A1AE24731009C668D /* AutoSizeTableViewCell.h */,
 				E9B3DA3B1AE24731009C668D /* AutoSizeTableViewCell.m */,
 				E9B3DA3C1AE24731009C668D /* AutoSizeTableViewCell.xib */,
+				E9C2E8221AE4BA9000D98DCC /* MenuTableViewCell.h */,
+				E9C2E8231AE4BA9000D98DCC /* MenuTableViewCell.m */,
+				E9C2E8241AE4BA9000D98DCC /* MenuTableViewCell.xib */,
+				E9F179A91AE7A195004D743E /* ShortDealInfoCell.h */,
+				E9F179AA1AE7A195004D743E /* ShortDealInfoCell.m */,
+				E9F179AB1AE7A195004D743E /* ShortDealInfoCell.xib */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -784,6 +813,7 @@
 		E9AE20921AD80BA6002E11AC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E9C2E8191AE4B48900D98DCC /* Account */,
 				E9AE1FA51AD80455002E11AC /* LeftMenuViewController.h */,
 				E9AE1FA61AD80455002E11AC /* LeftMenuViewController.m */,
 				E9AE1FA81AD80455002E11AC /* MainViewController.h */,
@@ -801,6 +831,8 @@
 				E95A23E21AE380B70050DCB1 /* SearchViewController.m */,
 				E9C2E8131AE4A13700D98DCC /* NewDealViewController.h */,
 				E9C2E8141AE4A13700D98DCC /* NewDealViewController.m */,
+				E9F179A61AE79D0A004D743E /* ProductListViewController.h */,
+				E9F179A71AE79D0A004D743E /* ProductListViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -843,6 +875,16 @@
 				E9AE209A1AD81134002E11AC /* Foundation.framework */,
 			);
 			name = Framwork;
+			sourceTree = "<group>";
+		};
+		E9C2E8191AE4B48900D98DCC /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				E9C2E81A1AE4B51C00D98DCC /* AccoutViewController.h */,
+				E9C2E81B1AE4B51C00D98DCC /* AccoutViewController.m */,
+				E9C2E81C1AE4B51C00D98DCC /* AccoutViewController.xib */,
+			);
+			name = Account;
 			sourceTree = "<group>";
 		};
 		E9D3BD5D1AD6BA5400F7429B = {
@@ -1002,12 +1044,15 @@
 				E97B700D1ADA01AF0099B5C2 /* DealItem.xib in Resources */,
 				E95945541ADB69AC00CDA3FF /* SectionHeaderView.xib in Resources */,
 				E9C049F41AE0F9360017C5CE /* DealCell.xib in Resources */,
+				E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */,
 				E9B3DA3E1AE24731009C668D /* AutoSizeTableViewCell.xib in Resources */,
 				E95945511ADB661F00CDA3FF /* carat.png in Resources */,
 				E9D3BD7D1AD6BA5400F7429B /* LaunchScreen.xib in Resources */,
 				E9B3DA341AE213E0009C668D /* CheckQuantityDealCell.xib in Resources */,
 				E98FCF3F1AD8CA9100992BF0 /* JingDianMapCell.xib in Resources */,
+				E9C2E81E1AE4B51C00D98DCC /* AccoutViewController.xib in Resources */,
 				E9B3DA391AE21431009C668D /* KindOfTransferDealCell.xib in Resources */,
+				E9C2E8261AE4BA9000D98DCC /* MenuTableViewCell.xib in Resources */,
 				E9D3BD7A1AD6BA5400F7429B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1040,6 +1085,7 @@
 				E9B3DA3D1AE24731009C668D /* AutoSizeTableViewCell.m in Sources */,
 				E9AE202E1AD80A5E002E11AC /* MagicalRecord+iCloud.m in Sources */,
 				E9AE201B1AD80A5E002E11AC /* NSEntityDescription+MagicalDataImport.m in Sources */,
+				E9F179A81AE79D0A004D743E /* ProductListViewController.m in Sources */,
 				E98FCF3B1AD8CA9100992BF0 /* BasicMapAnnotation.m in Sources */,
 				E959455F1ADB7F9900CDA3FF /* PromotionViewController.m in Sources */,
 				E9C049FD1AE143B80017C5CE /* UIScrollView+SVInfiniteScrolling.m in Sources */,
@@ -1057,7 +1103,9 @@
 				E9B3DA381AE21431009C668D /* KindOfTransferDealCell.m in Sources */,
 				E9AE203A1AD80A5E002E11AC /* SDWebImagePrefetcher.m in Sources */,
 				E9AE20281AD80A5E002E11AC /* NSManagedObjectContext+MagicalThreading.m in Sources */,
+				E9C2E81D1AE4B51C00D98DCC /* AccoutViewController.m in Sources */,
 				E9485B9A1AE006E2005D1688 /* AFNetworkReachabilityManager.m in Sources */,
+				E9F179AC1AE7A195004D743E /* ShortDealInfoCell.m in Sources */,
 				E98FCF401AD8CA9100992BF0 /* MapView.m in Sources */,
 				E9AE20251AD80A5E002E11AC /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				E9AE201D1AD80A5E002E11AC /* NSObject+MagicalDataImport.m in Sources */,
@@ -1087,6 +1135,7 @@
 				E9485B981AE006E2005D1688 /* AFHTTPRequestOperationManager.m in Sources */,
 				E959454F1ADB661F00CDA3FF /* APLSectionInfo.m in Sources */,
 				E9AE20261AD80A5E002E11AC /* NSManagedObjectContext+MagicalRecord.m in Sources */,
+				E9C2E8251AE4BA9000D98DCC /* MenuTableViewCell.m in Sources */,
 				E9AE20201AD80A5E002E11AC /* NSManagedObject+MagicalAggregation.m in Sources */,
 				E9AE20311AD80A5E002E11AC /* MagicalRecord+ShorthandSupport.m in Sources */,
 				E9AE20241AD80A5E002E11AC /* NSManagedObject+MagicalRequests.m in Sources */,
@@ -1105,6 +1154,7 @@
 				E9AE20301AD80A5E002E11AC /* MagicalRecord+Setup.m in Sources */,
 				E98FCF3C1AD8CA9100992BF0 /* CallOutAnnotationVifew.m in Sources */,
 				E9AE201E1AD80A5E002E11AC /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
+				E9C2E8211AE4B8B000D98DCC /* CellObject.m in Sources */,
 				E9B3DA331AE213E0009C668D /* CheckQuantityDealCell.m in Sources */,
 				E9C2E8151AE4A13700D98DCC /* NewDealViewController.m in Sources */,
 				E9485B991AE006E2005D1688 /* AFHTTPSessionManager.m in Sources */,

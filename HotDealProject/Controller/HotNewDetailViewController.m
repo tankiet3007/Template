@@ -12,6 +12,7 @@
 #import "KindOfTransferDealCell.h"
 #import "AutoSizeTableViewCell.h"
 #import "DealItem.h"
+#import "ProductListViewController.h"
 #define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([SYSTEM_VERSION compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define IS_IOS8_OR_ABOVE                            (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
@@ -392,5 +393,12 @@
         [btnTwo.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
     [viewBottom addSubview:btnTwo];
     return viewBottom;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+        ProductListViewController * pList = [[ProductListViewController alloc]init];
+        [self.navigationController pushViewController:pList animated:YES];
+    }
 }
 @end

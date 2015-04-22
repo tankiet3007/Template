@@ -17,6 +17,7 @@
 #import "SearchViewController.h"
 #import "NewDealViewController.h"
 #import "StartupViewController.h"
+#import "AccoutViewController.h"
 @interface LeftMenuViewController ()
 @property (nonatomic) NSMutableArray *sectionInfoArray;
 @property (nonatomic) NSInteger openSectionIndex;
@@ -30,6 +31,7 @@
 @implementation LeftMenuViewController
 {
     SWRevealViewController *revealVC;
+    UIButton * btnLogin;
 }
 #pragma mark - APLTableViewController
 
@@ -51,6 +53,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     // Set up default values.
     self.view.backgroundColor = [UIColor whiteColor];
     [self initData];
+    [self setupLoginBtn];
     [self initSearchBar];
     [self initUITableView];
     UINib *sectionHeaderNib = [UINib nibWithNibName:@"SectionHeaderView" bundle:nil];
@@ -184,11 +187,13 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return [arrMenu count];
+    return [arrMenu count] + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    if ([arrMenu count] == section) {
+        return 0;
+    }
     APLSectionInfo *sectionInfo = (self.sectionInfoArray)[section];
     NSInteger numStoriesInSection = [[sectionInfo.menuItem subItem] count];
     
@@ -227,7 +232,12 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
+    if (section == [arrMenu count]) {
+//        return btnLogin;
+        UIView * viewFooter = [[UIView alloc]initWithFrame:btnLogin.frame];
+        [viewFooter addSubview:btnLogin];
+        return viewFooter;
+    }
     APLSectionHeaderView *sectionHeaderView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:SectionHeaderViewIdentifier];
     
     APLSectionInfo *sectionInfo = (self.sectionInfoArray)[section];
@@ -241,7 +251,9 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.section == [arrMenu count]) {
+        return 0;
+    }
     APLSectionInfo *sectionInfo = (self.sectionInfoArray)[indexPath.section];
     return [[sectionInfo objectInRowHeightsAtIndex:indexPath.row] floatValue];
     // Alternatively, return rowHeight.
@@ -277,6 +289,15 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     }
     if (sectionOpened == 2) {
         NewDealViewController * newVC = [[NewDealViewController alloc]init];
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
+        
+        [revealVC setFrontViewController:navigationController animated:YES];
+        [revealVC revealToggle:nil];
+        return;
+    }
+    if (sectionOpened == 3) {
+        AccoutViewController * newVC = [[AccoutViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
         
@@ -371,6 +392,15 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC revealToggle:nil];
         return;
     }
+    if (sectionClosed == 3) {
+        AccoutViewController * newVC = [[AccoutViewController alloc]init];
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
+        
+        [revealVC setFrontViewController:navigationController animated:YES];
+        [revealVC revealToggle:nil];
+        return;
+    }
     APLSectionInfo *sectionInfo = (self.sectionInfoArray)[sectionClosed];
     
     sectionInfo.open = NO;
@@ -413,5 +443,31 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     [self.tableView reloadData];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"notificationUpdateLocation" object:nil];
 }
+-(UIButton *)setupLoginBtn
+{
+    btnLogin = [[UIButton alloc]initWithFrame:CGRectMake(10, -5, 240, 40)];
+    [btnLogin setBackgroundColor:[UIColor greenColor]];
+    [btnLogin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnLogin setTitle:@"ĐĂNG NHẬP" forState:UIControlStateNormal];
+    [btnLogin addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
+    return btnLogin;
+}
+-(void)loginClick
+{
+    UA_log(@"clicked");
+}
+//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    UIView * viewFooter = [[UIView alloc]initWithFrame:btnLogin.frame];
+//    [viewFooter addSubview:btnLogin];
+//    return viewFooter;
+//}
+//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+//{
+//    if (section == [arrMenu count]-1) {
+//        return 40;
+//    }
+//    return 0;
+//}
 @end
 
