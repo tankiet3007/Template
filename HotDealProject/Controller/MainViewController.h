@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ImageSlide.h"
+#import "ShoppingCartController.h"
 //#import "UITableView+DragLoad.h"
-@interface MainViewController : UIViewController<UIGestureRecognizerDelegate, UITableViewDataSource,UITableViewDelegate,slideImageDelegate>
+@interface MainViewController : UIViewController<UIGestureRecognizerDelegate, UITableViewDataSource,UITableViewDelegate,slideImageDelegate, ShoppingCartDelegate>
 @property(nonatomic,strong)UITableView * tableViewMain;
 @end

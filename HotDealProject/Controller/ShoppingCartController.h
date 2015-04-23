@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol ShoppingCartDelegate;
 @interface ShoppingCartController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate>
+{
+    id<ShoppingCartDelegate> delegate;
+}
+@property id<ShoppingCartDelegate>delegate;
 @property(nonatomic,strong)UITableView * tableViewProduct;
 @property(nonatomic,strong)NSMutableArray * arrProduct;
+@end
+@protocol ShoppingCartDelegate <NSObject>
+-(void)updateTotalSeletedItem:(int)iCount;
 @end

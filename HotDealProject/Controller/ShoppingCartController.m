@@ -15,6 +15,7 @@
 #import "ProductInfoStoredCell.h"
 #import "ProductObject.h"
 #import "TKDatabase.h"
+#import "BBBadgeBarButtonItem.h"
 @interface ShoppingCartController ()
 
 @end
@@ -34,6 +35,7 @@
 }
 @synthesize tableViewProduct;
 @synthesize arrProduct;
+@synthesize delegate;
 //@synthesize delegate;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,6 +61,8 @@
 
 -(void)backbtn_click:(id)sender
 {
+    int iCount = (int)[arrProduct count];
+    [self.delegate updateTotalSeletedItem:iCount];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

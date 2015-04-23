@@ -17,7 +17,7 @@
 #import "DealCell.h"
 #import "DealObject.h"
 #import "SVPullToRefresh.h"
-#import "ShoppingCartController.h"
+
 #import "BBBadgeBarButtonItem.h"
 #import "TKDatabase.h"
 #define HEADER_HEIGHT 156
@@ -42,6 +42,7 @@
     
     NSMutableArray * arrDeals;
     BBBadgeBarButtonItem *barButton;
+    NSArray * arrProduct;
 }
 @synthesize tableViewMain;
 #pragma mark init Method
@@ -50,6 +51,7 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [UIColor whiteColor];
+    arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
     [self checkNetwork];
     [self initUITableView];
     [self initNavigationbar];
@@ -302,18 +304,19 @@
     
     barButton.badgeOriginX = 25;
     barButton.badgeOriginY = -5;
-    barButton.badgeValue = @"7";
+    barButton.badgeValue = F(@"%ld",[arrProduct count]);
     self.navigationItem.rightBarButtonItem = barButton;
     
 }
 
 -(void)shoppingCart
 {
-    NSArray * arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
+    
     if ([arrProduct count] == 0) {
         return;
     }
     ShoppingCartController * shopping = [[ShoppingCartController alloc]init];
+    shopping.delegate = self;
     [self.navigationController pushViewController:shopping animated:YES];
 }
 #pragma mark tableview delegate + datasource
@@ -526,28 +529,8 @@
     [self.navigationController pushViewController:detail animated:YES];
 }
 
-/*UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];//reused
- cell.selectionStyle = UITableViewCellSelectionStyleNone;
- if (segmentedControl.selectedSegmentIndex == 0) {
- cell.textLabel.text = [arrSale objectAtIndex:indexPath.row];
- if (indexPath.row == [arrSale count] - 1)
- {
- ALERT(@"OK", @"Cancel");
- }
- }
- if (segmentedControl.selectedSegmentIndex == 1) {
- if (indexPath.row == [arrNew count] - 1)
- {
- ALERT(@"OK", @"Cancel");
- }
- cell.textLabel.text = [arrNew objectAtIndex:indexPath.row];
- }
- if (segmentedControl.selectedSegmentIndex == 2) {
- if (indexPath.row == [arrNear count] - 1)
- {
- ALERT(@"OK", @"Cancel");
- }
- cell.textLabel.text = [arrNear objectAtIndex:indexPath.row];
- }
-*/
+-(void)updateTotalSeletedItem:(int)iCount
+{
+    barButton.badgeValue = F(@"%d",iCount);
+}
 @end
