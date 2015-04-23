@@ -109,6 +109,12 @@
 		E9B3DA391AE21431009C668D /* KindOfTransferDealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B3DA371AE21431009C668D /* KindOfTransferDealCell.xib */; };
 		E9B3DA3D1AE24731009C668D /* AutoSizeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3DA3B1AE24731009C668D /* AutoSizeTableViewCell.m */; };
 		E9B3DA3E1AE24731009C668D /* AutoSizeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B3DA3C1AE24731009C668D /* AutoSizeTableViewCell.xib */; };
+		E9BAB7721AE898EC009BC234 /* ProductObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB7711AE898EC009BC234 /* ProductObject.m */; };
+		E9BAB7781AE8AF65009BC234 /* TKDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB7771AE8AF65009BC234 /* TKDatabase.m */; };
+		E9BAB77B1AE8D80F009BC234 /* ProductItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB77A1AE8D80F009BC234 /* ProductItem.m */; };
+		E9BAB77F1AE8D8E9009BC234 /* ProductInfoStoredCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB77D1AE8D8E9009BC234 /* ProductInfoStoredCell.m */; };
+		E9BAB7801AE8D8E9009BC234 /* ProductInfoStoredCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9BAB77E1AE8D8E9009BC234 /* ProductInfoStoredCell.xib */; };
+		E9BAB7831AE8E16B009BC234 /* ShoppingCartController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB7821AE8E16B009BC234 /* ShoppingCartController.m */; };
 		E9C049F31AE0F9360017C5CE /* DealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C049F11AE0F9360017C5CE /* DealCell.m */; };
 		E9C049F41AE0F9360017C5CE /* DealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9C049F21AE0F9360017C5CE /* DealCell.xib */; };
 		E9C049F71AE13B2D0017C5CE /* DealObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C049F61AE13B2D0017C5CE /* DealObject.m */; };
@@ -344,6 +350,17 @@
 		E9B3DA3A1AE24731009C668D /* AutoSizeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoSizeTableViewCell.h; path = Control/AutoSizeTableViewCell.h; sourceTree = "<group>"; };
 		E9B3DA3B1AE24731009C668D /* AutoSizeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AutoSizeTableViewCell.m; path = Control/AutoSizeTableViewCell.m; sourceTree = "<group>"; };
 		E9B3DA3C1AE24731009C668D /* AutoSizeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AutoSizeTableViewCell.xib; path = Control/AutoSizeTableViewCell.xib; sourceTree = "<group>"; };
+		E9BAB7701AE898EC009BC234 /* ProductObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductObject.h; path = Model/ProductObject.h; sourceTree = "<group>"; };
+		E9BAB7711AE898EC009BC234 /* ProductObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductObject.m; path = Model/ProductObject.m; sourceTree = "<group>"; };
+		E9BAB7761AE8AF65009BC234 /* TKDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TKDatabase.h; path = Model/CoreDataObject/TKDatabase.h; sourceTree = "<group>"; };
+		E9BAB7771AE8AF65009BC234 /* TKDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TKDatabase.m; path = Model/CoreDataObject/TKDatabase.m; sourceTree = "<group>"; };
+		E9BAB7791AE8D80F009BC234 /* ProductItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductItem.h; path = Model/CoreDataObject/ProductItem.h; sourceTree = "<group>"; };
+		E9BAB77A1AE8D80F009BC234 /* ProductItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductItem.m; path = Model/CoreDataObject/ProductItem.m; sourceTree = "<group>"; };
+		E9BAB77C1AE8D8E9009BC234 /* ProductInfoStoredCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductInfoStoredCell.h; path = Control/ProductInfoStoredCell.h; sourceTree = "<group>"; };
+		E9BAB77D1AE8D8E9009BC234 /* ProductInfoStoredCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductInfoStoredCell.m; path = Control/ProductInfoStoredCell.m; sourceTree = "<group>"; };
+		E9BAB77E1AE8D8E9009BC234 /* ProductInfoStoredCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProductInfoStoredCell.xib; path = Control/ProductInfoStoredCell.xib; sourceTree = "<group>"; };
+		E9BAB7811AE8E16B009BC234 /* ShoppingCartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShoppingCartController.h; path = Controller/ShoppingCartController.h; sourceTree = "<group>"; };
+		E9BAB7821AE8E16B009BC234 /* ShoppingCartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShoppingCartController.m; path = Controller/ShoppingCartController.m; sourceTree = "<group>"; };
 		E9C049F01AE0F9360017C5CE /* DealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealCell.h; path = Control/DealCell.h; sourceTree = "<group>"; };
 		E9C049F11AE0F9360017C5CE /* DealCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealCell.m; path = Control/DealCell.m; sourceTree = "<group>"; };
 		E9C049F21AE0F9360017C5CE /* DealCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DealCell.xib; path = Control/DealCell.xib; sourceTree = "<group>"; };
@@ -416,6 +433,12 @@
 				E9C049F61AE13B2D0017C5CE /* DealObject.m */,
 				E9C2E81F1AE4B8B000D98DCC /* CellObject.h */,
 				E9C2E8201AE4B8B000D98DCC /* CellObject.m */,
+				E9BAB7701AE898EC009BC234 /* ProductObject.h */,
+				E9BAB7711AE898EC009BC234 /* ProductObject.m */,
+				E9BAB7761AE8AF65009BC234 /* TKDatabase.h */,
+				E9BAB7771AE8AF65009BC234 /* TKDatabase.m */,
+				E9BAB7791AE8D80F009BC234 /* ProductItem.h */,
+				E9BAB77A1AE8D80F009BC234 /* ProductItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -503,6 +526,9 @@
 				E9F179A91AE7A195004D743E /* ShortDealInfoCell.h */,
 				E9F179AA1AE7A195004D743E /* ShortDealInfoCell.m */,
 				E9F179AB1AE7A195004D743E /* ShortDealInfoCell.xib */,
+				E9BAB77C1AE8D8E9009BC234 /* ProductInfoStoredCell.h */,
+				E9BAB77D1AE8D8E9009BC234 /* ProductInfoStoredCell.m */,
+				E9BAB77E1AE8D8E9009BC234 /* ProductInfoStoredCell.xib */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -833,6 +859,8 @@
 				E9C2E8141AE4A13700D98DCC /* NewDealViewController.m */,
 				E9F179A61AE79D0A004D743E /* ProductListViewController.h */,
 				E9F179A71AE79D0A004D743E /* ProductListViewController.m */,
+				E9BAB7811AE8E16B009BC234 /* ShoppingCartController.h */,
+				E9BAB7821AE8E16B009BC234 /* ShoppingCartController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1043,6 +1071,7 @@
 				E9AE1FB31AD80455002E11AC /* StartupViewController.xib in Resources */,
 				E97B700D1ADA01AF0099B5C2 /* DealItem.xib in Resources */,
 				E95945541ADB69AC00CDA3FF /* SectionHeaderView.xib in Resources */,
+				E9BAB7801AE8D8E9009BC234 /* ProductInfoStoredCell.xib in Resources */,
 				E9C049F41AE0F9360017C5CE /* DealCell.xib in Resources */,
 				E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */,
 				E9B3DA3E1AE24731009C668D /* AutoSizeTableViewCell.xib in Resources */,
@@ -1101,18 +1130,21 @@
 				E9AE203C1AD80A5E002E11AC /* UIImage+GIF.m in Sources */,
 				E959454E1ADB661F00CDA3FF /* APLSectionHeaderView.m in Sources */,
 				E9B3DA381AE21431009C668D /* KindOfTransferDealCell.m in Sources */,
+				E9BAB77F1AE8D8E9009BC234 /* ProductInfoStoredCell.m in Sources */,
 				E9AE203A1AD80A5E002E11AC /* SDWebImagePrefetcher.m in Sources */,
 				E9AE20281AD80A5E002E11AC /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				E9C2E81D1AE4B51C00D98DCC /* AccoutViewController.m in Sources */,
 				E9485B9A1AE006E2005D1688 /* AFNetworkReachabilityManager.m in Sources */,
 				E9F179AC1AE7A195004D743E /* ShortDealInfoCell.m in Sources */,
 				E98FCF401AD8CA9100992BF0 /* MapView.m in Sources */,
+				E9BAB7781AE8AF65009BC234 /* TKDatabase.m in Sources */,
 				E9AE20251AD80A5E002E11AC /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				E9AE201D1AD80A5E002E11AC /* NSObject+MagicalDataImport.m in Sources */,
 				E9C049F31AE0F9360017C5CE /* DealCell.m in Sources */,
 				E9AE20351AD80A5E002E11AC /* SDWebImageCompat.m in Sources */,
 				E9AE20371AD80A5E002E11AC /* SDWebImageDownloader.m in Sources */,
 				E9AE20381AD80A5E002E11AC /* SDWebImageDownloaderOperation.m in Sources */,
+				E9BAB7721AE898EC009BC234 /* ProductObject.m in Sources */,
 				E9AE20361AD80A5E002E11AC /* SDWebImageDecoder.m in Sources */,
 				E9AE20391AD80A5E002E11AC /* SDWebImageManager.m in Sources */,
 				E9AE1FB21AD80455002E11AC /* StartupViewController.m in Sources */,
@@ -1143,6 +1175,7 @@
 				E9AE20821AD80B68002E11AC /* NSData+Helper.m in Sources */,
 				E9AE201A1AD80A5E002E11AC /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				E9AE20321AD80A5E002E11AC /* MagicalRecord.m in Sources */,
+				E9BAB77B1AE8D80F009BC234 /* ProductItem.m in Sources */,
 				E9AE20331AD80A5E002E11AC /* NSData+ImageContentType.m in Sources */,
 				E9AE20901AD80B68002E11AC /* RadioButton.m in Sources */,
 				E95A23E31AE380B70050DCB1 /* SearchViewController.m in Sources */,
@@ -1165,6 +1198,7 @@
 				E9AE20401AD80A5E002E11AC /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				E9AE20291AD80A5E002E11AC /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				E9AE20421AD80A5E002E11AC /* UIView+WebCacheOperation.m in Sources */,
+				E9BAB7831AE8E16B009BC234 /* ShoppingCartController.m in Sources */,
 				E9AE208E1AD80B68002E11AC /* BBBadgeBarButtonItem.m in Sources */,
 				E9384F471ADF985300C3D703 /* TKAPI.m in Sources */,
 				E95945591ADB7CD800CDA3FF /* HotNewDetailViewController.m in Sources */,

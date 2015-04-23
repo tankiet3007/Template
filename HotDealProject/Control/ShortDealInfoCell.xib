@@ -44,6 +44,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="btnChoice" destination="fY4-Hn-4fE" id="Ebu-qa-6ly"/>
+                <outlet property="imgProduct" destination="8A1-rH-awA" id="TRo-B2-RMs"/>
                 <outlet property="lblDescription" destination="6lu-XR-PWY" id="zm6-gY-KZk"/>
                 <outlet property="lblDiscountPrice" destination="nes-IM-Aiv" id="63Q-gA-kPL"/>
                 <outlet property="lblStandarPrice" destination="PuL-we-hjw" id="uee-Dn-LxZ"/>

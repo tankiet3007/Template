@@ -1,46 +1,46 @@
 //
-//  ProductListViewController.m
+//  ShoppingCartController.m
 //  HotDealProject
 //
-//  Created by Tran Tan Kiet on 4/22/15.
+//  Created by Tran Tan Kiet on 4/23/15.
 //  Copyright (c) 2015 Tran Tan Kiet. All rights reserved.
 //
 
-#import "ProductListViewController.h"
+#import "ShoppingCartController.h"
 #import "DealCell.h"
-//#import "DealObject.h"
 #import "SVPullToRefresh.h"
 #import "HotNewDetailViewController.h"
 #import "SWRevealViewController.h"
 #import "AppDelegate.h"
-#import "ShortDealInfoCell.h"
+#import "ProductInfoStoredCell.h"
 #import "ProductObject.h"
 #import "TKDatabase.h"
-@interface ProductListViewController ()
+@interface ShoppingCartController ()
 
 @end
-@implementation ProductListViewController
+
+@implementation ShoppingCartController
 {
     SWRevealViewController *revealController;
-//    NSMutableArray * arrProduct;
+    //    NSMutableArray * arrProduct;
     UIView * viewHeader;
     UIButton * btnChoiceProducts;
     UIPickerView *myPickerView ;
     NSUInteger numRowsInPicker;
     NSUInteger iTagedButton;
-     NSUInteger iSelectedQuantity;
+    NSUInteger iSelectedQuantity;
     UIToolbar *toolBar;
-//    NSMutableArray * arrSelectedItem;
+    //    NSMutableArray * arrSelectedItem;
 }
 @synthesize tableViewProduct;
 @synthesize arrProduct;
-@synthesize delegate;
+//@synthesize delegate;
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [UIColor whiteColor];
-//    arrSelectedItem = [[NSMutableArray alloc]init];
+    //    arrSelectedItem = [[NSMutableArray alloc]init];
     iTagedButton = -1;
     iSelectedQuantity = -1;
     [self setupLoginBtn];
@@ -50,7 +50,7 @@
     AppDelegate * appdelegate = ApplicationDelegate;
     [appdelegate initNavigationbar:self withTitle:@"Chọn số lượng"];
     
-
+    
     [self initData];
     
     // Do any additional setup after loading the view.
@@ -69,34 +69,7 @@
         return;
     }
     arrProduct = [[NSMutableArray alloc]init];
-    
-    ProductObject * item = [[ProductObject alloc]init];
-    item.strDealID = @"1";
-     item.strProductID = @"1";
-    item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
-    item.iCount = 0;
-    item.lDiscountPrice = 100000;
-    item.lStandarPrice = 400000;
-    [arrProduct addObject:item];
-    
-    item = [[ProductObject alloc]init];
-    item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
-    item.strDealID = @"2";
-    item.strProductID = @"2";
-    item.iCount = 0;
-    item.lDiscountPrice = 200000;
-    item.lStandarPrice = 1000000;
-    [arrProduct addObject:item];
-    
-    item = [[ProductObject alloc]init];
-    item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
-    item.iCount = 0;
-    item.strDealID = @"3";
-    item.strProductID = @"3";
-    item.lDiscountPrice = 30000;
-    item.lStandarPrice = 200000;
-    [arrProduct addObject:item];
-    
+    arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -133,7 +106,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70;
+    return 90;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -143,46 +116,42 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ShortDealInfoCell *cell = (ShortDealInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"ShortDealInfoCell"];
+    ProductInfoStoredCell *cell = (ProductInfoStoredCell *)[tableView dequeueReusableCellWithIdentifier:@"ProductInfoStoredCell"];
     if (cell == nil)
     {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ShortDealInfoCell" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProductInfoStoredCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }    //    [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
     ProductObject * item = [arrProduct objectAtIndex:indexPath.row];
-//    for (ProductObject  *obj in arrTotalItemSelected) {
-//        if (obj.productID == item.productID) {
-//            NSString * strQuantity = F(@"%lu",(unsigned long)obj.iCount );
-//            [cell.btnChoice setTitle:strQuantity forState:UIControlStateNormal];
-//        }
-//    }
+    //    for (ProductObject  *obj in arrTotalItemSelected) {
+    //        if (obj.productID == item.productID) {
+    //            NSString * strQuantity = F(@"%lu",(unsigned long)obj.iCount );
+    //            [cell.btnChoice setTitle:strQuantity forState:UIControlStateNormal];
+    //        }
+    //    }
     cell.btnChoice.tag = indexPath.row;
     NSString * strQuantity = F(@"%lu",(unsigned long)item.iCount );
     [cell.btnChoice setTitle:strQuantity forState:UIControlStateNormal];
     [cell.btnChoice addTarget:self action:@selector(showDropbox:) forControlEvents:UIControlEventTouchUpInside];
     
     cell.lblDescription.text = item.strTitle;
-    NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
-    strStardarPrice = [strStardarPrice formatStringToDecimal];
-    NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.lblStandarPrice.attributedText = attributedString;
-    [cell.lblStandarPrice sizeToFit];
     
+    [cell.btnDestroy addTarget:self action:@selector(destroyItem:) forControlEvents:UIControlEventTouchUpInside];
+    cell.btnDestroy.tag = indexPath.row  + 999;
     NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
     strDiscountPrice = [strDiscountPrice formatStringToDecimal];
     strDiscountPrice = F(@"%@đ", strDiscountPrice);
     cell.lblDiscountPrice.text = strDiscountPrice;
     return cell;
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 40;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-//    return viewHeader;
+    //    return viewHeader;
     UIView * viewFooter = [[UIView alloc]initWithFrame:btnChoiceProducts.frame];
     [viewFooter addSubview:btnChoiceProducts];
     return viewFooter;
@@ -205,7 +174,7 @@
             [[TKDatabase sharedInstance]addProduct:item];
         }
     }
-    [self.delegate updateTotalSeletedItem:arrProduct];
+//    [self.delegate updateTotalSeletedItem:arrProduct];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -219,6 +188,19 @@
     tableViewProduct.userInteractionEnabled = NO;
     [myPickerView reloadComponent:0];
 }
+
+-(void)destroyItem:(id)sender
+{
+    UIButton * btnSelected = (UIButton *)sender;
+    UA_log(@"%ld",btnSelected.tag);
+    int iIndexRow = (int)btnSelected.tag - 999;
+
+    ProductObject * productObj = [arrProduct objectAtIndex:iIndexRow];
+    [arrProduct removeObject:productObj];
+    [[TKDatabase sharedInstance]removeProduct:productObj.strProductID];
+    [tableViewProduct reloadData];
+}
+
 -(void)setupToolbar
 {
     toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,ScreenHeight -250 - 44,320,44)];
@@ -231,9 +213,9 @@
     
     UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithCustomView:button_done];
     
-//            UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithCustomView:button_done];
+    //            UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithCustomView:button_done];
     
-        UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     UIButton *button_cancel = [UIButton buttonWithType:UIButtonTypeCustom];
     [button_cancel addTarget:self action:@selector(cancelQuantity) forControlEvents:UIControlEventTouchUpInside];
@@ -245,7 +227,7 @@
     button_done.tintColor=[UIColor whiteColor];
     button_cancel.tintColor=[UIColor whiteColor];
     toolBar.backgroundColor = [UIColor lightGrayColor];
-        [self.view addSubview:toolBar];
+    [self.view addSubview:toolBar];
     toolBar.hidden = YES;
 }
 -(void)setupPickerview
@@ -264,26 +246,26 @@
     myPickerView.hidden = YES;
     toolBar.hidden = YES;
     tableViewProduct.userInteractionEnabled = YES;
-//    UA_log(@"%ld",[myPickerView selectedRowInComponent:0]);
+    //    UA_log(@"%ld",[myPickerView selectedRowInComponent:0]);
 }
 -(void)selectQuantity
 {
-//    UA_log(@"%ld",[myPickerView selectedRowInComponent:0]);
-//    iTagedButton
+    //    UA_log(@"%ld",[myPickerView selectedRowInComponent:0]);
+    //    iTagedButton
     ProductObject * productObj = [arrProduct objectAtIndex:iTagedButton];
-
+    
     myPickerView.hidden = YES;
     toolBar.hidden = YES;
     tableViewProduct.userInteractionEnabled = YES;
     iSelectedQuantity = [myPickerView selectedRowInComponent:0];
     productObj.iCount =  (int)iSelectedQuantity ;
-//    [arrSelectedItem addObject:productObj];
-
+    //    [arrSelectedItem addObject:productObj];
+    
     [arrProduct replaceObjectAtIndex:iTagedButton withObject:productObj];
     [tableViewProduct reloadData];
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent:(NSInteger)component {
-//    UA_log(@"%ld",row);
+    //    UA_log(@"%ld",row);
     // Handle the selection
 }
 

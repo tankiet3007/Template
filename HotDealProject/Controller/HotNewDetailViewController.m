@@ -12,7 +12,7 @@
 #import "KindOfTransferDealCell.h"
 #import "AutoSizeTableViewCell.h"
 #import "DealItem.h"
-#import "ProductListViewController.h"
+#import "ProductObject.h"
 #define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([SYSTEM_VERSION compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define IS_IOS8_OR_ABOVE                            (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
@@ -27,6 +27,8 @@
     UILabel * lblDescription;
     float fHeightOfDescription;
     UIScrollView * scrollView;
+    int iSelectedItem;
+    NSArray * arrSelectedAldreay;
 }
 #define PADDING 10//HEADER_HEIGHT
 #define HEADER_HEIGHT 370//HEADER_HEIGHT
@@ -40,7 +42,7 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     AppDelegate * appdelegate = ApplicationDelegate;
     [appdelegate initNavigationbar:self withTitle:@"CHI TIẾT"];
-    
+    iSelectedItem = 0;
     lblDescription = [[UILabel alloc]initWithFrame:CGRectMake(0, HEADER_HEIGHT, 300, 0)];
     lblDescription.lineBreakMode = NSLineBreakByWordWrapping;
     lblDescription.numberOfLines = 0;
@@ -234,6 +236,7 @@
         cell.imgPic.image = [UIImage imageNamed:@"beef"];
         cell.vContainer.layer.borderWidth = 0.5;
         cell.vContainer.layer.borderColor =[UIColor lightGrayColor].CGColor;
+        cell.lblNumofVoucher.text = F(@"%d voucher",iSelectedItem);
         return cell;
     }
     if (indexPath.section == 2) {
@@ -398,7 +401,21 @@
 {
     if (indexPath.section == 1) {
         ProductListViewController * pList = [[ProductListViewController alloc]init];
+        pList.arrProduct = arrSelectedAldreay;
+        pList.delegate = self;
         [self.navigationController pushViewController:pList animated:YES];
     }
+}
+-(void)updateTotalSeletedItem:(NSMutableArray *)arrTotalItem
+{
+    //Add product to database
+    int iTotal = 0;
+    for (ProductObject * item in arrTotalItem) {
+        iTotal += item.iCount;
+        UA_log(@"%d", iTotal);
+    }
+    arrSelectedAldreay = [NSMutableArray arrayWithArray:arrTotalItem];
+    iSelectedItem = iTotal;
+    [tableViewDetail reloadData];
 }
 @end

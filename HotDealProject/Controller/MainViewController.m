@@ -17,6 +17,9 @@
 #import "DealCell.h"
 #import "DealObject.h"
 #import "SVPullToRefresh.h"
+#import "ShoppingCartController.h"
+#import "BBBadgeBarButtonItem.h"
+#import "TKDatabase.h"
 #define HEADER_HEIGHT 156
 #define PADDING 10
 @interface MainViewController ()
@@ -38,6 +41,7 @@
         NSMutableArray * arrNear;
     
     NSMutableArray * arrDeals;
+    BBBadgeBarButtonItem *barButton;
 }
 @synthesize tableViewMain;
 #pragma mark init Method
@@ -286,8 +290,32 @@
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rBtest];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
+    UIButton *customButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    // Add your action to your button
+    [customButton addTarget:self action:@selector(shoppingCart) forControlEvents:UIControlEventTouchUpInside];
+    // Customize your button as you want, with an image if you have a pictogram to display for example
+    [customButton setImage:[UIImage imageNamed:@"cart.png"] forState:UIControlStateNormal];
+    
+    // Then create and add our custom BBBadgeBarButtonItem
+    barButton = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:customButton];
+    // Set a value for the badge
+    
+    barButton.badgeOriginX = 25;
+    barButton.badgeOriginY = -5;
+    barButton.badgeValue = @"7";
+    self.navigationItem.rightBarButtonItem = barButton;
+    
 }
 
+-(void)shoppingCart
+{
+    NSArray * arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
+    if ([arrProduct count] == 0) {
+        return;
+    }
+    ShoppingCartController * shopping = [[ShoppingCartController alloc]init];
+    [self.navigationController pushViewController:shopping animated:YES];
+}
 #pragma mark tableview delegate + datasource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

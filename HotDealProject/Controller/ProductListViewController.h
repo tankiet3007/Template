@@ -7,8 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol ProductListDelegate;
 @interface ProductListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate>
-@property(nonatomic,strong)UITableView * tableViewDeal;
+{
+    id<ProductListDelegate> delegate;
+}
+@property id<ProductListDelegate>delegate;
 
+@property(nonatomic,strong)UITableView * tableViewProduct;
+@property(nonatomic,strong)NSMutableArray * arrProduct;
 @end
+@protocol ProductListDelegate <NSObject>
+-(void)updateTotalSeletedItem:(NSMutableArray *)arrTotalItem;
+@end
+

@@ -13,6 +13,7 @@
 @property (nonatomic,strong)NSString * strTitle;
 @property (nonatomic,strong)NSString * strDescription;
 @property (nonatomic,assign)int iCount;
+//@property (nonatomic,assign)int iCountSelected;
 @property (nonatomic,assign)long  lStandarPrice;
 @property (nonatomic,assign)long  lDiscountPrice;
 @end

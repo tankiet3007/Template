@@ -12,6 +12,7 @@
 #import "LeftMenuViewController.h"
 #import "SWRevealViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
+static NSString * const kRecipesStoreName = @"HotDealProject.sqlite";//HotDealProject.sqlite
 @interface AppDelegate ()<SWRevealViewControllerDelegate>
 
 @property (strong, nonatomic)UIViewController *masterViewController;
@@ -22,6 +23,7 @@
 {
         LeftMenuViewController *rearViewController;
 }
+
 
 - (NSUInteger)application:(UIApplication*)application
 supportedInterfaceOrientationsForWindow:(UIWindow*)window
@@ -41,6 +43,7 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self setupDB];
    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     if (/* DISABLES CODE */ (1)) {
         _masterViewController = [[StartupViewController alloc]init];
@@ -210,5 +213,19 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
         }
     }
 }
+- (void)setupDB
+{
+    [MagicalRecord setupAutoMigratingCoreDataStack];
+}
 
+- (NSString *)dbStore
+{
+    return kRecipesStoreName;
+}
+
+- (void)cleanAndResetupDB
+{
+    [MagicalRecord cleanUp];
+    [self setupDB];
+}
 @end
