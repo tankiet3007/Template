@@ -74,7 +74,8 @@
     item.strDealID = @"1";
      item.strProductID = @"1";
     item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
-    item.iCount = 0;
+    item.iCurrentQuantity = 0;
+    item.iMaxQuantity = 1;
     item.lDiscountPrice = 100000;
     item.lStandarPrice = 400000;
     [arrProduct addObject:item];
@@ -83,16 +84,18 @@
     item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
     item.strDealID = @"2";
     item.strProductID = @"2";
-    item.iCount = 0;
+    item.iCurrentQuantity = 0;
+    item.iMaxQuantity = 2;
     item.lDiscountPrice = 200000;
     item.lStandarPrice = 1000000;
     [arrProduct addObject:item];
     
     item = [[ProductObject alloc]init];
     item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
-    item.iCount = 0;
+    item.iCurrentQuantity = 0;
     item.strDealID = @"3";
     item.strProductID = @"3";
+    item.iMaxQuantity = 3;
     item.lDiscountPrice = 30000;
     item.lStandarPrice = 200000;
     [arrProduct addObject:item];
@@ -157,7 +160,7 @@
 //        }
 //    }
     cell.btnChoice.tag = indexPath.row;
-    NSString * strQuantity = F(@"%lu",(unsigned long)item.iCount );
+    NSString * strQuantity = F(@"%lu",(unsigned long)item.iCurrentQuantity );
     [cell.btnChoice setTitle:strQuantity forState:UIControlStateNormal];
     [cell.btnChoice addTarget:self action:@selector(showDropbox:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -200,8 +203,8 @@
 {
     UA_log(@"clicked");
     for (ProductObject * item  in arrProduct) {
-        UA_log(@"%d",item.iCount);
-        if (item.iCount != 0) {
+        UA_log(@"%d",item.iCurrentQuantity);
+        if (item.iCurrentQuantity != 0) {
             [[TKDatabase sharedInstance]addProduct:item];
         }
     }
@@ -213,6 +216,9 @@
 {
     UIButton * btnSelected = (UIButton *)sender;
     UA_log(@"%ld",btnSelected.tag);
+    ProductObject * item = [arrProduct objectAtIndex:btnSelected.tag];
+    numRowsInPicker = item.iMaxQuantity + 1;
+    
     iTagedButton = btnSelected.tag;
     myPickerView.hidden = NO;
     toolBar.hidden = NO;
@@ -251,7 +257,7 @@
 -(void)setupPickerview
 {
     myPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, 320, 200)];
-    numRowsInPicker = 3;
+//    numRowsInPicker = 3;
     myPickerView.delegate = self;
     [myPickerView setBackgroundColor:[UIColor whiteColor]];
     myPickerView.showsSelectionIndicator = YES;
@@ -276,7 +282,7 @@
     toolBar.hidden = YES;
     tableViewProduct.userInteractionEnabled = YES;
     iSelectedQuantity = [myPickerView selectedRowInComponent:0];
-    productObj.iCount =  (int)iSelectedQuantity ;
+    productObj.iCurrentQuantity =  (int)iSelectedQuantity ;
 //    [arrSelectedItem addObject:productObj];
 
     [arrProduct replaceObjectAtIndex:iTagedButton withObject:productObj];

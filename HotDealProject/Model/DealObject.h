@@ -14,6 +14,7 @@
 @property (nonatomic,strong)NSString * strDescription;
 @property (nonatomic,assign)int iCount;
 //@property (nonatomic,assign)int iCountSelected;
+@property (nonatomic, assign) int iType;//product or voucher
 @property (nonatomic,assign)long  lStandarPrice;
 @property (nonatomic,assign)long  lDiscountPrice;
 @end

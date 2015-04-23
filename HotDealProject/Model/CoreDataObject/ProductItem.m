@@ -11,12 +11,13 @@
 
 @implementation ProductItem
 
-@dynamic productImage;
-@dynamic title;
-@dynamic icount;
-@dynamic productID;
-@dynamic standarPrice;
-@dynamic discountPrice;
 @dynamic dealID;
+@dynamic discountPrice;
+@dynamic currentQuantity;
+@dynamic productID;
+@dynamic productImage;
+@dynamic standarPrice;
+@dynamic title;
+@dynamic maxQuantity;
 
 @end

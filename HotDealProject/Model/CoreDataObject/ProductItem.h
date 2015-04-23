@@ -12,12 +12,13 @@
 
 @interface ProductItem : NSManagedObject
 
-@property (nonatomic, retain) NSString * productImage;
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSNumber * icount;
-@property (nonatomic, retain) NSString * productID;
-@property (nonatomic, retain) NSNumber * standarPrice;
-@property (nonatomic, retain) NSNumber * discountPrice;
 @property (nonatomic, retain) NSString * dealID;
+@property (nonatomic, retain) NSNumber * discountPrice;
+@property (nonatomic, retain) NSNumber * currentQuantity;
+@property (nonatomic, retain) NSString * productID;
+@property (nonatomic, retain) NSString * productImage;
+@property (nonatomic, retain) NSNumber * standarPrice;
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSNumber * maxQuantity;
 
 @end

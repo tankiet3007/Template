@@ -16,6 +16,9 @@
 #import "ProductObject.h"
 #import "TKDatabase.h"
 #import "BBBadgeBarButtonItem.h"
+#import "HotNewDetailViewController.h"
+#import "InvoiceCell.h"
+
 @interface ShoppingCartController ()
 
 @end
@@ -50,7 +53,7 @@
     [self setupPickerview];
     [self setupToolbar];
     AppDelegate * appdelegate = ApplicationDelegate;
-    [appdelegate initNavigationbar:self withTitle:@"Chọn số lượng"];
+    [appdelegate initNavigationbar:self withTitle:@"Giỏ hàng"];
     
     
     [self initData];
@@ -61,8 +64,7 @@
 
 -(void)backbtn_click:(id)sender
 {
-    int iCount = (int)[arrProduct count];
-    [self.delegate updateTotalSeletedItem:iCount];
+    [self.delegate updateTotal];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -91,7 +93,8 @@
     tableViewProduct.backgroundColor = [UIColor whiteColor];
     tableViewProduct.dataSource = self;
     tableViewProduct.delegate = self;
-    tableViewProduct.separatorColor = [UIColor clearColor];
+//    tableViewProduct.separatorColor = [UIColor clearColor];
+    tableViewProduct.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     tableViewProduct.showsVerticalScrollIndicator = NO;
     tableViewProduct.sectionHeaderHeight = 0.0;
 }
@@ -105,12 +108,12 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return [arrProduct count];
+    return [arrProduct count] + 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 90;
+    return 105;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -120,33 +123,50 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ProductInfoStoredCell *cell = (ProductInfoStoredCell *)[tableView dequeueReusableCellWithIdentifier:@"ProductInfoStoredCell"];
-    if (cell == nil)
+    if (indexPath.row == [arrProduct count]) {
+        InvoiceCell *cell = (InvoiceCell *)[tableView dequeueReusableCellWithIdentifier:@"InvoiceCell"];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InvoiceCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        
+        NSString * strStardarPrice = F(@"%d", [self calculateCash]);
+        strStardarPrice = [strStardarPrice formatStringToDecimal];
+        NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+        NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.lblTotalOfBill.attributedText  = attributedString;
+        
+         cell.lblCash.attributedText  = attributedString;
+        return cell;
+        
+    }
+    else
     {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProductInfoStoredCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }    //    [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
-    ProductObject * item = [arrProduct objectAtIndex:indexPath.row];
-    //    for (ProductObject  *obj in arrTotalItemSelected) {
-    //        if (obj.productID == item.productID) {
-    //            NSString * strQuantity = F(@"%lu",(unsigned long)obj.iCount );
-    //            [cell.btnChoice setTitle:strQuantity forState:UIControlStateNormal];
-    //        }
-    //    }
-    cell.btnChoice.tag = indexPath.row;
-    NSString * strQuantity = F(@"%lu",(unsigned long)item.iCount );
-    [cell.btnChoice setTitle:strQuantity forState:UIControlStateNormal];
-    [cell.btnChoice addTarget:self action:@selector(showDropbox:) forControlEvents:UIControlEventTouchUpInside];
-    
-    cell.lblDescription.text = item.strTitle;
-    
-    [cell.btnDestroy addTarget:self action:@selector(destroyItem:) forControlEvents:UIControlEventTouchUpInside];
-    cell.btnDestroy.tag = indexPath.row  + 999;
-    NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
-    strDiscountPrice = [strDiscountPrice formatStringToDecimal];
-    strDiscountPrice = F(@"%@đ", strDiscountPrice);
-    cell.lblDiscountPrice.text = strDiscountPrice;
-    return cell;
+        ProductInfoStoredCell *cell = (ProductInfoStoredCell *)[tableView dequeueReusableCellWithIdentifier:@"ProductInfoStoredCell"];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProductInfoStoredCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        ProductObject * item = [arrProduct objectAtIndex:indexPath.row];
+        cell.btnChoice.tag = indexPath.row;
+        NSString * strQuantity = F(@"%lu",(unsigned long)item.iCurrentQuantity );
+        [cell.btnChoice setTitle:strQuantity forState:UIControlStateNormal];
+        [cell.btnChoice addTarget:self action:@selector(showDropbox:) forControlEvents:UIControlEventTouchUpInside];
+        
+        cell.lblDescription.text = item.strTitle;
+        
+        [cell.btnDestroy addTarget:self action:@selector(destroyItem:) forControlEvents:UIControlEventTouchUpInside];
+        cell.btnDestroy.tag = indexPath.row  + 999;
+        NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
+        strDiscountPrice = [strDiscountPrice formatStringToDecimal];
+        strDiscountPrice = F(@"%@đ", strDiscountPrice);
+        cell.lblDiscountPrice.text = strDiscountPrice;
+        return cell;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -160,6 +180,12 @@
     [viewFooter addSubview:btnChoiceProducts];
     return viewFooter;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    HotNewDetailViewController * hotDetail = [[HotNewDetailViewController alloc]init];
+    [self.navigationController pushViewController:hotDetail animated:YES];
+}
+
 -(UIButton *)setupLoginBtn
 {
     btnChoiceProducts = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 300, 40)];
@@ -173,13 +199,13 @@
 {
     UA_log(@"clicked");
     for (ProductObject * item  in arrProduct) {
-        UA_log(@"%d",item.iCount);
-        if (item.iCount != 0) {
+        UA_log(@"%d",item.iCurrentQuantity);
+        if (item.iCurrentQuantity != 0) {
             [[TKDatabase sharedInstance]addProduct:item];
         }
     }
-//    [self.delegate updateTotalSeletedItem:arrProduct];
-    
+    //    [self.delegate updateTotalSeletedItem:arrProduct];
+    [self.delegate updateTotal];
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)showDropbox:(id)sender
@@ -198,10 +224,22 @@
     UIButton * btnSelected = (UIButton *)sender;
     UA_log(@"%ld",btnSelected.tag);
     int iIndexRow = (int)btnSelected.tag - 999;
-
+    
     ProductObject * productObj = [arrProduct objectAtIndex:iIndexRow];
     [arrProduct removeObject:productObj];
     [[TKDatabase sharedInstance]removeProduct:productObj.strProductID];
+    if ([arrProduct count] == 0) {
+        tableViewProduct.hidden = YES;
+        UIView * viewEmpty = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 300, 30)];
+        UILabel * lblEmpty = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 300, 20)];
+        lblEmpty.font = [UIFont boldSystemFontOfSize:14];
+        lblEmpty.text = @"Không có sản phẩm nào trong giỏ hàng";
+        viewEmpty.layer.cornerRadius = 5;
+        viewEmpty.layer.masksToBounds = YES;
+        [viewEmpty addSubview:lblEmpty];
+        viewEmpty.backgroundColor = [UIColor lightGrayColor];
+        [self.view addSubview:viewEmpty];
+    }
     [tableViewProduct reloadData];
 }
 
@@ -262,7 +300,7 @@
     toolBar.hidden = YES;
     tableViewProduct.userInteractionEnabled = YES;
     iSelectedQuantity = [myPickerView selectedRowInComponent:0];
-    productObj.iCount =  (int)iSelectedQuantity ;
+    productObj.iCurrentQuantity =  (int)iSelectedQuantity ;
     //    [arrSelectedItem addObject:productObj];
     
     [arrProduct replaceObjectAtIndex:iTagedButton withObject:productObj];
@@ -299,5 +337,12 @@
     
     return sectionWidth;
 }
-
+-(int)calculateCash
+{
+    int i = 0;
+    for (ProductObject * iObject in arrProduct) {
+        i += iObject.lDiscountPrice * iObject.iCurrentQuantity;
+    }
+    return i;
+}
 @end

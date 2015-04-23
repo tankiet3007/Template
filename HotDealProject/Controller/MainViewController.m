@@ -86,6 +86,7 @@
     DealObject * item = [[DealObject alloc]init];
     item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
     item.iCount = 123;
+    item.iType = 0;
     item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
     item.lDiscountPrice = 100000;
     item.lStandarPrice = 400000;
@@ -95,6 +96,7 @@
     item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
     item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
     item.iCount = 456;
+        item.iType = 1;
     item.lDiscountPrice = 200000;
     item.lStandarPrice = 1000000;
     [arrDeals addObject:item];
@@ -304,7 +306,12 @@
     
     barButton.badgeOriginX = 25;
     barButton.badgeOriginY = -5;
-    barButton.badgeValue = F(@"%ld",[arrProduct count]);
+    int iBadge = 0;
+    for (ProductObject * item  in arrProduct) {
+        int iCurrent = item.iCurrentQuantity;
+        iBadge += iCurrent;
+    }
+    barButton.badgeValue = F(@"%d",iBadge);
     self.navigationItem.rightBarButtonItem = barButton;
     
 }
@@ -529,8 +536,14 @@
     [self.navigationController pushViewController:detail animated:YES];
 }
 
--(void)updateTotalSeletedItem:(int)iCount
+-(void)updateTotal
 {
-    barButton.badgeValue = F(@"%d",iCount);
+    arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
+    int iBadge = 0;
+    for (ProductObject * item  in arrProduct) {
+        int iCurrent = item.iCurrentQuantity;
+        iBadge += iCurrent;
+    }
+    barButton.badgeValue = F(@"%d",iBadge);
 }
 @end

@@ -17,5 +17,5 @@
 @property(nonatomic,strong)NSMutableArray * arrProduct;
 @end
 @protocol ShoppingCartDelegate <NSObject>
--(void)updateTotalSeletedItem:(int)iCount;
+-(void)updateTotal;
 @end

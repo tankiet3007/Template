@@ -11,7 +11,9 @@
 @interface ProductObject : NSObject
 @property (nonatomic, strong) NSString * strProductImage;
 @property (nonatomic, strong) NSString * strTitle;
-@property (nonatomic, assign) int iCount;
+@property (nonatomic, assign) int iCurrentQuantity;
+@property (nonatomic, assign) int iMaxQuantity;
+
 @property (nonatomic, strong) NSString * strProductID;
 @property (nonatomic, strong) NSString * strDealID;
 @property (nonatomic,assign)long  lStandarPrice;
