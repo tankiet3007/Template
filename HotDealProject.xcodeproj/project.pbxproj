@@ -112,6 +112,9 @@
 		E9B3DA391AE21431009C668D /* KindOfTransferDealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B3DA371AE21431009C668D /* KindOfTransferDealCell.xib */; };
 		E9B3DA3D1AE24731009C668D /* AutoSizeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3DA3B1AE24731009C668D /* AutoSizeTableViewCell.m */; };
 		E9B3DA3E1AE24731009C668D /* AutoSizeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B3DA3C1AE24731009C668D /* AutoSizeTableViewCell.xib */; };
+		E9B407C51AE9F3DA0053D484 /* RegisAndLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B407C41AE9F3DA0053D484 /* RegisAndLoginController.m */; };
+		E9B407C91AE9F7720053D484 /* LoginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B407C71AE9F7720053D484 /* LoginCell.m */; };
+		E9B407CA1AE9F7720053D484 /* LoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B407C81AE9F7720053D484 /* LoginCell.xib */; };
 		E9BAB7721AE898EC009BC234 /* ProductObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB7711AE898EC009BC234 /* ProductObject.m */; };
 		E9BAB7781AE8AF65009BC234 /* TKDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB7771AE8AF65009BC234 /* TKDatabase.m */; };
 		E9BAB77F1AE8D8E9009BC234 /* ProductInfoStoredCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB77D1AE8D8E9009BC234 /* ProductInfoStoredCell.m */; };
@@ -357,6 +360,11 @@
 		E9B3DA3A1AE24731009C668D /* AutoSizeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoSizeTableViewCell.h; path = Control/AutoSizeTableViewCell.h; sourceTree = "<group>"; };
 		E9B3DA3B1AE24731009C668D /* AutoSizeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AutoSizeTableViewCell.m; path = Control/AutoSizeTableViewCell.m; sourceTree = "<group>"; };
 		E9B3DA3C1AE24731009C668D /* AutoSizeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AutoSizeTableViewCell.xib; path = Control/AutoSizeTableViewCell.xib; sourceTree = "<group>"; };
+		E9B407C31AE9F3DA0053D484 /* RegisAndLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisAndLoginController.h; path = Controller/RegisAndLoginController.h; sourceTree = "<group>"; };
+		E9B407C41AE9F3DA0053D484 /* RegisAndLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisAndLoginController.m; path = Controller/RegisAndLoginController.m; sourceTree = "<group>"; };
+		E9B407C61AE9F7720053D484 /* LoginCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginCell.h; path = Control/LoginCell.h; sourceTree = "<group>"; };
+		E9B407C71AE9F7720053D484 /* LoginCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginCell.m; path = Control/LoginCell.m; sourceTree = "<group>"; };
+		E9B407C81AE9F7720053D484 /* LoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginCell.xib; path = Control/LoginCell.xib; sourceTree = "<group>"; };
 		E9BAB7701AE898EC009BC234 /* ProductObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductObject.h; path = Model/ProductObject.h; sourceTree = "<group>"; };
 		E9BAB7711AE898EC009BC234 /* ProductObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductObject.m; path = Model/ProductObject.m; sourceTree = "<group>"; };
 		E9BAB7761AE8AF65009BC234 /* TKDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TKDatabase.h; path = Model/CoreDataObject/TKDatabase.h; sourceTree = "<group>"; };
@@ -537,6 +545,9 @@
 				E978784A1AE92C8A003A3B84 /* InvoiceCell.h */,
 				E978784B1AE92C8A003A3B84 /* InvoiceCell.m */,
 				E978784C1AE92C8A003A3B84 /* InvoiceCell.xib */,
+				E9B407C61AE9F7720053D484 /* LoginCell.h */,
+				E9B407C71AE9F7720053D484 /* LoginCell.m */,
+				E9B407C81AE9F7720053D484 /* LoginCell.xib */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -919,6 +930,8 @@
 				E9C2E81A1AE4B51C00D98DCC /* AccoutViewController.h */,
 				E9C2E81B1AE4B51C00D98DCC /* AccoutViewController.m */,
 				E9C2E81C1AE4B51C00D98DCC /* AccoutViewController.xib */,
+				E9B407C31AE9F3DA0053D484 /* RegisAndLoginController.h */,
+				E9B407C41AE9F3DA0053D484 /* RegisAndLoginController.m */,
 			);
 			name = Account;
 			sourceTree = "<group>";
@@ -1088,6 +1101,7 @@
 				E9D3BD7D1AD6BA5400F7429B /* LaunchScreen.xib in Resources */,
 				E9B3DA341AE213E0009C668D /* CheckQuantityDealCell.xib in Resources */,
 				E98FCF3F1AD8CA9100992BF0 /* JingDianMapCell.xib in Resources */,
+				E9B407CA1AE9F7720053D484 /* LoginCell.xib in Resources */,
 				E9C2E81E1AE4B51C00D98DCC /* AccoutViewController.xib in Resources */,
 				E9B3DA391AE21431009C668D /* KindOfTransferDealCell.xib in Resources */,
 				E9C2E8261AE4BA9000D98DCC /* MenuTableViewCell.xib in Resources */,
@@ -1122,6 +1136,7 @@
 				E9AE1FAE1AD80455002E11AC /* LeftMenuViewController.m in Sources */,
 				E9B3DA3D1AE24731009C668D /* AutoSizeTableViewCell.m in Sources */,
 				E9AE202E1AD80A5E002E11AC /* MagicalRecord+iCloud.m in Sources */,
+				E9B407C91AE9F7720053D484 /* LoginCell.m in Sources */,
 				E9AE201B1AD80A5E002E11AC /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				E9F179A81AE79D0A004D743E /* ProductListViewController.m in Sources */,
 				E98FCF3B1AD8CA9100992BF0 /* BasicMapAnnotation.m in Sources */,
@@ -1216,6 +1231,7 @@
 				E9AE201C1AD80A5E002E11AC /* NSNumber+MagicalDataImport.m in Sources */,
 				E9AE20221AD80A5E002E11AC /* NSManagedObject+MagicalFinders.m in Sources */,
 				E9AE20341AD80A5E002E11AC /* SDImageCache.m in Sources */,
+				E9B407C51AE9F3DA0053D484 /* RegisAndLoginController.m in Sources */,
 				E959454D1ADB661F00CDA3FF /* APLQuoteCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

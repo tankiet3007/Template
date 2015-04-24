@@ -18,6 +18,8 @@
 #import "NewDealViewController.h"
 #import "StartupViewController.h"
 #import "AccoutViewController.h"
+
+#import "RegisAndLoginController.h"
 @interface LeftMenuViewController ()
 @property (nonatomic) NSMutableArray *sectionInfoArray;
 @property (nonatomic) NSInteger openSectionIndex;
@@ -296,8 +298,8 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC revealToggle:nil];
         return;
     }
-    if (sectionOpened == 3) {
-        AccoutViewController * newVC = [[AccoutViewController alloc]init];
+    if (sectionOpened == 3) {//#import "RegisAndLoginController.h"
+        RegisAndLoginController * newVC = [[RegisAndLoginController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
         
@@ -393,7 +395,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         return;
     }
     if (sectionClosed == 3) {
-        AccoutViewController * newVC = [[AccoutViewController alloc]init];
+        RegisAndLoginController * newVC = [[RegisAndLoginController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
         

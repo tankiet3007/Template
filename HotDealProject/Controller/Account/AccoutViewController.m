@@ -42,7 +42,7 @@
     // ^-Use UITextAlignmentCenter for older SDKs.
     label.textColor = [UIColor whiteColor]; // change this color
     self.navigationItem.titleView = label;
-    label.text = NSLocalizedString(@"Home", @"");
+    label.text = NSLocalizedString(@"Quản lý tài khoản", @"");
     [label sizeToFit];
     
     revealController = [self revealViewController];
