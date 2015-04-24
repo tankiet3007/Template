@@ -93,7 +93,7 @@
     tableViewProduct.backgroundColor = [UIColor whiteColor];
     tableViewProduct.dataSource = self;
     tableViewProduct.delegate = self;
-//    tableViewProduct.separatorColor = [UIColor clearColor];
+    tableViewProduct.separatorColor = [UIColor clearColor];
     tableViewProduct.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     tableViewProduct.showsVerticalScrollIndicator = NO;
     tableViewProduct.sectionHeaderHeight = 0.0;

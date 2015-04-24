@@ -485,6 +485,7 @@
     arrSelectedAldreay = [NSMutableArray arrayWithArray:arrTotalItem];
     iSelectedItem = iTotal;
     [tableViewDetail reloadData];
+    [self updateTotal];
     
     
 }

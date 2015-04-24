@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "HotNewDetailViewController.h"
 #import "SWRevealViewController.h"
+#import "DealCell.h"
 @interface CategoryViewController ()
 
 @end
@@ -22,19 +23,130 @@
     UIButton * btnFilter;
     UILabel * lblNumOfVoucher;
     SWRevealViewController *revealController;
-
+    UITableView * tableViewFilter;
+    NSArray * arrSort;
+    BOOL isShowSortMenu;
 }
+#define RowHeight 44
 @synthesize tableviewCategory;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    AppDelegate * appdelegate = ApplicationDelegate;
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+//    AppDelegate * appdelegate = ApplicationDelegate;
     [self setupSegment];
+    isShowSortMenu = YES;
     arrDeals = [[NSMutableArray alloc]init];
+    [self initDataSort];
+    [self initData];
     [self initUITableView];
+    [self initTableViewForSort];
     [self initNavigationbar];
 //    [appdelegate initNavigationbar:self withTitle:@"DANH MỤC"];
     // Do any additional setup after loading the view.
+}
+
+-(void)initDataSort
+{
+    arrSort = [NSArray arrayWithObjects:@"Thời trang nữ",@"Thời trang nam",@"Thời trang trẻ em",@"Phụ kiện thời trang",@"Thời trang nam",@"Thời trang trẻ em",@"Phụ kiện thời trang",@"Thời trang nữ",@"Thời trang nam",@"Thời trang trẻ em",@"Phụ kiện thời trang",@"Thời trang nam",@"Thời trang trẻ em",@"Phụ kiện thời trang", nil];
+}
+-(void)initTableViewForSort
+{
+    long estimateTableHeight = [arrSort count] * RowHeight;
+    if (estimateTableHeight > ScreenHeight - 120) {
+        estimateTableHeight = ScreenHeight - 120;
+    }
+    tableViewFilter = [[UITableView alloc]initWithFrame:CGRectMake(ScreenWidth/2, 40, ScreenWidth/2, estimateTableHeight)];
+
+    [self.view addSubview:tableViewFilter];
+//    [tableViewFilter setBounces:NO];
+    tableViewFilter.layer.borderWidth = 1;
+    tableViewFilter.layer.borderColor=[UIColor blackColor].CGColor;
+    tableViewFilter.layer.shadowColor = [UIColor purpleColor].CGColor;
+    tableViewFilter.layer.shadowOffset = CGSizeMake(0, 1);
+    tableViewFilter.layer.shadowOpacity = 1;
+    tableViewFilter.layer.shadowRadius = 1.0;
+    tableViewFilter.clipsToBounds = YES;
+    tableViewFilter.backgroundColor = [UIColor whiteColor];
+    tableViewFilter.dataSource = self;
+    tableViewFilter.delegate = self;
+    [tableViewFilter setAllowsSelection:YES];
+//    tableViewFilter.separatorColor = [UIColor clearColor];
+    tableViewFilter.showsVerticalScrollIndicator = NO;
+    tableViewFilter.sectionHeaderHeight = 0.0;
+    tableViewFilter.hidden = YES;
+}
+-(void)initData
+{
+    arrDeals = [[NSMutableArray alloc]init];
+    
+    DealObject * item = [[DealObject alloc]init];
+    item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
+    item.iCount = 123;
+    item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
+    item.lDiscountPrice = 100000;
+    item.lStandarPrice = 400000;
+    [arrDeals addObject:item];
+    
+    item = [[DealObject alloc]init];
+    item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
+    item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
+    item.iCount = 456;
+    item.lDiscountPrice = 200000;
+    item.lStandarPrice = 1000000;
+    [arrDeals addObject:item];
+    
+    item = [[DealObject alloc]init];
+    item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
+    item.iCount = 789;
+    item.strDescription = @"Đầm xòe Zara họa tiết chấm bi xuất khẩu - Thiết kế thời trang với phần phối màu xen kẽ họa tiết chấm bi đẹp mắt giúp thể hiện nét đẹp thanh lịch, sành điệu của bạn gái. Chỉ 199.000đ cho trị giá 398.000đ Chỉ 199.000đ cho trị giá 398.000đ";
+    item.lDiscountPrice = 30000;
+    item.lStandarPrice = 200000;
+    [arrDeals addObject:item];
+    
+    item = [[DealObject alloc]init];
+    item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
+    item.strDescription = @"Bộ miếng dán iPhone mạ vàng và ốp lưng silicon có thiết kế vừa vặn với khung máy sẽ giúp mang đến cho dế yêu của bạn một vẻ đẹp hoàn hảo và đẳng cấp. Chỉ 85.000đ cho trị giá 160.000đ";
+    item.iCount = 111;
+    item.lDiscountPrice = 100000;
+    item.lStandarPrice = 400000;
+    [arrDeals addObject:item];
+    
+    item = [[DealObject alloc]init];
+    item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
+    item.iCount = 222;
+    item.lDiscountPrice = 200000;
+    item.lStandarPrice = 1000000;
+    [arrDeals addObject:item];
+    
+    item = [[DealObject alloc]init];
+    item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
+    item.iCount = 333;
+    item.lDiscountPrice = 30000;
+    item.lStandarPrice = 200000;
+    [arrDeals addObject:item];
+    
+    item = [[DealObject alloc]init];
+    item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
+    item.iCount = 121;
+    item.lDiscountPrice = 100000;
+    item.lStandarPrice = 400000;
+    [arrDeals addObject:item];
+    
+    item = [[DealObject alloc]init];
+    item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
+    item.iCount = 212;
+    item.lDiscountPrice = 200000;
+    item.lStandarPrice = 1000000;
+    [arrDeals addObject:item];
+    
+    item = [[DealObject alloc]init];
+    item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
+    item.iCount = 999;
+    item.lDiscountPrice = 30000;
+    item.lStandarPrice = 200000;
+    [arrDeals addObject:item];
 }
 
 -(void)initNavigationbar
@@ -49,7 +161,7 @@
     // ^-Use UITextAlignmentCenter for older SDKs.
     label.textColor = [UIColor whiteColor]; // change this color
     self.navigationItem.titleView = label;
-    label.text = NSLocalizedString(@"DANH MUC", @"");
+    label.text = NSLocalizedString(@"DANH MỤC", @"");
     [label sizeToFit];
     
     revealController = [self revealViewController];
@@ -84,7 +196,7 @@
 
 -(void)initUITableView
 {
-    tableviewCategory = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-44) style:UITableViewStylePlain];
+    tableviewCategory = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-44) style:UITableViewStyleGrouped];
     [self.view addSubview:tableviewCategory];
 
     tableviewCategory.backgroundColor = [UIColor whiteColor];
@@ -104,12 +216,20 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [arrDeals count];
+    if ([tableView isEqual:tableViewFilter]) {
+        return [arrSort count];
+    }
+    else
+        return [arrDeals count];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 250;
+    if ([tableView isEqual:tableViewFilter]) {
+        return 44;
+    }
+    else
+        return 250;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -119,8 +239,49 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([tableView isEqual:tableViewFilter]) {
+        static NSString *CellIdentifier = @"CellIdentifier";
+        
+        
+        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        NSString * strTitle = [arrSort objectAtIndex:indexPath.row];
+        cell.textLabel.text = strTitle;
+        cell.textLabel.font = [UIFont systemFontOfSize:11];
+        cell.textLabel.textColor = [UIColor lightGrayColor];
+        return cell;
+
+    }
+    else
+    {
+    DealCell *cell = (DealCell *)[tableView dequeueReusableCellWithIdentifier:nil];
+    if (cell == nil)
+    {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"DealCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }    //    [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
+    DealObject * item = [arrDeals objectAtIndex:indexPath.row];
+    NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
+    strStardarPrice = [strStardarPrice formatStringToDecimal];
+    NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.lblStandarPrice.attributedText = attributedString;
+    [cell.lblStandarPrice sizeToFit];
+    cell.lblNumOfBook.text = F(@"%d",item.iCount);
     
-    return nil;
+    NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
+    strDiscountPrice = [strDiscountPrice formatStringToDecimal];
+    strDiscountPrice = F(@"%@đ", strDiscountPrice);
+    cell.lblDiscountPrice.text = strDiscountPrice;
+    cell.lblTitle.text = item.strTitle;
+    return cell;
+    }
+
 }
 -(UIView *)setupSegment
 {
@@ -139,7 +300,7 @@
     lblNumOfVoucher.font = [UIFont boldSystemFontOfSize:12];
     [viewHeader addSubview:lblNumOfVoucher];
     btnFilter = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnFilter setFrame:CGRectMake(ScreenWidth -10 -30, 10, 30, 18)];
+    [btnFilter setFrame:CGRectMake(ScreenWidth -60, 10, 50, 30)];
     [btnFilter addTarget:self action:@selector(showFilterMenu) forControlEvents:UIControlEventTouchUpInside];
     [btnFilter setBackgroundImage:[UIImage imageNamed:@"clickme-1-320x200"] forState:UIControlStateNormal];
     [viewHeader addSubview:btnFilter];
@@ -162,11 +323,17 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if ([tableView isEqual:tableViewFilter]) {
+        return 0;
+    }
     return 70.0f;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    if ([tableView isEqual:tableViewFilter]) {
+        return nil;
+    }
     return viewHeader;
 }
 -(void)mySegmentControlAction
@@ -182,13 +349,24 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 4) {
-        HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
-        [self.navigationController pushViewController:detail animated:YES];
+    
+    if ([tableView isEqual:tableViewFilter]) {
+        tableViewFilter.hidden = YES;
+        isShowSortMenu = YES;
+        tableviewCategory.userInteractionEnabled = YES;
     }
 }
 -(void)showFilterMenu
 {
-    UA_log(@"ok show filter");
+//    if (isShowSortMenu == NO) {
+//        tableviewCategory.userInteractionEnabled = NO;
+//    }
+//    else
+//    {
+//        tableviewCategory.userInteractionEnabled = YES;
+//    }
+    isShowSortMenu = !isShowSortMenu;
+    tableViewFilter.hidden = isShowSortMenu;
+    
 }
 @end

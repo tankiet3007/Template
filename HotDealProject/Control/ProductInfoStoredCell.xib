@@ -54,6 +54,9 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gach" translatesAutoresizingMaskIntoConstraints="NO" id="Xrl-Q6-XkN">
+                        <rect key="frame" x="0.0" y="101" width="320" height="3"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -69,5 +72,6 @@
     <resources>
         <image name="avatar" width="221" height="220"/>
         <image name="beef" width="300" height="300"/>
+        <image name="gach" width="700" height="10"/>
     </resources>
 </document>

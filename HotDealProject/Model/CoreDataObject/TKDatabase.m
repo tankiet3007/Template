@@ -28,6 +28,13 @@ static NSManagedObjectContext * __context = nil;
 #pragma mark product 
 -(void)addProduct:(ProductObject *)pObject
 {
+    NSArray *arrProductItem = [ProductItem MR_findAll];
+    for (ProductItem * item in arrProductItem) {
+        if ([item.productID isEqualToString:pObject.strProductID]) {
+            [self updateProduct:pObject];
+            return;
+        }
+    }
     ProductItem *productItem = [ProductItem MR_createEntityInContext:__context];
 //    NSNumber * numberID = [NSNumber numberWithInt:pObject.productID];
     NSNumber * numberCurrentQuantity = [NSNumber numberWithInt:pObject.iCurrentQuantity];
@@ -43,8 +50,22 @@ static NSManagedObjectContext * __context = nil;
     productItem.currentQuantity = numberCurrentQuantity;
     productItem.maxQuantity = numberMaxQuantity;
     [__context MR_saveToPersistentStoreAndWait];
-    NSArray *arrProductItem = [ProductItem MR_findAll];
+    
     UA_log(@"%ld Item", [arrProductItem count]);
+}
+
+-(void)updateProduct:(ProductObject *)pObject
+{
+    NSArray *arrProduct = [ProductItem MR_findByAttribute:@"productID" withValue:pObject.strProductID inContext:__context];
+    if ([arrProduct count]==0) {
+        return;
+    }
+    ProductItem *vResult = [arrProduct objectAtIndex:0];
+    int iCurrent = [vResult.currentQuantity intValue];
+    iCurrent += pObject.iCurrentQuantity;
+    vResult.currentQuantity = [NSNumber numberWithInt:iCurrent];
+    
+    [__context MR_saveToPersistentStoreAndWait];
 }
 -(NSMutableArray *)getAllProductStored
 {
