@@ -11,6 +11,7 @@
 #import "SWRevealViewController.h"
 #import "InvoiceCell.h"
 #import "LoginCell.h"
+#import "ForgotPasswordViewController.h"
 
 @interface RegisAndLoginController ()
 
@@ -30,6 +31,7 @@
     UITextField* tfPhone;
     UILabel* lblBirthday;
     UILabel* lblGender;
+    UIButton* btnRegister;
     UIToolbar *toolbar;
     BOOL isBirthdayAction;
 }
@@ -67,16 +69,16 @@
 }
 -(void)initUITableView
 {
-//    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 40) style:UITableViewStyleGrouped];
-//    [self.view addSubview:tableViewMain];
+    //    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 40) style:UITableViewStyleGrouped];
+    //    [self.view addSubview:tableViewMain];
     
     
     //    [tableViewDays setDragDelegate:self refreshDatePermanentKey:@"HotNewsList"];
     self.tableView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-//    [tableViewMain setBounces:NO];
-//    tableViewMain.separatorColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+    //    [tableViewMain setBounces:NO];
+    //    tableViewMain.separatorColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.sectionHeaderHeight = 0.0;
@@ -140,14 +142,14 @@
     }
     else
     {
-        return 3;
+        return 4;
     }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (isLoginFrame == TRUE) {
-    return 1;
+        return 1;
     }
     else
     {
@@ -242,35 +244,7 @@
             
             return cellRe;
         }
-       if (indexPath.section == 1)
-       {
-           UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-           
-           // Make cell unselectable
-           cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
-           UILabel* lbl = nil ;
-           switch ( indexPath.row ) {
-               case 0: {
-               
-                   cell.textLabel.text = @"" ;
-                   lbl = lblBirthday = [self makeLabel:@"  Ngày sinh"];
-                   [cellRe addSubview:lbl];
-                   break ;
-               }
-            }
-           
-           // Textfield dimensions
-           lbl.frame = CGRectMake(20, 0, 280, 39);
-           cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-           UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicker)];
-           // if labelView is not set userInteractionEnabled, you must do so
-           [lbl setUserInteractionEnabled:YES];
-           [lbl addGestureRecognizer:gesture];
-
-           return cellRe;
-
-       }
-        else
+        if (indexPath.section == 1)
         {
             UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
             
@@ -280,7 +254,35 @@
             switch ( indexPath.row ) {
                 case 0: {
                     
-//                    cell.textLabel.text = @"Ngày sinh" ;
+                    cell.textLabel.text = @"" ;
+                    lbl = lblBirthday = [self makeLabel:@"  Ngày sinh"];
+                    [cellRe addSubview:lbl];
+                    break ;
+                }
+            }
+            
+            // Textfield dimensions
+            lbl.frame = CGRectMake(20, 0, 280, 39);
+            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+            UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicker)];
+            // if labelView is not set userInteractionEnabled, you must do so
+            [lbl setUserInteractionEnabled:YES];
+            [lbl addGestureRecognizer:gesture];
+            
+            return cellRe;
+            
+        }
+        if (indexPath.section == 2)
+        {
+            UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            
+            // Make cell unselectable
+            cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
+            UILabel* lbl = nil ;
+            switch ( indexPath.row ) {
+                case 0: {
+                    
+                    //                    cell.textLabel.text = @"Ngày sinh" ;
                     lbl = lblGender = [self makeLabel:@"  Giới tính"];
                     [cellRe addSubview:lbl];
                     break ;
@@ -297,7 +299,24 @@
             [lbl addGestureRecognizer:gesture];
             
             return cellRe;
-
+            
+        }
+        else//btnRegister
+        {
+            UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            
+            // Make cell unselectable
+            cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
+            UIButton* button = nil ;
+            
+            button = btnRegister = [self makeButtonRegister];
+            [cellRe addSubview:btnRegister];
+            
+            // Textfield dimensions
+            button.frame = CGRectMake(20, 0, 280, 39);
+            //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+            return cellRe;
+            
         }
     }
     
@@ -314,6 +333,19 @@
     return tf ;
 }
 
+-(UIButton*) makeButtonRegister{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setTitle:@"Đăng ký" forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor redColor]];
+    btn.titleLabel.font = [UIFont systemFontOfSize:13];
+    [btn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
+    return btn;
+}
+-(void)registerClick
+{
+    UA_log(@"register");
+}
 
 - (void)configureCell:(LoginCell *)lcell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -333,10 +365,18 @@
     lcell.tfPassword.returnKeyType = UIReturnKeyDone;
     lcell.tfPassword.secureTextEntry  = YES;
     [lcell.btnLogin addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [lcell.btnForgotPassword addTarget:self action:@selector(forgotPassClick) forControlEvents:UIControlEventTouchUpInside];
 }
+
 -(void)loginClick
 {
     UA_log(@"%@ --- %@", cell.tfEmail.text, cell.tfPassword.text);
+}
+-(void)forgotPassClick
+{
+    ForgotPasswordViewController * forgotPass = [[ForgotPasswordViewController alloc]init];
+    [self.navigationController pushViewController:forgotPass animated:YES];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -352,9 +392,9 @@
 {
     if (isLoginFrame == FALSE) {
         if (section == 0) {
-           return viewHeader;
+            return viewHeader;
         }
-    return nil;
+        return nil;
     }
     return viewHeader;
 }
@@ -405,7 +445,7 @@
     else
     {
         isLoginFrame = FALSE;
-                cell.hidden = YES;
+        cell.hidden = YES;
         [self.tableView reloadData];
     }
 }
@@ -431,21 +471,21 @@
     toolbar.barStyle = UIBarStyleBlackOpaque;
     NSMutableArray *barItems = [[NSMutableArray alloc] init];
     UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-//    [barItems addObject:flexSpace];
+    //    [barItems addObject:flexSpace];
     
     UIButton *button_done = [UIButton buttonWithType:UIButtonTypeCustom];
     [button_done addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [button_done setTitle:@"Đồng ý" forState:UIControlStateNormal];
     UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithCustomView:button_done];
     button_done.frame = CGRectMake(0.0f,0.0f,70,44);
-//    [barItems addObject:doneBtn];
+    //    [barItems addObject:doneBtn];
     
     UIButton *button_cancel = [UIButton buttonWithType:UIButtonTypeCustom];
     [button_cancel addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [button_cancel setTitle:@"Hủy " forState:UIControlStateNormal];
     UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc]initWithCustomView:button_cancel];
     button_cancel.frame = CGRectMake(0.0f,0.0f,70,44);
-//    [barItems addObject:cancelBtn];
+    //    [barItems addObject:cancelBtn];
     barItems = [NSMutableArray arrayWithObjects:cancelBtn, flexSpace, doneBtn, nil];
     
     toolbar.items = barItems;
@@ -472,7 +512,7 @@
         lblBirthday.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
         pickerView.hidden = YES;
         toolbar.hidden = YES;
-
+        
     }
     else
     {
@@ -515,7 +555,7 @@
     pickerView.datePickerMode = UIDatePickerModeDate;
     pickerView.hidden = NO;
     toolbar.hidden = NO;
-
+    
     NSDate *currentDate = [NSDate date];
     [pickerView setMaximumDate:currentDate];
     
@@ -557,7 +597,7 @@
     pickerGender.showsSelectionIndicator = YES;
     pickerGender.hidden = YES;
     [self.view addSubview:pickerGender];
-
+    
 }
 -(void)showDropbox
 {

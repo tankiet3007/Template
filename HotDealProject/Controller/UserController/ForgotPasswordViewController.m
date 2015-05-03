@@ -7,7 +7,7 @@
 //
 
 #import "ForgotPasswordViewController.h"
-
+#import "AppDelegate.h"
 @interface ForgotPasswordViewController ()
 
 @end
@@ -16,7 +16,17 @@
 @synthesize tfEmail;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    AppDelegate * appdelegate = ApplicationDelegate;
+    [appdelegate initNavigationbar:self withTitle:@"QUÊN MẬT KHẨU"];
+    
     // Do any additional setup after loading the view from its nib.
+}
+-(void)backbtn_click:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
