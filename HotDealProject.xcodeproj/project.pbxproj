@@ -35,6 +35,17 @@
 		E978784E1AE92C8A003A3B84 /* InvoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E978784C1AE92C8A003A3B84 /* InvoiceCell.xib */; };
 		E97B700B1ADA01790099B5C2 /* DealItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B700A1ADA01790099B5C2 /* DealItem.m */; };
 		E97B700D1ADA01AF0099B5C2 /* DealItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = E97B700C1ADA01AF0099B5C2 /* DealItem.xib */; };
+		E98D4FAD1AF5DE8B0013EF4C /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E98D4FAB1AF5DE8B0013EF4C /* WebViewController.m */; };
+		E98D4FAE1AF5DE8B0013EF4C /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D4FAC1AF5DE8B0013EF4C /* WebViewController.xib */; };
+		E98D4FB01AF61E1E0013EF4C /* NetworkErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D4FAF1AF61E1E0013EF4C /* NetworkErrorView.xib */; };
+		E98D4FB21AF6243E0013EF4C /* DialogShowMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D4FB11AF6243E0013EF4C /* DialogShowMessage.xib */; };
+		E98D4FC01AF627D50013EF4C /* AccoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E98D4FB91AF627D50013EF4C /* AccoutViewController.m */; };
+		E98D4FC11AF627D50013EF4C /* AccoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D4FBA1AF627D50013EF4C /* AccoutViewController.xib */; };
+		E98D4FC21AF627D50013EF4C /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E98D4FBC1AF627D50013EF4C /* HelpViewController.m */; };
+		E98D4FC31AF627D50013EF4C /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D4FBD1AF627D50013EF4C /* HelpViewController.xib */; };
+		E98D4FC41AF627D50013EF4C /* RegisAndLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = E98D4FBF1AF627D50013EF4C /* RegisAndLoginController.m */; };
+		E98D4FC81AF62B6E0013EF4C /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E98D4FC61AF62B6E0013EF4C /* ForgotPasswordViewController.m */; };
+		E98D4FC91AF62B6E0013EF4C /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D4FC71AF62B6E0013EF4C /* ForgotPasswordViewController.xib */; };
 		E98FCF391AD8CA9100992BF0 /* ImageSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = E98FCF291AD8CA9100992BF0 /* ImageSlide.m */; };
 		E98FCF3A1AD8CA9100992BF0 /* ImageSwipe.m in Sources */ = {isa = PBXBuildFile; fileRef = E98FCF2B1AD8CA9100992BF0 /* ImageSwipe.m */; };
 		E98FCF3B1AD8CA9100992BF0 /* BasicMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E98FCF2F1AD8CA9100992BF0 /* BasicMapAnnotation.m */; };
@@ -112,7 +123,6 @@
 		E9B3DA391AE21431009C668D /* KindOfTransferDealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B3DA371AE21431009C668D /* KindOfTransferDealCell.xib */; };
 		E9B3DA3D1AE24731009C668D /* AutoSizeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3DA3B1AE24731009C668D /* AutoSizeTableViewCell.m */; };
 		E9B3DA3E1AE24731009C668D /* AutoSizeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B3DA3C1AE24731009C668D /* AutoSizeTableViewCell.xib */; };
-		E9B407C51AE9F3DA0053D484 /* RegisAndLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B407C41AE9F3DA0053D484 /* RegisAndLoginController.m */; };
 		E9B407C91AE9F7720053D484 /* LoginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B407C71AE9F7720053D484 /* LoginCell.m */; };
 		E9B407CA1AE9F7720053D484 /* LoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B407C81AE9F7720053D484 /* LoginCell.xib */; };
 		E9BAB7721AE898EC009BC234 /* ProductObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB7711AE898EC009BC234 /* ProductObject.m */; };
@@ -128,8 +138,6 @@
 		E9C0FE301ADCB8E30042502C /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C0FE2E1ADCB8E30042502C /* LocationTableViewCell.m */; };
 		E9C0FE311ADCB8E30042502C /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9C0FE2F1ADCB8E30042502C /* LocationTableViewCell.xib */; };
 		E9C2E8151AE4A13700D98DCC /* NewDealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C2E8141AE4A13700D98DCC /* NewDealViewController.m */; };
-		E9C2E81D1AE4B51C00D98DCC /* AccoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C2E81B1AE4B51C00D98DCC /* AccoutViewController.m */; };
-		E9C2E81E1AE4B51C00D98DCC /* AccoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9C2E81C1AE4B51C00D98DCC /* AccoutViewController.xib */; };
 		E9C2E8211AE4B8B000D98DCC /* CellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C2E8201AE4B8B000D98DCC /* CellObject.m */; };
 		E9C2E8251AE4BA9000D98DCC /* MenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C2E8231AE4BA9000D98DCC /* MenuTableViewCell.m */; };
 		E9C2E8261AE4BA9000D98DCC /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9C2E8241AE4BA9000D98DCC /* MenuTableViewCell.xib */; };
@@ -206,6 +214,22 @@
 		E97B70091ADA01790099B5C2 /* DealItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealItem.h; path = Control/DealItem.h; sourceTree = "<group>"; };
 		E97B700A1ADA01790099B5C2 /* DealItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealItem.m; path = Control/DealItem.m; sourceTree = "<group>"; };
 		E97B700C1ADA01AF0099B5C2 /* DealItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DealItem.xib; path = ../../HotDealProject/HotDealProject/DealItem.xib; sourceTree = "<group>"; };
+		E98D4FAA1AF5DE8B0013EF4C /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = Controller/WebViewController.h; sourceTree = "<group>"; };
+		E98D4FAB1AF5DE8B0013EF4C /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = Controller/WebViewController.m; sourceTree = "<group>"; };
+		E98D4FAC1AF5DE8B0013EF4C /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WebViewController.xib; path = Controller/WebViewController.xib; sourceTree = "<group>"; };
+		E98D4FAF1AF61E1E0013EF4C /* NetworkErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NetworkErrorView.xib; path = Control/NetworkErrorView.xib; sourceTree = "<group>"; };
+		E98D4FB11AF6243E0013EF4C /* DialogShowMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DialogShowMessage.xib; path = Control/DialogShowMessage.xib; sourceTree = "<group>"; };
+		E98D4FB81AF627D50013EF4C /* AccoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccoutViewController.h; path = Controller/UserController/AccoutViewController.h; sourceTree = "<group>"; };
+		E98D4FB91AF627D50013EF4C /* AccoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AccoutViewController.m; path = Controller/UserController/AccoutViewController.m; sourceTree = "<group>"; };
+		E98D4FBA1AF627D50013EF4C /* AccoutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccoutViewController.xib; path = Controller/UserController/AccoutViewController.xib; sourceTree = "<group>"; };
+		E98D4FBB1AF627D50013EF4C /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = Controller/UserController/HelpViewController.h; sourceTree = "<group>"; };
+		E98D4FBC1AF627D50013EF4C /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = Controller/UserController/HelpViewController.m; sourceTree = "<group>"; };
+		E98D4FBD1AF627D50013EF4C /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HelpViewController.xib; path = Controller/UserController/HelpViewController.xib; sourceTree = "<group>"; };
+		E98D4FBE1AF627D50013EF4C /* RegisAndLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisAndLoginController.h; path = Controller/UserController/RegisAndLoginController.h; sourceTree = "<group>"; };
+		E98D4FBF1AF627D50013EF4C /* RegisAndLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisAndLoginController.m; path = Controller/UserController/RegisAndLoginController.m; sourceTree = "<group>"; };
+		E98D4FC51AF62B6E0013EF4C /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgotPasswordViewController.h; path = Controller/UserController/ForgotPasswordViewController.h; sourceTree = "<group>"; };
+		E98D4FC61AF62B6E0013EF4C /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotPasswordViewController.m; path = Controller/UserController/ForgotPasswordViewController.m; sourceTree = "<group>"; };
+		E98D4FC71AF62B6E0013EF4C /* ForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ForgotPasswordViewController.xib; path = Controller/UserController/ForgotPasswordViewController.xib; sourceTree = "<group>"; };
 		E98FCF281AD8CA9100992BF0 /* ImageSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSlide.h; sourceTree = "<group>"; };
 		E98FCF291AD8CA9100992BF0 /* ImageSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSlide.m; sourceTree = "<group>"; };
 		E98FCF2A1AD8CA9100992BF0 /* ImageSwipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSwipe.h; sourceTree = "<group>"; };
@@ -360,8 +384,6 @@
 		E9B3DA3A1AE24731009C668D /* AutoSizeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoSizeTableViewCell.h; path = Control/AutoSizeTableViewCell.h; sourceTree = "<group>"; };
 		E9B3DA3B1AE24731009C668D /* AutoSizeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AutoSizeTableViewCell.m; path = Control/AutoSizeTableViewCell.m; sourceTree = "<group>"; };
 		E9B3DA3C1AE24731009C668D /* AutoSizeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AutoSizeTableViewCell.xib; path = Control/AutoSizeTableViewCell.xib; sourceTree = "<group>"; };
-		E9B407C31AE9F3DA0053D484 /* RegisAndLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisAndLoginController.h; path = Controller/RegisAndLoginController.h; sourceTree = "<group>"; };
-		E9B407C41AE9F3DA0053D484 /* RegisAndLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisAndLoginController.m; path = Controller/RegisAndLoginController.m; sourceTree = "<group>"; };
 		E9B407C61AE9F7720053D484 /* LoginCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginCell.h; path = Control/LoginCell.h; sourceTree = "<group>"; };
 		E9B407C71AE9F7720053D484 /* LoginCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginCell.m; path = Control/LoginCell.m; sourceTree = "<group>"; };
 		E9B407C81AE9F7720053D484 /* LoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginCell.xib; path = Control/LoginCell.xib; sourceTree = "<group>"; };
@@ -389,9 +411,6 @@
 		E9C0FE2F1ADCB8E30042502C /* LocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationTableViewCell.xib; path = Control/LocationTableViewCell.xib; sourceTree = "<group>"; };
 		E9C2E8131AE4A13700D98DCC /* NewDealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewDealViewController.h; path = Controller/NewDealViewController.h; sourceTree = "<group>"; };
 		E9C2E8141AE4A13700D98DCC /* NewDealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewDealViewController.m; path = Controller/NewDealViewController.m; sourceTree = "<group>"; };
-		E9C2E81A1AE4B51C00D98DCC /* AccoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccoutViewController.h; path = Controller/Account/AccoutViewController.h; sourceTree = "<group>"; };
-		E9C2E81B1AE4B51C00D98DCC /* AccoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AccoutViewController.m; path = Controller/Account/AccoutViewController.m; sourceTree = "<group>"; };
-		E9C2E81C1AE4B51C00D98DCC /* AccoutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccoutViewController.xib; path = Controller/Account/AccoutViewController.xib; sourceTree = "<group>"; };
 		E9C2E81F1AE4B8B000D98DCC /* CellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellObject.h; path = Model/CellObject.h; sourceTree = "<group>"; };
 		E9C2E8201AE4B8B000D98DCC /* CellObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellObject.m; path = Model/CellObject.m; sourceTree = "<group>"; };
 		E9C2E8221AE4BA9000D98DCC /* MenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuTableViewCell.h; path = Control/MenuTableViewCell.h; sourceTree = "<group>"; };
@@ -548,6 +567,8 @@
 				E9B407C61AE9F7720053D484 /* LoginCell.h */,
 				E9B407C71AE9F7720053D484 /* LoginCell.m */,
 				E9B407C81AE9F7720053D484 /* LoginCell.xib */,
+				E98D4FAF1AF61E1E0013EF4C /* NetworkErrorView.xib */,
+				E98D4FB11AF6243E0013EF4C /* DialogShowMessage.xib */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -618,6 +639,9 @@
 		E9AE1FB71AD804D2002E11AC /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				E98D4FAA1AF5DE8B0013EF4C /* WebViewController.h */,
+				E98D4FAB1AF5DE8B0013EF4C /* WebViewController.m */,
+				E98D4FAC1AF5DE8B0013EF4C /* WebViewController.xib */,
 				E9485B831AE006E2005D1688 /* AFNetworking */,
 				E98FCF221AD8CA1900992BF0 /* CustomeControl */,
 				E9AE20951AD80E70002E11AC /* Network */,
@@ -858,7 +882,7 @@
 		E9AE20921AD80BA6002E11AC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E9C2E8191AE4B48900D98DCC /* Account */,
+				E9C2E8191AE4B48900D98DCC /* UserController */,
 				E9AE1FA51AD80455002E11AC /* LeftMenuViewController.h */,
 				E9AE1FA61AD80455002E11AC /* LeftMenuViewController.m */,
 				E9AE1FA81AD80455002E11AC /* MainViewController.h */,
@@ -924,16 +948,22 @@
 			name = Framwork;
 			sourceTree = "<group>";
 		};
-		E9C2E8191AE4B48900D98DCC /* Account */ = {
+		E9C2E8191AE4B48900D98DCC /* UserController */ = {
 			isa = PBXGroup;
 			children = (
-				E9C2E81A1AE4B51C00D98DCC /* AccoutViewController.h */,
-				E9C2E81B1AE4B51C00D98DCC /* AccoutViewController.m */,
-				E9C2E81C1AE4B51C00D98DCC /* AccoutViewController.xib */,
-				E9B407C31AE9F3DA0053D484 /* RegisAndLoginController.h */,
-				E9B407C41AE9F3DA0053D484 /* RegisAndLoginController.m */,
+				E98D4FB81AF627D50013EF4C /* AccoutViewController.h */,
+				E98D4FB91AF627D50013EF4C /* AccoutViewController.m */,
+				E98D4FBA1AF627D50013EF4C /* AccoutViewController.xib */,
+				E98D4FBB1AF627D50013EF4C /* HelpViewController.h */,
+				E98D4FBC1AF627D50013EF4C /* HelpViewController.m */,
+				E98D4FBD1AF627D50013EF4C /* HelpViewController.xib */,
+				E98D4FBE1AF627D50013EF4C /* RegisAndLoginController.h */,
+				E98D4FBF1AF627D50013EF4C /* RegisAndLoginController.m */,
+				E98D4FC51AF62B6E0013EF4C /* ForgotPasswordViewController.h */,
+				E98D4FC61AF62B6E0013EF4C /* ForgotPasswordViewController.m */,
+				E98D4FC71AF62B6E0013EF4C /* ForgotPasswordViewController.xib */,
 			);
-			name = Account;
+			name = UserController;
 			sourceTree = "<group>";
 		};
 		E9D3BD5D1AD6BA5400F7429B = {
@@ -1089,22 +1119,27 @@
 				E95945561ADB6A3200CDA3FF /* APLQuoteCell.xib in Resources */,
 				E95945501ADB661F00CDA3FF /* carat-open.png in Resources */,
 				E9C0FE311ADCB8E30042502C /* LocationTableViewCell.xib in Resources */,
+				E98D4FAE1AF5DE8B0013EF4C /* WebViewController.xib in Resources */,
 				E9AE1FB31AD80455002E11AC /* StartupViewController.xib in Resources */,
 				E97B700D1ADA01AF0099B5C2 /* DealItem.xib in Resources */,
 				E95945541ADB69AC00CDA3FF /* SectionHeaderView.xib in Resources */,
 				E9BAB7801AE8D8E9009BC234 /* ProductInfoStoredCell.xib in Resources */,
 				E9C049F41AE0F9360017C5CE /* DealCell.xib in Resources */,
+				E98D4FC31AF627D50013EF4C /* HelpViewController.xib in Resources */,
 				E978784E1AE92C8A003A3B84 /* InvoiceCell.xib in Resources */,
 				E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */,
 				E9B3DA3E1AE24731009C668D /* AutoSizeTableViewCell.xib in Resources */,
 				E95945511ADB661F00CDA3FF /* carat.png in Resources */,
+				E98D4FC91AF62B6E0013EF4C /* ForgotPasswordViewController.xib in Resources */,
 				E9D3BD7D1AD6BA5400F7429B /* LaunchScreen.xib in Resources */,
 				E9B3DA341AE213E0009C668D /* CheckQuantityDealCell.xib in Resources */,
 				E98FCF3F1AD8CA9100992BF0 /* JingDianMapCell.xib in Resources */,
 				E9B407CA1AE9F7720053D484 /* LoginCell.xib in Resources */,
-				E9C2E81E1AE4B51C00D98DCC /* AccoutViewController.xib in Resources */,
+				E98D4FC11AF627D50013EF4C /* AccoutViewController.xib in Resources */,
 				E9B3DA391AE21431009C668D /* KindOfTransferDealCell.xib in Resources */,
+				E98D4FB21AF6243E0013EF4C /* DialogShowMessage.xib in Resources */,
 				E9C2E8261AE4BA9000D98DCC /* MenuTableViewCell.xib in Resources */,
+				E98D4FB01AF61E1E0013EF4C /* NetworkErrorView.xib in Resources */,
 				E9D3BD7A1AD6BA5400F7429B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1124,6 +1159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9485B9C1AE006E2005D1688 /* AFURLConnectionOperation.m in Sources */,
+				E98D4FAD1AF5DE8B0013EF4C /* WebViewController.m in Sources */,
 				E9AE203F1AD80A5E002E11AC /* UIImageView+HighlightedWebCache.m in Sources */,
 				E9D3BD721AD6BA5400F7429B /* HotDealProject.xcdatamodeld in Sources */,
 				E98FCF3D1AD8CA9100992BF0 /* CalloutMapAnnotation.m in Sources */,
@@ -1147,6 +1183,7 @@
 				E9D3BD6F1AD6BA5400F7429B /* AppDelegate.m in Sources */,
 				E9C049F71AE13B2D0017C5CE /* DealObject.m in Sources */,
 				E9AE1FB61AD804C4002E11AC /* SWRevealViewController.m in Sources */,
+				E98D4FC21AF627D50013EF4C /* HelpViewController.m in Sources */,
 				E9AE20861AD80B68002E11AC /* UIColor+CreateMethods.m in Sources */,
 				E9C049FE1AE143B80017C5CE /* UIScrollView+SVPullToRefresh.m in Sources */,
 				E9AE201F1AD80A5E002E11AC /* NSString+MagicalDataImport.m in Sources */,
@@ -1157,10 +1194,11 @@
 				E9BAB77F1AE8D8E9009BC234 /* ProductInfoStoredCell.m in Sources */,
 				E9AE203A1AD80A5E002E11AC /* SDWebImagePrefetcher.m in Sources */,
 				E9AE20281AD80A5E002E11AC /* NSManagedObjectContext+MagicalThreading.m in Sources */,
-				E9C2E81D1AE4B51C00D98DCC /* AccoutViewController.m in Sources */,
 				E9485B9A1AE006E2005D1688 /* AFNetworkReachabilityManager.m in Sources */,
 				E9F179AC1AE7A195004D743E /* ShortDealInfoCell.m in Sources */,
+				E98D4FC41AF627D50013EF4C /* RegisAndLoginController.m in Sources */,
 				E98FCF401AD8CA9100992BF0 /* MapView.m in Sources */,
+				E98D4FC01AF627D50013EF4C /* AccoutViewController.m in Sources */,
 				E9BAB7781AE8AF65009BC234 /* TKDatabase.m in Sources */,
 				E9AE20251AD80A5E002E11AC /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				E9AE201D1AD80A5E002E11AC /* NSObject+MagicalDataImport.m in Sources */,
@@ -1225,13 +1263,13 @@
 				E9AE20421AD80A5E002E11AC /* UIView+WebCacheOperation.m in Sources */,
 				E9BAB7831AE8E16B009BC234 /* ShoppingCartController.m in Sources */,
 				E9AE208E1AD80B68002E11AC /* BBBadgeBarButtonItem.m in Sources */,
+				E98D4FC81AF62B6E0013EF4C /* ForgotPasswordViewController.m in Sources */,
 				E9384F471ADF985300C3D703 /* TKAPI.m in Sources */,
 				E95945591ADB7CD800CDA3FF /* HotNewDetailViewController.m in Sources */,
 				E9AE208F1AD80B68002E11AC /* CustomBadge.m in Sources */,
 				E9AE201C1AD80A5E002E11AC /* NSNumber+MagicalDataImport.m in Sources */,
 				E9AE20221AD80A5E002E11AC /* NSManagedObject+MagicalFinders.m in Sources */,
 				E9AE20341AD80A5E002E11AC /* SDImageCache.m in Sources */,
-				E9B407C51AE9F3DA0053D484 /* RegisAndLoginController.m in Sources */,
 				E959454D1ADB661F00CDA3FF /* APLQuoteCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

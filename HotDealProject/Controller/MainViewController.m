@@ -36,13 +36,15 @@
     NSMutableArray * arrNewDeals;
     UISegmentedControl *segmentedControl;
     UIView * viewHeader;
-        NSMutableArray * arrSale;
-        NSMutableArray * arrNew;
-        NSMutableArray * arrNear;
+    NSMutableArray * arrSale;
+    NSMutableArray * arrNew;
+    NSMutableArray * arrNear;
     
     NSMutableArray * arrDeals;
     BBBadgeBarButtonItem *barButton;
     NSArray * arrProduct;
+    UIView *dialogView;
+    UIView* dimView;
 }
 @synthesize tableViewMain;
 #pragma mark init Method
@@ -60,6 +62,7 @@
     [self setupNewDeal];
     [self setupCategory];
     [self setupSegment];
+//    [self showDialog];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -96,7 +99,7 @@
     item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
     item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
     item.iCount = 456;
-        item.iType = 1;
+    item.iType = 1;
     item.lDiscountPrice = 200000;
     item.lStandarPrice = 1000000;
     [arrDeals addObject:item];
@@ -196,7 +199,7 @@
         [itemS setFrame:CGRectMake(x, 0, 250, 180)];
         [itemS.btnTemp addTarget:self action:@selector(clickOnItem:) forControlEvents:UIControlEventTouchUpInside];
         itemS.btnTemp.tag = i;
-//        itemS.backgroundColor = [UIColor greenColor];
+        //        itemS.backgroundColor = [UIColor greenColor];
         
         DealObject * item = [arrDeals objectAtIndex:i];
         NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
@@ -212,7 +215,7 @@
         strDiscountPrice = F(@"%@đ", strDiscountPrice);
         itemS.lblDiscountPrice.text = strDiscountPrice;
         itemS.lblTitle.text = item.strTitle;
-
+        
         
         x += itemS.frame.size.width + PADDING;
         [scrollView addSubview:itemS];
@@ -235,14 +238,14 @@
     tableViewMain.showsVerticalScrollIndicator = NO;
     tableViewMain.sectionHeaderHeight = 0.0;
     
-        __weak MainViewController *weakSelf = self;
+    __weak MainViewController *weakSelf = self;
     
-        // setup pull-to-refresh
-        [weakSelf.tableViewMain addPullToRefreshWithActionHandler:^{
-            [self refreshTable];
-            [weakSelf.tableViewMain.pullToRefreshView performSelector:@selector(stopAnimating) withObject:nil afterDelay:1];
-        }];
-
+    // setup pull-to-refresh
+    [weakSelf.tableViewMain addPullToRefreshWithActionHandler:^{
+        [self refreshTable];
+        [weakSelf.tableViewMain.pullToRefreshView performSelector:@selector(stopAnimating) withObject:nil afterDelay:1];
+    }];
+    
     
     
 }
@@ -378,7 +381,7 @@
     }
     if (indexPath.section == 1) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 15, 300, 20)];
         NSDate * date = [NSDate date];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -395,7 +398,7 @@
     }
     if (indexPath.section == 2) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 5, 300, 20)];
         lblTitle.text = @"Chọn danh mục";
         lblTitle.font = [UIFont boldSystemFontOfSize:14];
@@ -406,7 +409,7 @@
     }
     if (indexPath.section == 3) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.contentView addSubview:viewHeader];
         
         return cell;
@@ -423,7 +426,7 @@
         strStardarPrice = [strStardarPrice formatStringToDecimal];
         NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
         NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.lblStandarPrice.attributedText = attributedString;
         [cell.lblStandarPrice sizeToFit];
         cell.lblNumOfBook.text = F(@"%d",item.iCount);
@@ -435,7 +438,7 @@
         cell.lblTitle.text = item.strTitle;
         return cell;
     }
-
+    
     
     return nil;
 }
@@ -463,15 +466,15 @@
     segmentedControl.selectedSegmentIndex = 1;
     [viewHeader addSubview:segmentedControl];
     return viewHeader;
-
+    
 }
 
 -(void)mySegmentControlAction
 {
-        NSMutableIndexSet *indetsetToUpdate = [[NSMutableIndexSet alloc]init];
+    NSMutableIndexSet *indetsetToUpdate = [[NSMutableIndexSet alloc]init];
     
-        [indetsetToUpdate addIndex:4];
-        [tableViewMain reloadSections:indetsetToUpdate withRowAnimation:UITableViewRowAnimationFade];
+    [indetsetToUpdate addIndex:4];
+    [tableViewMain reloadSections:indetsetToUpdate withRowAnimation:UITableViewRowAnimationFade];
     if (segmentedControl.selectedSegmentIndex == 0) {
         UA_log(@"0");
     }
@@ -501,10 +504,10 @@
     int64_t delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-         [tableViewMain reloadData];
-    //            [self getNEWSCampaign:[arrNews count] andSize:10 wKeyword:searchBars.text];
+        [tableViewMain reloadData];
+        //            [self getNEWSCampaign:[arrNews count] andSize:10 wKeyword:searchBars.text];
     });
-   
+    
 }
 
 #pragma mark -- show deal detail
@@ -545,5 +548,72 @@
         iBadge += iCurrent;
     }
     barButton.badgeValue = F(@"%d",iBadge);
+}
+
+-(void)showDialog
+{
+    
+    [self setDimView];
+    if (dialogView != nil) {
+        [UIView animateWithDuration:.5 animations:^{
+            dialogView.alpha = 1;
+        } completion:^(BOOL finished) {
+        }];
+        return;
+    }
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"NetworkErrorView" owner:self options:nil];
+    
+    dialogView = [[UIView alloc] initWithFrame:CGRectMake(10, 50, 300, 200)]; // or if it exists, MCQView *view = [[MCQView alloc] init];
+    dialogView = (UIView *)[nib objectAtIndex:0]; // or if it exists, (MCQView *)[nib objectAtIndex:0];
+    [dialogView setFrame:CGRectMake(10, 200, 300, 200)];
+    
+    dialogView.layer.borderWidth=1.0f;
+    dialogView.layer.borderColor=[UIColor whiteColor].CGColor;
+    dialogView.layer.cornerRadius = 5;
+    dialogView.layer.masksToBounds = YES;
+    
+    [self.view addSubview:dialogView];
+    dialogView.alpha = 0;
+    [UIView animateWithDuration:.5 animations:^{
+        dialogView.alpha = 1;
+    } completion:^(BOOL finished) {
+    }];
+    
+}
+- (IBAction)refreshView:(id)sender {
+    
+    
+}
+-(void)setDimView
+{
+    if (dimView != nil) {
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             dimView.alpha = 0.6;
+                         }];
+        return;
+    }
+    dimView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hiddenView:)];
+    tapGesture.numberOfTapsRequired = 1;
+    [dimView addGestureRecognizer:tapGesture];
+    
+    dimView.backgroundColor = [UIColor blackColor];
+    dimView.alpha = 0;
+    [self.view addSubview:dimView];
+    
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         dimView.alpha = 0.6;
+                     }];
+    
+}
+- (IBAction)hiddenView:(id)sender {
+    dimView.alpha = 0;
+    [UIView animateWithDuration:.5 animations:^{
+        dialogView.alpha = 0;
+    } completion:^(BOOL finished) {
+    }];
 }
 @end

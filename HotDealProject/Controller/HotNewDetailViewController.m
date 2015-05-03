@@ -15,6 +15,7 @@
 #import "ProductObject.h"
 #import "BBBadgeBarButtonItem.h"
 #import "TKDatabase.h"
+#import "WebViewController.h"
 #define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([SYSTEM_VERSION compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define IS_IOS8_OR_ABOVE                            (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
@@ -472,7 +473,14 @@
         pList.arrProduct = arrSelectedAldreay;
         pList.delegate = self;
         [self.navigationController pushViewController:pList animated:YES];
+        return;
     }
+    if (indexPath.section == 3) {
+        WebViewController * web = [[WebViewController alloc]init];
+        web.url = [NSURL URLWithString:@"http://m.hamtruyen.com/doc-truyen/ban-long-chapter-83.html"];
+        [self.navigationController pushViewController:web animated:YES];
+    }
+    
 }
 -(void)updateTotalSeletedItem:(NSMutableArray *)arrTotalItem
 {

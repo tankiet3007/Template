@@ -18,7 +18,7 @@
 #import "NewDealViewController.h"
 #import "StartupViewController.h"
 #import "AccoutViewController.h"
-
+#import "HelpViewController.h"
 #import "RegisAndLoginController.h"
 @interface LeftMenuViewController ()
 @property (nonatomic) NSMutableArray *sectionInfoArray;
@@ -306,6 +306,15 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC setFrontViewController:navigationController animated:YES];
         [revealVC revealToggle:nil];
         return;
+    }//#import "HelpViewController.h"
+    if (sectionOpened == 4) {//#import "RegisAndLoginController.h"
+        HelpViewController * newVC = [[HelpViewController alloc]init];
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
+        
+        [revealVC setFrontViewController:navigationController animated:YES];
+        [revealVC revealToggle:nil];
+        return;
     }
     APLSectionInfo *sectionInfo = (self.sectionInfoArray)[sectionOpened];
     
@@ -396,6 +405,15 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     }
     if (sectionClosed == 3) {
         RegisAndLoginController * newVC = [[RegisAndLoginController alloc]init];
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
+        
+        [revealVC setFrontViewController:navigationController animated:YES];
+        [revealVC revealToggle:nil];
+        return;
+    }
+    if (sectionClosed == 4) {//#import "RegisAndLoginController.h"
+        HelpViewController * newVC = [[HelpViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
         
