@@ -315,6 +315,7 @@
             // Textfield dimensions
             button.frame = CGRectMake(20, 0, 280, 39);
             //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+             cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             return cellRe;
             
         }

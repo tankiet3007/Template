@@ -29,6 +29,7 @@
 }
 #define RowHeight 44
 @synthesize tableviewCategory;
+@synthesize strTitle;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -161,7 +162,8 @@
     // ^-Use UITextAlignmentCenter for older SDKs.
     label.textColor = [UIColor whiteColor]; // change this color
     self.navigationItem.titleView = label;
-    label.text = NSLocalizedString(@"DANH MỤC", @"");
+//    label.text = NSLocalizedString(@"DANH MỤC", @"");
+    label.text = strTitle;
     [label sizeToFit];
     
     revealController = [self revealViewController];

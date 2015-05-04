@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 @interface CategoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) UITableView * tableviewCategory;
+@property (nonatomic,strong) NSString * strTitle;
 @end

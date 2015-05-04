@@ -525,6 +525,7 @@
     UA_log(@"button is at %ld index", (long)btnTag.tag);
     
     CategoryViewController * category = [[CategoryViewController alloc]init];
+    category.strTitle = @"Danh mục";
     [self.navigationController pushViewController:category animated:YES];
 }
 

@@ -227,7 +227,9 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 {
 //    NSLog(@"%@ indexpath", indexPath);
     CategoryViewController * categoryVC = [[CategoryViewController alloc]init];
-    
+    MenuItem *item = (MenuItem *)[(self.sectionInfoArray)[indexPath.section] menuItem];
+    UA_log(@"%@",(item.subItem)[indexPath.row]);
+    categoryVC.strTitle = (item.subItem)[indexPath.row];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:categoryVC];
     [revealVC setFrontViewController:navigationController animated:YES];
     [revealVC revealToggle:nil];

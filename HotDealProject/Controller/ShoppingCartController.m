@@ -18,7 +18,7 @@
 #import "BBBadgeBarButtonItem.h"
 #import "HotNewDetailViewController.h"
 #import "InvoiceCell.h"
-
+#import "PaymentViewController.h"
 @interface ShoppingCartController ()
 
 @end
@@ -191,22 +191,24 @@
     btnChoiceProducts = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 300, 40)];
     [btnChoiceProducts setBackgroundColor:[UIColor greenColor]];
     [btnChoiceProducts setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnChoiceProducts setTitle:@"CHỌN" forState:UIControlStateNormal];
+    [btnChoiceProducts setTitle:@"THANH TOÁN" forState:UIControlStateNormal];
     [btnChoiceProducts addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
     return btnChoiceProducts;
 }
 -(void)loginClick
 {
-    UA_log(@"clicked");
-    for (ProductObject * item  in arrProduct) {
-        UA_log(@"%d",item.iCurrentQuantity);
-        if (item.iCurrentQuantity != 0) {
-            [[TKDatabase sharedInstance]addProduct:item];
-        }
-    }
-    //    [self.delegate updateTotalSeletedItem:arrProduct];
-    [self.delegate updateTotal];
-    [self.navigationController popViewControllerAnimated:YES];
+    PaymentViewController * paymentVC = [[PaymentViewController alloc]init];
+    [self.navigationController pushViewController:paymentVC animated:YES];
+//    UA_log(@"clicked");
+//    for (ProductObject * item  in arrProduct) {
+//        UA_log(@"%d",item.iCurrentQuantity);
+//        if (item.iCurrentQuantity != 0) {
+//            [[TKDatabase sharedInstance]addProduct:item];
+//        }
+//    }
+//    //    [self.delegate updateTotalSeletedItem:arrProduct];
+//    [self.delegate updateTotal];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)showDropbox:(id)sender
 {
