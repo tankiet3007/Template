@@ -299,7 +299,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         return;
     }
     if (sectionOpened == 3) {//#import "RegisAndLoginController.h"
-        RegisAndLoginController * newVC = [[RegisAndLoginController alloc]init];
+        AccoutViewController * newVC = [[AccoutViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
         
@@ -403,8 +403,8 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC revealToggle:nil];
         return;
     }
-    if (sectionClosed == 3) {
-        RegisAndLoginController * newVC = [[RegisAndLoginController alloc]init];
+    if (sectionClosed == 3) {//AccoutViewController
+        AccoutViewController * newVC = [[AccoutViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
         
@@ -474,7 +474,13 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 }
 -(void)loginClick
 {
-    UA_log(@"clicked");
+    RegisAndLoginController * newVC = [[RegisAndLoginController alloc]init];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
+    
+    [revealVC setFrontViewController:navigationController animated:YES];
+    [revealVC revealToggle:nil];
+    
 }
 //-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 //{

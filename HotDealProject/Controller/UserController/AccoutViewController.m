@@ -10,6 +10,8 @@
 #import "CellObject.h"
 #import "SWRevealViewController.h"
 #import "MenuTableViewCell.h"
+#import "AccountInfoViewController.h"
+#import "ChangePasswordViewController.h"
 @interface AccoutViewController ()
 
 @end
@@ -122,6 +124,16 @@
     cell.imgLeft.image = [UIImage imageNamed:obj.strImageName];
     cell.lblName.text = obj.strName;
     return cell;
-
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        AccountInfoViewController * accountInfo = [[AccountInfoViewController alloc]init];
+        [self.navigationController pushViewController:accountInfo animated:YES];
+    }
+    if (indexPath.row == 2) {
+        ChangePasswordViewController * changePassword = [[ChangePasswordViewController alloc]init];
+        [self.navigationController pushViewController:changePassword animated:YES];
+    }
 }
 @end

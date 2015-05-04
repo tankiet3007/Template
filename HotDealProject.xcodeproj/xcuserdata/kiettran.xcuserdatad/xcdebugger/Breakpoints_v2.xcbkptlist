@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/Controller/HotNewDetailViewController.m"
-            timestampString = "452321428.945036"
+            timestampString = "452408676.524451"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "494"
-            endingLineNumber = "494"
+            startingLineNumber = "495"
+            endingLineNumber = "495"
             landmarkName = "-updateTotalSeletedItem:"
             landmarkType = "5">
          </BreakpointContent>

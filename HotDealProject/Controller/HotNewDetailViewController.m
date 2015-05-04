@@ -8,9 +8,10 @@
 
 #import "HotNewDetailViewController.h"
 #import "AppDelegate.h"
+#import "AutoSizeTableViewCell.h"
 #import "CheckQuantityDealCell.h"
 #import "KindOfTransferDealCell.h"
-#import "AutoSizeTableViewCell.h"
+
 #import "DealItem.h"
 #import "ProductObject.h"
 #import "BBBadgeBarButtonItem.h"

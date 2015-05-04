@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E9239A471AF7321100CC4977 /* AccountInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9239A461AF7321100CC4977 /* AccountInfoViewController.m */; };
+		E9239A4B1AF7496B00CC4977 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9239A491AF7496B00CC4977 /* ChangePasswordViewController.m */; };
+		E9239A4C1AF7496B00CC4977 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9239A4A1AF7496B00CC4977 /* ChangePasswordViewController.xib */; };
 		E9384F471ADF985300C3D703 /* TKAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = E9384F461ADF985300C3D703 /* TKAPI.m */; };
 		E9485B971AE006E2005D1688 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9485B851AE006E2005D1688 /* AFHTTPRequestOperation.m */; };
 		E9485B981AE006E2005D1688 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9485B871AE006E2005D1688 /* AFHTTPRequestOperationManager.m */; };
@@ -163,6 +166,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E9239A451AF7321100CC4977 /* AccountInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccountInfoViewController.h; path = Controller/UserController/AccountInfoViewController.h; sourceTree = "<group>"; };
+		E9239A461AF7321100CC4977 /* AccountInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AccountInfoViewController.m; path = Controller/UserController/AccountInfoViewController.m; sourceTree = "<group>"; };
+		E9239A481AF7496B00CC4977 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePasswordViewController.h; path = Controller/UserController/ChangePasswordViewController.h; sourceTree = "<group>"; };
+		E9239A491AF7496B00CC4977 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePasswordViewController.m; path = Controller/UserController/ChangePasswordViewController.m; sourceTree = "<group>"; };
+		E9239A4A1AF7496B00CC4977 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChangePasswordViewController.xib; path = Controller/UserController/ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		E9384F451ADF985300C3D703 /* TKAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TKAPI.h; path = Model/TKAPI.h; sourceTree = "<group>"; };
 		E9384F461ADF985300C3D703 /* TKAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TKAPI.m; path = Model/TKAPI.m; sourceTree = "<group>"; };
 		E9485B841AE006E2005D1688 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -962,6 +970,11 @@
 				E98D4FC51AF62B6E0013EF4C /* ForgotPasswordViewController.h */,
 				E98D4FC61AF62B6E0013EF4C /* ForgotPasswordViewController.m */,
 				E98D4FC71AF62B6E0013EF4C /* ForgotPasswordViewController.xib */,
+				E9239A451AF7321100CC4977 /* AccountInfoViewController.h */,
+				E9239A461AF7321100CC4977 /* AccountInfoViewController.m */,
+				E9239A481AF7496B00CC4977 /* ChangePasswordViewController.h */,
+				E9239A491AF7496B00CC4977 /* ChangePasswordViewController.m */,
+				E9239A4A1AF7496B00CC4977 /* ChangePasswordViewController.xib */,
 			);
 			name = UserController;
 			sourceTree = "<group>";
@@ -1130,6 +1143,7 @@
 				E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */,
 				E9B3DA3E1AE24731009C668D /* AutoSizeTableViewCell.xib in Resources */,
 				E95945511ADB661F00CDA3FF /* carat.png in Resources */,
+				E9239A4C1AF7496B00CC4977 /* ChangePasswordViewController.xib in Resources */,
 				E98D4FC91AF62B6E0013EF4C /* ForgotPasswordViewController.xib in Resources */,
 				E9D3BD7D1AD6BA5400F7429B /* LaunchScreen.xib in Resources */,
 				E9B3DA341AE213E0009C668D /* CheckQuantityDealCell.xib in Resources */,
@@ -1176,6 +1190,7 @@
 				E9AE201B1AD80A5E002E11AC /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				E9F179A81AE79D0A004D743E /* ProductListViewController.m in Sources */,
 				E98FCF3B1AD8CA9100992BF0 /* BasicMapAnnotation.m in Sources */,
+				E9239A4B1AF7496B00CC4977 /* ChangePasswordViewController.m in Sources */,
 				E959455F1ADB7F9900CDA3FF /* PromotionViewController.m in Sources */,
 				E9C049FD1AE143B80017C5CE /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				E9AE203B1AD80A5E002E11AC /* UIButton+WebCache.m in Sources */,
@@ -1184,6 +1199,7 @@
 				E9C049F71AE13B2D0017C5CE /* DealObject.m in Sources */,
 				E9AE1FB61AD804C4002E11AC /* SWRevealViewController.m in Sources */,
 				E98D4FC21AF627D50013EF4C /* HelpViewController.m in Sources */,
+				E9239A471AF7321100CC4977 /* AccountInfoViewController.m in Sources */,
 				E9AE20861AD80B68002E11AC /* UIColor+CreateMethods.m in Sources */,
 				E9C049FE1AE143B80017C5CE /* UIScrollView+SVPullToRefresh.m in Sources */,
 				E9AE201F1AD80A5E002E11AC /* NSString+MagicalDataImport.m in Sources */,
