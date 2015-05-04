@@ -242,10 +242,13 @@
     [btn setTitle:@"ĐẶT HÀNG" forState:UIControlStateNormal];
     [btn setBackgroundColor:[UIColor redColor]];
     btn.titleLabel.font = [UIFont systemFontOfSize:13];
-    [btn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(paymentClick) forControlEvents:UIControlEventTouchUpInside];
     return btn;
 }
-
+-(void)paymentClick
+{
+    ALERT(@"Thong bao", @"Dat hang thanh cong");
+}
 /*
 #pragma mark - Navigation
 

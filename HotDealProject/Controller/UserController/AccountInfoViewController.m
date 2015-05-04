@@ -47,7 +47,7 @@
 
 -(void)initUITableView
 {
-    tableInfo = [[UITableView alloc]initWithFrame:CGRectMake(0, 40, ScreenWidth, ScreenHeight - 66 - 40) style:UITableViewStylePlain];
+    tableInfo = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, ScreenWidth, ScreenHeight - 66 - 40) style:UITableViewStylePlain];
     [self.view addSubview:tableInfo];
     //    [tableViewDays setDragDelegate:self refreshDatePermanentKey:@"HotNewsList"];
     tableInfo.backgroundColor = [UIColor whiteColor];
@@ -56,6 +56,7 @@
     tableInfo.separatorColor = [UIColor clearColor];
     tableInfo.showsVerticalScrollIndicator = NO;
     tableInfo.sectionHeaderHeight = 0.0;
+    tableInfo.scrollEnabled = NO;
 }
 
 
@@ -83,7 +84,7 @@
 -(void)initNavigationbar
 {
     AppDelegate * appdelegate = ApplicationDelegate;
-    [appdelegate initNavigationbar:self withTitle:@"Đổi mật khẩu"];
+    [appdelegate initNavigationbar:self withTitle:@"Thông tin tài khoản"];
     
     UIButton *customButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     // Add your action to your button

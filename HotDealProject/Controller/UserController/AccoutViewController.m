@@ -98,6 +98,7 @@
     tableAccount.separatorColor = [UIColor clearColor];
     tableAccount.showsVerticalScrollIndicator = NO;
     tableAccount.sectionHeaderHeight = 0.0;
+    tableAccount.scrollEnabled = NO;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

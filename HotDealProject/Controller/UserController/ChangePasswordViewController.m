@@ -80,7 +80,7 @@
 -(void)initNavigationbar
 {
     AppDelegate * appdelegate = ApplicationDelegate;
-    [appdelegate initNavigationbar:self withTitle:@"Thông tin tài khoản"];
+    [appdelegate initNavigationbar:self withTitle:@"Đổi mật khẩu"];
     
     UIButton *customButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     // Add your action to your button
