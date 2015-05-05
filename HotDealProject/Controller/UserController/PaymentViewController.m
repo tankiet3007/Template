@@ -48,7 +48,6 @@
 {
     tablePayment = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, ScreenWidth, ScreenHeight - 66 - 40) style:UITableViewStylePlain];
     [self.view addSubview:tablePayment];
-    //    [tableViewDays setDragDelegate:self refreshDatePermanentKey:@"HotNewsList"];
     tablePayment.backgroundColor = [UIColor whiteColor];
     tablePayment.dataSource = self;
     tablePayment.delegate = self;

@@ -12,6 +12,7 @@
 #import "MenuTableViewCell.h"
 #import "AccountInfoViewController.h"
 #import "ChangePasswordViewController.h"
+#import "PaymentInfoViewController.h"
 @interface AccoutViewController ()
 
 @end
@@ -131,6 +132,10 @@
     if (indexPath.row == 0) {
         AccountInfoViewController * accountInfo = [[AccountInfoViewController alloc]init];
         [self.navigationController pushViewController:accountInfo animated:YES];
+    }
+    if (indexPath.row == 1) {
+        PaymentInfoViewController * payInfo = [[PaymentInfoViewController alloc]init];
+        [self.navigationController pushViewController:payInfo animated:YES];
     }
     if (indexPath.row == 2) {
         ChangePasswordViewController * changePassword = [[ChangePasswordViewController alloc]init];
