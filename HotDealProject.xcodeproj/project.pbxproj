@@ -125,6 +125,8 @@
 		E9B24BD91AF85C6000322C0F /* PayItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B24BD71AF85C6000322C0F /* PayItemTableViewCell.m */; };
 		E9B24BDA1AF85C6000322C0F /* PayItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B24BD81AF85C6000322C0F /* PayItemTableViewCell.xib */; };
 		E9B24BDD1AF860B500322C0F /* PayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B24BDC1AF860B500322C0F /* PayItem.m */; };
+		E9B24BE11AF873E400322C0F /* BookSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B24BDF1AF873E400322C0F /* BookSuccessViewController.m */; };
+		E9B24BE21AF873E400322C0F /* BookSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B24BE01AF873E400322C0F /* BookSuccessViewController.xib */; };
 		E9B3DA331AE213E0009C668D /* CheckQuantityDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3DA311AE213E0009C668D /* CheckQuantityDealCell.m */; };
 		E9B3DA341AE213E0009C668D /* CheckQuantityDealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B3DA321AE213E0009C668D /* CheckQuantityDealCell.xib */; };
 		E9B3DA381AE21431009C668D /* KindOfTransferDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3DA361AE21431009C668D /* KindOfTransferDealCell.m */; };
@@ -397,6 +399,9 @@
 		E9B24BD81AF85C6000322C0F /* PayItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PayItemTableViewCell.xib; path = Control/PayItemTableViewCell.xib; sourceTree = "<group>"; };
 		E9B24BDB1AF860B500322C0F /* PayItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayItem.h; path = Model/PayItem.h; sourceTree = "<group>"; };
 		E9B24BDC1AF860B500322C0F /* PayItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PayItem.m; path = Model/PayItem.m; sourceTree = "<group>"; };
+		E9B24BDE1AF873E400322C0F /* BookSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookSuccessViewController.h; path = Controller/UserController/BookSuccessViewController.h; sourceTree = "<group>"; };
+		E9B24BDF1AF873E400322C0F /* BookSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookSuccessViewController.m; path = Controller/UserController/BookSuccessViewController.m; sourceTree = "<group>"; };
+		E9B24BE01AF873E400322C0F /* BookSuccessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BookSuccessViewController.xib; path = Controller/UserController/BookSuccessViewController.xib; sourceTree = "<group>"; };
 		E9B3DA301AE213E0009C668D /* CheckQuantityDealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckQuantityDealCell.h; path = Control/CheckQuantityDealCell.h; sourceTree = "<group>"; };
 		E9B3DA311AE213E0009C668D /* CheckQuantityDealCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckQuantityDealCell.m; path = Control/CheckQuantityDealCell.m; sourceTree = "<group>"; };
 		E9B3DA321AE213E0009C668D /* CheckQuantityDealCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CheckQuantityDealCell.xib; path = Control/CheckQuantityDealCell.xib; sourceTree = "<group>"; };
@@ -998,6 +1003,9 @@
 				E9B0D4E11AF7AE97008F45A0 /* PaymentViewController.m */,
 				E9B24BD31AF85B5300322C0F /* PaymentInfoViewController.h */,
 				E9B24BD41AF85B5300322C0F /* PaymentInfoViewController.m */,
+				E9B24BDE1AF873E400322C0F /* BookSuccessViewController.h */,
+				E9B24BDF1AF873E400322C0F /* BookSuccessViewController.m */,
+				E9B24BE01AF873E400322C0F /* BookSuccessViewController.xib */,
 			);
 			name = UserController;
 			sourceTree = "<group>";
@@ -1161,6 +1169,7 @@
 				E95945541ADB69AC00CDA3FF /* SectionHeaderView.xib in Resources */,
 				E9BAB7801AE8D8E9009BC234 /* ProductInfoStoredCell.xib in Resources */,
 				E9C049F41AE0F9360017C5CE /* DealCell.xib in Resources */,
+				E9B24BE21AF873E400322C0F /* BookSuccessViewController.xib in Resources */,
 				E98D4FC31AF627D50013EF4C /* HelpViewController.xib in Resources */,
 				E978784E1AE92C8A003A3B84 /* InvoiceCell.xib in Resources */,
 				E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */,
@@ -1237,6 +1246,7 @@
 				E9AE20281AD80A5E002E11AC /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				E9485B9A1AE006E2005D1688 /* AFNetworkReachabilityManager.m in Sources */,
 				E9F179AC1AE7A195004D743E /* ShortDealInfoCell.m in Sources */,
+				E9B24BE11AF873E400322C0F /* BookSuccessViewController.m in Sources */,
 				E98D4FC41AF627D50013EF4C /* RegisAndLoginController.m in Sources */,
 				E98FCF401AD8CA9100992BF0 /* MapView.m in Sources */,
 				E98D4FC01AF627D50013EF4C /* AccoutViewController.m in Sources */,
