@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,8 +14,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FGD-Au-Yq1">
-                        <rect key="frame" x="10" y="0.0" width="300" height="44"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FGD-Au-Yq1">
+                        <rect key="frame" x="3" y="0.0" width="314" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2311" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0l-rT-tVL">
                                 <rect key="frame" x="39" y="6" width="71" height="21"/>
@@ -49,13 +50,23 @@
                         </subviews>
                         <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hỗ trợ đặt hàng 19001560 - Mã sản phẩm 1202 Hợp tác với Nhómmua.com" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OuN-F1-pYz">
-                        <rect key="frame" x="13" y="47" width="291" height="36"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hỗ trợ đặt hàng 19001560 - Mã sản phẩm 1202 Hợp tác với Nhómmua.com" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OuN-F1-pYz">
+                        <rect key="frame" x="6" y="47" width="305" height="36"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="OuN-F1-pYz" firstAttribute="top" secondItem="FGD-Au-Yq1" secondAttribute="bottom" constant="3" id="7xV-aQ-EKn"/>
+                    <constraint firstAttribute="centerY" secondItem="OuN-F1-pYz" secondAttribute="centerY" constant="-21.5" id="83g-nZ-rjB"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="OuN-F1-pYz" secondAttribute="bottom" constant="-4" id="FV1-66-twf"/>
+                    <constraint firstItem="OuN-F1-pYz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-2" id="OBX-2c-D5g"/>
+                    <constraint firstItem="FGD-Au-Yq1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-5" id="Sda-Zy-nWz"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="OuN-F1-pYz" secondAttribute="trailing" constant="1" id="iLw-D9-Yqi"/>
+                    <constraint firstItem="FGD-Au-Yq1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="pWe-f8-hzt"/>
+                    <constraint firstAttribute="centerX" secondItem="FGD-Au-Yq1" secondAttribute="centerX" id="usq-zW-8g6"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="imgKindOfTransfer" destination="kbP-5T-6dg" id="EMh-fB-lY8"/>

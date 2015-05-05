@@ -61,7 +61,13 @@
 
 -(void)setupLabelDescription
 {
-    lblDescription = [[UILabel alloc]initWithFrame:CGRectMake(0, HEADER_HEIGHT, 300, 0)];
+    lblDescription = [[UILabel alloc]initWithFrame:CGRectMake(0, HEADER_HEIGHT, ScreenWidth - 20, 0)];
+    if (IS_IPHONE_6) {
+        lblDescription = [[UILabel alloc]initWithFrame:CGRectMake(0, HEADER_HEIGHT + 55, ScreenWidth - 20, 0)];
+    }
+    if (IS_IPHONE_6_PLUS) {
+        lblDescription = [[UILabel alloc]initWithFrame:CGRectMake(0, HEADER_HEIGHT + 94, ScreenWidth - 20, 0)];
+    }
     lblDescription.lineBreakMode = NSLineBreakByWordWrapping;
     lblDescription.numberOfLines = 0;
     lblDescription.text = dealObj.strDescription;
@@ -142,6 +148,12 @@
         viewHeader = nil;
     }
     float realHeight = HEADER_HEIGHT + fHeightOfDescription;
+    if (IS_IPHONE_6) {
+        realHeight += 45;
+    }
+    if (IS_IPHONE_6_PLUS) {
+        realHeight += 94;
+    }
     viewHeader = [[UIView alloc]initWithFrame:CGRectMake(PADDING, PADDING, ScreenWidth - PADDING*2, realHeight)];
     UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIDTH(viewHeader), 40)];
     lblTitle.numberOfLines = 2;
@@ -222,6 +234,12 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
+        if (IS_IPHONE_6) {
+            return HEADER_HEIGHT + fHeightOfDescription + 65;
+        }
+        if (IS_IPHONE_6_PLUS) {
+            return HEADER_HEIGHT + fHeightOfDescription + 104;
+        }
         return HEADER_HEIGHT + fHeightOfDescription + 15;
     }
     if (indexPath.section == 1) {
@@ -283,8 +301,14 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.imgPic.image = [UIImage imageNamed:@"beef"];
-        cell.vContainer.layer.borderWidth = 0.5;
-        cell.vContainer.layer.borderColor =[UIColor lightGrayColor].CGColor;
+        
+//        cell.vContainer.layer.borderWidth = 0.5;
+//        cell.vContainer.layer.borderColor =[UIColor lightGrayColor].CGColor;
+        UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth -20, 45)];
+        [cell.contentView insertSubview:viewBG atIndex:0];
+        viewBG.layer.borderWidth = 0.5;
+        viewBG.layer.borderColor =[UIColor lightGrayColor].CGColor;
+        
         if (dealObj.iType == 0) {
             if (iSelectedItem == 0) {
                 cell.lblNumofVoucher.text = @"Chọn số lượng";
@@ -334,7 +358,7 @@
     if (indexPath.section == 4) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 15, 300, 20)];
+        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 15, ScreenWidth -20, 20)];
         
         lblTitle.text = @"Sản phẩm liên quan";
         lblTitle.font = [UIFont boldSystemFontOfSize:14];
@@ -372,7 +396,7 @@
         cell.desLabel.text = @"\n";
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    UILabel * lblTemp = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 260, 0)];
+    UILabel * lblTemp = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth - 60, 0)];
     lblTemp.lineBreakMode = NSLineBreakByWordWrapping;
     lblTemp.numberOfLines = 0;
     lblTemp.text = cell.desLabel.text;
@@ -385,7 +409,7 @@
     //    fHeightOfDescription = rect.size.height;
     
     //    UA_log(@"height desLabel : %f", rect.size.height );
-    UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 0, 300, rect.size.height + 15)];
+    UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth -20, rect.size.height + 15)];
     [cell.contentView insertSubview:viewBG atIndex:0];
     viewBG.layer.borderWidth = 0.5;
     viewBG.layer.borderColor =[UIColor lightGrayColor].CGColor;
@@ -398,7 +422,7 @@
         [scrollView removeFromSuperview];
         scrollView = nil;
     }
-    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 40, 320, 180)];
+    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 40, ScreenWidth, 180)];
     scrollView.backgroundColor = [UIColor clearColor];
     scrollView.showsHorizontalScrollIndicator = NO;
     //    [scrollView setBounces:NO];
