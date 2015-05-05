@@ -20,7 +20,7 @@
 
 #import "BBBadgeBarButtonItem.h"
 #import "TKDatabase.h"
-#define HEADER_HEIGHT 156
+#define HEADER_HEIGHT 166
 #define PADDING 10
 @interface MainViewController ()
 
@@ -163,7 +163,7 @@
         [scrollViewCategory removeFromSuperview];
         scrollViewCategory = nil;
     }
-    scrollViewCategory = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 30, 320, 80)];
+    scrollViewCategory = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 30, ScreenWidth, 80)];
     scrollViewCategory.showsHorizontalScrollIndicator = NO;
     scrollViewCategory.backgroundColor = [UIColor clearColor];
     //    [scrollView setBounces:NO];
@@ -188,7 +188,7 @@
         [scrollView removeFromSuperview];
         scrollView = nil;
     }
-    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 40, 320, 180)];
+    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 40, ScreenWidth, 180)];
     scrollView.backgroundColor = [UIColor clearColor];
     scrollView.showsHorizontalScrollIndicator = NO;
     //    [scrollView setBounces:NO];
@@ -225,7 +225,7 @@
 }
 -(void)initUITableView
 {
-    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 66) style:UITableViewStylePlain];
+    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(0, 2, ScreenWidth, ScreenHeight - 66) style:UITableViewStylePlain];
     [self.view addSubview:tableViewMain];
     
     
@@ -382,7 +382,7 @@
     if (indexPath.section == 1) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 15, 300, 20)];
+        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 15, ScreenWidth - 20, 20)];
         NSDate * date = [NSDate date];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"dd/MM"];
@@ -399,7 +399,7 @@
     if (indexPath.section == 2) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 5, 300, 20)];
+        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 5, ScreenWidth - 20, 20)];
         lblTitle.text = @"Chọn danh mục";
         lblTitle.font = [UIFont boldSystemFontOfSize:14];
         lblTitle.textColor = [UIColor redColor];
@@ -448,13 +448,13 @@
         [viewHeader removeFromSuperview];
         viewHeader = nil;
     }
-    viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 29)];
+    viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 29)];
     if (segmentedControl != nil) {
         [segmentedControl removeFromSuperview];
         segmentedControl = nil;
     }
     NSArray *itemArray = [NSArray arrayWithObjects: @"Bán chạy", @"Mới nhất", @"Gần nhất", nil];
-    CGRect myFrame = CGRectMake(10.0f, 0, 300.0f, 29);
+    CGRect myFrame = CGRectMake(10.0f, 0, ScreenWidth -20, 29);
     
     //create an intialize our segmented control
     segmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
@@ -564,9 +564,9 @@
     }
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"NetworkErrorView" owner:self options:nil];
     
-    dialogView = [[UIView alloc] initWithFrame:CGRectMake(10, 50, 300, 200)]; // or if it exists, MCQView *view = [[MCQView alloc] init];
+    dialogView = [[UIView alloc] initWithFrame:CGRectMake(10, 50, ScreenWidth -20, 200)]; // or if it exists, MCQView *view = [[MCQView alloc] init];
     dialogView = (UIView *)[nib objectAtIndex:0]; // or if it exists, (MCQView *)[nib objectAtIndex:0];
-    [dialogView setFrame:CGRectMake(10, 200, 300, 200)];
+    [dialogView setFrame:CGRectMake(10, 200, ScreenWidth - 20, 200)];
     
     dialogView.layer.borderWidth=1.0f;
     dialogView.layer.borderColor=[UIColor whiteColor].CGColor;

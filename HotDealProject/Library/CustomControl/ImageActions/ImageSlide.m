@@ -102,7 +102,7 @@
     //                                    userInfo:Nil
     //                                     repeats:YES] fire];
     
-    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width,  self.frame.size.height)];
+    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(10, 10, ScreenWidth -20,  self.frame.size.height)];
     //    [self addSubview:_scrollView];
     _scrollView.delegate = self;
     _scrollView.showsHorizontalScrollIndicator = NO;
@@ -130,7 +130,7 @@
         UIImage *imageT = [UIImage imageNamed:filePath];
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
 //        [button.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [button setImage:imageT forState:UIControlStateNormal];
+        [button setBackgroundImage:imageT forState:UIControlStateNormal];
         button.tag = i;
         [button addTarget:self action:@selector(topCellClick:) forControlEvents:UIControlEventTouchUpInside];
         
