@@ -10,7 +10,13 @@
         <attribute name="standarPrice" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Provine" representedClassName="Provine" syncable="YES">
+        <attribute name="provineID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="provineName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="provineType" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="ProductItem" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="Provine" positionX="-63" positionY="45" width="128" height="90"/>
     </elements>
 </model>

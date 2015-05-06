@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "AutoSizeTableViewCell.h"
 #import "PersonalInfoViewController.h"
+//#import "EmailPromotionViewController.h"
 @interface AccountInfoViewController ()
 #define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([SYSTEM_VERSION compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -23,6 +24,7 @@
 {
     BBBadgeBarButtonItem *barButton;
     NSArray * arrProduct;
+    NSArray * arrProvine;
 }
 @synthesize tableInfo;
 - (void)viewDidLoad {
@@ -31,6 +33,7 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
+    [self getAllProvineSelected];
     [self initNavigationbar];
     [self initUITableView];
     // Do any additional setup after loading the view.
@@ -154,7 +157,18 @@
     }
     if (indexPath.section == 1) {
         cell.titleLabel.text = @"Email khuyến mãi";
-        cell.desLabel.text = @"TP Hồ Chí Minh\n\n";
+        NSString * strProvines = @"";
+        for (NSString * strItem in arrProvine) {
+            strProvines = F(@"%@, %@",strItem,strProvines);
+        }
+        if ([strProvines isEqualToString:@""]) {
+            cell.desLabel.text = @"\n";
+        }
+        else
+        {
+            strProvines = F(@"%@ \n\n",strProvines);
+            cell.desLabel.text = strProvines;
+        }
     }
     
     if (indexPath.section == 2) {
@@ -184,7 +198,7 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
+    
     AutoSizeTableViewCell *cell = (AutoSizeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:nil];
     if (cell == nil)
     {
@@ -199,9 +213,22 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if (indexPath.section == 0) {
         PersonalInfoViewController * pInfo = [[PersonalInfoViewController alloc]init];
         [self.navigationController pushViewController:pInfo animated:YES];
     }
+    if (indexPath.section == 1) {
+        EmailPromotionViewController * email = [[EmailPromotionViewController alloc]init];
+        email.delegate = self;
+        [self.navigationController pushViewController:email animated:YES];
+    }
+}
+-(void)getAllProvineSelected
+{
+    arrProvine = [[TKDatabase sharedInstance]getAllProvineUserSelected];
+}
+-(void)updateProvine
+{
+    [self getAllProvineSelected];
 }
 @end

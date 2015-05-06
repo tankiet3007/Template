@@ -7,6 +7,7 @@
 //
 
 #import "TKDatabase.h"
+#import "Provine.h"
 static NSManagedObjectContext * __context = nil;
 @implementation TKDatabase
 + (TKDatabase*)sharedInstance
@@ -105,4 +106,35 @@ static NSManagedObjectContext * __context = nil;
     [__context MR_deleteObjects:arr];
     [__context MR_saveToPersistentStoreAndWait];
 }
+
+-(void)addProvine:(NSString *)strName
+{
+    Provine *provineItem = [Provine MR_createEntityInContext:__context];
+    provineItem.provineName = strName;
+    [__context MR_saveToPersistentStoreAndWait];
+    
+}
+-(void)removeProvineSelected:(NSString *)strName
+{
+    NSArray *arrProduct = [ProductItem MR_findByAttribute:@"provineName" withValue:strName inContext:__context];
+    if ([arrProduct count]==0) {
+        return;
+    }
+    ProductItem *vResult = [arrProduct objectAtIndex:0];
+    [vResult MR_deleteEntityInContext:__context];
+    
+    [__context MR_saveToPersistentStoreAndWait];
+}
+
+-(NSMutableArray *)getAllProvineUserSelected
+{
+    NSMutableArray * arrProvine = [[NSMutableArray alloc]init];
+    NSArray * arrProductStored = [Provine MR_findAll];
+    for (Provine * pItem in arrProductStored) {
+        NSString * strName = pItem.provineName;
+        [arrProvine addObject:strName];
+    }
+    return arrProvine;
+}
+
 @end

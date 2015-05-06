@@ -264,7 +264,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     sectionHeaderView.section = section;
     sectionHeaderView.delegate = self;
     if (section == 2) {
-        UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(20, 43, 280, 5)];
+        UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(0, 43, ScreenWidth - 40, 5)];
         imgLine.image = [UIImage imageNamed:@"gach"];
 
         [sectionHeaderView addSubview:imgLine];

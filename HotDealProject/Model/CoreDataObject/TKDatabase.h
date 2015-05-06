@@ -16,4 +16,8 @@
 -(NSMutableArray *)getAllProductStored;
 -(void)removeProduct:(NSString *)strProductID;
 -(void)resetProduct;
+
+-(void)addProvine:(NSString *)strName;
+-(NSMutableArray *)getAllProvineUserSelected;
+-(void)removeProvineSelected:(NSString *)strName;
 @end

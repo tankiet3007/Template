@@ -33,6 +33,9 @@
 		E959455C1ADB7F7E00CDA3FF /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E959455B1ADB7F7E00CDA3FF /* CategoryViewController.m */; };
 		E959455F1ADB7F9900CDA3FF /* PromotionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E959455E1ADB7F9900CDA3FF /* PromotionViewController.m */; };
 		E95A23E31AE380B70050DCB1 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95A23E21AE380B70050DCB1 /* SearchViewController.m */; };
+		E972563A1AF9F9580012D8DD /* EmailPromotionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E97256381AF9F9580012D8DD /* EmailPromotionViewController.m */; };
+		E972563B1AF9F9580012D8DD /* EmailPromotionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E97256391AF9F9580012D8DD /* EmailPromotionViewController.xib */; };
+		E97256411AFA08AD0012D8DD /* Provine.m in Sources */ = {isa = PBXBuildFile; fileRef = E97256401AFA08AD0012D8DD /* Provine.m */; };
 		E97878491AE9256A003A3B84 /* ProductItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E97878481AE9256A003A3B84 /* ProductItem.m */; };
 		E978784D1AE92C8A003A3B84 /* InvoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E978784B1AE92C8A003A3B84 /* InvoiceCell.m */; };
 		E978784E1AE92C8A003A3B84 /* InvoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E978784C1AE92C8A003A3B84 /* InvoiceCell.xib */; };
@@ -222,6 +225,11 @@
 		E959455E1ADB7F9900CDA3FF /* PromotionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PromotionViewController.m; path = Controller/PromotionViewController.m; sourceTree = "<group>"; };
 		E95A23E11AE380B70050DCB1 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = Controller/SearchViewController.h; sourceTree = "<group>"; };
 		E95A23E21AE380B70050DCB1 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = Controller/SearchViewController.m; sourceTree = "<group>"; };
+		E97256371AF9F9580012D8DD /* EmailPromotionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailPromotionViewController.h; path = Controller/UserController/EmailPromotionViewController.h; sourceTree = "<group>"; };
+		E97256381AF9F9580012D8DD /* EmailPromotionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailPromotionViewController.m; path = Controller/UserController/EmailPromotionViewController.m; sourceTree = "<group>"; };
+		E97256391AF9F9580012D8DD /* EmailPromotionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmailPromotionViewController.xib; path = Controller/UserController/EmailPromotionViewController.xib; sourceTree = "<group>"; };
+		E972563F1AFA08AD0012D8DD /* Provine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Provine.h; path = Model/CoreDataObject/Provine.h; sourceTree = "<group>"; };
+		E97256401AFA08AD0012D8DD /* Provine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Provine.m; path = Model/CoreDataObject/Provine.m; sourceTree = "<group>"; };
 		E97878471AE9256A003A3B84 /* ProductItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductItem.h; path = Model/CoreDataObject/ProductItem.h; sourceTree = "<group>"; };
 		E97878481AE9256A003A3B84 /* ProductItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductItem.m; path = Model/CoreDataObject/ProductItem.m; sourceTree = "<group>"; };
 		E978784A1AE92C8A003A3B84 /* InvoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InvoiceCell.h; path = Control/InvoiceCell.h; sourceTree = "<group>"; };
@@ -503,6 +511,8 @@
 				E97878481AE9256A003A3B84 /* ProductItem.m */,
 				E9B24BDB1AF860B500322C0F /* PayItem.h */,
 				E9B24BDC1AF860B500322C0F /* PayItem.m */,
+				E972563F1AFA08AD0012D8DD /* Provine.h */,
+				E97256401AFA08AD0012D8DD /* Provine.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1011,6 +1021,9 @@
 				E9B24BE01AF873E400322C0F /* BookSuccessViewController.xib */,
 				E98F11B91AF9D49600BCDA7E /* PersonalInfoViewController.h */,
 				E98F11BA1AF9D49600BCDA7E /* PersonalInfoViewController.m */,
+				E97256371AF9F9580012D8DD /* EmailPromotionViewController.h */,
+				E97256381AF9F9580012D8DD /* EmailPromotionViewController.m */,
+				E97256391AF9F9580012D8DD /* EmailPromotionViewController.xib */,
 			);
 			name = UserController;
 			sourceTree = "<group>";
@@ -1179,6 +1192,7 @@
 				E978784E1AE92C8A003A3B84 /* InvoiceCell.xib in Resources */,
 				E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */,
 				E9B3DA3E1AE24731009C668D /* AutoSizeTableViewCell.xib in Resources */,
+				E972563B1AF9F9580012D8DD /* EmailPromotionViewController.xib in Resources */,
 				E95945511ADB661F00CDA3FF /* carat.png in Resources */,
 				E9B24BDA1AF85C6000322C0F /* PayItemTableViewCell.xib in Resources */,
 				E9239A4C1AF7496B00CC4977 /* ChangePasswordViewController.xib in Resources */,
@@ -1243,6 +1257,7 @@
 				E9C049FE1AE143B80017C5CE /* UIScrollView+SVPullToRefresh.m in Sources */,
 				E9AE201F1AD80A5E002E11AC /* NSString+MagicalDataImport.m in Sources */,
 				E9AE20851AD80B68002E11AC /* NSString+Helper.m in Sources */,
+				E97256411AFA08AD0012D8DD /* Provine.m in Sources */,
 				E9AE203C1AD80A5E002E11AC /* UIImage+GIF.m in Sources */,
 				E959454E1ADB661F00CDA3FF /* APLSectionHeaderView.m in Sources */,
 				E9B3DA381AE21431009C668D /* KindOfTransferDealCell.m in Sources */,
@@ -1317,6 +1332,7 @@
 				E9C0FE301ADCB8E30042502C /* LocationTableViewCell.m in Sources */,
 				E98FCF3A1AD8CA9100992BF0 /* ImageSwipe.m in Sources */,
 				E9AE20401AD80A5E002E11AC /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
+				E972563A1AF9F9580012D8DD /* EmailPromotionViewController.m in Sources */,
 				E9AE20291AD80A5E002E11AC /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				E978784D1AE92C8A003A3B84 /* InvoiceCell.m in Sources */,
 				E9AE20421AD80A5E002E11AC /* UIView+WebCacheOperation.m in Sources */,
