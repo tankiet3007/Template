@@ -133,13 +133,13 @@
         
         NSString * strStardarPrice = F(@"%d", [self calculateCash]);
         strStardarPrice = [strStardarPrice formatStringToDecimal];
-        NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-        NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
+//        NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+//        NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.lblTotalOfBill.attributedText  = attributedString;
+        cell.lblTotalOfBill.text  = strStardarPrice;
         
-         cell.lblCash.attributedText  = attributedString;
+         cell.lblCash.text  = strStardarPrice;
         return cell;
         
     }
@@ -188,7 +188,7 @@
 
 -(UIButton *)setupLoginBtn
 {
-    btnChoiceProducts = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 300, 40)];
+    btnChoiceProducts = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth - 20, 40)];
     [btnChoiceProducts setBackgroundColor:[UIColor greenColor]];
     [btnChoiceProducts setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnChoiceProducts setTitle:@"THANH TOÁN" forState:UIControlStateNormal];

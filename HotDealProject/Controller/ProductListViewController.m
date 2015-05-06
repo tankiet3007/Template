@@ -192,7 +192,7 @@
 }
 -(UIButton *)setupLoginBtn
 {
-    btnChoiceProducts = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 300, 40)];
+    btnChoiceProducts = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth - 20, 40)];
     [btnChoiceProducts setBackgroundColor:[UIColor greenColor]];
     [btnChoiceProducts setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnChoiceProducts setTitle:@"CHỌN" forState:UIControlStateNormal];
@@ -227,7 +227,7 @@
 }
 -(void)setupToolbar
 {
-    toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,ScreenHeight -250 - 44,320,44)];
+    toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,ScreenHeight -250 - 44,ScreenWidth,44)];
     [toolBar setBarStyle:UIBarStyleBlackOpaque];
     
     UIButton *button_done = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -256,7 +256,7 @@
 }
 -(void)setupPickerview
 {
-    myPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, 320, 200)];
+    myPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, ScreenWidth, 200)];
 //    numRowsInPicker = 3;
     myPickerView.delegate = self;
     [myPickerView setBackgroundColor:[UIColor whiteColor]];
