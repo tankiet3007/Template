@@ -144,7 +144,7 @@
     //    fHeightOfDescription = rect.size.height;
     
     //    UA_log(@"height desLabel : %f", rect.size.height );
-    UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 0, 300, rect.size.height + 15)];
+    UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth - 20, rect.size.height + 15)];
     [cell.contentView insertSubview:viewBG atIndex:0];
     viewBG.layer.borderWidth = 0.5;
     viewBG.layer.borderColor =[UIColor lightGrayColor].CGColor;
@@ -162,7 +162,7 @@
         cellRe.textLabel.text = @"" ;
         tv = tvDescription = [self makeTextView:@"" placeholder:@"Ghi chú khi nhận hàng (nếu có)"];
         tv.textColor = [UIColor lightGrayColor];
-        tv.frame = CGRectMake(10, 5, 300, 55);
+        tv.frame = CGRectMake(10, 5, ScreenWidth - 20, 55);
                 cellRe.contentView.backgroundColor = [UIColor clearColor];
 //        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
 
@@ -180,7 +180,7 @@
         [cellRe addSubview:btnPayment];
         
         // Textfield dimensions
-        button.frame = CGRectMake(10, 20, 300, 35);
+        button.frame = CGRectMake(10, 20, ScreenWidth - 20, 35);
                     cellRe.contentView.backgroundColor = [UIColor clearColor];
 //        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
         return cellRe;
