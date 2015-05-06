@@ -8,6 +8,8 @@
 
 #import "BookSuccessViewController.h"
 #import "AppDelegate.h"
+#import "PaymentInfoViewController.h"
+#import "MainViewController.h"
 @interface BookSuccessViewController ()
 
 @end
@@ -36,6 +38,15 @@
 {
     AppDelegate * appdelegate = ApplicationDelegate;
     [appdelegate initNavigationbar:self withTitle:@"Thanh toán"];
+}
+- (IBAction)contiBuy:(id)sender {
+    //MainViewController
+    MainViewController * mainInfo = [[MainViewController alloc]init];
+    [self.navigationController pushViewController:mainInfo animated:YES];
+}
+- (IBAction)manageInvoice:(id)sender {
+    PaymentInfoViewController * payInfo = [[PaymentInfoViewController alloc]init];
+    [self.navigationController pushViewController:payInfo animated:YES];
 }
 
 /*

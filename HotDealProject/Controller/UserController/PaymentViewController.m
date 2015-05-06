@@ -10,6 +10,7 @@
 #import "TKDatabase.h"
 #import "AppDelegate.h"
 #import "AutoSizeTableViewCell.h"
+#import "BookSuccessViewController.h"
 @interface PaymentViewController ()
 @property (nonatomic, strong) AutoSizeTableViewCell *prototypeCell;
 @end
@@ -246,7 +247,9 @@
 }
 -(void)paymentClick
 {
-    ALERT(@"Thong bao", @"Dat hang thanh cong");
+    BookSuccessViewController * bookVC = [[BookSuccessViewController alloc]init];
+    [self.navigationController pushViewController:bookVC animated:YES];
+//    ALERT(@"Thong bao", @"Dat hang thanh cong");
 }
 /*
 #pragma mark - Navigation

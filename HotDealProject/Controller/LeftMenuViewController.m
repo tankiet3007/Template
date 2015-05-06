@@ -111,18 +111,6 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Tài khoản";
-    //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
-    //    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Hỗ trợ";
-    //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
-    //    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Thời trang - Phụ kiện";
     subMenu = [NSArray arrayWithObjects:@"Thời trang nữ",@"Thời trang nam",@"Thời trang trẻ em",@"Phụ kiện thời trang",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
@@ -151,6 +139,31 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     subMenu = [NSArray arrayWithObjects:@"Phụ kiện công nghệ",@"Thiết bị điện tử",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
+    
+    menuItem = [[MenuItem alloc]init];
+    menuItem.name = @"Giải trí - Đào tạo";
+    subMenu = [NSArray arrayWithObjects:@"Giải trí - Vui chơi",@"Đào tạo",@"Thể dục thẩm mỹ",@"Sách - Tạp chí", @"XEM TẤT CẢ", nil];
+    menuItem.subItem = subMenu;
+    [arrMenu addObject:menuItem];
+    
+    menuItem = [[MenuItem alloc]init];
+    menuItem.name = @"Gia dụng - Nội thất";
+    subMenu = [NSArray arrayWithObjects:@"Nhà cửa - Đời sống",@"Thiết bị điện tử",@"XEM TẤT CẢ", nil];
+    menuItem.subItem = subMenu;
+    [arrMenu addObject:menuItem];
+    
+    menuItem = [[MenuItem alloc]init];
+    menuItem.name = @"Tài khoản";
+    //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
+    //    menuItem.subItem = subMenu;
+    [arrMenu addObject:menuItem];
+    
+    menuItem = [[MenuItem alloc]init];
+    menuItem.name = @"Hỗ trợ";
+    //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
+    //    menuItem.subItem = subMenu;
+    [arrMenu addObject:menuItem];
+
     
     self.sectionInfoArray = nil;
     if ((self.sectionInfoArray == nil) ||
@@ -250,7 +263,12 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     sectionHeaderView.titleLabel.text = sectionInfo.menuItem.name;
     sectionHeaderView.section = section;
     sectionHeaderView.delegate = self;
-    
+    if (section == 2) {
+        UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(20, 43, 280, 5)];
+        imgLine.image = [UIImage imageNamed:@"gach"];
+
+        [sectionHeaderView addSubview:imgLine];
+    }
     return sectionHeaderView;
 }
 
@@ -300,7 +318,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC revealToggle:nil];
         return;
     }
-    if (sectionOpened == 3) {//#import "RegisAndLoginController.h"
+    if (sectionOpened == 10) {//#import "RegisAndLoginController.h"
         AccoutViewController * newVC = [[AccoutViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
@@ -309,7 +327,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC revealToggle:nil];
         return;
     }//#import "HelpViewController.h"
-    if (sectionOpened == 4) {//#import "RegisAndLoginController.h"
+    if (sectionOpened == 11) {//#import "RegisAndLoginController.h"
         HelpViewController * newVC = [[HelpViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
@@ -405,7 +423,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC revealToggle:nil];
         return;
     }
-    if (sectionClosed == 3) {//AccoutViewController
+    if (sectionClosed == 10) {//AccoutViewController
         AccoutViewController * newVC = [[AccoutViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
@@ -414,7 +432,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC revealToggle:nil];
         return;
     }
-    if (sectionClosed == 4) {//#import "RegisAndLoginController.h"
+    if (sectionClosed == 11) {//#import "RegisAndLoginController.h"
         HelpViewController * newVC = [[HelpViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
