@@ -49,6 +49,7 @@
 		E98D4FC41AF627D50013EF4C /* RegisAndLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = E98D4FBF1AF627D50013EF4C /* RegisAndLoginController.m */; };
 		E98D4FC81AF62B6E0013EF4C /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E98D4FC61AF62B6E0013EF4C /* ForgotPasswordViewController.m */; };
 		E98D4FC91AF62B6E0013EF4C /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D4FC71AF62B6E0013EF4C /* ForgotPasswordViewController.xib */; };
+		E98F11BB1AF9D49600BCDA7E /* PersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F11BA1AF9D49600BCDA7E /* PersonalInfoViewController.m */; };
 		E98FCF391AD8CA9100992BF0 /* ImageSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = E98FCF291AD8CA9100992BF0 /* ImageSlide.m */; };
 		E98FCF3A1AD8CA9100992BF0 /* ImageSwipe.m in Sources */ = {isa = PBXBuildFile; fileRef = E98FCF2B1AD8CA9100992BF0 /* ImageSwipe.m */; };
 		E98FCF3B1AD8CA9100992BF0 /* BasicMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E98FCF2F1AD8CA9100992BF0 /* BasicMapAnnotation.m */; };
@@ -245,6 +246,8 @@
 		E98D4FC51AF62B6E0013EF4C /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgotPasswordViewController.h; path = Controller/UserController/ForgotPasswordViewController.h; sourceTree = "<group>"; };
 		E98D4FC61AF62B6E0013EF4C /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotPasswordViewController.m; path = Controller/UserController/ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		E98D4FC71AF62B6E0013EF4C /* ForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ForgotPasswordViewController.xib; path = Controller/UserController/ForgotPasswordViewController.xib; sourceTree = "<group>"; };
+		E98F11B91AF9D49600BCDA7E /* PersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonalInfoViewController.h; path = Controller/UserController/PersonalInfoViewController.h; sourceTree = "<group>"; };
+		E98F11BA1AF9D49600BCDA7E /* PersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonalInfoViewController.m; path = Controller/UserController/PersonalInfoViewController.m; sourceTree = "<group>"; };
 		E98FCF281AD8CA9100992BF0 /* ImageSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSlide.h; sourceTree = "<group>"; };
 		E98FCF291AD8CA9100992BF0 /* ImageSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSlide.m; sourceTree = "<group>"; };
 		E98FCF2A1AD8CA9100992BF0 /* ImageSwipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSwipe.h; sourceTree = "<group>"; };
@@ -1006,6 +1009,8 @@
 				E9B24BDE1AF873E400322C0F /* BookSuccessViewController.h */,
 				E9B24BDF1AF873E400322C0F /* BookSuccessViewController.m */,
 				E9B24BE01AF873E400322C0F /* BookSuccessViewController.xib */,
+				E98F11B91AF9D49600BCDA7E /* PersonalInfoViewController.h */,
+				E98F11BA1AF9D49600BCDA7E /* PersonalInfoViewController.m */,
 			);
 			name = UserController;
 			sourceTree = "<group>";
@@ -1317,6 +1322,7 @@
 				E9AE20421AD80A5E002E11AC /* UIView+WebCacheOperation.m in Sources */,
 				E9BAB7831AE8E16B009BC234 /* ShoppingCartController.m in Sources */,
 				E9AE208E1AD80B68002E11AC /* BBBadgeBarButtonItem.m in Sources */,
+				E98F11BB1AF9D49600BCDA7E /* PersonalInfoViewController.m in Sources */,
 				E98D4FC81AF62B6E0013EF4C /* ForgotPasswordViewController.m in Sources */,
 				E9384F471ADF985300C3D703 /* TKAPI.m in Sources */,
 				E95945591ADB7CD800CDA3FF /* HotNewDetailViewController.m in Sources */,

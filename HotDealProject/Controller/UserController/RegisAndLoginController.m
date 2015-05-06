@@ -43,8 +43,9 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     [self initNavigationbar];
     isLoginFrame = TRUE;
-    isBirthdayAction = TRUE;
+    
     [self setupSegment];
+    isBirthdayAction = TRUE;
     [self initUITableView];
     [self setupPickerGender];
     [self makePicker];
@@ -233,12 +234,12 @@
             }
             
             // Textfield dimensions
-            tf.frame = CGRectMake(20, 0, 280, 39);
+            tf.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
             //        cell.contentView.backgroundColor = [UIColor clearColor];
             cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             // We want to handle textFieldDidEndEditing
             tf.delegate = self ;
-            UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(20, 38, 280, 2)];
+            UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(20, 38, ScreenWidth - 40, 2)];
             imgLine.image = [UIImage imageNamed:@"gach"];
             [cellRe.contentView addSubview:imgLine];
             
@@ -254,7 +255,7 @@
             switch ( indexPath.row ) {
                 case 0: {
                     
-                    cell.textLabel.text = @"" ;
+                    cellRe.textLabel.text = @"" ;
                     lbl = lblBirthday = [self makeLabel:@"  Ngày sinh"];
                     [cellRe addSubview:lbl];
                     break ;
@@ -262,7 +263,7 @@
             }
             
             // Textfield dimensions
-            lbl.frame = CGRectMake(20, 0, 280, 39);
+            lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
             cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicker)];
             // if labelView is not set userInteractionEnabled, you must do so
@@ -290,7 +291,7 @@
             }
             
             // Textfield dimensions
-            lbl.frame = CGRectMake(20, 0, 280, 39);
+            lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
             cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             
             UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox)];
@@ -313,7 +314,7 @@
             [cellRe addSubview:btnRegister];
             
             // Textfield dimensions
-            button.frame = CGRectMake(20, 0, 280, 39);
+            button.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
             //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
              cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             return cellRe;
@@ -584,7 +585,7 @@
 
 // tell the picker the width of each row for a given component
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-    int sectionWidth = 300;
+    int sectionWidth = ScreenWidth- 20;
     
     return sectionWidth;
 }

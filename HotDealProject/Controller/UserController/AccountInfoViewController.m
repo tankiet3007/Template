@@ -11,6 +11,7 @@
 #import "TKDatabase.h"
 #import "AppDelegate.h"
 #import "AutoSizeTableViewCell.h"
+#import "PersonalInfoViewController.h"
 @interface AccountInfoViewController ()
 #define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([SYSTEM_VERSION compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -175,7 +176,7 @@
     //    fHeightOfDescription = rect.size.height;
     
     //    UA_log(@"height desLabel : %f", rect.size.height );
-    UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 0, 300, rect.size.height + 15)];
+    UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth - 20, rect.size.height + 15)];
     [cell.contentView insertSubview:viewBG atIndex:0];
     viewBG.layer.borderWidth = 0.5;
     viewBG.layer.borderColor =[UIColor lightGrayColor].CGColor;
@@ -196,5 +197,11 @@
     return cell;
     
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        PersonalInfoViewController * pInfo = [[PersonalInfoViewController alloc]init];
+        [self.navigationController pushViewController:pInfo animated:YES];
+    }
+}
 @end
