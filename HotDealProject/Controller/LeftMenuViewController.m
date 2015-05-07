@@ -269,6 +269,12 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
         [sectionHeaderView addSubview:imgLine];
     }
+    if (section == 9) {
+        UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(0, 43, ScreenWidth - 40, 5)];
+        imgLine.image = [UIImage imageNamed:@"gach"];
+        
+        [sectionHeaderView addSubview:imgLine];
+    }
     return sectionHeaderView;
 }
 

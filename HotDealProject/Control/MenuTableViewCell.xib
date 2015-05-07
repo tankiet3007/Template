@@ -15,17 +15,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mcv-RK-0nl">
-                        <rect key="frame" x="9" y="9" width="20" height="20"/>
+                        <rect key="frame" x="9" y="9" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="4Yp-Rp-oqB"/>
-                            <constraint firstAttribute="height" constant="20" id="7Qy-F4-NAG"/>
+                            <constraint firstAttribute="width" constant="25" id="4Yp-Rp-oqB"/>
+                            <constraint firstAttribute="height" constant="25" id="7Qy-F4-NAG"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="ylO-4k-2mc"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGI-0z-sYZ">
                         <rect key="frame" x="45" y="9" width="36" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gach" translatesAutoresizingMaskIntoConstraints="NO" id="dF3-0v-CYJ">
@@ -37,12 +37,12 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="mcv-RK-0nl" firstAttribute="top" secondItem="uGI-0z-sYZ" secondAttribute="top" id="10C-sh-o7a"/>
-                    <constraint firstItem="dF3-0v-CYJ" firstAttribute="top" secondItem="mcv-RK-0nl" secondAttribute="bottom" constant="8" symbolic="YES" id="GVk-sv-HpD"/>
+                    <constraint firstItem="dF3-0v-CYJ" firstAttribute="top" secondItem="mcv-RK-0nl" secondAttribute="bottom" constant="3" id="GVk-sv-HpD"/>
                     <constraint firstItem="dF3-0v-CYJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="L7I-VG-cnZ"/>
                     <constraint firstItem="mcv-RK-0nl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="cCo-b6-FCZ"/>
                     <constraint firstItem="dF3-0v-CYJ" firstAttribute="top" secondItem="uGI-0z-sYZ" secondAttribute="bottom" constant="7" id="elm-8X-aiW"/>
-                    <constraint firstItem="mcv-RK-0nl" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jFU-dD-Wed"/>
-                    <constraint firstItem="uGI-0z-sYZ" firstAttribute="leading" secondItem="mcv-RK-0nl" secondAttribute="trailing" constant="16" id="qa2-N3-NMv"/>
+                    <constraint firstItem="mcv-RK-0nl" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="2" id="jFU-dD-Wed"/>
+                    <constraint firstItem="uGI-0z-sYZ" firstAttribute="leading" secondItem="mcv-RK-0nl" secondAttribute="trailing" constant="11" id="qa2-N3-NMv"/>
                     <constraint firstAttribute="trailingMargin" secondItem="dF3-0v-CYJ" secondAttribute="trailing" constant="-63" id="t7p-0z-clD"/>
                     <constraint firstAttribute="bottomMargin" secondItem="dF3-0v-CYJ" secondAttribute="bottom" constant="-9" id="vhg-wA-cXI"/>
                 </constraints>

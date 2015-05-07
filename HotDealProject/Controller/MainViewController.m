@@ -90,6 +90,7 @@
     item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
     item.iCount = 123;
     item.iType = 0;
+        item.isNew = TRUE;
     item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
     item.lDiscountPrice = 100000;
     item.lStandarPrice = 400000;
@@ -100,6 +101,7 @@
     item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
     item.iCount = 456;
     item.iType = 1;
+            item.isNew = TRUE;
     item.lDiscountPrice = 200000;
     item.lStandarPrice = 1000000;
     [arrDeals addObject:item];
@@ -110,12 +112,15 @@
     item.strDescription = @"Đầm xòe Zara họa tiết chấm bi xuất khẩu - Thiết kế thời trang với phần phối màu xen kẽ họa tiết chấm bi đẹp mắt giúp thể hiện nét đẹp thanh lịch, sành điệu của bạn gái. Chỉ 199.000đ cho trị giá 398.000đ Chỉ 199.000đ cho trị giá 398.000đ";
     item.lDiscountPrice = 30000;
     item.lStandarPrice = 200000;
+            item.isNew = FALSE;
     [arrDeals addObject:item];
     
     item = [[DealObject alloc]init];
     item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
     item.strDescription = @"Bộ miếng dán iPhone mạ vàng và ốp lưng silicon có thiết kế vừa vặn với khung máy sẽ giúp mang đến cho dế yêu của bạn một vẻ đẹp hoàn hảo và đẳng cấp. Chỉ 85.000đ cho trị giá 160.000đ";
     item.iCount = 111;
+    item.iType = 1;
+    item.isNew = FALSE;
     item.lDiscountPrice = 100000;
     item.lStandarPrice = 400000;
     [arrDeals addObject:item];
@@ -125,6 +130,7 @@
     item.iCount = 222;
     item.lDiscountPrice = 200000;
     item.lStandarPrice = 1000000;
+    item.isNew = FALSE;
     [arrDeals addObject:item];
     
     item = [[DealObject alloc]init];
@@ -132,6 +138,8 @@
     item.iCount = 333;
     item.lDiscountPrice = 30000;
     item.lStandarPrice = 200000;
+    item.isNew = TRUE;
+    item.iType = 1;
     [arrDeals addObject:item];
     
     item = [[DealObject alloc]init];
@@ -139,6 +147,8 @@
     item.iCount = 121;
     item.lDiscountPrice = 100000;
     item.lStandarPrice = 400000;
+    item.iType = 0;
+    item.isNew = FALSE;
     [arrDeals addObject:item];
     
     item = [[DealObject alloc]init];
@@ -146,6 +156,8 @@
     item.iCount = 212;
     item.lDiscountPrice = 200000;
     item.lStandarPrice = 1000000;
+    item.iType = 0;
+    item.isNew = FALSE;
     [arrDeals addObject:item];
     
     item = [[DealObject alloc]init];
@@ -153,6 +165,8 @@
     item.iCount = 999;
     item.lDiscountPrice = 30000;
     item.lStandarPrice = 200000;
+    item.iType = 0;
+    item.isNew = TRUE;
     [arrDeals addObject:item];
 }
 
@@ -216,6 +230,12 @@
         itemS.lblDiscountPrice.text = strDiscountPrice;
         itemS.lblTitle.text = item.strTitle;
         
+        if (item.isNew == FALSE) {
+            itemS.lblNew.hidden = YES;
+        }
+        if (item.iType == 1) {
+            itemS.lblEVoucher.hidden = YES;
+        }
         
         x += itemS.frame.size.width + PADDING;
         [scrollView addSubview:itemS];
@@ -422,6 +442,12 @@
             cell = [nib objectAtIndex:0];
         }    //    [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
         DealObject * item = [arrDeals objectAtIndex:indexPath.row];
+        if (item.isNew == FALSE) {
+            cell.lblNew.hidden = YES;
+        }
+        if (item.iType == 1) {
+            cell.lblEVoucher.hidden = YES;
+        }
         NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
         strStardarPrice = [strStardarPrice formatStringToDecimal];
         NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};

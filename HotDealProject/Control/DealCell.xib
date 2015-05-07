@@ -21,7 +21,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gC-RX-Rcf">
                                 <rect key="frame" x="8" y="0.0" width="279" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -68,28 +68,56 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clickme-1-320x200" translatesAutoresizingMaskIntoConstraints="NO" id="MsX-IZ-b2K">
                         <rect key="frame" x="3" y="10" width="314" height="159"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MỚI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfJ-mP-xIc">
+                        <rect key="frame" x="274" y="148" width="42" height="21"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="pus-ZX-5f8"/>
+                            <constraint firstAttribute="width" constant="42" id="saH-1A-K2n"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="11"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voucher điện tử" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6KO-hE-q1s">
+                        <rect key="frame" x="240" y="25" width="57" height="34"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="QcR-D7-KBI"/>
+                            <constraint firstAttribute="width" constant="57" id="Zz1-h1-NZX"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="MsX-IZ-b2K" firstAttribute="leading" secondItem="0SJ-UJ-Myg" secondAttribute="leading" id="4OC-YC-1sG"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="dfJ-mP-xIc" secondAttribute="trailing" constant="-4" id="8Xv-eS-eMT"/>
                     <constraint firstItem="MsX-IZ-b2K" firstAttribute="trailing" secondItem="3Re-2V-lUP" secondAttribute="trailing" id="9jz-Ur-orH"/>
                     <constraint firstItem="3Re-2V-lUP" firstAttribute="top" secondItem="MsX-IZ-b2K" secondAttribute="bottom" id="EvY-Ys-1Bu"/>
                     <constraint firstItem="0SJ-UJ-Myg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="199" id="KI8-Pg-p7h"/>
                     <constraint firstAttribute="centerY" secondItem="3Re-2V-lUP" secondAttribute="centerY" constant="-70" id="Lp4-Xp-Jqq"/>
+                    <constraint firstItem="dfJ-mP-xIc" firstAttribute="bottom" secondItem="MsX-IZ-b2K" secondAttribute="bottom" id="NGq-A1-gK1"/>
                     <constraint firstItem="MsX-IZ-b2K" firstAttribute="leading" secondItem="3Re-2V-lUP" secondAttribute="leading" id="OJQ-lE-WsV"/>
                     <constraint firstItem="MsX-IZ-b2K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-5" id="Pnw-qI-KVP"/>
                     <constraint firstAttribute="centerY" secondItem="MsX-IZ-b2K" secondAttribute="centerY" constant="24.5" id="QgV-iV-WHb"/>
                     <constraint firstItem="MsX-IZ-b2K" firstAttribute="trailing" secondItem="0SJ-UJ-Myg" secondAttribute="trailing" id="SLC-Xd-LIM"/>
                     <constraint firstAttribute="bottomMargin" secondItem="0SJ-UJ-Myg" secondAttribute="bottom" constant="-12" id="T3V-1y-Aoh"/>
+                    <constraint firstItem="dfJ-mP-xIc" firstAttribute="top" secondItem="6KO-hE-q1s" secondAttribute="bottom" constant="89" id="TOv-bN-nTe"/>
                     <constraint firstAttribute="centerY" secondItem="0SJ-UJ-Myg" secondAttribute="centerY" constant="-101.5" id="a3H-7c-urw"/>
                     <constraint firstItem="MsX-IZ-b2K" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ggo-LW-0LT"/>
                     <constraint firstItem="MsX-IZ-b2K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="hUR-Mf-8h9"/>
                     <constraint firstItem="MsX-IZ-b2K" firstAttribute="centerX" secondItem="3Re-2V-lUP" secondAttribute="centerX" id="i5j-Fn-aph"/>
                     <constraint firstItem="0SJ-UJ-Myg" firstAttribute="top" secondItem="3Re-2V-lUP" secondAttribute="bottom" id="lVm-Nd-SAW"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="6KO-hE-q1s" secondAttribute="trailing" constant="15" id="uSW-iK-uMa"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="imgBrand" destination="MsX-IZ-b2K" id="UYg-mI-kcY"/>
                 <outlet property="lblDiscountPrice" destination="eQx-dp-hdn" id="moX-cx-j6E"/>
+                <outlet property="lblEVoucher" destination="6KO-hE-q1s" id="gzs-a9-zoj"/>
+                <outlet property="lblNew" destination="dfJ-mP-xIc" id="Cs4-y2-jaR"/>
                 <outlet property="lblNumOfBook" destination="89c-jX-ZV4" id="QUS-d8-enp"/>
                 <outlet property="lblStandarPrice" destination="Kos-M3-qNV" id="ptR-ii-1Tk"/>
                 <outlet property="lblTitle" destination="3gC-RX-Rcf" id="oZO-u3-M5e"/>

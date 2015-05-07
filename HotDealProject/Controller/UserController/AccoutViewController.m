@@ -13,6 +13,7 @@
 #import "AccountInfoViewController.h"
 #import "ChangePasswordViewController.h"
 #import "PaymentInfoViewController.h"
+#import "UserAmountViewController.h"
 @interface AccoutViewController ()
 
 @end
@@ -68,24 +69,35 @@
 {
     arrMenu = [[NSMutableArray alloc]init];
     CellObject * cellOBj = [[CellObject alloc]init];
-    cellOBj.strImageName = @"map_pin_fill-512";
+    cellOBj.strImageName = @"Account_1";
     cellOBj.strName = @"Thông tin tài khoản";
     [arrMenu addObject:cellOBj];
     
     cellOBj = [[CellObject alloc]init];
-    cellOBj.strImageName = @"map_pin_fill-512";
+    cellOBj.strImageName = @"Account_2";
     cellOBj.strName = @"Thông tin đơn hàng";
     [arrMenu addObject:cellOBj];
 
     
     cellOBj = [[CellObject alloc]init];
-    cellOBj.strImageName = @"map_pin_fill-512";
+    cellOBj.strImageName = @"Account_3";
+    cellOBj.strName = @"Tiền trong tài khoản";
+    [arrMenu addObject:cellOBj];
+    
+    
+    cellOBj = [[CellObject alloc]init];
+    cellOBj.strImageName = @"Account_5";
+    cellOBj.strName = @"Quản lý voucher điện tử";
+    [arrMenu addObject:cellOBj];
+    
+    cellOBj = [[CellObject alloc]init];
+    cellOBj.strImageName = @"Account_6";
     cellOBj.strName = @"Đổi mật khẩu";
     [arrMenu addObject:cellOBj];
 
     
     cellOBj = [[CellObject alloc]init];
-    cellOBj.strImageName = @"map_pin_fill-512";
+    cellOBj.strImageName = @"Account_7";
     cellOBj.strName = @"Đăng xuất";
     [arrMenu addObject:cellOBj];
 
@@ -136,8 +148,12 @@
     if (indexPath.row == 1) {
         PaymentInfoViewController * payInfo = [[PaymentInfoViewController alloc]init];
         [self.navigationController pushViewController:payInfo animated:YES];
-    }
+    }//UserAmountViewController
     if (indexPath.row == 2) {
+        UserAmountViewController * payInfo = [[UserAmountViewController alloc]init];
+        [self.navigationController pushViewController:payInfo animated:YES];
+    }
+    if (indexPath.row == 4) {
         ChangePasswordViewController * changePassword = [[ChangePasswordViewController alloc]init];
         [self.navigationController pushViewController:changePassword animated:YES];
     }

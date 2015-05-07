@@ -250,6 +250,14 @@
     strDiscountPrice = F(@"%@đ", strDiscountPrice);
     cell.lblDiscountPrice.text = strDiscountPrice;
     cell.lblTitle.text = item.strTitle;
+    
+    if (item.isNew == FALSE) {
+        cell.lblNew.hidden = YES;
+    }
+    if (item.iType == 1) {
+        cell.lblEVoucher.hidden = YES;
+    }
+
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -288,5 +296,14 @@
 - (void)hideKeyboardWithSearchBar:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
+    DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
+    detail.dealObj = dealObj;
+    detail.arrDealRelateds = arrDeals;
+    [self.navigationController pushViewController:detail animated:YES];
+
 }
 @end

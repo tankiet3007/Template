@@ -70,35 +70,35 @@
 {
     arrMenu = [[NSMutableArray alloc]init];
     CellObject * cellOBj = [[CellObject alloc]init];
-    cellOBj.strImageName = @"map_pin_fill-512";
+    cellOBj.strImageName = @"help_1";
     cellOBj.strName = @"Về cùng mua";
     [arrMenu addObject:cellOBj];
     
     cellOBj = [[CellObject alloc]init];
-    cellOBj.strImageName = @"map_pin_fill-512";
+    cellOBj.strImageName = @"help_2";
     cellOBj.strName = @"Quy chế sàn giao dịch";
     [arrMenu addObject:cellOBj];
     
     
     cellOBj = [[CellObject alloc]init];
-    cellOBj.strImageName = @"map_pin_fill-512";
+    cellOBj.strImageName = @"help_3";
     cellOBj.strName = @"Trả hàng & hoàn tiền";
     [arrMenu addObject:cellOBj];
     
     
     cellOBj = [[CellObject alloc]init];
-    cellOBj.strImageName = @"map_pin_fill-512";
+    cellOBj.strImageName = @"help_4";
     cellOBj.strName = @"Hướng dẫn mua hàng";
     [arrMenu addObject:cellOBj];
     
     cellOBj = [[CellObject alloc]init];
-    cellOBj.strImageName = @"map_pin_fill-512";
+    cellOBj.strImageName = @"help_5";
     cellOBj.strName = @"Hình thức thanh toán";
     [arrMenu addObject:cellOBj];
     
     
     cellOBj = [[CellObject alloc]init];
-    cellOBj.strImageName = @"map_pin_fill-512";
+    cellOBj.strImageName = @"help_6";
     cellOBj.strName = @"Hình thức giao hàng";
     [arrMenu addObject:cellOBj];
     

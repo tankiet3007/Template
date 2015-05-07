@@ -389,7 +389,7 @@
     
     if (indexPath.row == 2) {
         cell.titleLabel.text = @"Địa chỉ sử dụng";
-        cell.desLabel.text = @"Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng Địa chỉ sử dụng\n\n";
+        cell.desLabel.text = @"Địa chỉ sử dụng \n\n";
     }
     if (indexPath.row == 3) {
         cell.titleLabel.text = @"Chi tiết khuyến mãi";
@@ -450,6 +450,13 @@
         itemS.lblDiscountPrice.text = strDiscountPrice;
         itemS.lblTitle.text = item.strTitle;
         
+        if (item.isNew == FALSE) {
+            itemS.lblNew.hidden = YES;
+        }
+        if (item.iType == 1) {
+            itemS.lblEVoucher.hidden = YES;
+        }
+
         
         x += itemS.frame.size.width + PADDING;
         [scrollView addSubview:itemS];

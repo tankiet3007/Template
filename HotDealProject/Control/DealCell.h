@@ -13,5 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblStandarPrice;
 @property (weak, nonatomic) IBOutlet UILabel *lblDiscountPrice;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+@property (weak, nonatomic) IBOutlet UILabel *lblNew;
+@property (weak, nonatomic) IBOutlet UILabel *lblEVoucher;
 
 @end

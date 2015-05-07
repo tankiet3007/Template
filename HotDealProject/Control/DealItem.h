@@ -16,5 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnTemp;
+@property (weak, nonatomic) IBOutlet UILabel *lblNew;
+@property (weak, nonatomic) IBOutlet UILabel *lblEVoucher;
 
 @end

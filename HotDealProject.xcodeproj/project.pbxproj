@@ -161,6 +161,8 @@
 		E9D3BD7A1AD6BA5400F7429B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9D3BD791AD6BA5400F7429B /* Images.xcassets */; };
 		E9D3BD7D1AD6BA5400F7429B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D3BD7B1AD6BA5400F7429B /* LaunchScreen.xib */; };
 		E9D3BD891AD6BA5400F7429B /* HotDealProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D3BD881AD6BA5400F7429B /* HotDealProjectTests.m */; };
+		E9D9BB131AFB19A700FF07AB /* UserAmountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D9BB111AFB19A700FF07AB /* UserAmountViewController.m */; };
+		E9D9BB141AFB19A700FF07AB /* UserAmountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D9BB121AFB19A700FF07AB /* UserAmountViewController.xib */; };
 		E9F179A81AE79D0A004D743E /* ProductListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F179A71AE79D0A004D743E /* ProductListViewController.m */; };
 		E9F179AC1AE7A195004D743E /* ShortDealInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F179AA1AE7A195004D743E /* ShortDealInfoCell.m */; };
 		E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9F179AB1AE7A195004D743E /* ShortDealInfoCell.xib */; };
@@ -465,6 +467,9 @@
 		E9D3BD821AD6BA5400F7429B /* HotDealProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HotDealProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D3BD871AD6BA5400F7429B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9D3BD881AD6BA5400F7429B /* HotDealProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotDealProjectTests.m; sourceTree = "<group>"; };
+		E9D9BB101AFB19A700FF07AB /* UserAmountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserAmountViewController.h; path = Controller/UserController/UserAmountViewController.h; sourceTree = "<group>"; };
+		E9D9BB111AFB19A700FF07AB /* UserAmountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserAmountViewController.m; path = Controller/UserController/UserAmountViewController.m; sourceTree = "<group>"; };
+		E9D9BB121AFB19A700FF07AB /* UserAmountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserAmountViewController.xib; path = Controller/UserController/UserAmountViewController.xib; sourceTree = "<group>"; };
 		E9F179A61AE79D0A004D743E /* ProductListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductListViewController.h; path = Controller/ProductListViewController.h; sourceTree = "<group>"; };
 		E9F179A71AE79D0A004D743E /* ProductListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductListViewController.m; path = Controller/ProductListViewController.m; sourceTree = "<group>"; };
 		E9F179A91AE7A195004D743E /* ShortDealInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShortDealInfoCell.h; path = Control/ShortDealInfoCell.h; sourceTree = "<group>"; };
@@ -1024,6 +1029,9 @@
 				E97256371AF9F9580012D8DD /* EmailPromotionViewController.h */,
 				E97256381AF9F9580012D8DD /* EmailPromotionViewController.m */,
 				E97256391AF9F9580012D8DD /* EmailPromotionViewController.xib */,
+				E9D9BB101AFB19A700FF07AB /* UserAmountViewController.h */,
+				E9D9BB111AFB19A700FF07AB /* UserAmountViewController.m */,
+				E9D9BB121AFB19A700FF07AB /* UserAmountViewController.xib */,
 			);
 			name = UserController;
 			sourceTree = "<group>";
@@ -1197,6 +1205,7 @@
 				E9B24BDA1AF85C6000322C0F /* PayItemTableViewCell.xib in Resources */,
 				E9239A4C1AF7496B00CC4977 /* ChangePasswordViewController.xib in Resources */,
 				E98D4FC91AF62B6E0013EF4C /* ForgotPasswordViewController.xib in Resources */,
+				E9D9BB141AFB19A700FF07AB /* UserAmountViewController.xib in Resources */,
 				E9D3BD7D1AD6BA5400F7429B /* LaunchScreen.xib in Resources */,
 				E9B3DA341AE213E0009C668D /* CheckQuantityDealCell.xib in Resources */,
 				E98FCF3F1AD8CA9100992BF0 /* JingDianMapCell.xib in Resources */,
@@ -1315,6 +1324,7 @@
 				E9AE20901AD80B68002E11AC /* RadioButton.m in Sources */,
 				E95A23E31AE380B70050DCB1 /* SearchViewController.m in Sources */,
 				E9AE20811AD80B68002E11AC /* INTULocationRequest.m in Sources */,
+				E9D9BB131AFB19A700FF07AB /* UserAmountViewController.m in Sources */,
 				E9485B971AE006E2005D1688 /* AFHTTPRequestOperation.m in Sources */,
 				E9AE1FB01AD80455002E11AC /* MainViewController.m in Sources */,
 				E95945411ADB5F4D00CDA3FF /* NSDate+Relative.m in Sources */,

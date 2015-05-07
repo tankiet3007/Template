@@ -38,7 +38,7 @@
                             <constraint firstAttribute="width" constant="232" id="RbE-6a-s4H"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
                             <mask key="constraints">
@@ -47,19 +47,21 @@
                         </variation>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fY4-Hn-4fE">
-                        <rect key="frame" x="82" y="46" width="59" height="18"/>
+                        <rect key="frame" x="75" y="46" width="59" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="j0h-uc-vcA"/>
                             <constraint firstAttribute="width" constant="59" id="nax-Zy-mTO"/>
                         </constraints>
-                        <state key="normal" title="0" backgroundImage="avatar">
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <inset key="contentEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="0" backgroundImage="comboBox">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.000đ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nes-IM-Aiv">
                         <rect key="frame" x="191" y="43" width="52" height="21"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.000đ" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PuL-we-hjw">
@@ -68,28 +70,28 @@
                             <constraint firstAttribute="width" constant="65" id="i5r-cX-Fs8"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="PuL-we-hjw" firstAttribute="baseline" secondItem="fY4-Hn-4fE" secondAttribute="baseline" id="0sD-We-7F7"/>
+                    <constraint firstItem="PuL-we-hjw" firstAttribute="baseline" secondItem="fY4-Hn-4fE" secondAttribute="baseline" constant="2" id="0sD-We-7F7"/>
                     <constraint firstAttribute="bottomMargin" secondItem="PuL-we-hjw" secondAttribute="bottom" constant="-3" id="12U-Zg-b1o"/>
                     <constraint firstItem="PuL-we-hjw" firstAttribute="firstBaseline" secondItem="nes-IM-Aiv" secondAttribute="firstBaseline" id="1za-4a-5pk"/>
-                    <constraint firstItem="fY4-Hn-4fE" firstAttribute="leading" secondItem="8A1-rH-awA" secondAttribute="trailing" constant="24" id="3QS-dS-wxj"/>
+                    <constraint firstItem="fY4-Hn-4fE" firstAttribute="leading" secondItem="8A1-rH-awA" secondAttribute="trailing" constant="17" id="3QS-dS-wxj"/>
                     <constraint firstItem="PuL-we-hjw" firstAttribute="leading" secondItem="nes-IM-Aiv" secondAttribute="trailing" constant="-1" id="3eb-d4-t0M"/>
                     <constraint firstItem="8A1-rH-awA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-1" id="4j2-2R-pKW"/>
                     <constraint firstItem="fY4-Hn-4fE" firstAttribute="top" secondItem="6lu-XR-PWY" secondAttribute="bottom" constant="1" id="5vi-w5-8Ht"/>
                     <constraint firstItem="8A1-rH-awA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-5" id="7xm-Xd-ZVa"/>
                     <constraint firstItem="PuL-we-hjw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="35" id="Cu0-Fg-uEE"/>
                     <constraint firstItem="6lu-XR-PWY" firstAttribute="leading" secondItem="8A1-rH-awA" secondAttribute="trailing" constant="17" id="Ji8-Vw-yCh"/>
-                    <constraint firstItem="PuL-we-hjw" firstAttribute="baseline" secondItem="fY4-Hn-4fE" secondAttribute="firstBaseline" id="WwO-k0-rfB"/>
+                    <constraint firstItem="PuL-we-hjw" firstAttribute="baseline" secondItem="fY4-Hn-4fE" secondAttribute="firstBaseline" constant="2" id="WwO-k0-rfB"/>
                     <constraint firstAttribute="trailingMargin" secondItem="PuL-we-hjw" secondAttribute="trailing" constant="5" id="aE6-EF-Wmp"/>
                     <constraint firstItem="6lu-XR-PWY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-2" id="afy-cS-fnG"/>
                     <constraint firstAttribute="trailingMargin" secondItem="6lu-XR-PWY" secondAttribute="trailing" constant="8" id="eVQ-eB-D2n"/>
                     <constraint firstItem="PuL-we-hjw" firstAttribute="bottom" secondItem="fY4-Hn-4fE" secondAttribute="bottom" id="hyi-l9-tEK"/>
                     <constraint firstItem="PuL-we-hjw" firstAttribute="baseline" secondItem="nes-IM-Aiv" secondAttribute="baseline" id="ifz-GI-WaC"/>
-                    <constraint firstItem="6lu-XR-PWY" firstAttribute="leading" secondItem="fY4-Hn-4fE" secondAttribute="leading" constant="-7" id="nGP-mr-vY1"/>
+                    <constraint firstItem="6lu-XR-PWY" firstAttribute="leading" secondItem="fY4-Hn-4fE" secondAttribute="leading" id="nGP-mr-vY1"/>
                     <constraint firstAttribute="trailingMargin" secondItem="6lu-XR-PWY" secondAttribute="trailing" constant="5" id="nw5-mE-5lh"/>
                     <constraint firstItem="8A1-rH-awA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-5" id="pDR-Hf-rgk"/>
                     <constraint firstItem="8A1-rH-awA" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qQR-yR-JNx"/>
@@ -113,7 +115,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="avatar" width="221" height="220"/>
         <image name="beef" width="300" height="300"/>
+        <image name="comboBox" width="64" height="28"/>
     </resources>
 </document>
