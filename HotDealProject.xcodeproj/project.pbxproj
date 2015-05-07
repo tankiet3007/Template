@@ -163,6 +163,9 @@
 		E9D3BD891AD6BA5400F7429B /* HotDealProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D3BD881AD6BA5400F7429B /* HotDealProjectTests.m */; };
 		E9D9BB131AFB19A700FF07AB /* UserAmountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D9BB111AFB19A700FF07AB /* UserAmountViewController.m */; };
 		E9D9BB141AFB19A700FF07AB /* UserAmountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D9BB121AFB19A700FF07AB /* UserAmountViewController.xib */; };
+		E9D9BB171AFB5BA200FF07AB /* PaymentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D9BB161AFB5BA200FF07AB /* PaymentDetailViewController.m */; };
+		E9D9BB1B1AFB65C600FF07AB /* ProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D9BB191AFB65C600FF07AB /* ProductTableViewCell.m */; };
+		E9D9BB1C1AFB65C600FF07AB /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D9BB1A1AFB65C600FF07AB /* ProductTableViewCell.xib */; };
 		E9F179A81AE79D0A004D743E /* ProductListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F179A71AE79D0A004D743E /* ProductListViewController.m */; };
 		E9F179AC1AE7A195004D743E /* ShortDealInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F179AA1AE7A195004D743E /* ShortDealInfoCell.m */; };
 		E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9F179AB1AE7A195004D743E /* ShortDealInfoCell.xib */; };
@@ -470,6 +473,11 @@
 		E9D9BB101AFB19A700FF07AB /* UserAmountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserAmountViewController.h; path = Controller/UserController/UserAmountViewController.h; sourceTree = "<group>"; };
 		E9D9BB111AFB19A700FF07AB /* UserAmountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserAmountViewController.m; path = Controller/UserController/UserAmountViewController.m; sourceTree = "<group>"; };
 		E9D9BB121AFB19A700FF07AB /* UserAmountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserAmountViewController.xib; path = Controller/UserController/UserAmountViewController.xib; sourceTree = "<group>"; };
+		E9D9BB151AFB5BA200FF07AB /* PaymentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaymentDetailViewController.h; path = Controller/UserController/PaymentDetailViewController.h; sourceTree = "<group>"; };
+		E9D9BB161AFB5BA200FF07AB /* PaymentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaymentDetailViewController.m; path = Controller/UserController/PaymentDetailViewController.m; sourceTree = "<group>"; };
+		E9D9BB181AFB65C600FF07AB /* ProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductTableViewCell.h; path = Control/ProductTableViewCell.h; sourceTree = "<group>"; };
+		E9D9BB191AFB65C600FF07AB /* ProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductTableViewCell.m; path = Control/ProductTableViewCell.m; sourceTree = "<group>"; };
+		E9D9BB1A1AFB65C600FF07AB /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProductTableViewCell.xib; path = Control/ProductTableViewCell.xib; sourceTree = "<group>"; };
 		E9F179A61AE79D0A004D743E /* ProductListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductListViewController.h; path = Controller/ProductListViewController.h; sourceTree = "<group>"; };
 		E9F179A71AE79D0A004D743E /* ProductListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductListViewController.m; path = Controller/ProductListViewController.m; sourceTree = "<group>"; };
 		E9F179A91AE7A195004D743E /* ShortDealInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShortDealInfoCell.h; path = Control/ShortDealInfoCell.h; sourceTree = "<group>"; };
@@ -619,6 +627,9 @@
 				E9B24BD61AF85C6000322C0F /* PayItemTableViewCell.h */,
 				E9B24BD71AF85C6000322C0F /* PayItemTableViewCell.m */,
 				E9B24BD81AF85C6000322C0F /* PayItemTableViewCell.xib */,
+				E9D9BB181AFB65C600FF07AB /* ProductTableViewCell.h */,
+				E9D9BB191AFB65C600FF07AB /* ProductTableViewCell.m */,
+				E9D9BB1A1AFB65C600FF07AB /* ProductTableViewCell.xib */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -1032,6 +1043,8 @@
 				E9D9BB101AFB19A700FF07AB /* UserAmountViewController.h */,
 				E9D9BB111AFB19A700FF07AB /* UserAmountViewController.m */,
 				E9D9BB121AFB19A700FF07AB /* UserAmountViewController.xib */,
+				E9D9BB151AFB5BA200FF07AB /* PaymentDetailViewController.h */,
+				E9D9BB161AFB5BA200FF07AB /* PaymentDetailViewController.m */,
 			);
 			name = UserController;
 			sourceTree = "<group>";
@@ -1200,6 +1213,7 @@
 				E978784E1AE92C8A003A3B84 /* InvoiceCell.xib in Resources */,
 				E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */,
 				E9B3DA3E1AE24731009C668D /* AutoSizeTableViewCell.xib in Resources */,
+				E9D9BB1C1AFB65C600FF07AB /* ProductTableViewCell.xib in Resources */,
 				E972563B1AF9F9580012D8DD /* EmailPromotionViewController.xib in Resources */,
 				E95945511ADB661F00CDA3FF /* carat.png in Resources */,
 				E9B24BDA1AF85C6000322C0F /* PayItemTableViewCell.xib in Resources */,
@@ -1266,6 +1280,7 @@
 				E9C049FE1AE143B80017C5CE /* UIScrollView+SVPullToRefresh.m in Sources */,
 				E9AE201F1AD80A5E002E11AC /* NSString+MagicalDataImport.m in Sources */,
 				E9AE20851AD80B68002E11AC /* NSString+Helper.m in Sources */,
+				E9D9BB1B1AFB65C600FF07AB /* ProductTableViewCell.m in Sources */,
 				E97256411AFA08AD0012D8DD /* Provine.m in Sources */,
 				E9AE203C1AD80A5E002E11AC /* UIImage+GIF.m in Sources */,
 				E959454E1ADB661F00CDA3FF /* APLSectionHeaderView.m in Sources */,
@@ -1308,6 +1323,7 @@
 				E9AE202B1AD80A5E002E11AC /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				E9AE20911AD80B68002E11AC /* ViewUtils.m in Sources */,
 				E9AE20211AD80A5E002E11AC /* NSManagedObject+MagicalDataImport.m in Sources */,
+				E9D9BB171AFB5BA200FF07AB /* PaymentDetailViewController.m in Sources */,
 				E9B24BDD1AF860B500322C0F /* PayItem.m in Sources */,
 				E9485B981AE006E2005D1688 /* AFHTTPRequestOperationManager.m in Sources */,
 				E959454F1ADB661F00CDA3FF /* APLSectionInfo.m in Sources */,

@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/Controller/UserController/PaymentInfoViewController.m"
-            timestampString = "452487397.570323"
+            timestampString = "452681757.590505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "-initUITableView"
             landmarkType = "5">
          </BreakpointContent>

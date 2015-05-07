@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "PayItemTableViewCell.h"
 #import "PayItem.h"
+#import "PaymentDetailViewController.h"
 @interface PaymentInfoViewController ()
 
 @end
@@ -46,24 +47,28 @@
     item.strID = @"123456";
     item.strBookDate = @"05/05/2015 20:33:15";
     item.strStatus = @"Chưa hoàn tất";
+    item.strType = @"Credit card";
     [arrListPayment addObject:item];
     
     item = [[PayItem alloc]init];
     item.strID = @"123456";
     item.strBookDate = @"05/05/2015 20:33:15";
     item.strStatus = @"Chưa hoàn tất";
+        item.strType = @"Credit card";
     [arrListPayment addObject:item];
     
     item = [[PayItem alloc]init];
     item.strID = @"123456";
     item.strBookDate = @"05/05/2015 20:33:15";
     item.strStatus = @"Chưa hoàn tất";
+        item.strType = @"Credit card";
     [arrListPayment addObject:item];
     
     item = [[PayItem alloc]init];
     item.strID = @"123456";
     item.strBookDate = @"05/05/2015 20:33:15";
     item.strStatus = @"Chưa hoàn tất";
+        item.strType = @"Credit card";
     [arrListPayment addObject:item];
 }
 
@@ -104,7 +109,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 90;
+    return 105;
 }
 
 
@@ -113,19 +118,11 @@
     PayItem * item = [arrListPayment objectAtIndex:indexPath.row];
     cell.lblBookID.text = F(@"Đơn hàng số %@",item.strID);
         cell.lblBookDate.text = F(@"Ngày đặt %@",item.strBookDate);
-        cell.lblBookID.text = F(@"Trạng thái %@",item.strStatus);
+        cell.lblStatus.text = F(@"Trạng thái %@",item.strStatus);
     
     NSString * strTotalPrice = F(@"%ldđ", item.lTotalPrice);
     strTotalPrice = [strTotalPrice formatStringToDecimal];
-//    NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-//    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strTotalPrice) attributes:attributes];
-//    cell.lblTotalOfBill.text = strTotalPrice;
-//    cell.vContain.layer.borderWidth = 0.5;
-//    CGRect rectContain = cell.vContain.frame;
-//    [cell.vContain setFrame:CGRectMake(rectContain.origin.x, rectContain.origin.y, ScreenWidth - 20, rectContain.size.height)];
-//    cell.vContain.layer.borderColor =[UIColor lightGrayColor].CGColor;
-    
-    UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 5, ScreenWidth -20, 85)];
+    UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 5, ScreenWidth -20, 100)];
     [cell.contentView insertSubview:viewBG atIndex:0];
     viewBG.layer.borderWidth = 0.5;
     viewBG.layer.borderColor =[UIColor lightGrayColor].CGColor;
@@ -135,16 +132,24 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PayItemTableViewCell *cell = (PayItemTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PayItemTableViewCell"];
-    if (cell == nil)
+       if (cell == nil)
     {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PayItemTableViewCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
     //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     [self configureCell:cell forRowAtIndexPath:indexPath];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
     
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PaymentDetailViewController * pItemVC = [[PaymentDetailViewController alloc]init];
+    pItemVC.pItem = [arrListPayment objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:pItemVC animated:YES];
 }
 
 @end

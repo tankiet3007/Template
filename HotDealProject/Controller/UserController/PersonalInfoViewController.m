@@ -326,6 +326,10 @@
         // Textfield dimensions
         lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
         cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+        
+        UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
+        [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
+        [cellRe addSubview:imgArrow];
         UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicker)];
         // if labelView is not set userInteractionEnabled, you must do so
         [lbl setUserInteractionEnabled:YES];
@@ -359,7 +363,10 @@
         // if labelView is not set userInteractionEnabled, you must do so
         [lbl setUserInteractionEnabled:YES];
         [lbl addGestureRecognizer:gesture];
-        
+        UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
+        [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
+        [cellRe addSubview:imgArrow];
+
         return cellRe;
         
     }

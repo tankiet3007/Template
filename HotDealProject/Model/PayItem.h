@@ -13,4 +13,5 @@
 @property (nonatomic,strong)NSString * strBookDate;
 @property (nonatomic,strong)NSString * strStatus;
 @property (nonatomic,assign)long lTotalPrice;
+@property (nonatomic,strong)NSString * strType;
 @end
