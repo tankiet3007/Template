@@ -105,7 +105,7 @@
 }
 -(void)initUITableView
 {
-    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(20, 80, ScreenWidth-40, 150) style:UITableViewStylePlain];
+    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(20, 80, ScreenWidth-40, 200) style:UITableViewStylePlain];
     [self.view addSubview:tableViewMain];
     tableViewMain.layer.borderWidth = 0.3;
     tableViewMain.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -114,6 +114,7 @@
     tableViewMain.delegate = self;
     tableViewMain.separatorColor = [UIColor clearColor];
     tableViewMain.showsVerticalScrollIndicator = NO;
+    tableViewMain.scrollEnabled = NO;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -128,7 +129,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 30;
+    return 40;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

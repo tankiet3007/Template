@@ -66,7 +66,7 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMo-0o-sqq">
-                        <rect key="frame" x="69" y="8" width="193" height="14"/>
+                        <rect key="frame" x="69" y="8" width="193" height="33"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -115,7 +115,7 @@
                     <constraint firstItem="I93-wj-WE9" firstAttribute="bottom" secondItem="sF2-jq-6Ud" secondAttribute="bottom" id="jlK-OI-KJn"/>
                     <constraint firstItem="P06-gm-nJM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="kSi-3l-stS"/>
                     <constraint firstItem="sF2-jq-6Ud" firstAttribute="leading" secondItem="P06-gm-nJM" secondAttribute="trailing" constant="17" id="l1r-nx-IX5"/>
-                    <constraint firstItem="sF2-jq-6Ud" firstAttribute="top" secondItem="bMo-0o-sqq" secondAttribute="bottom" constant="27" id="mEI-Ho-Vgz"/>
+                    <constraint firstItem="sF2-jq-6Ud" firstAttribute="top" secondItem="bMo-0o-sqq" secondAttribute="bottom" constant="8" id="mEI-Ho-Vgz"/>
                     <constraint firstItem="bMo-0o-sqq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="mp4-8g-PgV"/>
                     <constraint firstItem="bMo-0o-sqq" firstAttribute="leading" secondItem="P06-gm-nJM" secondAttribute="trailing" constant="9" id="oNo-hR-ezx"/>
                     <constraint firstAttribute="bottom" secondItem="k0m-bR-278" secondAttribute="bottom" id="qSD-Q9-WZe"/>

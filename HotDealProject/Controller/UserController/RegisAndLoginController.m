@@ -168,7 +168,7 @@
     }
     else
     {
-        return 40;
+        return 50;
     }
 }
 
@@ -234,7 +234,7 @@
             }
             
             // Textfield dimensions
-            tf.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
+            tf.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
             //        cell.contentView.backgroundColor = [UIColor clearColor];
             cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             // We want to handle textFieldDidEndEditing
@@ -263,7 +263,7 @@
             }
             
             // Textfield dimensions
-            lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
+            lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
             cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicker)];
             // if labelView is not set userInteractionEnabled, you must do so
@@ -291,7 +291,7 @@
             }
             
             // Textfield dimensions
-            lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
+            lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
             cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             
             UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox)];
@@ -314,7 +314,7 @@
             [cellRe addSubview:btnRegister];
             
             // Textfield dimensions
-            button.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
+            button.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
             //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
              cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             return cellRe;
@@ -592,7 +592,7 @@
 
 -(void)setupPickerGender
 {
-    pickerGender = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, 320, 200)];
+    pickerGender = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, ScreenWidth, 200)];
     //    numRowsInPicker = 3;
     pickerGender.delegate = self;
     [pickerGender setBackgroundColor:[UIColor whiteColor]];

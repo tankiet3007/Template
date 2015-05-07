@@ -119,9 +119,17 @@
     strTotalPrice = [strTotalPrice formatStringToDecimal];
 //    NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
 //    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strTotalPrice) attributes:attributes];
-    cell.lblTotalOfBill.text = strTotalPrice;
-    cell.vContain.layer.borderWidth = 0.5;
-    cell.vContain.layer.borderColor =[UIColor lightGrayColor].CGColor;
+//    cell.lblTotalOfBill.text = strTotalPrice;
+//    cell.vContain.layer.borderWidth = 0.5;
+//    CGRect rectContain = cell.vContain.frame;
+//    [cell.vContain setFrame:CGRectMake(rectContain.origin.x, rectContain.origin.y, ScreenWidth - 20, rectContain.size.height)];
+//    cell.vContain.layer.borderColor =[UIColor lightGrayColor].CGColor;
+    
+    UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 5, ScreenWidth -20, 85)];
+    [cell.contentView insertSubview:viewBG atIndex:0];
+    viewBG.layer.borderWidth = 0.5;
+    viewBG.layer.borderColor =[UIColor lightGrayColor].CGColor;
+    
     
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
