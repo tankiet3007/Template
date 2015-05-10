@@ -29,7 +29,7 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     [self initUITableView];
-    [self initSearchBar];
+//    [self initSearchBar];
     [self setupHeader];
     
     [self initNavigationbar];
@@ -44,24 +44,24 @@
         [viewHeader removeFromSuperview];
         viewHeader = nil;
     }
-    viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 88)];
+    viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
     
-    UIView * viewForSearch = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-    viewForSearch.backgroundColor = [UIColor blackColor];
-    [viewForSearch addSubview:searchBars];
-    [viewHeader addSubview:viewForSearch];
+//    UIView * viewForSearch = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+//    viewForSearch.backgroundColor = [UIColor blackColor];
+//    [viewForSearch addSubview:searchBars];
+//    [viewHeader addSubview:viewForSearch];
     
-    UILabel * lblHave = [[UILabel alloc]initWithFrame:CGRectMake(13, 58, 25, 20)];
+    UILabel * lblHave = [[UILabel alloc]initWithFrame:CGRectMake(13, 14, 25, 20)];
     lblHave.font = [UIFont systemFontOfSize:14];
     lblHave.text = @"Có";
     [viewHeader addSubview:lblHave];
-    lblNumOfDeal = [[UILabel alloc]initWithFrame:CGRectMake(36, 58, 40, 20)];
+    lblNumOfDeal = [[UILabel alloc]initWithFrame:CGRectMake(36, 14, 40, 20)];
     lblNumOfDeal.font = [UIFont boldSystemFontOfSize:14];
     lblNumOfDeal.text = @"1232";
     lblNumOfDeal.textAlignment = NSTextAlignmentCenter;
     [viewHeader addSubview:lblNumOfDeal];
     
-    lblHave = [[UILabel alloc]initWithFrame:CGRectMake(85, 58, 120, 20)];
+    lblHave = [[UILabel alloc]initWithFrame:CGRectMake(85, 14, 120, 20)];
     lblHave.font = [UIFont systemFontOfSize:14];
     lblHave.text = @"khuyến mãi";
     [viewHeader addSubview:lblHave];
@@ -167,7 +167,7 @@
     // ^-Use UITextAlignmentCenter for older SDKs.
     label.textColor = [UIColor whiteColor]; // change this color
     self.navigationItem.titleView = label;
-    label.text = NSLocalizedString(@"Home", @"");
+    label.text = NSLocalizedString(_searchText, @"");
     [label sizeToFit];
     
     revealController = [self revealViewController];
@@ -262,7 +262,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 88;
+    return 40;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {

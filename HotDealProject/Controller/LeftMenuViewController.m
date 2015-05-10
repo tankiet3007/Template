@@ -34,6 +34,9 @@
 {
     SWRevealViewController *revealVC;
     UIButton * btnLogin;
+    UITableView * autocompleteTableView;
+    NSMutableArray * autocompleteItem;
+    NSMutableArray * rootData;
 }
 #pragma mark - APLTableViewController
 
@@ -48,7 +51,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-//    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    //    [[self navigationController] setNavigationBarHidden:YES animated:YES];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     revealVC = [self revealViewController];
@@ -61,6 +64,9 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     UINib *sectionHeaderNib = [UINib nibWithNibName:@"SectionHeaderView" bundle:nil];
     self.openSectionIndex = NSNotFound;
     [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:SectionHeaderViewIdentifier];
+    
+    [self initDataSearch];
+    [self initSearchTable];
 }
 
 -(void)initUITableView
@@ -88,7 +94,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     if (savedValue != nil) {
         iIndexLocation = [savedValue integerValue];
     }
-   NSArray * arrLocation = [NSArray arrayWithObjects:@"Hà Nội",@"Hồ Chí Minh",@"Bình Dương",@"Đà Nẵng",@"Tỉnh thành khác", nil];
+    NSArray * arrLocation = [NSArray arrayWithObjects:@"Hà Nội",@"Hồ Chí Minh",@"Bình Dương",@"Đà Nẵng",@"Tỉnh thành khác", nil];
     NSString * location = [arrLocation objectAtIndex:iIndexLocation];
     
     NSArray * subMenu;
@@ -175,7 +181,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
     //    menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
-
+    
     
     self.sectionInfoArray = nil;
     if ((self.sectionInfoArray == nil) ||
@@ -201,102 +207,142 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         
         self.sectionInfoArray = infoArray;
     }
-
+    
 }
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     
-    }
+}
 
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    return [arrMenu count] + 1;
+    if ([tableView isEqual:_tableView]) {
+        return [arrMenu count] + 1;
+    }
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([arrMenu count] == section) {
-        return 0;
+    if ([tableView isEqual:_tableView]) {
+        if ([arrMenu count] == section) {
+            return 0;
+        }
+        APLSectionInfo *sectionInfo = (self.sectionInfoArray)[section];
+        NSInteger numStoriesInSection = [[sectionInfo.menuItem subItem] count];
+        
+        NSInteger numberOfRows = sectionInfo.open ? numStoriesInSection : 0;
+        //    UA_log(@"%ld",numberOfRows);
+        return numberOfRows;
     }
-    APLSectionInfo *sectionInfo = (self.sectionInfoArray)[section];
-    NSInteger numStoriesInSection = [[sectionInfo.menuItem subItem] count];
-    
-    NSInteger numberOfRows = sectionInfo.open ? numStoriesInSection : 0;
-    //    UA_log(@"%ld",numberOfRows);
-    return numberOfRows;
+    return autocompleteItem.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *simpleTableIdentifier = @"APLQuoteCell";
-    
-    APLQuoteCell *cell = (APLQuoteCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    if ([tableView isEqual:_tableView]) {
+        static NSString *simpleTableIdentifier = @"APLQuoteCell";
+        
+        APLQuoteCell *cell = (APLQuoteCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         [cell setTranslatesAutoresizingMaskIntoConstraints:NO];
-    if (cell == nil)
-    {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"APLQuoteCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"APLQuoteCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        MenuItem *item = (MenuItem *)[(self.sectionInfoArray)[indexPath.section] menuItem];
+        UA_log(@"%@",(item.subItem)[indexPath.row]);
+        cell.lblSubMenu.text = (item.subItem)[indexPath.row];
+        
+        return cell;
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    MenuItem *item = (MenuItem *)[(self.sectionInfoArray)[indexPath.section] menuItem];
-    UA_log(@"%@",(item.subItem)[indexPath.row]);
-    cell.lblSubMenu.text = (item.subItem)[indexPath.row];
-    
-    return cell;
+    else
+    {
+        UITableViewCell *cell = nil;
+        static NSString *AutoCompleteRowIdentifier = @"AutoCompleteRowIdentifier";
+        cell = [tableView dequeueReusableCellWithIdentifier:AutoCompleteRowIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc]
+                    initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AutoCompleteRowIdentifier];
+        }
+        
+        cell.textLabel.text = [autocompleteItem objectAtIndex:indexPath.row];
+        return cell;
+        
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSLog(@"%@ indexpath", indexPath);
-    CategoryViewController * categoryVC = [[CategoryViewController alloc]init];
-    MenuItem *item = (MenuItem *)[(self.sectionInfoArray)[indexPath.section] menuItem];
-    UA_log(@"%@",(item.subItem)[indexPath.row]);
-    categoryVC.strTitle = (item.subItem)[indexPath.row];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:categoryVC];
-    [revealVC setFrontViewController:navigationController animated:YES];
-    [revealVC revealToggle:nil];
+    //    NSLog(@"%@ indexpath", indexPath);
+    if ([tableView isEqual:_tableView]) {
+        CategoryViewController * categoryVC = [[CategoryViewController alloc]init];
+        MenuItem *item = (MenuItem *)[(self.sectionInfoArray)[indexPath.section] menuItem];
+        UA_log(@"%@",(item.subItem)[indexPath.row]);
+        categoryVC.strTitle = (item.subItem)[indexPath.row];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:categoryVC];
+        [revealVC setFrontViewController:navigationController animated:YES];
+        [revealVC revealToggle:nil];
+    }
+    else
+    {
+        SearchViewController *searchVC = [SearchViewController alloc];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:searchVC];
+        searchVC.searchText = [autocompleteItem objectAtIndex:indexPath.row];
+        [revealVC setFrontViewController:navigationController animated:YES];
+        [revealVC revealToggle:nil];
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == [arrMenu count]) {
-//        return btnLogin;
-        UIView * viewFooter = [[UIView alloc]initWithFrame:btnLogin.frame];
-        [viewFooter addSubview:btnLogin];
-        return viewFooter;
-    }
-    APLSectionHeaderView *sectionHeaderView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:SectionHeaderViewIdentifier];
-    
-    APLSectionInfo *sectionInfo = (self.sectionInfoArray)[section];
-    sectionInfo.headerView = sectionHeaderView;
-    sectionHeaderView.imgSectionLogo.image = [UIImage imageNamed:sectionInfo.menuItem.logo];
-    sectionHeaderView.titleLabel.text = sectionInfo.menuItem.name;
-    sectionHeaderView.section = section;
-    sectionHeaderView.delegate = self;
-    if (section == 2) {
-        UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(0, 43, ScreenWidth - 40, 5)];
-        imgLine.image = [UIImage imageNamed:@"gach"];
-
-        [sectionHeaderView addSubview:imgLine];
-    }
-    if (section == 9) {
-        UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(0, 43, ScreenWidth - 40, 5)];
-        imgLine.image = [UIImage imageNamed:@"gach"];
+    if ([tableView isEqual:_tableView]) {
+        if (section == [arrMenu count]) {
+            //        return btnLogin;
+            UIView * viewFooter = [[UIView alloc]initWithFrame:btnLogin.frame];
+            [viewFooter addSubview:btnLogin];
+            return viewFooter;
+        }
+        APLSectionHeaderView *sectionHeaderView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:SectionHeaderViewIdentifier];
         
-        [sectionHeaderView addSubview:imgLine];
+        APLSectionInfo *sectionInfo = (self.sectionInfoArray)[section];
+        sectionInfo.headerView = sectionHeaderView;
+        sectionHeaderView.imgSectionLogo.image = [UIImage imageNamed:sectionInfo.menuItem.logo];
+        sectionHeaderView.titleLabel.text = sectionInfo.menuItem.name;
+        sectionHeaderView.section = section;
+        sectionHeaderView.delegate = self;
+        if (section == 2) {
+            UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(0, 43, ScreenWidth - 40, 5)];
+            imgLine.image = [UIImage imageNamed:@"gach"];
+            
+            [sectionHeaderView addSubview:imgLine];
+        }
+        if (section == 9) {
+            UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(0, 43, ScreenWidth - 40, 5)];
+            imgLine.image = [UIImage imageNamed:@"gach"];
+            
+            [sectionHeaderView addSubview:imgLine];
+        }
+        return sectionHeaderView;
     }
-    return sectionHeaderView;
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == [arrMenu count]) {
-        return 0;
+    if ([tableView isEqual:_tableView]) {
+        if (indexPath.section == [arrMenu count]) {
+            return 0;
+        }
+        APLSectionInfo *sectionInfo = (self.sectionInfoArray)[indexPath.section];
+        return [[sectionInfo objectInRowHeightsAtIndex:indexPath.row] floatValue];
+        // Alternatively, return rowHeight.
+        
     }
-    APLSectionInfo *sectionInfo = (self.sectionInfoArray)[indexPath.section];
-    return [[sectionInfo objectInRowHeightsAtIndex:indexPath.row] floatValue];
-    // Alternatively, return rowHeight.
+    else
+    {
+        return 44;
+    }
 }
 
 
@@ -420,7 +466,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(notificationUpdateLocation:) name:@"notificationUpdateLocation"
                                                    object:nil];
-
+        
         return;
     }
     if (sectionClosed == 1) {
@@ -479,27 +525,69 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 }
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-//    SearchViewController *searchVC = [SearchViewController alloc];
-//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:searchVC];
-//    [revealVC setFrontViewController:navigationController animated:YES];
-//    [revealVC revealToggle:nil];
+    //    SearchViewController *searchVC = [SearchViewController alloc];
+    //    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:searchVC];
+    //    [revealVC setFrontViewController:navigationController animated:YES];
+    //    [revealVC revealToggle:nil];
     [searchBars setFrame:CGRectMake(0, 0, ScreenWidth - 40, 40)];
     self.revealViewController.rearViewRevealWidth = 320;
     [self.revealViewController setFrontViewPosition: FrontViewPositionRightMost animated: YES];
     _tableView.hidden = YES;
     searchBar.showsCancelButton = YES;
+    
+    
     return YES;
+}
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    autocompleteTableView.hidden = NO;
+    
+    NSString *substring = [NSString stringWithString:searchBar.text];
+    //    substring = [substring stringByReplacingCharactersInRange:range withString:string];
+    [self searchAutocompleteEntriesWithSubstring:substring];
+    
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
     _tableView.hidden = NO;
+    
+    autocompleteTableView.hidden = YES;
     [searchBars setFrame:CGRectMake(0, 0, 245, 40)];
     searchBar.showsCancelButton = NO;
     self.revealViewController.rearViewRevealWidth = 260;
-     [self.revealViewController setFrontViewPosition: FrontViewPositionRight animated: YES];
+    [self.revealViewController setFrontViewPosition: FrontViewPositionRight animated: YES];
     [searchBars resignFirstResponder];
 }
 
+-(void)initDataSearch
+{
+    rootData = [[NSMutableArray alloc] initWithObjects:@"www.google.com",@"www.zing.vn", @"Tran Tan Kiet",@"Mai Thi Le Quyen", nil];
+    autocompleteItem = [[NSMutableArray alloc] init];
+}
+
+- (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {
+    
+    // Put anything that starts with this substring into the autocompleteUrls array
+    // The items in this array is what will show up in the table view
+    [autocompleteItem removeAllObjects];
+    for(NSString *curString in rootData) {
+        NSRange substringRange = [curString rangeOfString:substring];
+        if (substringRange.location == 0) {
+            [autocompleteItem addObject:curString];
+        }
+    }
+    [autocompleteTableView reloadData];
+}
+
+-(void)initSearchTable
+{
+    autocompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) style:UITableViewStylePlain];
+    autocompleteTableView.delegate = self;
+    autocompleteTableView.dataSource = self;
+    autocompleteTableView.scrollEnabled = YES;
+    autocompleteTableView.hidden = YES;
+    [self.view addSubview:autocompleteTableView];
+}
 -(void)initSearchBar
 {
     searchBars = [[UISearchBar alloc] init];
@@ -507,7 +595,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     [searchBars setFrame:CGRectMake(0, 0, 245, 40)];
     searchBars.placeholder = @"Tìm kiếm";
     searchBars.tintColor = [UIColor colorWithHex:@"#EFEFEF" alpha:1];
-//    [searchBars setBackgroundColor:[UIColor darkGrayColor]];
+    //    [searchBars setBackgroundColor:[UIColor darkGrayColor]];
     [searchBars setBarTintColor:[UIColor darkGrayColor]];
     searchBars.delegate = self;
     [searchBars setValue:@"Hủy" forKey:@"_cancelButtonText"];
@@ -517,7 +605,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     searchBarView.autoresizingMask = 0;
     [searchBarView addSubview:searchBars];
     self.navigationItem.titleView = searchBarView;
-//    [self.view addSubview:searchBars];
+    //    [self.view addSubview:searchBars];
 }
 - (void)notificationUpdateLocation:(NSNotification *)notification {
     [self initData];

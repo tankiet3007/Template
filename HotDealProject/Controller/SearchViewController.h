@@ -11,4 +11,5 @@
 @interface SearchViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, UISearchBarDelegate>
 @property(nonatomic,strong)UITableView * tableViewSearch;
 @property (strong, nonatomic) UISearchBar *searchBars;
+@property (strong, nonatomic) NSString *searchText;
 @end
