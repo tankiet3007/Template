@@ -18,13 +18,19 @@
     [super viewDidLoad];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
-    vContain.layer.borderWidth = 0.5;
-    vContain.layer.borderColor =[UIColor lightGrayColor].CGColor;
+        [self initView];
     [self initData];
     [self initNavigationbar];
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)initView
+{
+    [vContain setFrame:CGRectMake(10, 10, ScreenWidth - 20, 110)];
+    vContain.layer.borderWidth = 0.5;
+    vContain.layer.borderColor =[UIColor lightGrayColor].CGColor;
+    [_btnUse setFrame:CGRectMake(10, 144, ScreenWidth -20, 42)];
+}
 -(void)initData
 {
     NSString * strUserAmount = F(@"%d", 2000000);

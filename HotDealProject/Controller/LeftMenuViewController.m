@@ -48,7 +48,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+//    [[self navigationController] setNavigationBarHidden:YES animated:YES];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     revealVC = [self revealViewController];
@@ -66,7 +66,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 -(void)initUITableView
 {
     self.view.backgroundColor = [UIColor darkGrayColor];
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 60, ScreenWidth, ScreenHeight-60) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-20) style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = [UIColor darkGrayColor];
     
@@ -95,10 +95,12 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     arrMenu = [[NSMutableArray alloc]init];
     MenuItem * menuItem = [[MenuItem alloc]init];
     menuItem.name = F(@"Địa điểm : %@", location);
+    menuItem.logo = @"map_pin_fill-512";
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Trang chủ";
+    menuItem.logo = @"leftmenu_1";
     
     //    subMenu = [NSArray arrayWithObjects:@"Sub 1 - 1",@"Sub 1 - 2",@"Sub 1 - 3", nil];
     //    menuItem.subItem = subMenu;
@@ -106,60 +108,70 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Khuyến mãi mới";
+    menuItem.logo = @"leftmenu_2";
     //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
     //    menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Thời trang - Phụ kiện";
+    menuItem.logo = @"leftmenu_3";
     subMenu = [NSArray arrayWithObjects:@"Thời trang nữ",@"Thời trang nam",@"Thời trang trẻ em",@"Phụ kiện thời trang",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Nhà hàng - Ẩm thực";
+    menuItem.logo = @"leftmenu_4";
     subMenu = [NSArray arrayWithObjects:@"Buffet",@"Nhà hàng - Quán ăn",@"Cafe - Kem  - Bánh",@"Thực phẩm",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Sức khoẻ - Làm đẹp";
+    menuItem.logo = @"leftmenu_5";
     subMenu = [NSArray arrayWithObjects:@"Spa - Thẩm mỹ viện",@"Salon - Làm đẹp",@"Nha khoa - Sức khỏe",@"Mỹ phẩm",@"Dụng cụ làm đẹp",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Du lịch - Khách sạn";
+    menuItem.logo = @"leftmenu_6";
     subMenu = [NSArray arrayWithObjects:@"Khách sạn - Resorts",@"Tour trong nước",@"Tour nước ngoài",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Điện tử - Công nghệ";
+    menuItem.logo = @"leftmenu_7";
     subMenu = [NSArray arrayWithObjects:@"Phụ kiện công nghệ",@"Thiết bị điện tử",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Giải trí - Đào tạo";
+    menuItem.logo = @"leftmenu_8";
     subMenu = [NSArray arrayWithObjects:@"Giải trí - Vui chơi",@"Đào tạo",@"Thể dục thẩm mỹ",@"Sách - Tạp chí", @"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Gia dụng - Nội thất";
+    menuItem.logo = @"leftmenu_9";
     subMenu = [NSArray arrayWithObjects:@"Nhà cửa - Đời sống",@"Thiết bị điện tử",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Tài khoản";
+    menuItem.logo = @"leftmenu_10";
     //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
     //    menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Hỗ trợ";
+    menuItem.logo = @"leftmenu_11";
     //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
     //    menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
@@ -259,7 +271,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     
     APLSectionInfo *sectionInfo = (self.sectionInfoArray)[section];
     sectionInfo.headerView = sectionHeaderView;
-    
+    sectionHeaderView.imgSectionLogo.image = [UIImage imageNamed:sectionInfo.menuItem.logo];
     sectionHeaderView.titleLabel.text = sectionInfo.menuItem.name;
     sectionHeaderView.section = section;
     sectionHeaderView.delegate = self;
@@ -467,22 +479,45 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 }
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    SearchViewController *searchVC = [SearchViewController alloc];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:searchVC];
-    [revealVC setFrontViewController:navigationController animated:YES];
-    [revealVC revealToggle:nil];
-    return NO;
+//    SearchViewController *searchVC = [SearchViewController alloc];
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:searchVC];
+//    [revealVC setFrontViewController:navigationController animated:YES];
+//    [revealVC revealToggle:nil];
+    [searchBars setFrame:CGRectMake(0, 0, ScreenWidth - 40, 40)];
+    self.revealViewController.rearViewRevealWidth = 320;
+    [self.revealViewController setFrontViewPosition: FrontViewPositionRightMost animated: YES];
+    _tableView.hidden = YES;
+    searchBar.showsCancelButton = YES;
+    return YES;
 }
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
+{
+    _tableView.hidden = NO;
+    [searchBars setFrame:CGRectMake(0, 0, 245, 40)];
+    searchBar.showsCancelButton = NO;
+    self.revealViewController.rearViewRevealWidth = 260;
+     [self.revealViewController setFrontViewPosition: FrontViewPositionRight animated: YES];
+    [searchBars resignFirstResponder];
+}
+
 -(void)initSearchBar
 {
     searchBars = [[UISearchBar alloc] init];
     //    searchBars.backgroundColor = [UIColor darkGrayColor];
-    [searchBars setFrame:CGRectMake(0, 20, 259, 40)];
-    searchBars.placeholder = @"Tìm kiếm                              ";
-    [searchBars setBackgroundColor:[UIColor darkGrayColor]];
+    [searchBars setFrame:CGRectMake(0, 0, 245, 40)];
+    searchBars.placeholder = @"Tìm kiếm";
+    searchBars.tintColor = [UIColor colorWithHex:@"#EFEFEF" alpha:1];
+//    [searchBars setBackgroundColor:[UIColor darkGrayColor]];
     [searchBars setBarTintColor:[UIColor darkGrayColor]];
     searchBars.delegate = self;
-    [self.view addSubview:searchBars];
+    [searchBars setValue:@"Hủy" forKey:@"_cancelButtonText"];
+    [searchBars setBackgroundImage:[UIImage new]];
+    [searchBars setTranslucent:YES];
+    UIView *searchBarView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 310.0, 44.0)];
+    searchBarView.autoresizingMask = 0;
+    [searchBarView addSubview:searchBars];
+    self.navigationItem.titleView = searchBarView;
+//    [self.view addSubview:searchBars];
 }
 - (void)notificationUpdateLocation:(NSNotification *)notification {
     [self initData];

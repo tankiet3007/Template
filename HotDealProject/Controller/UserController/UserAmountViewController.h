@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblUserRecieve;
 @property (weak, nonatomic) IBOutlet UILabel *lblUserUsed;
 - (IBAction)useAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *btnUse;
 
 @end

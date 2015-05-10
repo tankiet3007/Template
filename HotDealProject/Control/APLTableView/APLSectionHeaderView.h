@@ -55,6 +55,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *disclosureButton;
 @property (nonatomic, weak) IBOutlet id <SectionHeaderViewDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIImageView *imgSectionLogo;
 
 @property (nonatomic) NSInteger section;
 
