@@ -53,11 +53,6 @@
     // Do any additional setup after loading the view.
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
@@ -69,6 +64,10 @@
     return self;
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 -(void)initUITableView
 {
     //    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 40) style:UITableViewStyleGrouped];
@@ -89,6 +88,8 @@
     topToBottom.direction=UISwipeGestureRecognizerDirectionDown;
     
     [self.tableView addGestureRecognizer:topToBottom];
+    self.tableView.scrollEnabled = NO;
+    self.tableView.userInteractionEnabled = NO;
 }
 
 -(void)closeKeyboard
@@ -271,11 +272,6 @@
             [lbl setUserInteractionEnabled:YES];
             [lbl addGestureRecognizer:gesture];
             
-            UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
-            [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
-            [cellRe addSubview:imgArrow];
-
-            
             return cellRe;
             
         }
@@ -305,10 +301,6 @@
             [lbl setUserInteractionEnabled:YES];
             [lbl addGestureRecognizer:gesture];
             
-            UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
-            [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
-            [cellRe addSubview:imgArrow];
-
             return cellRe;
             
         }
@@ -377,6 +369,14 @@
     lcell.tfPassword.returnKeyType = UIReturnKeyDone;
     lcell.tfPassword.secureTextEntry  = YES;
     [lcell.btnLogin addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
+ 
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
+    lcell.tfEmail.leftView = paddingView;
+    lcell.tfEmail.leftViewMode = UITextFieldViewModeAlways;
+    
+    paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
+    lcell.tfPassword.leftView = paddingView;
+    lcell.tfPassword.leftViewMode = UITextFieldViewModeAlways;
     
     [lcell.btnForgotPassword addTarget:self action:@selector(forgotPassClick) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -452,10 +452,12 @@
     if (segmentedControl.selectedSegmentIndex == 0) {
         cell.hidden = NO;
         isLoginFrame = TRUE;
+            self.tableView.scrollEnabled = NO;
         [self.tableView reloadData];
     }
     else
     {
+            self.tableView.scrollEnabled = YES;
         isLoginFrame = FALSE;
         cell.hidden = YES;
         [self.tableView reloadData];
