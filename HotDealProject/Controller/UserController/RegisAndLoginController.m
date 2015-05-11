@@ -25,6 +25,8 @@
     UIView * viewHeader;
     BOOL isLoginFrame;
     UITextField* tfEmail;
+    UITextField* tfEmailLogin;
+    UITextField* tfPasswordLogin;
     UITextField* tfPassword;
     UITextField* tfConfirmPassword;
     UITextField* tfFullname;
@@ -32,6 +34,7 @@
     UILabel* lblBirthday;
     UILabel* lblGender;
     UIButton* btnRegister;
+    UIButton* btnLoginFacebook;
     UIToolbar *toolbar;
     BOOL isBirthdayAction;
 }
@@ -89,12 +92,16 @@
     
     [self.tableView addGestureRecognizer:topToBottom];
     self.tableView.scrollEnabled = NO;
-    self.tableView.userInteractionEnabled = NO;
+    //self.tableView.userInteractionEnabled;
 }
 
 -(void)closeKeyboard
 {
     [self.view endEditing:YES];
+}
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
 }
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView
                     withVelocity:(CGPoint)velocity
@@ -129,7 +136,7 @@
     
     UIImage *image = [UIImage imageNamed:@"menu_n.png"];
     UIButton * rBtest = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rBtest addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    [rBtest addTarget:self action:@selector(myMethod) forControlEvents:UIControlEventTouchUpInside];
     [rBtest setBackgroundImage:image forState:UIControlStateNormal];
     [rBtest setFrame:CGRectMake(0, 0, 30, 30)];
     
@@ -137,11 +144,19 @@
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
 }
+
+-(void)myMethod{
+    [self.view endEditing:YES];
+    SWRevealViewController *reveal = self.revealViewController;
+    [reveal revealToggleAnimated:YES];
+}
+
+
 #pragma mark tableview delegate + datasource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (isLoginFrame == TRUE) {
-        return  1;
+        return  3;
     }
     else
     {
@@ -152,7 +167,10 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (isLoginFrame == TRUE) {
-        return 1;
+        if (section == 0) {
+            return 2;
+        }
+        return 1;//3 login facebook, google +
     }
     else
     {
@@ -166,7 +184,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (isLoginFrame == TRUE) {
-        return ScreenHeight-80;
+        return 50;
     }
     else
     {
@@ -182,16 +200,78 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (isLoginFrame == TRUE) {
-        cell = (LoginCell *)[tableView dequeueReusableCellWithIdentifier:nil];
-        if (cell == nil)
-        {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoginCell" owner:self options:nil];
-            cell = [nib objectAtIndex:0];
+        if (indexPath.section == 0) {
+            UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            
+            // Make cell unselectable
+            cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
+            UITextField* tf = nil ;
+            switch ( indexPath.row ) {
+                case 0: {
+                    cellRe.textLabel.text = @"" ;
+                    tf = tfEmailLogin = [self makeTextField:@"" placeholder:@"Địa chỉ email"];
+                    tf.textColor = [UIColor lightGrayColor];
+                    [cellRe addSubview:tfEmailLogin];
+                    break ;
+                }
+                case 1: {
+                    cellRe.textLabel.text = @"" ;
+                    tf = tfPasswordLogin = [self makeTextField:@"" placeholder:@"Mật khẩu"];
+                    tfPasswordLogin.secureTextEntry = YES;
+                    [cellRe addSubview:tfPasswordLogin];
+                    break ;
+                }
+            }
+            
+            // Textfield dimensions
+            tf.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
+            //        cell.contentView.backgroundColor = [UIColor clearColor];
+            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+            // We want to handle textFieldDidEndEditing
+            tf.delegate = self ;
+            UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(20, 38, ScreenWidth - 40, 2)];
+            imgLine.image = [UIImage imageNamed:@"gach"];
+            [cellRe.contentView addSubview:imgLine];
+            
+            return cellRe;
+            
         }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [self configureCell:cell forRowAtIndexPath:indexPath];
-        cell.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-        return cell;
+        if (indexPath.section == 1)
+        {
+            
+            UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            
+            // Make cell unselectable
+            cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
+            UIButton* button = nil ;
+            
+            button = btnLoginFacebook = [self makeButtonLogin];
+            [cellRe addSubview:btnLoginFacebook];
+            
+            // Textfield dimensions
+            button.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
+            //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+            return cellRe;
+        }
+        else// (indexPath.section == 2)
+        {
+            
+            UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            
+            // Make cell unselectable
+            cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
+            UIButton* button = nil ;
+            
+            button = btnLoginFacebook = [self makeButtonLoginFacebook];
+            [cellRe addSubview:btnLoginFacebook];
+            
+            // Textfield dimensions
+            button.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
+            //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+            return cellRe;
+        }
     }
     else
     {
@@ -213,11 +293,13 @@
                     cellRe.textLabel.text = @"" ;
                     tf = tfPassword = [self makeTextField:@"" placeholder:@"Mật khẩu"];
                     [cellRe addSubview:tfPassword];
+                                        tfPassword.secureTextEntry = YES;
                     break ;
                 }
                 case 2: {
                     cellRe.textLabel.text = @"" ;
                     tf = tfConfirmPassword = [self makeTextField:@"" placeholder:@"Nhập lại mật khẩu"];
+                    tfConfirmPassword.secureTextEntry = YES;
                     [cellRe addSubview:tfConfirmPassword];
                     break ;
                 }
@@ -318,7 +400,7 @@
             // Textfield dimensions
             button.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
             //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-             cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             return cellRe;
             
         }
@@ -341,6 +423,27 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn setTitle:@"Đăng ký" forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor redColor]];
+    btn.titleLabel.font = [UIFont systemFontOfSize:13];
+    [btn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
+    return btn;
+}
+
+-(UIButton*) makeButtonLogin{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setTitle:@"Đăng nhập" forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor redColor]];
+    btn.titleLabel.font = [UIFont systemFontOfSize:13];
+    [btn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
+    return btn;
+}
+
+
+-(UIButton*) makeButtonLoginFacebook{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setTitle:@"Đăng nhập bằng facebook" forState:UIControlStateNormal];
     [btn setBackgroundColor:[UIColor redColor]];
     btn.titleLabel.font = [UIFont systemFontOfSize:13];
     [btn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
@@ -369,7 +472,7 @@
     lcell.tfPassword.returnKeyType = UIReturnKeyDone;
     lcell.tfPassword.secureTextEntry  = YES;
     [lcell.btnLogin addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
- 
+    
     UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
     lcell.tfEmail.leftView = paddingView;
     lcell.tfEmail.leftViewMode = UITextFieldViewModeAlways;
@@ -398,7 +501,16 @@
         }
         return 0;
     }
-    return 60;
+    else
+    {
+        if (section == 0)
+            return 60;
+        if (section == 1) {
+            return 44;
+        }
+        else
+            return 0;
+    }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -408,7 +520,23 @@
         }
         return nil;
     }
-    return viewHeader;
+    else
+    {
+        if (section == 0) {
+            return viewHeader;
+        }
+        if (section == 1) {
+            UIView * viewForgotpass = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth -20, 44)];
+            UIButton * btnForgot = [UIButton buttonWithType:UIButtonTypeSystem];
+            [btnForgot setFrame:CGRectMake(0, -5, 200, 35)];
+            [btnForgot setTitle:@"Bạn quên mật khẩu ?" forState:UIControlStateNormal];
+            [btnForgot addTarget:self action:@selector(forgotPassClick) forControlEvents:UIControlEventTouchUpInside];
+            [viewForgotpass addSubview:btnForgot];
+            return viewForgotpass;
+        }
+        else return nil;
+        
+    }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -452,12 +580,12 @@
     if (segmentedControl.selectedSegmentIndex == 0) {
         cell.hidden = NO;
         isLoginFrame = TRUE;
-            self.tableView.scrollEnabled = NO;
+        self.tableView.scrollEnabled = NO;
         [self.tableView reloadData];
     }
     else
     {
-            self.tableView.scrollEnabled = YES;
+        self.tableView.scrollEnabled = YES;
         isLoginFrame = FALSE;
         cell.hidden = YES;
         [self.tableView reloadData];
