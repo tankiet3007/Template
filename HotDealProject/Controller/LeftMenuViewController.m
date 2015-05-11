@@ -72,7 +72,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 -(void)initUITableView
 {
     self.view.backgroundColor = [UIColor darkGrayColor];
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-20) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-60) style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = [UIColor darkGrayColor];
     

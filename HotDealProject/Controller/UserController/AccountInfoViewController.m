@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "AutoSizeTableViewCell.h"
 #import "PersonalInfoViewController.h"
+
 //#import "EmailPromotionViewController.h"
 @interface AccountInfoViewController ()
 #define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
@@ -25,6 +26,7 @@
     BBBadgeBarButtonItem *barButton;
     NSArray * arrProduct;
     NSArray * arrProvine;
+    NSString * strAddressL;
 }
 @synthesize tableInfo;
 - (void)viewDidLoad {
@@ -33,6 +35,7 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
+    strAddressL = @"";
     [self getAllProvineSelected];
     [self initNavigationbar];
     [self initUITableView];
@@ -173,7 +176,11 @@
     
     if (indexPath.section == 2) {
         cell.titleLabel.text = @"Địa chỉ nhận hàng";
-        cell.desLabel.text = @"Trần Tấn Kiệt\nĐTDĐ:0936459200\nYoco Building\n41, Nguyễn Thị Minh Khai, Phường Bến Nghé, Quận 1, TP Hồ Chí Minh\n\n";
+        if ([strAddressL isEqualToString:@""] || strAddressL == nil) {
+            cell.desLabel.text = @"Trần Tấn Kiệt\nĐTDĐ:0936459200\nYoco Building\n41, Nguyễn Thị Minh Khai, Phường Bến Nghé, Quận 1, TP Hồ Chí Minh\n\n";
+        }
+        else
+            cell.desLabel.text = F(@"%@\n\n",strAddressL);
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -222,6 +229,11 @@
         email.delegate = self;
         [self.navigationController pushViewController:email animated:YES];
     }
+    if (indexPath.section == 2) {
+        AddressViewController * addressVC = [[AddressViewController alloc]init];
+        addressVC.delegate = self;
+        [self.navigationController pushViewController:addressVC animated:YES];
+    }
 }
 -(void)getAllProvineSelected
 {
@@ -230,5 +242,10 @@
 -(void)updateProvine
 {
     [self getAllProvineSelected];
+}
+-(void)updateAddress:(NSString *)strAddress
+{
+    strAddressL = strAddress;
+    [tableInfo reloadData];
 }
 @end

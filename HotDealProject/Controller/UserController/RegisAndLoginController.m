@@ -53,6 +53,11 @@
     // Do any additional setup after loading the view.
 }
 
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
@@ -64,10 +69,6 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 -(void)initUITableView
 {
     //    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 40) style:UITableViewStyleGrouped];
@@ -270,6 +271,11 @@
             [lbl setUserInteractionEnabled:YES];
             [lbl addGestureRecognizer:gesture];
             
+            UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
+            [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
+            [cellRe addSubview:imgArrow];
+
+            
             return cellRe;
             
         }
@@ -299,6 +305,10 @@
             [lbl setUserInteractionEnabled:YES];
             [lbl addGestureRecognizer:gesture];
             
+            UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
+            [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
+            [cellRe addSubview:imgArrow];
+
             return cellRe;
             
         }

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ShoppingCartController.h"
 #import "EmailPromotionViewController.h"
-@interface AccountInfoViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,ShoppingCartDelegate,ProvineDelegate>
+#import "AddressViewController.h"
+@interface AccountInfoViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,ShoppingCartDelegate,ProvineDelegate, AddressDelegate>
 @property (nonatomic, strong) UITableView * tableInfo;
 @end

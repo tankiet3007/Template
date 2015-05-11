@@ -31,7 +31,8 @@
 
 -(void)backbtn_click:(id)sender
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)initNavigationbar
