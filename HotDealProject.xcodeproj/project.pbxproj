@@ -173,6 +173,7 @@
 		E9F3AB8B1B00639A00A91D9C /* AddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3AB891B00639A00A91D9C /* AddressCell.m */; };
 		E9F3AB8C1B00639A00A91D9C /* AddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9F3AB8A1B00639A00A91D9C /* AddressCell.xib */; };
 		E9F3AB8F1B0084C300A91D9C /* AddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3AB8E1B0084C300A91D9C /* AddressTableViewController.m */; };
+		E9F3AB911B00A03F00A91D9C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9F3AB901B00A03F00A91D9C /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -494,6 +495,7 @@
 		E9F3AB8A1B00639A00A91D9C /* AddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddressCell.xib; path = Control/AddressCell.xib; sourceTree = "<group>"; };
 		E9F3AB8D1B0084C300A91D9C /* AddressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddressTableViewController.h; path = Controller/UserController/AddressTableViewController.h; sourceTree = "<group>"; };
 		E9F3AB8E1B0084C300A91D9C /* AddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressTableViewController.m; path = Controller/UserController/AddressTableViewController.m; sourceTree = "<group>"; };
+		E9F3AB901B00A03F00A91D9C /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -537,6 +539,7 @@
 				E9B24BDC1AF860B500322C0F /* PayItem.m */,
 				E972563F1AFA08AD0012D8DD /* Provine.h */,
 				E97256401AFA08AD0012D8DD /* Provine.m */,
+				E9F3AB901B00A03F00A91D9C /* Localizable.strings */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1230,6 +1233,7 @@
 				E9B24BE21AF873E400322C0F /* BookSuccessViewController.xib in Resources */,
 				E98D4FC31AF627D50013EF4C /* HelpViewController.xib in Resources */,
 				E978784E1AE92C8A003A3B84 /* InvoiceCell.xib in Resources */,
+				E9F3AB911B00A03F00A91D9C /* Localizable.strings in Resources */,
 				E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */,
 				E9B3DA3E1AE24731009C668D /* AutoSizeTableViewCell.xib in Resources */,
 				E9D9BB1C1AFB65C600FF07AB /* ProductTableViewCell.xib in Resources */,

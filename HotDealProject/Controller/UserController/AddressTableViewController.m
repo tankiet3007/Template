@@ -11,7 +11,12 @@
 @interface AddressTableViewController ()
 
 @end
-
+typedef enum {
+    ProvinceCb,
+    DistrictCb,
+    PhuongXaCb,
+    AddressTypeCb
+}ComboboxType;
 @implementation AddressTableViewController
 {
     UITextField* tfFullname;
@@ -25,7 +30,10 @@
     UILabel* strAddressType;
     UIToolbar *toolbar;
     UIButton* btnRegister;
-
+    NSArray * arrProvince;
+    NSArray * arrDistrict;
+    NSArray * arrAddressType;
+    ComboboxType cbType;
 }
 @synthesize pickerViewMain;
 - (void)viewDidLoad {
@@ -33,14 +41,23 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     [self initNavigationBar];
+    cbType = ProvinceCb;
+    [self initData];
     [self initUITableView];
+    [self setupPickerCommon];
+    [self setupToolBar];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
+-(void)initData
+{
+    arrProvince = [NSArray arrayWithObjects:@"TP.HCM",@"Hà Nội",@"Đà Nẵng",@"Vũng Tàu", nil];
+    arrDistrict = [NSArray arrayWithObjects:@"Quận 1",@"Quận 2",@"Quận 3",@"Quận 4",@"Quận 5",@"Quận 6",@"Quận 7", nil];
+    arrAddressType = [NSArray arrayWithObjects:@"Nhà riêng",@"Cơ quan", nil];
+}
 -(void)initNavigationBar
 {
     AppDelegate * appdelegate = ApplicationDelegate;
@@ -144,7 +161,7 @@
         lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
         cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
         
-        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox)];
+        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox2)];
         // if labelView is not set userInteractionEnabled, you must do so
         [lbl setUserInteractionEnabled:YES];
         [lbl addGestureRecognizer:gesture];
@@ -152,7 +169,7 @@
         UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
         [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
         [cellRe addSubview:imgArrow];
-
+        
         return cellRe;
         
     }
@@ -177,14 +194,14 @@
         lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
         cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
         
-        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox)];
+        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox3)];
         // if labelView is not set userInteractionEnabled, you must do so
         [lbl setUserInteractionEnabled:YES];
         [lbl addGestureRecognizer:gesture];
         UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
         [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
         [cellRe addSubview:imgArrow];
-
+        
         
         return cellRe;
         
@@ -210,7 +227,7 @@
         lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
         cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
         
-        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox)];
+        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox1)];
         // if labelView is not set userInteractionEnabled, you must do so
         [lbl setUserInteractionEnabled:YES];
         [lbl addGestureRecognizer:gesture];
@@ -218,7 +235,7 @@
         UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
         [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
         [cellRe addSubview:imgArrow];
-
+        
         
         return cellRe;
         
@@ -244,7 +261,7 @@
         lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
         cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
         
-        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox)];
+        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox4)];
         // if labelView is not set userInteractionEnabled, you must do so
         [lbl setUserInteractionEnabled:YES];
         [lbl addGestureRecognizer:gesture];
@@ -252,7 +269,7 @@
         UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
         [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
         [cellRe addSubview:imgArrow];
-
+        
         
         return cellRe;
         
@@ -331,17 +348,17 @@
     toolbar.hidden = YES;
 }
 -(void)doneButtonPressed:(id)sender{
-//    NSInteger  iIndex =  [pickerGender selectedRowInComponent:0];
-//    if (iIndex == 0) {
-//        lblGender.text = @"  Nam";
-//    }
-//    else
-//    {
-//        lblGender.text = @"  Nữ";
-//    }
-//    
-//    lblGender.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
-//    pickerGender.hidden = YES;
+    //    NSInteger  iIndex =  [pickerGender selectedRowInComponent:0];
+    //    if (iIndex == 0) {
+    //        lblGender.text = @"  Nam";
+    //    }
+    //    else
+    //    {
+    //        lblGender.text = @"  Nữ";
+    //    }
+    //
+    //    lblGender.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+    pickerViewMain.hidden = YES;
     toolbar.hidden = YES;
 }
 
@@ -354,28 +371,38 @@
 
 -(void)makePicker
 {
-//    CGRect pickerFrame = CGRectMake(0,ScreenHeight - 162-60,0,0);
-//    
-//    pickerView = [[UIDatePicker alloc] initWithFrame:pickerFrame];
-//    pickerView.hidden = YES;
-//    [self.view addSubview:pickerView];
+    //    CGRect pickerFrame = CGRectMake(0,ScreenHeight - 162-60,0,0);
+    //
+    //    pickerView = [[UIDatePicker alloc] initWithFrame:pickerFrame];
+    //    pickerView.hidden = YES;
+    //    [self.view addSubview:pickerView];
 }
 
 -(void)showPicker
 {
-//    isBirthdayAction = TRUE;
-//    pickerView.backgroundColor = [UIColor whiteColor];
-//    pickerView.datePickerMode = UIDatePickerModeDate;
-//    pickerView.hidden = NO;
-//    toolbar.hidden = NO;
-//    
-//    NSDate *currentDate = [NSDate date];
-//    [pickerView setMaximumDate:currentDate];
+    //    isBirthdayAction = TRUE;
+    //    pickerView.backgroundColor = [UIColor whiteColor];
+    //    pickerView.datePickerMode = UIDatePickerModeDate;
+    //    pickerView.hidden = NO;
+    //    toolbar.hidden = NO;
+    //
+    //    NSDate *currentDate = [NSDate date];
+    //    [pickerView setMaximumDate:currentDate];
     
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return 2;
+    if (cbType == DistrictCb) {
+       return  [arrDistrict count];
+        
+    }
+    if (cbType == ProvinceCb) {
+    return [arrProvince count];
+    }
+    else
+    {
+        return [arrAddressType count];
+    }
 }
 
 // tell the picker how many components it will have
@@ -385,11 +412,14 @@
 
 // tell the picker the title for a given component
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if (row == 0 ) {
-        return  @"Nam";
+    if (cbType == DistrictCb) {
+       return [arrDistrict objectAtIndex:row];
     }
-    
-    return  @"Nữ";
+    if (cbType == ProvinceCb) {
+        return [arrProvince objectAtIndex:row];
+    }
+    else
+        return [arrAddressType objectAtIndex:row];
 }
 
 // tell the picker the width of each row for a given component
@@ -443,11 +473,37 @@
     return 50;
 }
 
--(void)showDropbox
+-(void)showDropbox1
 {
     pickerViewMain.hidden = NO;
     toolbar.hidden = NO;
+    cbType = ProvinceCb;
+    [pickerViewMain reloadAllComponents];
 }
+-(void)showDropbox2
+{
+    pickerViewMain.hidden = NO;
+    toolbar.hidden = NO;
+    cbType = DistrictCb;
+    [pickerViewMain reloadAllComponents];
+}
+
+-(void)showDropbox3
+{
+    cbType = PhuongXaCb;
+    pickerViewMain.hidden = NO;
+    toolbar.hidden = NO;
+    [pickerViewMain reloadAllComponents];
+}
+
+-(void)showDropbox4
+{
+    cbType = AddressTypeCb;
+    pickerViewMain.hidden = NO;
+    toolbar.hidden = NO;
+    [pickerViewMain reloadAllComponents];
+}
+
 -(UIButton*) makeButtonRegister{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -456,5 +512,9 @@
     btn.titleLabel.font = [UIFont systemFontOfSize:12];
     [btn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
     return btn;
+}
+-(void)registerClick
+{
+    UA_log(@"GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY");
 }
 @end

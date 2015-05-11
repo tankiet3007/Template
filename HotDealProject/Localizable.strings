@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  HotDealProject
+
+  Created by Tran Tan Kiet on 5/11/15.
+  Copyright (c) 2015 Tran Tan Kiet. All rights reserved.
+*/
+"MessageBoxOK" = "Đồng ý";
+
+"MessageBoxTitle" = "Thông báo";
