@@ -43,7 +43,7 @@
 //    arrSelectedItem = [[NSMutableArray alloc]init];
     iTagedButton = -1;
     iSelectedQuantity = -1;
-    [self setupLoginBtn];
+    [self setupDoneBtn];
     [self initUITableView];
     [self setupPickerview];
     [self setupToolbar];
@@ -190,25 +190,26 @@
     [viewFooter addSubview:btnChoiceProducts];
     return viewFooter;
 }
--(UIButton *)setupLoginBtn
+-(UIButton *)setupDoneBtn
 {
     btnChoiceProducts = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth - 20, 40)];
     [btnChoiceProducts setBackgroundColor:[UIColor greenColor]];
     [btnChoiceProducts setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnChoiceProducts setTitle:@"CHỌN" forState:UIControlStateNormal];
-    [btnChoiceProducts addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
+    [btnChoiceProducts addTarget:self action:@selector(doneClick) forControlEvents:UIControlEventTouchUpInside];
     return btnChoiceProducts;
 }
--(void)loginClick
+-(void)doneClick
 {
     UA_log(@"clicked");
     for (ProductObject * item  in arrProduct) {
-        UA_log(@"%d",item.iCurrentQuantity);
+        UA_log(@"%d",item.iMaxQuantity);
         if (item.iCurrentQuantity != 0) {
             [[TKDatabase sharedInstance]addProduct:item];
         }
     }
-    [self.delegate updateTotalSeletedItem:arrProduct];
+//    [self.delegate updateTotalSeletedItem:arrProduct];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"notiDealCount" object:nil];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

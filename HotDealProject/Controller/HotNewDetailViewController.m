@@ -56,7 +56,15 @@
     [self setupViewHeader];
     [self initUITableView];
     [self.view addSubview:[self setupBottomView]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateDealCount:) name:@"notiDealCount"
+                                               object:nil];
     // Do any additional setup after loading the view.
+}
+
+- (void)updateDealCount:(NSNotification *)notification {
+    [self updateTotal];
 }
 
 -(void)setupLabelDescription

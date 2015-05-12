@@ -215,6 +215,8 @@
     UIButton * btnSelected = (UIButton *)sender;
     UA_log(@"%ld",btnSelected.tag);
     iTagedButton = btnSelected.tag;
+    ProductObject * item = [arrProduct objectAtIndex:btnSelected.tag];
+     numRowsInPicker = item.iMaxQuantity + 1;
     myPickerView.hidden = NO;
     toolBar.hidden = NO;
     tableViewProduct.userInteractionEnabled = NO;

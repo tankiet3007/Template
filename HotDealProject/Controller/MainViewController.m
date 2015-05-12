@@ -62,10 +62,19 @@
     [self setupNewDeal];
     [self setupCategory];
     [self setupSegment];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateDealCount:) name:@"notiDealCount"
+                                               object:nil];
 //    [self showDialog];
     // Do any additional setup after loading the view from its nib.
 }
-
+-(void)dealloc
+{
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"notiDealCount" object:nil];
+}
+- (void)updateDealCount:(NSNotification *)notification {
+    [self updateTotal];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
