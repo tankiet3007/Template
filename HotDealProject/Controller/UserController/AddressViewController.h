@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddressTableViewController.h"
 @protocol AddressDelegate;
-@interface AddressViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface AddressViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, AddressTableDelegate>
 {
     id<AddressDelegate> delegate;
 }

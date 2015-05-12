@@ -7,8 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol AddressTableDelegate;
 @interface AddressTableViewController : UITableViewController
 <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate,UIPickerViewDelegate>
-@property (strong, nonatomic)  UIPickerView *pickerViewMain;
+{
+    id<AddressTableDelegate> delegate;
+}
+@property id<AddressTableDelegate>delegate;
+
+@property (strong, nonatomic) UIPickerView *pickerViewMain;
+@property (strong, nonatomic) NSString * strTitle;
+@end
+@protocol AddressTableDelegate <NSObject>
+-(void)updateTableAddress:(NSString *)strAddress;
 @end

@@ -15,14 +15,20 @@
 @implementation WebViewController
 
 @synthesize webView,url;
+@synthesize sTitle, strContent;
 - (void)viewDidLoad {
     [super viewDidLoad];
     webView.delegate = self;
 
     [self initNavigationbar:_sTitle];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    [webView loadRequest:request];
-   
+    if (url != nil) {
+        NSURLRequest * request = [NSURLRequest requestWithURL:url];
+        [webView loadRequest:request];
+    }
+    else
+    {
+        [webView loadHTMLString:strContent baseURL:nil];
+    }
     // Do any additional setup after loading the view from its nib.
 }
 

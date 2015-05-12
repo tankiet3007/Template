@@ -11,4 +11,7 @@
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic, strong) NSURL* url;
 @property (nonatomic, strong) NSString* sTitle;
+
+@property (nonatomic, strong) NSString * strContent;
+@property (nonatomic, assign) int iOption;
 @end

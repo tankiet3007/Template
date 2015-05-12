@@ -61,7 +61,7 @@ typedef enum {
 -(void)initNavigationBar
 {
     AppDelegate * appdelegate = ApplicationDelegate;
-    [appdelegate initNavigationbar:self withTitle:@"Địa chỉ giao hàng"];
+    [appdelegate initNavigationbar:self withTitle:_strTitle];
 }
 -(void)backbtn_click:(id)sender
 {
@@ -516,5 +516,7 @@ typedef enum {
 -(void)registerClick
 {
     UA_log(@"GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY");
+    [self.delegate updateTableAddress:@"GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY"];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

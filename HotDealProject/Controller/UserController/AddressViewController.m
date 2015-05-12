@@ -9,14 +9,14 @@
 #import "AddressViewController.h"
 #import "AppDelegate.h"
 #import "AddressCell.h"
-#import "AddressTableViewController.h"
+
 @interface AddressViewController ()
 
 @end
 
 @implementation AddressViewController
 {
-    NSArray * arrAddress;
+    NSMutableArray * arrAddress;
     NSIndexPath * indexPathSelected;
     UIView * vFooter;
 }
@@ -53,8 +53,8 @@
 
 -(void)initData
 {
-    arrAddress = [NSArray new];
-    arrAddress = [NSArray arrayWithObjects:@"33 ấp 4 xã Phước Kiển huyện Nhà Bè, TP.HCM, toà nha Yoco Building",@"41 Nguyễn Thị Minh Khai, toà nhà Yoco Buiding Phường Bến Nghé, Quận 1, TP.HCM", nil];
+    arrAddress = [NSMutableArray new];
+    arrAddress = [NSMutableArray arrayWithObjects:@"33 ấp 4 xã Phước Kiển huyện Nhà Bè, TP.HCM, toà nha Yoco Building",@"41 Nguyễn Thị Minh Khai, toà nhà Yoco Buiding Phường Bến Nghé, Quận 1, TP.HCM", nil];
 }
 -(void)initUITableView
 {
@@ -107,7 +107,9 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"AddressCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    [cell.btnEdit addTarget:self action:@selector(editAddress:) forControlEvents:UIControlEventTouchUpInside];
+    cell.btnEdit.tag = indexPath.row;
+    //    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     [self configureCell:cell forRowAtIndexPath:indexPath];
     if (![indexPathSelected isEqual:indexPath]) {
         cell.imgStatus.image = [UIImage imageNamed:@"radio"];
@@ -143,6 +145,8 @@
 {
     UA_log(@"Add Address");
     AddressTableViewController * addressTable = [[AddressTableViewController alloc]init];
+    addressTable.strTitle = @"Địa chỉ giao hàng";
+    addressTable.delegate = self;
     [self.navigationController pushViewController:addressTable animated:YES];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -155,14 +159,31 @@
     [self.delegate updateAddress:[arrAddress objectAtIndex:indexPath.row]];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)editAddress:(id)sender
+{
+    //    UIButton * btnEdit = (UIButton *)sender;
+    AddressTableViewController * addressTable = [[AddressTableViewController alloc]init];
+    addressTable.strTitle = @"Chỉnh sửa địa chỉ";
+    [self.navigationController pushViewController:addressTable animated:YES];
+    //    UA_log(@"%ld selected", btnEdit.tag);
 }
-*/
+-(void)updateTableAddress:(NSString *)strAddress
+{
+    [arrAddress addObject:strAddress];
+    [tableAddress setFrame:CGRectMake(10, 20, ScreenWidth -20 , RowHeight * [arrAddress count] + 50)];
+    
+    [tableAddress reloadData];
+    //    tableAddress = [[UITableView alloc]initWithFrame:CGRectMake(10, 20, ScreenWidth -20 , RowHeight * [arrAddress count] + 50) style:UITableViewStylePlain];
+    
+}
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

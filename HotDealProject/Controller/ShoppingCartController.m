@@ -276,7 +276,7 @@
 }
 -(void)setupPickerview
 {
-    myPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, 320, 200)];
+    myPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, ScreenWidth, 200)];
     numRowsInPicker = 3;
     myPickerView.delegate = self;
     [myPickerView setBackgroundColor:[UIColor whiteColor]];

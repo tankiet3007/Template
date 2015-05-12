@@ -101,7 +101,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     arrMenu = [[NSMutableArray alloc]init];
     MenuItem * menuItem = [[MenuItem alloc]init];
     menuItem.name = F(@"Địa điểm : %@", location);
-    menuItem.logo = @"map_pin_fill-512";
+    menuItem.logo = @"leftmenu_1";
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
