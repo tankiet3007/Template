@@ -232,8 +232,8 @@
     [[TKDatabase sharedInstance]removeProduct:productObj.strProductID];
     if ([arrProduct count] == 0) {
         tableViewProduct.hidden = YES;
-        UIView * viewEmpty = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 300, 30)];
-        UILabel * lblEmpty = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 300, 20)];
+        UIView * viewEmpty = [[UIView alloc]initWithFrame:CGRectMake(10, 10, ScreenWidth - 20, 30)];
+        UILabel * lblEmpty = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, ScreenWidth - 20, 20)];
         lblEmpty.font = [UIFont boldSystemFontOfSize:14];
         lblEmpty.text = @"Không có sản phẩm nào trong giỏ hàng";
         viewEmpty.layer.cornerRadius = 5;
@@ -247,7 +247,7 @@
 
 -(void)setupToolbar
 {
-    toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,ScreenHeight -250 - 44,320,44)];
+    toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,ScreenHeight -250 - 44,ScreenWidth,44)];
     [toolBar setBarStyle:UIBarStyleBlackOpaque];
     
     UIButton *button_done = [UIButton buttonWithType:UIButtonTypeCustom];

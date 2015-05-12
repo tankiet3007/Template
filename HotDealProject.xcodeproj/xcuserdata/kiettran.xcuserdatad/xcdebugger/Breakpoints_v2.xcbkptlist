@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/Controller/UserController/RegisAndLoginController.m"
-            timestampString = "453030998.331889"
+            timestampString = "453108899.382297"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "404"
-            endingLineNumber = "404"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/Controller/UserController/RegisAndLoginController.m"
-            timestampString = "453030998.331889"
+            timestampString = "453108899.382297"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "391"
-            endingLineNumber = "391"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -329,12 +329,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HotDealProject/Controller/UserController/AddressTableViewController.m"
-            timestampString = "453025330.923753"
+            filePath = "HotDealProject/Controller/UserController/AddressTableViewController_.m"
+            timestampString = "453107297.038071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "487"
-            endingLineNumber = "487"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
             landmarkName = "-showDropbox2"
             landmarkType = "5">
          </BreakpointContent>
@@ -345,12 +345,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HotDealProject/Controller/UserController/AddressTableViewController.m"
-            timestampString = "453025372.99668"
+            filePath = "HotDealProject/Controller/UserController/AddressTableViewController_.m"
+            timestampString = "453107297.038071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "479"
-            endingLineNumber = "479"
+            startingLineNumber = "486"
+            endingLineNumber = "486"
             landmarkName = "-showDropbox1"
             landmarkType = "5">
          </BreakpointContent>
@@ -361,8 +361,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HotDealProject/Controller/UserController/AddressTableViewController.m"
-            timestampString = "453025392.726915"
+            filePath = "HotDealProject/Controller/UserController/AddressTableViewController_.m"
+            timestampString = "453107297.038071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "415"
@@ -377,8 +377,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HotDealProject/Controller/UserController/AddressTableViewController.m"
-            timestampString = "453025403.990472"
+            filePath = "HotDealProject/Controller/UserController/AddressTableViewController_.m"
+            timestampString = "453107297.038071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "395"
@@ -394,11 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/Controller/UserController/RegisAndLoginController.m"
-            timestampString = "453030998.331889"
+            timestampString = "453108899.382297"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "583"
-            endingLineNumber = "583"
+            startingLineNumber = "590"
+            endingLineNumber = "590"
             landmarkName = "-mySegmentControlAction"
             landmarkType = "5">
          </BreakpointContent>
@@ -416,6 +416,22 @@
             startingLineNumber = "94"
             endingLineNumber = "94"
             landmarkName = "-initUITableView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HotDealProject/Controller/UserController/AddressTableViewController_.m"
+            timestampString = "453107390.135987"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
+            landmarkName = "-setupPickerCommon"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

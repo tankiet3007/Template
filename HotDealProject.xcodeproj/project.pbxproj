@@ -131,6 +131,7 @@
 		E9B24BDD1AF860B500322C0F /* PayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B24BDC1AF860B500322C0F /* PayItem.m */; };
 		E9B24BE11AF873E400322C0F /* BookSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B24BDF1AF873E400322C0F /* BookSuccessViewController.m */; };
 		E9B24BE21AF873E400322C0F /* BookSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B24BE01AF873E400322C0F /* BookSuccessViewController.xib */; };
+		E9B3A12E1B01DF93000DA4FC /* AddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3A12C1B01DF93000DA4FC /* AddressTableViewController.m */; };
 		E9B3DA331AE213E0009C668D /* CheckQuantityDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3DA311AE213E0009C668D /* CheckQuantityDealCell.m */; };
 		E9B3DA341AE213E0009C668D /* CheckQuantityDealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B3DA321AE213E0009C668D /* CheckQuantityDealCell.xib */; };
 		E9B3DA381AE21431009C668D /* KindOfTransferDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3DA361AE21431009C668D /* KindOfTransferDealCell.m */; };
@@ -172,7 +173,6 @@
 		E9F3AB871B005BE500A91D9C /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3AB861B005BE500A91D9C /* AddressViewController.m */; };
 		E9F3AB8B1B00639A00A91D9C /* AddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3AB891B00639A00A91D9C /* AddressCell.m */; };
 		E9F3AB8C1B00639A00A91D9C /* AddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9F3AB8A1B00639A00A91D9C /* AddressCell.xib */; };
-		E9F3AB8F1B0084C300A91D9C /* AddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3AB8E1B0084C300A91D9C /* AddressTableViewController.m */; };
 		E9F3AB911B00A03F00A91D9C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9F3AB901B00A03F00A91D9C /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -423,6 +423,8 @@
 		E9B24BDE1AF873E400322C0F /* BookSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookSuccessViewController.h; path = Controller/UserController/BookSuccessViewController.h; sourceTree = "<group>"; };
 		E9B24BDF1AF873E400322C0F /* BookSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookSuccessViewController.m; path = Controller/UserController/BookSuccessViewController.m; sourceTree = "<group>"; };
 		E9B24BE01AF873E400322C0F /* BookSuccessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BookSuccessViewController.xib; path = Controller/UserController/BookSuccessViewController.xib; sourceTree = "<group>"; };
+		E9B3A12B1B01DF93000DA4FC /* AddressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddressTableViewController.h; path = Controller/UserController/AddressTableViewController.h; sourceTree = "<group>"; };
+		E9B3A12C1B01DF93000DA4FC /* AddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressTableViewController.m; path = Controller/UserController/AddressTableViewController.m; sourceTree = "<group>"; };
 		E9B3DA301AE213E0009C668D /* CheckQuantityDealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckQuantityDealCell.h; path = Control/CheckQuantityDealCell.h; sourceTree = "<group>"; };
 		E9B3DA311AE213E0009C668D /* CheckQuantityDealCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckQuantityDealCell.m; path = Control/CheckQuantityDealCell.m; sourceTree = "<group>"; };
 		E9B3DA321AE213E0009C668D /* CheckQuantityDealCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CheckQuantityDealCell.xib; path = Control/CheckQuantityDealCell.xib; sourceTree = "<group>"; };
@@ -493,8 +495,6 @@
 		E9F3AB881B00639A00A91D9C /* AddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddressCell.h; path = Control/AddressCell.h; sourceTree = "<group>"; };
 		E9F3AB891B00639A00A91D9C /* AddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressCell.m; path = Control/AddressCell.m; sourceTree = "<group>"; };
 		E9F3AB8A1B00639A00A91D9C /* AddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddressCell.xib; path = Control/AddressCell.xib; sourceTree = "<group>"; };
-		E9F3AB8D1B0084C300A91D9C /* AddressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddressTableViewController.h; path = Controller/UserController/AddressTableViewController.h; sourceTree = "<group>"; };
-		E9F3AB8E1B0084C300A91D9C /* AddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressTableViewController.m; path = Controller/UserController/AddressTableViewController.m; sourceTree = "<group>"; };
 		E9F3AB901B00A03F00A91D9C /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1064,8 +1064,8 @@
 				E9D9BB161AFB5BA200FF07AB /* PaymentDetailViewController.m */,
 				E9F3AB851B005BE500A91D9C /* AddressViewController.h */,
 				E9F3AB861B005BE500A91D9C /* AddressViewController.m */,
-				E9F3AB8D1B0084C300A91D9C /* AddressTableViewController.h */,
-				E9F3AB8E1B0084C300A91D9C /* AddressTableViewController.m */,
+				E9B3A12B1B01DF93000DA4FC /* AddressTableViewController.h */,
+				E9B3A12C1B01DF93000DA4FC /* AddressTableViewController.m */,
 			);
 			name = UserController;
 			sourceTree = "<group>";
@@ -1300,6 +1300,7 @@
 				E98D4FC21AF627D50013EF4C /* HelpViewController.m in Sources */,
 				E9239A471AF7321100CC4977 /* AccountInfoViewController.m in Sources */,
 				E9AE20861AD80B68002E11AC /* UIColor+CreateMethods.m in Sources */,
+				E9B3A12E1B01DF93000DA4FC /* AddressTableViewController.m in Sources */,
 				E9C049FE1AE143B80017C5CE /* UIScrollView+SVPullToRefresh.m in Sources */,
 				E9AE201F1AD80A5E002E11AC /* NSString+MagicalDataImport.m in Sources */,
 				E9AE20851AD80B68002E11AC /* NSString+Helper.m in Sources */,
@@ -1350,7 +1351,6 @@
 				E9D9BB171AFB5BA200FF07AB /* PaymentDetailViewController.m in Sources */,
 				E9B24BDD1AF860B500322C0F /* PayItem.m in Sources */,
 				E9485B981AE006E2005D1688 /* AFHTTPRequestOperationManager.m in Sources */,
-				E9F3AB8F1B0084C300A91D9C /* AddressTableViewController.m in Sources */,
 				E959454F1ADB661F00CDA3FF /* APLSectionInfo.m in Sources */,
 				E9AE20261AD80A5E002E11AC /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				E9C2E8251AE4BA9000D98DCC /* MenuTableViewCell.m in Sources */,

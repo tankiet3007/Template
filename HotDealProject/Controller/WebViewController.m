@@ -20,7 +20,7 @@
     [super viewDidLoad];
     webView.delegate = self;
 
-    [self initNavigationbar:_sTitle];
+    [self initNavigationbar:sTitle];
     if (url != nil) {
         NSURLRequest * request = [NSURLRequest requestWithURL:url];
         [webView loadRequest:request];

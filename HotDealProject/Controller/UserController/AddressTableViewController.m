@@ -360,6 +360,7 @@ typedef enum {
     //    lblGender.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
     pickerViewMain.hidden = YES;
     toolbar.hidden = YES;
+    self.tableView.scrollEnabled = YES;
 }
 
 
@@ -367,6 +368,7 @@ typedef enum {
 -(void)cancelButtonPressed:(id)sender{
     pickerViewMain.hidden = YES;
     toolbar.hidden = YES;
+        self.tableView.scrollEnabled = YES;
 }
 
 -(void)makePicker
@@ -431,7 +433,7 @@ typedef enum {
 
 -(void)setupPickerCommon
 {
-    pickerViewMain = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, ScreenWidth, 200)];
+    pickerViewMain = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, ScreenWidth, 220)];
     //    numRowsInPicker = 3;
     pickerViewMain.delegate = self;
     [pickerViewMain setBackgroundColor:[UIColor whiteColor]];
@@ -479,6 +481,9 @@ typedef enum {
     toolbar.hidden = NO;
     cbType = ProvinceCb;
     [pickerViewMain reloadAllComponents];
+
+        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+            self.tableView.scrollEnabled = NO;
 }
 -(void)showDropbox2
 {
@@ -486,6 +491,8 @@ typedef enum {
     toolbar.hidden = NO;
     cbType = DistrictCb;
     [pickerViewMain reloadAllComponents];
+        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+            self.tableView.scrollEnabled = NO;
 }
 
 -(void)showDropbox3
@@ -494,6 +501,8 @@ typedef enum {
     pickerViewMain.hidden = NO;
     toolbar.hidden = NO;
     [pickerViewMain reloadAllComponents];
+        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+            self.tableView.scrollEnabled = NO;
 }
 
 -(void)showDropbox4
@@ -502,6 +511,8 @@ typedef enum {
     pickerViewMain.hidden = NO;
     toolbar.hidden = NO;
     [pickerViewMain reloadAllComponents];
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+            self.tableView.scrollEnabled = NO;
 }
 
 -(UIButton*) makeButtonRegister{

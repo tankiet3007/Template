@@ -291,7 +291,7 @@
         [viewHeader removeFromSuperview];
         viewHeader = nil;
     }
-    viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 70)];
+    viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 70)];
     if (segmentedControl != nil) {
         [segmentedControl removeFromSuperview];
         segmentedControl = nil;

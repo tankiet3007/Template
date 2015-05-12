@@ -99,10 +99,7 @@
 {
     [self.view endEditing:YES];
 }
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
+
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView
                     withVelocity:(CGPoint)velocity
              targetContentOffset:(inout CGPoint *)targetContentOffset{
@@ -354,6 +351,11 @@
             [lbl setUserInteractionEnabled:YES];
             [lbl addGestureRecognizer:gesture];
             
+            UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
+            [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
+            [cellRe addSubview:imgArrow];
+
+            
             return cellRe;
             
         }
@@ -383,6 +385,10 @@
             [lbl setUserInteractionEnabled:YES];
             [lbl addGestureRecognizer:gesture];
             
+            UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
+            [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
+            [cellRe addSubview:imgArrow];
+
             return cellRe;
             
         }
@@ -416,6 +422,7 @@
     
     tf.userInteractionEnabled = YES;
     tf.font = [UIFont systemFontOfSize:13];
+    
     return tf ;
 }
 
@@ -552,7 +559,7 @@
         [viewHeader removeFromSuperview];
         viewHeader = nil;
     }
-    viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 60)];
+    viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 60)];
     if (segmentedControl != nil) {
         [segmentedControl removeFromSuperview];
         segmentedControl = nil;
@@ -654,6 +661,7 @@
         lblBirthday.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
         pickerView.hidden = YES;
         toolbar.hidden = YES;
+        self.tableView.scrollEnabled = YES;
         
     }
     else
@@ -670,6 +678,7 @@
         lblGender.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
         pickerGender.hidden = YES;
         toolbar.hidden = YES;
+        self.tableView.scrollEnabled = YES;
     }
 }
 
@@ -700,6 +709,8 @@
     
     NSDate *currentDate = [NSDate date];
     [pickerView setMaximumDate:currentDate];
+    self.tableView.scrollEnabled = NO;
+        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
     
 }
 
@@ -732,13 +743,16 @@
 
 -(void)setupPickerGender
 {
-    pickerGender = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, ScreenWidth, 200)];
+    pickerGender = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, ScreenWidth, 220)];
     //    numRowsInPicker = 3;
     pickerGender.delegate = self;
     [pickerGender setBackgroundColor:[UIColor whiteColor]];
     pickerGender.showsSelectionIndicator = YES;
     pickerGender.hidden = YES;
     [self.view addSubview:pickerGender];
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+    self.tableView.scrollEnabled = NO;
+    
     
 }
 -(void)showDropbox

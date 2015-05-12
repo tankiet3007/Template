@@ -43,7 +43,7 @@
         [viewHeader removeFromSuperview];
         viewHeader = nil;
     }
-    viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+    viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
     
     UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 15, 300, 20)];
     NSDate * date = [NSDate date];

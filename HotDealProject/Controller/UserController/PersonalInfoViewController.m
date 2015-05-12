@@ -242,7 +242,7 @@
 
 -(void)setupPickerGender
 {
-    pickerGender = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, 320, 200)];
+    pickerGender = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight -250, ScreenWidth, 200)];
     //    numRowsInPicker = 3;
     pickerGender.delegate = self;
     [pickerGender setBackgroundColor:[UIColor whiteColor]];
