@@ -132,6 +132,9 @@
 		E9B24BE11AF873E400322C0F /* BookSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B24BDF1AF873E400322C0F /* BookSuccessViewController.m */; };
 		E9B24BE21AF873E400322C0F /* BookSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B24BE01AF873E400322C0F /* BookSuccessViewController.xib */; };
 		E9B3A12E1B01DF93000DA4FC /* AddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3A12C1B01DF93000DA4FC /* AddressTableViewController.m */; };
+		E9B3A1331B01F018000DA4FC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B3A1301B01F018000DA4FC /* FBSDKCoreKit.framework */; };
+		E9B3A1341B01F018000DA4FC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B3A1311B01F018000DA4FC /* FBSDKLoginKit.framework */; };
+		E9B3A1351B01F018000DA4FC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B3A1321B01F018000DA4FC /* FBSDKShareKit.framework */; };
 		E9B3DA331AE213E0009C668D /* CheckQuantityDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3DA311AE213E0009C668D /* CheckQuantityDealCell.m */; };
 		E9B3DA341AE213E0009C668D /* CheckQuantityDealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B3DA321AE213E0009C668D /* CheckQuantityDealCell.xib */; };
 		E9B3DA381AE21431009C668D /* KindOfTransferDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3DA361AE21431009C668D /* KindOfTransferDealCell.m */; };
@@ -425,6 +428,9 @@
 		E9B24BE01AF873E400322C0F /* BookSuccessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BookSuccessViewController.xib; path = Controller/UserController/BookSuccessViewController.xib; sourceTree = "<group>"; };
 		E9B3A12B1B01DF93000DA4FC /* AddressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddressTableViewController.h; path = Controller/UserController/AddressTableViewController.h; sourceTree = "<group>"; };
 		E9B3A12C1B01DF93000DA4FC /* AddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressTableViewController.m; path = Controller/UserController/AddressTableViewController.m; sourceTree = "<group>"; };
+		E9B3A1301B01F018000DA4FC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		E9B3A1311B01F018000DA4FC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		E9B3A1321B01F018000DA4FC /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		E9B3DA301AE213E0009C668D /* CheckQuantityDealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckQuantityDealCell.h; path = Control/CheckQuantityDealCell.h; sourceTree = "<group>"; };
 		E9B3DA311AE213E0009C668D /* CheckQuantityDealCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckQuantityDealCell.m; path = Control/CheckQuantityDealCell.m; sourceTree = "<group>"; };
 		E9B3DA321AE213E0009C668D /* CheckQuantityDealCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CheckQuantityDealCell.xib; path = Control/CheckQuantityDealCell.xib; sourceTree = "<group>"; };
@@ -503,6 +509,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9B3A1331B01F018000DA4FC /* FBSDKCoreKit.framework in Frameworks */,
+				E9B3A1341B01F018000DA4FC /* FBSDKLoginKit.framework in Frameworks */,
+				E9B3A1351B01F018000DA4FC /* FBSDKShareKit.framework in Frameworks */,
 				E9AE20A01AD8124E002E11AC /* CoreFoundation.framework in Frameworks */,
 				E9AE209E1AD8114F002E11AC /* CoreData.framework in Frameworks */,
 				E9AE209B1AD81134002E11AC /* AVFoundation.framework in Frameworks */,
@@ -1073,6 +1082,9 @@
 		E9D3BD5D1AD6BA5400F7429B = {
 			isa = PBXGroup;
 			children = (
+				E9B3A1301B01F018000DA4FC /* FBSDKCoreKit.framework */,
+				E9B3A1311B01F018000DA4FC /* FBSDKLoginKit.framework */,
+				E9B3A1321B01F018000DA4FC /* FBSDKShareKit.framework */,
 				E9AE20A21AD817A2002E11AC /* Framwork */,
 				E9D3BD681AD6BA5400F7429B /* HotDealProject */,
 				E9D3BD851AD6BA5400F7429B /* HotDealProjectTests */,
@@ -1512,6 +1524,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/kiettran/Documents/FacebookSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HotDealProject/Hotdeal-pch.pch";
 				INFOPLIST_FILE = HotDealProject/Info.plist;
@@ -1526,6 +1542,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/kiettran/Documents/FacebookSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HotDealProject/Hotdeal-pch.pch";
 				INFOPLIST_FILE = HotDealProject/Info.plist;
