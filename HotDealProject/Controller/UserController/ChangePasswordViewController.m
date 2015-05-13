@@ -18,6 +18,7 @@
 {
     BBBadgeBarButtonItem *barButton;
     NSArray * arrProduct;
+    MBProgressHUD *HUD;
 }
 @synthesize tfConfirmPassword,tfNewPassword,tfOldPassword;
 
@@ -114,6 +115,13 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    //    HUD.labelText = LS(@"LoadingData");
+    [HUD hide:YES];
+}
 
 - (IBAction)changePassClick:(id)sender {
 //    UA_log(@"%@\n%@\n%@", tfOldPassword.text,tfNewPassword.text, tfConfirmPassword.text);

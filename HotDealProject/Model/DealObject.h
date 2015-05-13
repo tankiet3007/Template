@@ -12,8 +12,8 @@
 @property (nonatomic,strong)NSString * strBrandImage;
 @property (nonatomic,strong)NSString * strTitle;
 @property (nonatomic,strong)NSString * strDescription;
-@property (nonatomic,assign)int iCount;
-//@property (nonatomic,assign)int iCountSelected;
+@property (nonatomic,assign)int buy_number;
+@property (nonatomic,assign)int product_id;
 @property (nonatomic, assign) int iType;//product or voucher
 @property (nonatomic ,assign) BOOL isNew;
 @property (nonatomic,assign)long  lStandarPrice;

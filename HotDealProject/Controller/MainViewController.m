@@ -45,6 +45,7 @@
     NSArray * arrProduct;
     UIView *dialogView;
     UIView* dimView;
+    MBProgressHUD *HUD;
 }
 @synthesize tableViewMain;
 #pragma mark init Method
@@ -55,18 +56,27 @@
     self.view.backgroundColor = [UIColor whiteColor];
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
     [self checkNetwork];
-    [self initUITableView];
+    
     [self initNavigationbar];
+      [self initHUD];
     [self initData];
+    
     [self setupSlide];
-    [self setupNewDeal];
+//    [self setupNewDeal];
     [self setupCategory];
     [self setupSegment];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateDealCount:) name:@"notiDealCount"
                                                object:nil];
+  
 //    [self showDialog];
     // Do any additional setup after loading the view from its nib.
+}
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    //    HUD.labelText = LS(@"LoadingData");
+    [HUD hide:YES];
 }
 -(void)dealloc
 {
@@ -93,11 +103,44 @@
 }
 -(void)initData
 {
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @123, @"category",
+                                    @437, @"city",
+                                    @10, @"fetch_count",
+                                    @1, @"offset",
+                                    @"default",@"fetch_type",
+                                    nil];
+    arrDeals = [[NSMutableArray alloc]init];
+    UA_log(@"%@",jsonDictionary);
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
+        [HUD hide:YES];
+        NSArray * arrProducts = [dict objectForKey:@"product"];
+        for (NSDictionary * dictItem in arrProducts) {
+             DealObject * item = [[DealObject alloc]init];
+            item.strTitle = [dictItem objectForKey:@"title"];
+            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
+            item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
+            item.strBrandImage = [dictItem objectForKey:@"image_link"];
+            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            [arrDeals addObject:item];
+        }
+        UA_log(@"%d item", [arrDeals count]);
+//        [tableViewMain reloadData];
+        [self initUITableView];
+        [self setupNewDeal];
+        }];
+
+}
+-(void)initData2
+{
     arrDeals = [[NSMutableArray alloc]init];
     
     DealObject * item = [[DealObject alloc]init];
     item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
-    item.iCount = 123;
+    item.buy_number = 123;
     item.iType = 0;
         item.isNew = TRUE;
     item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
@@ -108,7 +151,7 @@
     item = [[DealObject alloc]init];
     item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
     item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
-    item.iCount = 456;
+    item.buy_number = 456;
     item.iType = 1;
             item.isNew = TRUE;
     item.lDiscountPrice = 200000;
@@ -117,7 +160,7 @@
     
     item = [[DealObject alloc]init];
     item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
-    item.iCount = 789;
+    item.buy_number = 789;
     item.strDescription = @"Đầm xòe Zara họa tiết chấm bi xuất khẩu - Thiết kế thời trang với phần phối màu xen kẽ họa tiết chấm bi đẹp mắt giúp thể hiện nét đẹp thanh lịch, sành điệu của bạn gái. Chỉ 199.000đ cho trị giá 398.000đ Chỉ 199.000đ cho trị giá 398.000đ";
     item.lDiscountPrice = 30000;
     item.lStandarPrice = 200000;
@@ -127,7 +170,7 @@
     item = [[DealObject alloc]init];
     item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
     item.strDescription = @"Bộ miếng dán iPhone mạ vàng và ốp lưng silicon có thiết kế vừa vặn với khung máy sẽ giúp mang đến cho dế yêu của bạn một vẻ đẹp hoàn hảo và đẳng cấp. Chỉ 85.000đ cho trị giá 160.000đ";
-    item.iCount = 111;
+    item.buy_number = 111;
     item.iType = 1;
     item.isNew = FALSE;
     item.lDiscountPrice = 100000;
@@ -136,7 +179,7 @@
     
     item = [[DealObject alloc]init];
     item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
-    item.iCount = 222;
+    item.buy_number = 222;
     item.lDiscountPrice = 200000;
     item.lStandarPrice = 1000000;
     item.isNew = FALSE;
@@ -144,7 +187,7 @@
     
     item = [[DealObject alloc]init];
     item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
-    item.iCount = 333;
+    item.buy_number = 333;
     item.lDiscountPrice = 30000;
     item.lStandarPrice = 200000;
     item.isNew = TRUE;
@@ -153,7 +196,7 @@
     
     item = [[DealObject alloc]init];
     item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
-    item.iCount = 121;
+    item.buy_number = 121;
     item.lDiscountPrice = 100000;
     item.lStandarPrice = 400000;
     item.iType = 0;
@@ -162,7 +205,7 @@
     
     item = [[DealObject alloc]init];
     item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
-    item.iCount = 212;
+    item.buy_number = 212;
     item.lDiscountPrice = 200000;
     item.lStandarPrice = 1000000;
     item.iType = 0;
@@ -171,7 +214,7 @@
     
     item = [[DealObject alloc]init];
     item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
-    item.iCount = 999;
+    item.buy_number = 999;
     item.lDiscountPrice = 30000;
     item.lStandarPrice = 200000;
     item.iType = 0;
@@ -231,7 +274,7 @@
         NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
         itemS.lblStandarPrice.attributedText = attributedString;
         [itemS.lblStandarPrice sizeToFit];
-        itemS.lblNumOfBook.text = F(@"%d",item.iCount);
+        itemS.lblNumOfBook.text = F(@"%d",item.buy_number);
         
         NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
         strDiscountPrice = [strDiscountPrice formatStringToDecimal];
@@ -464,7 +507,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.lblStandarPrice.attributedText = attributedString;
         [cell.lblStandarPrice sizeToFit];
-        cell.lblNumOfBook.text = F(@"%d",item.iCount);
+        cell.lblNumOfBook.text = F(@"%d",item.buy_number);
         
         NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
         strDiscountPrice = [strDiscountPrice formatStringToDecimal];

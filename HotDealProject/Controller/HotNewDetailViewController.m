@@ -347,7 +347,7 @@
             cell = [nib objectAtIndex:0];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.lblTotal.text = F(@"%d",dealObj.iCount);
+        cell.lblTotal.text = F(@"%d",dealObj.buy_number);
         
         return cell;
     }
@@ -450,7 +450,7 @@
         NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
         itemS.lblStandarPrice.attributedText = attributedString;
         [itemS.lblStandarPrice sizeToFit];
-        itemS.lblNumOfBook.text = F(@"%d",item.iCount);
+        itemS.lblNumOfBook.text = F(@"%d",item.buy_number);
         
         NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
         strDiscountPrice = [strDiscountPrice formatStringToDecimal];
