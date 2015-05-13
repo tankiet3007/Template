@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 @interface RegisAndLoginController : UITableViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate,UIPickerViewDelegate>
 @property (strong, nonatomic)  UIDatePicker *pickerView;
 @property (strong, nonatomic)  UIPickerView *pickerGender;

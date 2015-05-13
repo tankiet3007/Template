@@ -20,6 +20,7 @@
 #import "AccoutViewController.h"
 #import "HelpViewController.h"
 #import "RegisAndLoginController.h"
+#import "TKDatabase.h"
 @interface LeftMenuViewController ()
 @property (nonatomic) NSMutableArray *sectionInfoArray;
 @property (nonatomic) NSInteger openSectionIndex;
@@ -37,6 +38,7 @@
     UITableView * autocompleteTableView;
     NSMutableArray * autocompleteItem;
     NSMutableArray * rootData;
+    BOOL isUserLogged;
 }
 #pragma mark - APLTableViewController
 
@@ -55,6 +57,8 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     revealVC = [self revealViewController];
+    isUserLogged = FALSE;
+    [self checkUserLogged];
     // Set up default values.
     self.view.backgroundColor = [UIColor whiteColor];
     [self initData];
@@ -67,6 +71,21 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     
     [self initDataSearch];
     [self initSearchTable];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(notiUpdateLeftmenu:) name:@"notiUpdateLeftmenu"
+                                               object:nil];
+
+    
+}
+
+-(void)checkUserLogged
+{
+    if ([[TKDatabase sharedInstance]getUserInfo] != nil) {
+        isUserLogged = TRUE;
+    }
+    else
+        isUserLogged = FALSE;
 }
 
 -(void)initUITableView
@@ -220,7 +239,10 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if ([tableView isEqual:_tableView]) {
-        return [arrMenu count] + 1;
+        if (isUserLogged == FALSE) {
+             return [arrMenu count] + 1;
+        }
+        return [arrMenu count];
     }
     return 1;
 }
@@ -303,6 +325,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             UIView * viewFooter = [[UIView alloc]initWithFrame:btnLogin.frame];
             [viewFooter addSubview:btnLogin];
             return viewFooter;
+            
         }
         APLSectionHeaderView *sectionHeaderView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:SectionHeaderViewIdentifier];
         
@@ -383,13 +406,26 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         return;
     }
     if (sectionOpened == 10) {//#import "RegisAndLoginController.h"
-        AccoutViewController * newVC = [[AccoutViewController alloc]init];
-        
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
-        
-        [revealVC setFrontViewController:navigationController animated:YES];
-        [revealVC revealToggle:nil];
-        return;
+        if (isUserLogged == FALSE) {
+            RegisAndLoginController * newVC = [[RegisAndLoginController alloc]init];
+            
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
+            
+            [revealVC setFrontViewController:navigationController animated:YES];
+            [revealVC revealToggle:nil];
+            return;
+
+        }
+        else
+        {
+            AccoutViewController * newVC = [[AccoutViewController alloc]init];
+            
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
+            
+            [revealVC setFrontViewController:navigationController animated:YES];
+            [revealVC revealToggle:nil];
+            return;
+        }
     }//#import "HelpViewController.h"
     if (sectionOpened == 11) {//#import "RegisAndLoginController.h"
         HelpViewController * newVC = [[HelpViewController alloc]init];
@@ -611,6 +647,11 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     [self initData];
     [self.tableView reloadData];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"notificationUpdateLocation" object:nil];
+}//notiUpdateLeftmenu
+- (void)notiUpdateLeftmenu:(NSNotification *)notification {
+    [self checkUserLogged];
+    [self.tableView reloadData];
+//    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"notiUpdateLeftmenu" object:nil];
 }
 -(UIButton *)setupLoginBtn
 {

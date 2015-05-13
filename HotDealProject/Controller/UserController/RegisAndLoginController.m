@@ -12,7 +12,8 @@
 #import "InvoiceCell.h"
 #import "LoginCell.h"
 #import "ForgotPasswordViewController.h"
-
+#import "MainViewController.h"
+#import "TKDatabase.h"
 @interface RegisAndLoginController ()
 
 @end
@@ -290,7 +291,7 @@
                     cellRe.textLabel.text = @"" ;
                     tf = tfPassword = [self makeTextField:@"" placeholder:@"Mật khẩu"];
                     [cellRe addSubview:tfPassword];
-                                        tfPassword.secureTextEntry = YES;
+                    tfPassword.secureTextEntry = YES;
                     break ;
                 }
                 case 2: {
@@ -354,7 +355,7 @@
             UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
             [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
             [cellRe addSubview:imgArrow];
-
+            
             
             return cellRe;
             
@@ -388,7 +389,7 @@
             UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
             [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
             [cellRe addSubview:imgArrow];
-
+            
             return cellRe;
             
         }
@@ -442,18 +443,83 @@
     [btn setTitle:@"Đăng nhập" forState:UIControlStateNormal];
     [btn setBackgroundColor:[UIColor redColor]];
     btn.titleLabel.font = [UIFont systemFontOfSize:13];
-    [btn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(normalLogin) forControlEvents:UIControlEventTouchUpInside];
     return btn;
 }
+-(void)normalLogin
+{
+    
+}
 
+-(void)fbLogin
+{
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+        if (error) {
+            // Process error
+            NSLog(@"error %@",error);
+        } else if (result.isCancelled) {
+            // Handle cancellations
+            NSLog(@"Cancelled");
+        } else {
+            if ([result.grantedPermissions containsObject:@"email"]) {
+                // Do work
+                [self fetchUserInfo];
+            }
+        }
+    }];
+}
 
+-(void)fetchUserInfo {
+    
+    if ([FBSDKAccessToken currentAccessToken]) {
+        
+        NSLog(@"Token is available");
+        
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil]
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                 NSString * email = [result objectForKey:@"email"];
+                 NSString * gender = [result objectForKey:@"gender"];
+                 NSString * name = [result objectForKey:@"name"];
+                 [[TKDatabase sharedInstance]addUser:email wFullname:name wGender:gender];
+                 NSLog(@"Fetched User Information:%@", result);
+                 ALERT(@"Thông báo", @"Đăng nhập thành công");
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
+                 MainViewController * mainVC = [[MainViewController alloc]init];
+                 [self.navigationController pushViewController:mainVC animated:YES];
+                 
+                 
+             }
+             else {
+                 NSLog(@"Error %@",error);
+             }
+         }];
+        
+    } else {
+        
+        NSLog(@"User is not Logged in");
+    }
+}
+
+//email = "lionlord19901@yahoo.com";
+//"first_name" = "Ki\U1ec7t";
+//gender = male;
+//id = 842110102511021;
+//"last_name" = "Tr\U1ea7n T\U1ea5n";
+//link = "https://www.facebook.com/app_scoped_user_id/842110102511021/";
+//locale = "en_US";
+//name = "Tr\U1ea7n T\U1ea5n Ki\U1ec7t";
+//timezone = 7;
+//"updated_time" = "2015-05-12T06:25:56+0000";
+//verified = 1;
 -(UIButton*) makeButtonLoginFacebook{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn setTitle:@"Đăng nhập bằng facebook" forState:UIControlStateNormal];
     [btn setBackgroundColor:[UIColor redColor]];
     btn.titleLabel.font = [UIFont systemFontOfSize:13];
-    [btn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(fbLogin) forControlEvents:UIControlEventTouchUpInside];
     return btn;
 }
 -(void)registerClick
@@ -710,7 +776,7 @@
     NSDate *currentDate = [NSDate date];
     [pickerView setMaximumDate:currentDate];
     self.tableView.scrollEnabled = NO;
-        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
     
 }
 

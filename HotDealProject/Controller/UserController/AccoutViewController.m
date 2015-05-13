@@ -14,6 +14,8 @@
 #import "ChangePasswordViewController.h"
 #import "PaymentInfoViewController.h"
 #import "UserAmountViewController.h"
+#import "MainViewController.h"
+#import "TKDatabase.h"
 @interface AccoutViewController ()
 
 @end
@@ -157,5 +159,12 @@
         ChangePasswordViewController * changePassword = [[ChangePasswordViewController alloc]init];
         [self.navigationController pushViewController:changePassword animated:YES];
     }
+    if (indexPath.row == 5) {
+        [[TKDatabase sharedInstance]removeUser];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
+        MainViewController * mainVC = [[MainViewController alloc]init];
+        [self.navigationController pushViewController:mainVC animated:YES];
+    }
+
 }
 @end

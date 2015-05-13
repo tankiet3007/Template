@@ -11,6 +11,7 @@
 		E9239A4B1AF7496B00CC4977 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9239A491AF7496B00CC4977 /* ChangePasswordViewController.m */; };
 		E9239A4C1AF7496B00CC4977 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9239A4A1AF7496B00CC4977 /* ChangePasswordViewController.xib */; };
 		E9384F471ADF985300C3D703 /* TKAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = E9384F461ADF985300C3D703 /* TKAPI.m */; };
+		E93D3AFE1B02F8810004FA3A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E93D3AFD1B02F8810004FA3A /* User.m */; };
 		E9485B971AE006E2005D1688 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9485B851AE006E2005D1688 /* AFHTTPRequestOperation.m */; };
 		E9485B981AE006E2005D1688 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9485B871AE006E2005D1688 /* AFHTTPRequestOperationManager.m */; };
 		E9485B991AE006E2005D1688 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9485B891AE006E2005D1688 /* AFHTTPSessionManager.m */; };
@@ -197,6 +198,8 @@
 		E9239A4A1AF7496B00CC4977 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChangePasswordViewController.xib; path = Controller/UserController/ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		E9384F451ADF985300C3D703 /* TKAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TKAPI.h; path = Model/TKAPI.h; sourceTree = "<group>"; };
 		E9384F461ADF985300C3D703 /* TKAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TKAPI.m; path = Model/TKAPI.m; sourceTree = "<group>"; };
+		E93D3AFC1B02F8810004FA3A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Model/CoreDataObject/User.h; sourceTree = "<group>"; };
+		E93D3AFD1B02F8810004FA3A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Model/CoreDataObject/User.m; sourceTree = "<group>"; };
 		E9485B841AE006E2005D1688 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		E9485B851AE006E2005D1688 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		E9485B861AE006E2005D1688 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -549,6 +552,8 @@
 				E972563F1AFA08AD0012D8DD /* Provine.h */,
 				E97256401AFA08AD0012D8DD /* Provine.m */,
 				E9F3AB901B00A03F00A91D9C /* Localizable.strings */,
+				E93D3AFC1B02F8810004FA3A /* User.h */,
+				E93D3AFD1B02F8810004FA3A /* User.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1204,6 +1209,7 @@
 					};
 					E9D3BD811AD6BA5400F7429B = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = F48QKNQDQT;
 						TestTargetID = E9D3BD651AD6BA5400F7429B;
 					};
 				};
@@ -1282,6 +1288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E93D3AFE1B02F8810004FA3A /* User.m in Sources */,
 				E9485B9C1AE006E2005D1688 /* AFURLConnectionOperation.m in Sources */,
 				E98D4FAD1AF5DE8B0013EF4C /* WebViewController.m in Sources */,
 				E9AE203F1AD80A5E002E11AC /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -1534,7 +1541,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "11854f29-b9c7-404f-abd8-e677d3f9b5f3";
+				PROVISIONING_PROFILE = "49d4457e-e7c5-40e7-98f5-b7d020f6298e";
 			};
 			name = Debug;
 		};
@@ -1552,7 +1559,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "11854f29-b9c7-404f-abd8-e677d3f9b5f3";
+				PROVISIONING_PROFILE = "49d4457e-e7c5-40e7-98f5-b7d020f6298e";
 			};
 			name = Release;
 		};
@@ -1560,6 +1567,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1571,6 +1580,7 @@
 				INFOPLIST_FILE = HotDealProjectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HotDealProject.app/HotDealProject";
 			};
 			name = Debug;
@@ -1579,6 +1589,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1586,6 +1598,7 @@
 				INFOPLIST_FILE = HotDealProjectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HotDealProject.app/HotDealProject";
 			};
 			name = Release;

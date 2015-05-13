@@ -8,6 +8,7 @@
 
 #import "TKDatabase.h"
 #import "Provine.h"
+
 static NSManagedObjectContext * __context = nil;
 @implementation TKDatabase
 + (TKDatabase*)sharedInstance
@@ -52,7 +53,6 @@ static NSManagedObjectContext * __context = nil;
     productItem.maxQuantity = numberMaxQuantity;
     [__context MR_saveToPersistentStoreAndWait];
     
-    UA_log(@"%ld Item", [arrProductItem count]);
 }
 
 -(void)updateProduct:(ProductObject *)pObject
@@ -137,4 +137,31 @@ static NSManagedObjectContext * __context = nil;
     return arrProvine;
 }
 
+-(void)addUser:(NSString *)strEmail wFullname:(NSString *)strFullname wGender:(NSString *)strGender
+{
+    User * user = [User MR_createEntityInContext:__context];
+    user.email = strEmail;
+    user.gender = strGender;
+    user.fullname = strFullname;
+    [__context MR_saveToPersistentStoreAndWait];
+}
+-(User *)getUserInfo
+{
+    NSArray *arrUser = [User MR_findAll];
+    if ([arrUser count]==0) {
+        return nil;
+    }
+    User *vResult = [arrUser objectAtIndex:0];
+    return vResult;
+}
+-(void)removeUser
+{
+    NSArray *arrUser = [User MR_findAll];
+    if ([arrUser count]==0) {
+        return;
+    }
+    User *vResult = [arrUser objectAtIndex:0];
+    [vResult MR_deleteEntityInContext:__context];
+    [__context MR_saveToPersistentStoreAndWait];
+}
 @end

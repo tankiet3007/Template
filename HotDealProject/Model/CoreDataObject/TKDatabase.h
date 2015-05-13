@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ProductObject.h"
 #import "ProductItem.h"
+#import "User.h"
 @interface TKDatabase : NSObject
 + (TKDatabase*)sharedInstance;
 #pragma mark product 
@@ -20,4 +21,8 @@
 -(void)addProvine:(NSString *)strName;
 -(NSMutableArray *)getAllProvineUserSelected;
 -(void)removeProvineSelected:(NSString *)strName;
+
+-(void)addUser:(NSString *)strEmail wFullname:(NSString *)strFullname wGender:(NSString *)strGender;
+-(User *)getUserInfo;
+-(void)removeUser;
 @end

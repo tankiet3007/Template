@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FBSDKCoreKit/FBSDKApplicationDelegate.h>
 @class SWRevealViewController;
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) SWRevealViewController *viewController;
