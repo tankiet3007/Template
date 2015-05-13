@@ -13,6 +13,9 @@
 @end
 
 @implementation ForgotPasswordViewController
+{
+     MBProgressHUD *HUD;
+}
 @synthesize tfEmail;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -21,8 +24,14 @@
     
     AppDelegate * appdelegate = ApplicationDelegate;
     [appdelegate initNavigationbar:self withTitle:@"QUÊN MẬT KHẨU"];
-    
+    [self initHUD];
     // Do any additional setup after loading the view from its nib.
+}
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    //    HUD.labelText = LS(@"LoadingData");
+    [HUD hide:YES];
 }
 -(void)backbtn_click:(id)sender
 {
@@ -45,5 +54,31 @@
 */
 
 - (IBAction)sendEmailToConfirm:(id)sender {
+    NSString * email = tfEmail.text;
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    email, @"email",
+                                    nil];
+    
+    
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_FORGOT_PASSWORD completion:^(NSDictionary * dict, NSError *error) {
+        //        [self showMainView:dict wError:error];
+        [HUD hide:YES];
+        BOOL response = [[dict objectForKey:@"response"]boolValue];
+        if (response == TRUE) {
+//            NSString* user_id = F(@"%@",[dict objectForKey:@"user_id"]);
+//            [[TKDatabase sharedInstance]addUser:user_id];
+            ALERT(LS(@"MessageBoxTitle"), @"Đăng nhâp thành công");
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
+//            MainViewController * mainVC = [[MainViewController alloc]init];
+//            [self.navigationController pushViewController:mainVC animated:YES];
+        }
+        else
+        {
+            NSString * response = [dict objectForKey:@"reason"];
+            ALERT(LS(@"MessageBoxTitle"),response);
+        }
+    }];
+
 }
 @end

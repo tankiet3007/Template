@@ -14,7 +14,7 @@
 #import "ForgotPasswordViewController.h"
 #import "MainViewController.h"
 #import "TKDatabase.h"
-#import "MBProgressHUD.h"
+
 @interface RegisAndLoginController ()
 
 @end
@@ -464,9 +464,9 @@
                                     auto_signin, @"auto_signin",
                                     nil];
 
-    
+    UA_log(@"%@",jsonDictionary);
     [HUD show:YES];
-    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_CONNECT_SOCICAL completion:^(NSDictionary * dict, NSError *error) {
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_SIGN_IN completion:^(NSDictionary * dict, NSError *error) {
         //        [self showMainView:dict wError:error];
         [HUD hide:YES];
         BOOL response = [[dict objectForKey:@"response"]boolValue];
@@ -540,7 +540,7 @@
                                                  nil];
                  
                  
-                 
+                  UA_log(@"%@",jsonDictionary);
                  [HUD show:YES];
                  [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_CONNECT_SOCICAL completion:^(NSDictionary * dict, NSError *error) {
                      //        [self showMainView:dict wError:error];
@@ -617,6 +617,7 @@
                                      fullname, @"fullname",
                                      birthday, @"birthday",
                                     nil];
+     UA_log(@"%@",jsonDictionary);
     [HUD show:YES];
     [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_SIGN_UP completion:^(NSDictionary * dict, NSError *error) {
 //        [self showMainView:dict wError:error];

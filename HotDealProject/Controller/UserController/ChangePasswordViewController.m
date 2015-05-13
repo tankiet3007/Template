@@ -116,6 +116,37 @@
 */
 
 - (IBAction)changePassClick:(id)sender {
-    UA_log(@"%@\n%@\n%@", tfOldPassword.text,tfNewPassword.text, tfConfirmPassword.text);
+//    UA_log(@"%@\n%@\n%@", tfOldPassword.text,tfNewPassword.text, tfConfirmPassword.text);
+    if (![tfConfirmPassword.text isEqualToString:tfNewPassword.text]) {
+        ALERT(LS(@"MessageBoxTitle"), LS(@"CheckPasswordAndRetype"));
+        return;
+    }
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    tfOldPassword.text, @"old_password",
+                                     tfNewPassword.text, @"new_password",
+                                    nil];
+    
+    
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_CHANGE_PASSWORD completion:^(NSDictionary * dict, NSError *error) {
+        //        [self showMainView:dict wError:error];
+        [HUD hide:YES];
+        BOOL response = [[dict objectForKey:@"response"]boolValue];
+        if (response == TRUE) {
+            //            NSString* user_id = F(@"%@",[dict objectForKey:@"user_id"]);
+            //            [[TKDatabase sharedInstance]addUser:user_id];
+            ALERT(LS(@"MessageBoxTitle"), @"Đăng nhâp thành công");
+            //            [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
+            //            MainViewController * mainVC = [[MainViewController alloc]init];
+            //            [self.navigationController pushViewController:mainVC animated:YES];
+        }
+        else
+        {
+            NSString * response = [dict objectForKey:@"reason"];
+            ALERT(LS(@"MessageBoxTitle"),response);
+        }
+    }];
+
+    
 }
 @end
