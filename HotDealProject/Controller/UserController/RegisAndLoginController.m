@@ -61,7 +61,7 @@
 - (void)initHUD {
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
-    HUD.labelText = LS(@"LoadingData");
+//    HUD.labelText = LS(@"LoadingData");
     [HUD hide:YES];
 }
 - (id)initWithStyle:(UITableViewStyle)style
@@ -455,7 +455,36 @@
 }
 -(void)normalLogin
 {
+    NSString * email = tfEmailLogin.text;
+    NSString * pass = [tfPasswordLogin.text MD5];
+    NSString * auto_signin = @"1";
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    email, @"email",
+                                    pass, @"password",
+                                    auto_signin, @"auto_signin",
+                                    nil];
+
     
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_CONNECT_SOCICAL completion:^(NSDictionary * dict, NSError *error) {
+        //        [self showMainView:dict wError:error];
+        [HUD hide:YES];
+        BOOL response = [[dict objectForKey:@"response"]boolValue];
+        if (response == TRUE) {
+            NSString* user_id = F(@"%@",[dict objectForKey:@"user_id"]);
+            [[TKDatabase sharedInstance]addUser:user_id];
+            ALERT(LS(@"MessageBoxTitle"), @"Đăng nhâp thành công");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
+            MainViewController * mainVC = [[MainViewController alloc]init];
+            [self.navigationController pushViewController:mainVC animated:YES];
+        }
+        else
+        {
+            NSString * response = [dict objectForKey:@"reason"];
+            ALERT(LS(@"MessageBoxTitle"),response);
+        }
+    }];
+
 }
 
 -(void)fbLogin
@@ -486,15 +515,59 @@
         [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
-//                 NSString * email = [result objectForKey:@"email"];
-//                 NSString * gender = [result objectForKey:@"gender"];
-//                 NSString * name = [result objectForKey:@"name"];
+                 NSDictionary* dictionary = (NSDictionary *)result;
+                 
+                 NSString * email = [dictionary objectForKey:@"email"];
+                 NSString * gender = [dictionary objectForKey:@"gender"];
+                 if ([gender isEqualToString:@"male"]) {
+                     gender = @"M";
+                 }
+                 else
+                 {
+                     gender = @"F";
+                 }
+                 NSString * name = [dictionary objectForKey:@"name"];
+                 NSString * link = [dictionary objectForKey:@"link"];
+                 NSString * type = @"facebook";
+                 NSString * bod = @"1332043063";
+                 NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                 email, @"email",
+                                                 gender, @"gender",
+                                                 name, @"name",
+                                                 link, @"link",
+                                                 type, @"type",
+                                                 bod, @"bod",
+                                                 nil];
+                 
+                 
+                 
+                 [HUD show:YES];
+                 [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_CONNECT_SOCICAL completion:^(NSDictionary * dict, NSError *error) {
+                     //        [self showMainView:dict wError:error];
+                     [HUD hide:YES];
+                     BOOL response = [[dict objectForKey:@"response"]boolValue];
+                     if (response == TRUE) {
+                         NSString* user_id = F(@"%@",[dict objectForKey:@"user_id"]);
+                         [[TKDatabase sharedInstance]addUser:user_id];
+                         ALERT(LS(@"MessageBoxTitle"), @"Đăng nhâp thành công");
+                         [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
+                         MainViewController * mainVC = [[MainViewController alloc]init];
+                         [self.navigationController pushViewController:mainVC animated:YES];
+                     }
+                     else
+                     {
+                         NSString * response = [dict objectForKey:@"reason"];
+                         ALERT(LS(@"MessageBoxTitle"),response);
+                     }        
+                 }];
+
+                 
 //                 [[TKDatabase sharedInstance]addUser:email wFullname:name wGender:gender];
-                 NSLog(@"Fetched User Information:%@", result);
-                 ALERT(@"Thông báo", @"Đăng nhập thành công");
-                 [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
-                 MainViewController * mainVC = [[MainViewController alloc]init];
-                 [self.navigationController pushViewController:mainVC animated:YES];
+//                 NSLog(@"Fetched User Information:%@", result);
+//                 ALERT(@"Thông báo", @"Đăng nhập thành công");
+//                 [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
+//                 MainViewController * mainVC = [[MainViewController alloc]init];
+//                 [self.navigationController pushViewController:mainVC animated:YES];
                  
                  
              }

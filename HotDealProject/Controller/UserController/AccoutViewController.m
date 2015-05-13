@@ -161,9 +161,20 @@
     }
     if (indexPath.row == 5) {
         [[TKDatabase sharedInstance]removeUser];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
-        MainViewController * mainVC = [[MainViewController alloc]init];
-        [self.navigationController pushViewController:mainVC animated:YES];
+        User * user = [[TKDatabase sharedInstance]getUserInfo];
+        NSDictionary * dictParameter = [NSDictionary dictionaryWithObjectsAndKeys:user.user_id,@"user_id", nil];
+        [[TKAPI sharedInstance]postRequestAF:dictParameter withURL:URL_SIGN_OUT completion:^(NSDictionary *dict, NSError * error) {
+            if ([[dict objectForKey:@"response"]boolValue] == TRUE) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
+                MainViewController * mainVC = [[MainViewController alloc]init];
+                [self.navigationController pushViewController:mainVC animated:YES];
+            }
+           else
+           {
+               ALERT(LS(@"MessageBoxTitle"), [dict objectForKey:@"reason"]);
+           }
+        }];
+        
     }
 
 }

@@ -10,7 +10,7 @@
 #pragma mark for user
 static NSString * const URL_SIGN_UP = @"http://hotdeal.vn/mapi/sign-up";
 static NSString * const URL_SIGN_IN = @"http://hotdeal.vn/mapi/sign-in";
-static NSString * const URL_CONNECT_SOCICAL = @"http://hotdeal.vn/mapi/connect_socical ";
+static NSString * const URL_CONNECT_SOCICAL = @"http://hotdeal.vn/mapi/connect_socical";
 static NSString * const URL_SIGN_OUT = @"http://hotdeal.vn/mapi/sign-out";
 static NSString * const URL_FORGOT_PASSWORD = @"http://hotdeal.vn/mapi/reset-password";
 static NSString * const URL_GET_USERINFO = @"http://hotdeal.vn/mapi/get-user-info";//http://hotdeal.vn/mapi/update-user-info
