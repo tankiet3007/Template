@@ -8,3 +8,9 @@
 "MessageBoxOK" = "Đồng ý";
 
 "MessageBoxTitle" = "Thông báo";
+"CheckPasswordAndRetype"            = "Xác nhận mật khẩu không trùng với mật khẩu";
+
+"ForgotEmpty"                  = "Vui lòng nhập đầy đủ thông tin";
+
+"CheckPasswordLength"               = "Mật khẩu phải từ 4 đến 16 ký tự";
+"EmailErrorNotify" = "Email không đúng định dạng";

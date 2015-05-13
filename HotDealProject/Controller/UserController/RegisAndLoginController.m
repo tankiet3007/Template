@@ -14,6 +14,7 @@
 #import "ForgotPasswordViewController.h"
 #import "MainViewController.h"
 #import "TKDatabase.h"
+#import "MBProgressHUD.h"
 @interface RegisAndLoginController ()
 
 @end
@@ -38,6 +39,7 @@
     UIButton* btnLoginFacebook;
     UIToolbar *toolbar;
     BOOL isBirthdayAction;
+    MBProgressHUD *HUD;
 }
 @synthesize pickerView;
 @synthesize pickerGender;
@@ -47,7 +49,7 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     [self initNavigationbar];
     isLoginFrame = TRUE;
-    
+    [self initHUD];
     [self setupSegment];
     isBirthdayAction = TRUE;
     [self initUITableView];
@@ -56,7 +58,12 @@
     [self setupToolBar];
     // Do any additional setup after loading the view.
 }
-
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    HUD.labelText = LS(@"LoadingData");
+    [HUD hide:YES];
+}
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
@@ -208,7 +215,7 @@
                 case 0: {
                     cellRe.textLabel.text = @"" ;
                     tf = tfEmailLogin = [self makeTextField:@"" placeholder:@"Địa chỉ email"];
-                    tf.textColor = [UIColor lightGrayColor];
+//                    tf.textColor = [UIColor lightGrayColor];
                     [cellRe addSubview:tfEmailLogin];
                     break ;
                 }
@@ -283,7 +290,7 @@
                 case 0: {
                     cellRe.textLabel.text = @"" ;
                     tf = tfEmail = [self makeTextField:@"" placeholder:@"Địa chỉ email"];
-                    tf.textColor = [UIColor lightGrayColor];
+//                    tf.textColor = [UIColor lightGrayColor];
                     [cellRe addSubview:tfEmail];
                     break ;
                 }
@@ -479,10 +486,10 @@
         [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
-                 NSString * email = [result objectForKey:@"email"];
-                 NSString * gender = [result objectForKey:@"gender"];
-                 NSString * name = [result objectForKey:@"name"];
-                 [[TKDatabase sharedInstance]addUser:email wFullname:name wGender:gender];
+//                 NSString * email = [result objectForKey:@"email"];
+//                 NSString * gender = [result objectForKey:@"gender"];
+//                 NSString * name = [result objectForKey:@"name"];
+//                 [[TKDatabase sharedInstance]addUser:email wFullname:name wGender:gender];
                  NSLog(@"Fetched User Information:%@", result);
                  ALERT(@"Thông báo", @"Đăng nhập thành công");
                  [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
@@ -524,7 +531,39 @@
 }
 -(void)registerClick
 {
-    UA_log(@"register");
+    if ([self checkInput] == FALSE) {
+        return;
+    }
+    NSString * email = tfEmail.text;
+    NSString * password = [tfPassword.text MD5];
+    NSString * fullname = tfFullname.text;
+    NSString * birthday = [lblBirthday.text trim];
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    email, @"email",
+                                    password, @"password",
+                                     fullname, @"fullname",
+                                     birthday, @"birthday",
+                                    nil];
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_SIGN_UP completion:^(NSDictionary * dict, NSError *error) {
+//        [self showMainView:dict wError:error];
+        [HUD hide:YES];
+        BOOL response = [[dict objectForKey:@"response"]boolValue];
+        if (response == TRUE) {
+            NSString* user_id = F(@"%@",[dict objectForKey:@"user_id"]);
+            [[TKDatabase sharedInstance]addUser:user_id];
+            ALERT(LS(@"MessageBoxTitle"), @"Đăng ký thành công");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
+            MainViewController * mainVC = [[MainViewController alloc]init];
+            [self.navigationController pushViewController:mainVC animated:YES];
+        }
+        else
+        {
+            NSString * response = [dict objectForKey:@"reason"];
+            ALERT(LS(@"MessageBoxTitle"),response);
+        }        
+    }];
+    
 }
 
 - (void)configureCell:(LoginCell *)lcell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -674,6 +713,7 @@
     tf.autocapitalizationType = UITextAutocapitalizationTypeNone;
     tf.adjustsFontSizeToFitWidth = YES;
     tf.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+    tf.textColor = [UIColor blackColor];
     tf.backgroundColor = [UIColor whiteColor];
     UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
     tf.leftView = paddingView;
@@ -827,4 +867,28 @@
     pickerGender.hidden = NO;
     toolbar.hidden = NO;
 }
+
+- (BOOL)validateEmail:(NSString *)emailStr {
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:emailStr];
+}
+
+- (BOOL)checkInput{
+    if (([tfEmail.text length]<4) || ([tfEmail.text rangeOfString:@"@"].location == NSNotFound)||![self validateEmail:tfEmail.text]){
+        ALERT(LS(@"MessageBoxTitle"), LS(@"EmailErrorNotify"));
+        return NO;
+    }
+    else if ([tfPassword.text length]<4 || [tfPassword.text length]>16){
+        ALERT(LS(@"MessageBoxTitle"), LS(@"CheckPasswordLength"));
+        return NO;
+    }else if ([tfPassword.text isEqualToString:tfConfirmPassword.text] == NO){
+        ALERT(LS(@"MessageBoxTitle"), LS(@"CheckPasswordAndRetype"));
+        return NO;
+    }
+    else{
+        return YES;
+    }
+}
+
 @end

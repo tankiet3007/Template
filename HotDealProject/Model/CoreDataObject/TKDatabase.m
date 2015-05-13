@@ -137,12 +137,10 @@ static NSManagedObjectContext * __context = nil;
     return arrProvine;
 }
 
--(void)addUser:(NSString *)strEmail wFullname:(NSString *)strFullname wGender:(NSString *)strGender
+-(void)addUser:(NSString *)user_id
 {
     User * user = [User MR_createEntityInContext:__context];
-    user.email = strEmail;
-    user.gender = strGender;
-    user.fullname = strFullname;
+    user.user_id = user_id;
     [__context MR_saveToPersistentStoreAndWait];
 }
 -(User *)getUserInfo

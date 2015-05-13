@@ -16,13 +16,11 @@
         <attribute name="provineType" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
-        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="fullname" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="ProductItem" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="Provine" positionX="-63" positionY="45" width="128" height="90"/>
-        <element name="User" positionX="-63" positionY="45" width="128" height="90"/>
+        <element name="User" positionX="-63" positionY="45" width="128" height="60"/>
     </elements>
 </model>

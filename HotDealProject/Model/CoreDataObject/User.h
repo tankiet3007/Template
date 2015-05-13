@@ -12,8 +12,6 @@
 
 @interface User : NSManagedObject
 
-@property (nonatomic, retain) NSString * email;
-@property (nonatomic, retain) NSString * fullname;
-@property (nonatomic, retain) NSString * gender;
+@property (nonatomic, retain) NSString * user_id;
 
 @end

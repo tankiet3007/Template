@@ -38,15 +38,7 @@
 - (IBAction)homeClick:(id)sender {
         MainViewController * mainVC = [[MainViewController alloc]init];
         [self.navigationController pushViewController:mainVC animated:YES];
-//    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-//                                    @"Value1", @"Key1",
-//                                    @"Value2", @"Key2",
-//                                    nil];
-//
-//    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:@"http://chrisrisner.com/Labs/day7test.php?name=KietTran" completion:^(NSDictionary * dict, NSError *error) {
-//        [self showMainView:dict wError:error];
-//    }];
-//    [TKAPI postRequest:jsonDictionary withURL:@"http://chrisrisner.com/Labs/day7test.php?name=KietTran"];
+   //    [TKAPI postRequest:jsonDictionary withURL:@"http://chrisrisner.com/Labs/day7test.php?name=KietTran"];
 }
 
 -(void)showMainView:(NSDictionary *)data wError :(NSError *)error

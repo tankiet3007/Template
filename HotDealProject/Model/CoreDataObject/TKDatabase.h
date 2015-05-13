@@ -22,7 +22,7 @@
 -(NSMutableArray *)getAllProvineUserSelected;
 -(void)removeProvineSelected:(NSString *)strName;
 
--(void)addUser:(NSString *)strEmail wFullname:(NSString *)strFullname wGender:(NSString *)strGender;
+-(void)addUser:(NSString *)user_id;
 -(User *)getUserInfo;
 -(void)removeUser;
 @end

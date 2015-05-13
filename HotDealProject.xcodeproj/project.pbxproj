@@ -11,7 +11,8 @@
 		E9239A4B1AF7496B00CC4977 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9239A491AF7496B00CC4977 /* ChangePasswordViewController.m */; };
 		E9239A4C1AF7496B00CC4977 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9239A4A1AF7496B00CC4977 /* ChangePasswordViewController.xib */; };
 		E9384F471ADF985300C3D703 /* TKAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = E9384F461ADF985300C3D703 /* TKAPI.m */; };
-		E93D3AFE1B02F8810004FA3A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E93D3AFD1B02F8810004FA3A /* User.m */; };
+		E93D3B011B03266B0004FA3A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E93D3B001B03266B0004FA3A /* User.m */; };
+		E93D3B061B032C350004FA3A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E93D3B051B032C350004FA3A /* MBProgressHUD.m */; };
 		E9485B971AE006E2005D1688 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9485B851AE006E2005D1688 /* AFHTTPRequestOperation.m */; };
 		E9485B981AE006E2005D1688 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9485B871AE006E2005D1688 /* AFHTTPRequestOperationManager.m */; };
 		E9485B991AE006E2005D1688 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9485B891AE006E2005D1688 /* AFHTTPSessionManager.m */; };
@@ -198,8 +199,10 @@
 		E9239A4A1AF7496B00CC4977 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChangePasswordViewController.xib; path = Controller/UserController/ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		E9384F451ADF985300C3D703 /* TKAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TKAPI.h; path = Model/TKAPI.h; sourceTree = "<group>"; };
 		E9384F461ADF985300C3D703 /* TKAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TKAPI.m; path = Model/TKAPI.m; sourceTree = "<group>"; };
-		E93D3AFC1B02F8810004FA3A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Model/CoreDataObject/User.h; sourceTree = "<group>"; };
-		E93D3AFD1B02F8810004FA3A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Model/CoreDataObject/User.m; sourceTree = "<group>"; };
+		E93D3AFF1B03266B0004FA3A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Model/CoreDataObject/User.h; sourceTree = "<group>"; };
+		E93D3B001B03266B0004FA3A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Model/CoreDataObject/User.m; sourceTree = "<group>"; };
+		E93D3B041B032C350004FA3A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = Library/HUD/MBProgressHUD.h; sourceTree = "<group>"; };
+		E93D3B051B032C350004FA3A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = Library/HUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		E9485B841AE006E2005D1688 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		E9485B851AE006E2005D1688 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		E9485B861AE006E2005D1688 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -552,10 +555,20 @@
 				E972563F1AFA08AD0012D8DD /* Provine.h */,
 				E97256401AFA08AD0012D8DD /* Provine.m */,
 				E9F3AB901B00A03F00A91D9C /* Localizable.strings */,
-				E93D3AFC1B02F8810004FA3A /* User.h */,
-				E93D3AFD1B02F8810004FA3A /* User.m */,
+				E9D3BD701AD6BA5400F7429B /* HotDealProject.xcdatamodeld */,
+				E93D3AFF1B03266B0004FA3A /* User.h */,
+				E93D3B001B03266B0004FA3A /* User.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		E93D3B031B032C190004FA3A /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				E93D3B041B032C350004FA3A /* MBProgressHUD.h */,
+				E93D3B051B032C350004FA3A /* MBProgressHUD.m */,
+			);
+			name = HUD;
 			sourceTree = "<group>";
 		};
 		E9485B831AE006E2005D1688 /* AFNetworking */ = {
@@ -731,6 +744,7 @@
 		E9AE1FB71AD804D2002E11AC /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				E93D3B031B032C190004FA3A /* HUD */,
 				E98D4FAA1AF5DE8B0013EF4C /* WebViewController.h */,
 				E98D4FAB1AF5DE8B0013EF4C /* WebViewController.m */,
 				E98D4FAC1AF5DE8B0013EF4C /* WebViewController.xib */,
@@ -1014,7 +1028,6 @@
 				E98FCF411AD8CBBC00992BF0 /* Macro.h */,
 				E9D3BD791AD6BA5400F7429B /* Images.xcassets */,
 				E9D3BD7B1AD6BA5400F7429B /* LaunchScreen.xib */,
-				E9D3BD701AD6BA5400F7429B /* HotDealProject.xcdatamodeld */,
 			);
 			name = Startup;
 			sourceTree = "<group>";
@@ -1288,7 +1301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E93D3AFE1B02F8810004FA3A /* User.m in Sources */,
+				E93D3B011B03266B0004FA3A /* User.m in Sources */,
 				E9485B9C1AE006E2005D1688 /* AFURLConnectionOperation.m in Sources */,
 				E98D4FAD1AF5DE8B0013EF4C /* WebViewController.m in Sources */,
 				E9AE203F1AD80A5E002E11AC /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -1323,6 +1336,7 @@
 				E9C049FE1AE143B80017C5CE /* UIScrollView+SVPullToRefresh.m in Sources */,
 				E9AE201F1AD80A5E002E11AC /* NSString+MagicalDataImport.m in Sources */,
 				E9AE20851AD80B68002E11AC /* NSString+Helper.m in Sources */,
+				E93D3B061B032C350004FA3A /* MBProgressHUD.m in Sources */,
 				E9D9BB1B1AFB65C600FF07AB /* ProductTableViewCell.m in Sources */,
 				E97256411AFA08AD0012D8DD /* Provine.m in Sources */,
 				E9AE203C1AD80A5E002E11AC /* UIImage+GIF.m in Sources */,

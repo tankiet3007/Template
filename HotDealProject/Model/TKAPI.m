@@ -55,13 +55,19 @@
     [operationManager setSecurityPolicy:policy];
     operationManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     operationManager.requestSerializer = [AFJSONRequestSerializer serializer];
-    operationManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    operationManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
  
     [operationManager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
        
         NSString *strResponeData = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
          NSLog(@"responseObject: %@", strResponeData);
-        NSDictionary* dictionary = (NSDictionary*)responseObject;
+//        NSDictionary* dictionary = (NSDictionary*)responseObject;
+
+        NSDictionary* dictionary = [NSJSONSerialization
+                            JSONObjectWithData:responseObject
+                            options:kNilOptions
+                            error:nil];
+        
         if ([dictionary isKindOfClass:[NSDictionary class]] == YES)
         {
             completion(dictionary, nil);

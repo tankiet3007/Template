@@ -11,8 +11,6 @@
 
 @implementation User
 
-@dynamic email;
-@dynamic fullname;
-@dynamic gender;
+@dynamic user_id;
 
 @end
