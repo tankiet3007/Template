@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/Controller/MainViewController.m"
-            timestampString = "453202110.98842"
+            timestampString = "453262495.84214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "387"
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/Controller/HotNewDetailViewController.m"
-            timestampString = "453111065.460106"
+            timestampString = "453260730.216706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "534"
-            endingLineNumber = "534"
+            startingLineNumber = "557"
+            endingLineNumber = "557"
             landmarkName = "-updateTotalSeletedItem:"
             landmarkType = "5">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/Controller/HotNewDetailViewController.m"
-            timestampString = "453111065.460106"
+            timestampString = "453260730.216706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "-setupLabelDescription"
             landmarkType = "5">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/Controller/HotNewDetailViewController.m"
-            timestampString = "453111065.460106"
+            timestampString = "453260730.216706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "-setupViewHeader"
             landmarkType = "5">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/Controller/HotNewDetailViewController.m"
-            timestampString = "453111065.460106"
+            timestampString = "453260730.216706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
             landmarkName = "-setupViewHeader"
             landmarkType = "5">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/Controller/HotNewDetailViewController.m"
-            timestampString = "453111065.460106"
+            timestampString = "453260730.216706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "-setupLabelDescription"
             landmarkType = "5">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/Controller/HotNewDetailViewController.m"
-            timestampString = "453111065.460106"
+            timestampString = "453260730.216706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "-setupSlide"
             landmarkType = "5">
          </BreakpointContent>
@@ -458,7 +458,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/Controller/MainViewController.m"
-            timestampString = "453202110.98842"
+            timestampString = "453262495.84214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "624"
@@ -496,6 +496,38 @@
             startingLineNumber = "675"
             endingLineNumber = "675"
             landmarkName = "-loginClick"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HotDealProject/Controller/UserController/RegisAndLoginController.m"
+            timestampString = "453261282.274639"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "626"
+            endingLineNumber = "626"
+            landmarkName = "-registerClick"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HotDealProject/Controller/UserController/PersonalInfoViewController.m"
+            timestampString = "453266309.444614"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "-showDropbox"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

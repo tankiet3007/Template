@@ -35,6 +35,7 @@
     NSMutableArray * arrSelectedAldreay;
     BBBadgeBarButtonItem *barButton;
     NSArray * arrProduct;
+     MBProgressHUD *HUD;
 }
 #define PADDING 10//HEADER_HEIGHT
 #define HEADER_HEIGHT 370//HEADER_HEIGHT
@@ -48,7 +49,8 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
     [self initNavigationbar];
-    
+    [self initHUD];
+    [self initData];
     [self setupLabelDescription];
     iSelectedItem = 0;
     [self setupSlide];
@@ -61,6 +63,27 @@
                                              selector:@selector(updateDealCount:) name:@"notiDealCount"
                                                object:nil];
     // Do any additional setup after loading the view.
+}
+
+-(void)initData
+{
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @137537, @"product_id",
+                                    nil];
+    
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_GET_DEAL_CONTENT completion:^(NSDictionary * dict, NSError *error) {
+        UA_log(@"%@",dict);
+        [HUD hide:YES];
+    }];
+
+}
+
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    //    HUD.labelText = LS(@"LoadingData");
+    [HUD hide:YES];
 }
 
 - (void)updateDealCount:(NSNotification *)notification {

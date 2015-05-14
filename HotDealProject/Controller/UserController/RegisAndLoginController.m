@@ -538,7 +538,7 @@
                                                  type, @"type",
                                                  bod, @"bod",
                                                  nil];
-                 
+                 //NSString * strDate = F(@"%.0f",floor([date timeIntervalSince1970] * 1000));
                  
                   UA_log(@"%@",jsonDictionary);
                  [HUD show:YES];
