@@ -1219,6 +1219,7 @@
 				TargetAttributes = {
 					E9D3BD651AD6BA5400F7429B = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = BUWJGCCHBQ;
 					};
 					E9D3BD811AD6BA5400F7429B = {
 						CreatedOnToolsVersion = 6.2;
@@ -1545,6 +1546,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/kiettran/Documents/FacebookSDK,
@@ -1555,7 +1558,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "49d4457e-e7c5-40e7-98f5-b7d020f6298e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1563,6 +1566,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/kiettran/Documents/FacebookSDK,
@@ -1573,7 +1578,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "49d4457e-e7c5-40e7-98f5-b7d020f6298e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

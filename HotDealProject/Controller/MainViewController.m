@@ -56,7 +56,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
     [self checkNetwork];
-    
+    [self initUITableView];
     [self initNavigationbar];
       [self initHUD];
     [self initData];
@@ -128,8 +128,8 @@
             [arrDeals addObject:item];
         }
         UA_log(@"%d item", [arrDeals count]);
-//        [tableViewMain reloadData];
-        [self initUITableView];
+        [tableViewMain reloadData];
+        
         [self setupNewDeal];
         }];
 
@@ -260,7 +260,7 @@
     //    [scrollView setBounces:NO];
     
     int x = 0;
-    for (int i = 0; i < [arrDeals count]; i++) {
+    for (int i = 0; i < 10; i++) {
         DealItem *itemS = [[[NSBundle mainBundle] loadNibNamed:@"DealItem" owner:self options:nil] objectAtIndex:0];
         [itemS setFrame:CGRectMake(x, 0, 250, 180)];
         [itemS.btnTemp addTarget:self action:@selector(clickOnItem:) forControlEvents:UIControlEventTouchUpInside];
