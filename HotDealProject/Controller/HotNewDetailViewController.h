@@ -15,4 +15,5 @@
 @property(nonatomic,strong)UITableView * tableViewDetail;
 @property (nonatomic, strong)DealObject * dealObj;
 @property (nonatomic,strong)NSMutableArray * arrDealRelateds;
+@property (nonatomic, assign)int  iProductID;
 @end

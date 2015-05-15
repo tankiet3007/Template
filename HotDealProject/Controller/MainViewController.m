@@ -569,8 +569,9 @@
     if (indexPath.section == 4) {
         HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
         DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
-        detail.dealObj = dealObj;
-        detail.arrDealRelateds = arrDeals;
+        detail.iProductID = dealObj.product_id;
+//        detail.dealObj = dealObj;
+//        detail.arrDealRelateds = arrDeals;
         [self.navigationController pushViewController:detail animated:YES];
     }
 }
@@ -613,8 +614,9 @@
     UA_log(@"button is at %ld index", (long)btnTag.tag);
     HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
     DealObject * dealObj = [arrDeals objectAtIndex:(long)btnTag.tag];
-    detail.dealObj = dealObj;
-    detail.arrDealRelateds = arrDeals;
+//    detail.dealObj = dealObj;
+//    detail.arrDealRelateds = arrDeals;
+    detail.iProductID = dealObj.product_id;
     [self.navigationController pushViewController:detail animated:YES];
 }
 

@@ -52,13 +52,13 @@
     [self initNavigationbar];
     [self initHUD];
     [self initData];
-    [self setupLabelDescription];
+    
     iSelectedItem = 0;
-    [self setupSlide];
-//    [self setupRelatedDeal];
-    [self setupViewHeader];
-    [self initUITableView];
-    [self.view addSubview:[self setupBottomView]];
+    
+    //    [self setupRelatedDeal];
+    //    [self setupViewHeader];
+    
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateDealCount:) name:@"notiDealCount"
@@ -68,15 +68,21 @@
 
 -(void)initData
 {
-    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    @37509, @"product_id",
-                                    nil];
+    //    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+    //                                    [NSNumber numberWithInt:_iProductID ], @"product_id",
+    //                                    nil];
+    NSString * strParam = F(@"product_id=%@",[NSNumber numberWithInt:_iProductID ]);
     
     [HUD show:YES];
-    [[TKAPI sharedInstance]getRequestAF:jsonDictionary withURL:URL_GET_DEAL_CONTENT completion:^(NSDictionary * dict, NSError *error) {
+    [[TKAPI sharedInstance]getRequest:strParam withURL:URL_GET_DEAL_CONTENT completion:^(NSDictionary * dict, NSError *error) {
         //        UA_log(@"%@",dict);
         dictDetail = dict;
         [HUD hide:YES];
+        [self setupLabelDescription];
+        [self setupSlide];
+        [self setupViewHeader];
+        [self initUITableView];
+        [self.view addSubview:[self setupBottomView]];
     }];
     
 }
@@ -103,8 +109,8 @@
     }
     lblDescription.lineBreakMode = NSLineBreakByWordWrapping;
     lblDescription.numberOfLines = 0;
-    lblDescription.text = dealObj.strDescription;
-    lblDescription.font = [UIFont systemFontOfSize:14];
+    lblDescription.text = F(@"\n%@\n",[dictDetail objectForKey:@"product"]);
+    lblDescription.font = [UIFont systemFontOfSize:13];
     [lblDescription sizeToFit];
     CGRect rect = lblDescription.frame;
     fHeightOfDescription = rect.size.height;
@@ -190,7 +196,7 @@
     viewHeader = [[UIView alloc]initWithFrame:CGRectMake(PADDING, PADDING, ScreenWidth - PADDING*2, realHeight)];
     UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIDTH(viewHeader), 40)];
     lblTitle.numberOfLines = 2;
-    lblTitle.text = dealObj.strTitle;
+    lblTitle.text = [dictDetail objectForKey:@"title"];
     lblTitle.font = [UIFont boldSystemFontOfSize:15];
     lblTitle.textColor = [UIColor orangeColor];
     [viewHeader addSubview:lblTitle];
@@ -200,7 +206,8 @@
     UILabel * lblStandarPrice = [[UILabel alloc]initWithFrame:CGRectMake(0, Y(imageSlideTop) + HEIGHT(imageSlideTop), 150, 18)];
     lblStandarPrice.font = [UIFont systemFontOfSize:14];
     lblStandarPrice.textColor = [UIColor blackColor];
-    NSString * strStardarPrice = F(@"%ld", dealObj.lStandarPrice);
+    int price = [[dictDetail objectForKey:@"price"]intValue];
+    NSString * strStardarPrice = F(@"%d", price);
     strStardarPrice = [strStardarPrice formatStringToDecimal];
     NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
     NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
@@ -210,7 +217,8 @@
     
     UILabel * lblDiscountPrice = [[UILabel alloc]initWithFrame:CGRectMake(0, Y(lblStandarPrice) + HEIGHT(lblStandarPrice), 150, 25)];
     
-    NSString * strDiscountPrice = F(@"%ld", dealObj.lDiscountPrice);
+    int list_price = [[dictDetail objectForKey:@"list_price"]intValue];
+    NSString * strDiscountPrice = F(@"%d",  list_price);
     strDiscountPrice = [strDiscountPrice formatStringToDecimal];
     strDiscountPrice = F(@"%@đ", strDiscountPrice);
     lblDiscountPrice.text = strDiscountPrice;
@@ -226,7 +234,8 @@
     UILabel *  lblDiscountPercent = [[UILabel alloc]initWithFrame:CGRectMake(X(imvDown) + 5, Y(imvDown)+2, WIDTH(imvDown)-5, 25)];
     
     lblDiscountPercent.numberOfLines = 1;
-    lblDiscountPercent.text = @"60%";
+    float calculatePercent = (float)((float)price/(float)list_price) *100;
+    lblDiscountPercent.text = F(@"%.0f%%", calculatePercent);
     lblDiscountPercent.textAlignment = NSTextAlignmentCenter;
     lblDiscountPercent.font = [UIFont boldSystemFontOfSize:15];
     lblDiscountPercent.textColor = [UIColor whiteColor];//frame = (245 337; 55 25)
@@ -372,7 +381,7 @@
             cell = [nib objectAtIndex:0];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.lblTotal.text = F(@"%d",dealObj.buy_number);
+        cell.lblTotal.text = F(@"%d",[[dictDetail objectForKey:@"buy_number"]intValue]);
         
         return cell;
     }
@@ -602,6 +611,16 @@
         ALERT(@"Thông báo!", @"Vui lòng chọn số lượng");
         return;
     }
+    User * user
+        NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        [NSNumber numberWithInt:_iProductID ], @"product_id",
+                                        
+                                        nil];
+//    NSString * strParam = F(@"product_id=%@",[NSNumber numberWithInt:_iProductID ]);
+    
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:strParam withURL:URL_ADD_TO_CART completion:^(NSDictionary * dict, NSError *error) {
+    }];
 }
 -(void)openCart
 {

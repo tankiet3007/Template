@@ -117,4 +117,45 @@
              completion(nil, error);
          }];
 }
+
+- (void)getRequest:(NSString *)params withURL:(NSString *)url completion:(void(^)(NSDictionary*, NSError*))completion
+{
+    dispatch_queue_t queue = dispatch_queue_create("com.get", 0);
+    dispatch_async(queue, ^{
+    NSString *paramString = F(@"%@?%@", url, params);
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:paramString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod: @"GET"];
+    
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    
+    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    NSString * strData = [[NSString alloc]initWithData:response1 encoding:NSUTF8StringEncoding];
+    NSDictionary* dictionary = [NSJSONSerialization
+                                JSONObjectWithData:response1
+                                options:kNilOptions
+                                error:nil];
+    
+    if ([dictionary isKindOfClass:[NSDictionary class]] == YES)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(dictionary, nil);
+        });
+        
+    }
+    else
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(dictionary, nil);
+        });
+
+    }
+
+    UA_log(@"data: %@",strData);
+    });
+}
 @end
