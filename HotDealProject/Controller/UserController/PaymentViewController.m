@@ -251,6 +251,11 @@
     [self.navigationController pushViewController:bookVC animated:YES];
 //    ALERT(@"Thong bao", @"Dat hang thanh cong");
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
 /*
 #pragma mark - Navigation
 

@@ -79,6 +79,18 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     
 }
 
+-(void)initData2
+{
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"123", @"state_id",
+                                    nil];
+    
+    UA_log(@"%@",jsonDictionary);
+//    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_SIGN_IN completion:^(NSDictionary * dict, NSError *error) {
+        
+    }];
+}
 -(void)checkUserLogged
 {
     if ([[TKDatabase sharedInstance]getUserInfo] != nil) {
@@ -91,7 +103,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 -(void)initUITableView
 {
     self.view.backgroundColor = [UIColor darkGrayColor];
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-60) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 60) style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = [UIColor darkGrayColor];
     

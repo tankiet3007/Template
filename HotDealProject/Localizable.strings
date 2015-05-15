@@ -14,3 +14,7 @@
 
 "CheckPasswordLength"               = "Mật khẩu phải từ 4 đến 16 ký tự";
 "EmailErrorNotify" = "Email không đúng định dạng";
+"feature" = "Điểm nổi bật";
+"location" = "Địa điểm sử dụng";
+"condition" = "Lưu ý khi mua";
+"detail" = "Chi tiết khuyến mãi";

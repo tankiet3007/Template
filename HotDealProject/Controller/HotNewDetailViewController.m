@@ -35,7 +35,8 @@
     NSMutableArray * arrSelectedAldreay;
     BBBadgeBarButtonItem *barButton;
     NSArray * arrProduct;
-     MBProgressHUD *HUD;
+    MBProgressHUD *HUD;
+    __block NSDictionary * dictDetail;
 }
 #define PADDING 10//HEADER_HEIGHT
 #define HEADER_HEIGHT 370//HEADER_HEIGHT
@@ -54,7 +55,7 @@
     [self setupLabelDescription];
     iSelectedItem = 0;
     [self setupSlide];
-    [self setupRelatedDeal];
+//    [self setupRelatedDeal];
     [self setupViewHeader];
     [self initUITableView];
     [self.view addSubview:[self setupBottomView]];
@@ -68,15 +69,16 @@
 -(void)initData
 {
     NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    @137537, @"product_id",
+                                    @37509, @"product_id",
                                     nil];
     
     [HUD show:YES];
-    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_GET_DEAL_CONTENT completion:^(NSDictionary * dict, NSError *error) {
-        UA_log(@"%@",dict);
+    [[TKAPI sharedInstance]getRequestAF:jsonDictionary withURL:URL_GET_DEAL_CONTENT completion:^(NSDictionary * dict, NSError *error) {
+        //        UA_log(@"%@",dict);
+        dictDetail = dict;
         [HUD hide:YES];
     }];
-
+    
 }
 
 - (void)initHUD {
@@ -143,7 +145,7 @@
     }
     barButton.badgeValue = F(@"%d",iBadge);
     
-//    barButton.badgeValue = F(@"%ld",[arrProduct count]);
+    //    barButton.badgeValue = F(@"%ld",[arrProduct count]);
     self.navigationItem.rightBarButtonItem = barButton;
 }
 
@@ -333,8 +335,8 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.imgPic.image = [UIImage imageNamed:@"beef"];
         
-//        cell.vContainer.layer.borderWidth = 0.5;
-//        cell.vContainer.layer.borderColor =[UIColor lightGrayColor].CGColor;
+        //        cell.vContainer.layer.borderWidth = 0.5;
+        //        cell.vContainer.layer.borderColor =[UIColor lightGrayColor].CGColor;
         UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth -20, 45)];
         [cell.contentView insertSubview:viewBG atIndex:0];
         viewBG.layer.borderWidth = 0.5;
@@ -358,7 +360,7 @@
             {
                 cell.lblNumofVoucher.text = F(@"%d voucher",iSelectedItem);
             }
-
+            
         }
         return cell;
     }
@@ -487,7 +489,7 @@
         if (item.iType == 1) {
             itemS.lblEVoucher.hidden = YES;
         }
-
+        
         
         x += itemS.frame.size.width + PADDING;
         [scrollView addSubview:itemS];
@@ -539,9 +541,33 @@
         return;
     }
     if (indexPath.section == 3) {
-        WebViewController * web = [[WebViewController alloc]init];
-        web.url = [NSURL URLWithString:@"http://m.hamtruyen.com/doc-truyen/ban-long-chapter-83.html"];
-        [self.navigationController pushViewController:web animated:YES];
+        if (indexPath.row == 0) {
+            WebViewController * web = [[WebViewController alloc]init];
+            web.sTitle = LS(@"feature");
+            web.strContent = [dictDetail objectForKey:@"feature"];
+            [self.navigationController pushViewController:web animated:YES];
+            
+        }
+        if (indexPath.row == 1) {
+            WebViewController * web = [[WebViewController alloc]init];
+            web.sTitle = LS(@"condition");
+            web.strContent = [dictDetail objectForKey:@"condition"];
+            [self.navigationController pushViewController:web animated:YES];
+            
+        }
+        if (indexPath.row == 2) {
+            WebViewController * web = [[WebViewController alloc]init];
+            web.sTitle = LS(@"location");
+            web.strContent = [dictDetail objectForKey:@"location"];
+            [self.navigationController pushViewController:web animated:YES];
+            
+        }
+        if (indexPath.row == 3) {
+            WebViewController * web = [[WebViewController alloc]init];
+            web.sTitle = LS(@"detail");
+            web.strContent = [dictDetail objectForKey:@"detail"];
+            [self.navigationController pushViewController:web animated:YES];
+        }
     }
     
 }

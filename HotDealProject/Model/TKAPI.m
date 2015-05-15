@@ -80,4 +80,41 @@
 //        NSLog(@"Error: %@", error);
         completion(nil, error);
     }];}
+
+- (void)getRequestAF:(NSDictionary *)params withURL:(NSString *)url completion:(void(^)(NSDictionary*, NSError*))completion
+{
+    AFSecurityPolicy *policy = [[AFSecurityPolicy alloc] init];
+    [policy setAllowInvalidCertificates:YES];
+    AFHTTPRequestOperationManager *operationManager = [AFHTTPRequestOperationManager manager];
+    [operationManager setSecurityPolicy:policy];
+    operationManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    operationManager.requestSerializer = [AFJSONRequestSerializer serializer];
+    operationManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+
+    [operationManager GET:url
+      parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          NSString *strResponeData = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+          NSLog(@"responseObject: %@", strResponeData);
+          //        NSDictionary* dictionary = (NSDictionary*)responseObject;
+          
+          NSDictionary* dictionary = [NSJSONSerialization
+                                      JSONObjectWithData:responseObject
+                                      options:kNilOptions
+                                      error:nil];
+          
+          if ([dictionary isKindOfClass:[NSDictionary class]] == YES)
+          {
+              completion(dictionary, nil);
+          }
+          else
+          {
+              completion(dictionary, nil);
+          }
+
+         }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             // handle failure
+             completion(nil, error);
+         }];
+}
 @end
