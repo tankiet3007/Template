@@ -611,7 +611,7 @@
         ALERT(@"Thông báo!", @"Vui lòng chọn số lượng");
         return;
     }
-    User * user
+//    User * user
         NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                         [NSNumber numberWithInt:_iProductID ], @"product_id",
                                         
@@ -619,8 +619,8 @@
 //    NSString * strParam = F(@"product_id=%@",[NSNumber numberWithInt:_iProductID ]);
     
     [HUD show:YES];
-    [[TKAPI sharedInstance]postRequestAF:strParam withURL:URL_ADD_TO_CART completion:^(NSDictionary * dict, NSError *error) {
-    }];
+//    [[TKAPI sharedInstance]postRequestAF:strParam withURL:URL_ADD_TO_CART completion:^(NSDictionary * dict, NSError *error) {
+//    }];
 }
 -(void)openCart
 {

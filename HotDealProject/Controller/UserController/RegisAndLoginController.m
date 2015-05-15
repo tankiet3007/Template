@@ -289,6 +289,10 @@
             switch ( indexPath.row ) {
                 case 0: {
                     cellRe.textLabel.text = @"" ;
+                    if (tfEmail != nil) {
+                        [cellRe addSubview:tfEmail];
+                        break;
+                    }
                     tf = tfEmail = [self makeTextField:@"" placeholder:@"Địa chỉ email"];
 //                    tf.textColor = [UIColor lightGrayColor];
                     [cellRe addSubview:tfEmail];
@@ -296,6 +300,11 @@
                 }
                 case 1: {
                     cellRe.textLabel.text = @"" ;
+                    if (tfPassword != nil) {
+                        [cellRe addSubview:tfPassword];
+                        tfPassword.secureTextEntry = YES;
+                        break;
+                    }
                     tf = tfPassword = [self makeTextField:@"" placeholder:@"Mật khẩu"];
                     [cellRe addSubview:tfPassword];
                     tfPassword.secureTextEntry = YES;
@@ -303,6 +312,9 @@
                 }
                 case 2: {
                     cellRe.textLabel.text = @"" ;
+                    if (tfConfirmPassword != nil) {
+                        break;
+                    }
                     tf = tfConfirmPassword = [self makeTextField:@"" placeholder:@"Nhập lại mật khẩu"];
                     tfConfirmPassword.secureTextEntry = YES;
                     [cellRe addSubview:tfConfirmPassword];
@@ -310,12 +322,18 @@
                 }
                 case 3: {
                     cellRe.textLabel.text = @"" ;
+                    if (tfFullname != nil) {
+                        break;
+                    }
                     tf = tfFullname = [self makeTextField:@"" placeholder:@"Họ tên"];
                     [cellRe addSubview:tfFullname];
                     break ;
                 }
                 case 4: {
                     cellRe.textLabel.text = @"" ;
+                    if (tfPhone != nil) {
+                        break;
+                    }
                     tf = tfPhone = [self makeTextField:@"" placeholder:@"Điện thoại di động"];
                     [cellRe addSubview:tfPhone];
                     break ;
