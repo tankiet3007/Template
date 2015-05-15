@@ -64,6 +64,12 @@
 //    HUD.labelText = LS(@"LoadingData");
     [HUD hide:YES];
 }
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
@@ -73,11 +79,6 @@
         
     }
     return self;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 -(void)initUITableView
 {
@@ -313,6 +314,7 @@
                 case 2: {
                     cellRe.textLabel.text = @"" ;
                     if (tfConfirmPassword != nil) {
+                        [cellRe addSubview:tfConfirmPassword];
                         break;
                     }
                     tf = tfConfirmPassword = [self makeTextField:@"" placeholder:@"Nhập lại mật khẩu"];
@@ -323,6 +325,7 @@
                 case 3: {
                     cellRe.textLabel.text = @"" ;
                     if (tfFullname != nil) {
+                        [cellRe addSubview:tfFullname];
                         break;
                     }
                     tf = tfFullname = [self makeTextField:@"" placeholder:@"Họ tên"];
@@ -332,6 +335,7 @@
                 case 4: {
                     cellRe.textLabel.text = @"" ;
                     if (tfPhone != nil) {
+                        [cellRe addSubview:tfPhone];
                         break;
                     }
                     tf = tfPhone = [self makeTextField:@"" placeholder:@"Điện thoại di động"];
