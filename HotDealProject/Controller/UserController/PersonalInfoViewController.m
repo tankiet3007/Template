@@ -118,7 +118,7 @@ typedef enum {
     topToBottom.direction=UISwipeGestureRecognizerDirectionDown;
     
     [self.tableView addGestureRecognizer:topToBottom];
-//    self.tableView.scrollEnabled = NO;
+    //    self.tableView.scrollEnabled = NO;
     //self.tableView.userInteractionEnabled;
 }
 
