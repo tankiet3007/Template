@@ -118,7 +118,7 @@
 #pragma mark tableview delegate + datasource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return  3;
+    return  2;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -158,23 +158,23 @@
         cell.titleLabel.text = @"Thông tin cá nhân";
         cell.desLabel.text = @"\n";
     }
-    if (indexPath.section == 1) {
-        cell.titleLabel.text = @"Email khuyến mãi";
-        NSString * strProvines = @"";
-        for (NSString * strItem in arrProvine) {
-            strProvines = F(@"%@, %@",strItem,strProvines);
-        }
-        if ([strProvines isEqualToString:@""]) {
-            cell.desLabel.text = @"\n";
-        }
-        else
-        {
-            strProvines = F(@"%@ \n\n",strProvines);
-            cell.desLabel.text = strProvines;
-        }
-    }
+//    if (indexPath.section == 1) {
+//        cell.titleLabel.text = @"Email khuyến mãi";
+//        NSString * strProvines = @"";
+//        for (NSString * strItem in arrProvine) {
+//            strProvines = F(@"%@, %@",strItem,strProvines);
+//        }
+//        if ([strProvines isEqualToString:@""]) {
+//            cell.desLabel.text = @"\n";
+//        }
+//        else
+//        {
+//            strProvines = F(@"%@ \n\n",strProvines);
+//            cell.desLabel.text = strProvines;
+//        }
+//    }
     
-    if (indexPath.section == 2) {
+    if (indexPath.section == 1) {
         cell.titleLabel.text = @"Địa chỉ nhận hàng";
         if ([strAddressL isEqualToString:@""] || strAddressL == nil) {
             cell.desLabel.text = @"Trần Tấn Kiệt\nĐTDĐ:0936459200\nYoco Building\n41, Nguyễn Thị Minh Khai, Phường Bến Nghé, Quận 1, TP Hồ Chí Minh\n\n";
@@ -224,12 +224,12 @@
         PersonalInfoViewController * pInfo = [[PersonalInfoViewController alloc]init];
         [self.navigationController pushViewController:pInfo animated:YES];
     }
+//    if (indexPath.section == 1) {
+//        EmailPromotionViewController * email = [[EmailPromotionViewController alloc]init];
+//        email.delegate = self;
+//        [self.navigationController pushViewController:email animated:YES];
+//    }
     if (indexPath.section == 1) {
-        EmailPromotionViewController * email = [[EmailPromotionViewController alloc]init];
-        email.delegate = self;
-        [self.navigationController pushViewController:email animated:YES];
-    }
-    if (indexPath.section == 2) {
         AddressViewController * addressVC = [[AddressViewController alloc]init];
         addressVC.delegate = self;
         [self.navigationController pushViewController:addressVC animated:YES];

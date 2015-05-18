@@ -46,6 +46,8 @@
     UIView *dialogView;
     UIView* dimView;
     MBProgressHUD *HUD;
+    BOOL bForceStop;
+    NSString * strCategory;
 }
 @synthesize tableViewMain;
 #pragma mark init Method
@@ -55,11 +57,13 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [UIColor whiteColor];
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
+    bForceStop = FALSE;
     [self checkNetwork];
     [self initUITableView];
     [self initNavigationbar];
       [self initHUD];
-    [self initData];
+    strCategory = @"default";
+    [self initData:10 wOffset:1 wType:@"default" ];
     
     [self setupSlide];
 //    [self setupNewDeal];
@@ -101,14 +105,14 @@
     imageSlideTop.delegate = self;
     [imageSlideTop initScrollLocal2];
 }
--(void)initData
+-(void)initData:(int)iCount wOffset:(int)iOffset wType:(NSString *)sType
 {
     NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     @123, @"category",
                                     @437, @"city",
-                                    @10, @"fetch_count",
-                                    @1, @"offset",
-                                    @"default",@"fetch_type",
+                                    [NSNumber numberWithInt:iCount], @"fetch_count",
+                                    [NSNumber numberWithInt:iOffset], @"offset",
+                                    sType,@"fetch_type",
                                     nil];
     arrDeals = [[NSMutableArray alloc]init];
     UA_log(@"%@",jsonDictionary);
@@ -123,103 +127,89 @@
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
             item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
+            item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
             item.iType = [[dictItem objectForKey:@"type"]intValue];
+            if ([arrDeals count]>10) {
+                break;
+            }
             [arrDeals addObject:item];
         }
-        UA_log(@"%d item", [arrDeals count]);
+        UA_log(@"%lu item", [arrDeals count]);
+        if ([arrDeals count] == 0) {
+            return ;
+        }
         [tableViewMain reloadData];
         
         [self setupNewDeal];
         }];
 
 }
--(void)initData2
+-(void)initData2:(int)iCount wOffset:(int)iOffset wType:(NSString *)sType
 {
-    arrDeals = [[NSMutableArray alloc]init];
-    
-    DealObject * item = [[DealObject alloc]init];
-    item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
-    item.buy_number = 123;
-    item.iType = 0;
-        item.isNew = TRUE;
-    item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
-    item.lDiscountPrice = 100000;
-    item.lStandarPrice = 400000;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
-    item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
-    item.buy_number = 456;
-    item.iType = 1;
-            item.isNew = TRUE;
-    item.lDiscountPrice = 200000;
-    item.lStandarPrice = 1000000;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
-    item.buy_number = 789;
-    item.strDescription = @"Đầm xòe Zara họa tiết chấm bi xuất khẩu - Thiết kế thời trang với phần phối màu xen kẽ họa tiết chấm bi đẹp mắt giúp thể hiện nét đẹp thanh lịch, sành điệu của bạn gái. Chỉ 199.000đ cho trị giá 398.000đ Chỉ 199.000đ cho trị giá 398.000đ";
-    item.lDiscountPrice = 30000;
-    item.lStandarPrice = 200000;
-            item.isNew = FALSE;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
-    item.strDescription = @"Bộ miếng dán iPhone mạ vàng và ốp lưng silicon có thiết kế vừa vặn với khung máy sẽ giúp mang đến cho dế yêu của bạn một vẻ đẹp hoàn hảo và đẳng cấp. Chỉ 85.000đ cho trị giá 160.000đ";
-    item.buy_number = 111;
-    item.iType = 1;
-    item.isNew = FALSE;
-    item.lDiscountPrice = 100000;
-    item.lStandarPrice = 400000;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
-    item.buy_number = 222;
-    item.lDiscountPrice = 200000;
-    item.lStandarPrice = 1000000;
-    item.isNew = FALSE;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
-    item.buy_number = 333;
-    item.lDiscountPrice = 30000;
-    item.lStandarPrice = 200000;
-    item.isNew = TRUE;
-    item.iType = 1;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
-    item.buy_number = 121;
-    item.lDiscountPrice = 100000;
-    item.lStandarPrice = 400000;
-    item.iType = 0;
-    item.isNew = FALSE;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
-    item.buy_number = 212;
-    item.lDiscountPrice = 200000;
-    item.lStandarPrice = 1000000;
-    item.iType = 0;
-    item.isNew = FALSE;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
-    item.buy_number = 999;
-    item.lDiscountPrice = 30000;
-    item.lStandarPrice = 200000;
-    item.iType = 0;
-    item.isNew = TRUE;
-    [arrDeals addObject:item];
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @123, @"category",
+                                    @437, @"city",
+                                    [NSNumber numberWithInt:iCount], @"fetch_count",
+                                    [NSNumber numberWithInt:iOffset], @"offset",
+                                    sType,@"fetch_type",
+                                    nil];
+
+    UA_log(@"%@",jsonDictionary);
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
+        [HUD hide:YES];
+        NSArray * arrProducts = [dict objectForKey:@"product"];
+        for (NSDictionary * dictItem in arrProducts) {
+            DealObject * item = [[DealObject alloc]init];
+            item.strTitle = [dictItem objectForKey:@"title"];
+            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
+            item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
+            item.strBrandImage = [dictItem objectForKey:@"image_link"];
+            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            [arrDeals addObject:item];
+        }
+        UA_log(@"%lu item", [arrDeals count]);
+        [tableViewMain reloadData];
+    }];
+
+}
+
+-(void)loadMoreDeal
+{
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @123, @"category",
+                                    @437, @"city",
+                                    [NSNumber numberWithInteger:[arrDeals count]], @"fetch_count",
+                                    [NSNumber numberWithInt:30], @"offset",
+                                    strCategory,@"fetch_type",
+                                    nil];
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
+        [HUD hide:YES];
+        NSArray * arrProducts = [dict objectForKey:@"product"];
+        if ([arrProducts count] == 0) {
+            bForceStop = YES;
+            return;
+        }
+        
+        for (NSDictionary * dictItem in arrProducts) {
+            DealObject * item = [[DealObject alloc]init];
+            item.strTitle = [dictItem objectForKey:@"title"];
+            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
+            item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
+            item.strBrandImage = [dictItem objectForKey:@"image_link"];
+            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            [arrDeals addObject:item];
+        }
+        UA_log(@"%lu item", [arrDeals count]);
+        [tableViewMain reloadData];
+    }];
+
 }
 
 
@@ -500,6 +490,7 @@
         if (item.iType == 1) {
             cell.lblEVoucher.hidden = YES;
         }
+        
         NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
         strStardarPrice = [strStardarPrice formatStringToDecimal];
         NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
@@ -514,6 +505,23 @@
         strDiscountPrice = F(@"%@đ", strDiscountPrice);
         cell.lblDiscountPrice.text = strDiscountPrice;
         cell.lblTitle.text = item.strTitle;
+        
+        if (bForceStop == TRUE) {
+            return cell;
+        }
+        if (indexPath.row == [arrDeals count] - 1)
+        {
+//            [HUD showAnimated:YES whileExecutingBlock:^{
+                [self loadMoreDeal];
+//            }completionBlock:^{
+//                [self.tableViewMain performSelectorOnMainThread:@selector(reloadData)
+//                                                       withObject:nil
+//                                                    waitUntilDone:NO];
+//                
+//            }];
+        }
+
+        
         return cell;
     }
     
@@ -541,7 +549,7 @@
     segmentedControl.frame = myFrame;
     segmentedControl.tintColor = [UIColor darkGrayColor];
     [segmentedControl addTarget:self action:@selector(mySegmentControlAction) forControlEvents: UIControlEventValueChanged];
-    segmentedControl.selectedSegmentIndex = 1;
+    segmentedControl.selectedSegmentIndex = 0;
     [viewHeader addSubview:segmentedControl];
     return viewHeader;
     
@@ -549,19 +557,24 @@
 
 -(void)mySegmentControlAction
 {
+    arrDeals = [[NSMutableArray alloc]init];
     NSMutableIndexSet *indetsetToUpdate = [[NSMutableIndexSet alloc]init];
     
     [indetsetToUpdate addIndex:4];
     [tableViewMain reloadSections:indetsetToUpdate withRowAnimation:UITableViewRowAnimationFade];
     if (segmentedControl.selectedSegmentIndex == 0) {
-        UA_log(@"0");
+//        UA_log(@"0");
+        strCategory = @"default";
     }
     if (segmentedControl.selectedSegmentIndex == 1) {
         UA_log(@"1");
+        strCategory = @"newest";
     }
     if (segmentedControl.selectedSegmentIndex == 2) {
         UA_log(@"2");
+        strCategory = @"sale";
     }
+    [self initData:1 wOffset:10 wType:strCategory];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -583,6 +596,8 @@
     int64_t delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self initData:10 wOffset:1 wType:@"default" ];
+        segmentedControl.selectedSegmentIndex = 0;
         [tableViewMain reloadData];
         //            [self getNEWSCampaign:[arrNews count] andSize:10 wKeyword:searchBars.text];
     });

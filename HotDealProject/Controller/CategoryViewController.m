@@ -231,7 +231,7 @@
         return 44;
     }
     else
-        return 250;
+        return 230;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -251,8 +251,8 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        NSString * strTitle = [arrSort objectAtIndex:indexPath.row];
-        cell.textLabel.text = strTitle;
+        NSString * strTitles = [arrSort objectAtIndex:indexPath.row];
+        cell.textLabel.text = strTitles;
         cell.textLabel.font = [UIFont systemFontOfSize:11];
         cell.textLabel.textColor = [UIColor lightGrayColor];
         return cell;

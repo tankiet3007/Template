@@ -60,7 +60,7 @@
     [operationManager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
        
         NSString *strResponeData = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
-         NSLog(@"responseObject: %@", strResponeData);
+//         NSLog(@"responseObject: %@", strResponeData);
 //        NSDictionary* dictionary = (NSDictionary*)responseObject;
 
         NSDictionary* dictionary = [NSJSONSerialization
@@ -94,7 +94,7 @@
     [operationManager GET:url
       parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
           NSString *strResponeData = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
-          NSLog(@"responseObject: %@", strResponeData);
+//          NSLog(@"responseObject: %@", strResponeData);
           //        NSDictionary* dictionary = (NSDictionary*)responseObject;
           
           NSDictionary* dictionary = [NSJSONSerialization
@@ -155,7 +155,7 @@
 
     }
 
-    UA_log(@"data: %@",strData);
+//    UA_log(@"data: %@",strData);
     });
 }
 @end

@@ -12,6 +12,7 @@
 #import "SVPullToRefresh.h"
 #import "HotNewDetailViewController.h"
 #import "SWRevealViewController.h"
+
 @interface SearchViewController ()
 
 @end
@@ -22,46 +23,54 @@
     NSMutableArray * arrDeals;
     UIView * viewHeader;
     UILabel * lblNumOfDeal;
+    MBProgressHUD *HUD;
 }
 @synthesize tableViewSearch,searchBars;
+@synthesize searchText;
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     [self initUITableView];
-//    [self initSearchBar];
+    [self initSearchBar];
     [self setupHeader];
     
     [self initNavigationbar];
+    [self initHUD];
     [self initData];
     
     // Do any additional setup after loading the view.
 }
-
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    //    HUD.labelText = LS(@"LoadingData");
+    [HUD hide:YES];
+}
 -(UIView *)setupHeader
 {
     if (viewHeader != nil) {
         [viewHeader removeFromSuperview];
         viewHeader = nil;
     }
-    viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
+    viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 84)];
     
-//    UIView * viewForSearch = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-//    viewForSearch.backgroundColor = [UIColor blackColor];
-//    [viewForSearch addSubview:searchBars];
-//    [viewHeader addSubview:viewForSearch];
+    UIView * viewForSearch = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    viewForSearch.backgroundColor = [UIColor clearColor];
+    [viewForSearch addSubview:searchBars];
+    [viewHeader addSubview:viewForSearch];
     
-    UILabel * lblHave = [[UILabel alloc]initWithFrame:CGRectMake(13, 14, 25, 20)];
+    UILabel * lblHave = [[UILabel alloc]initWithFrame:CGRectMake(13, 54, 25, 20)];
     lblHave.font = [UIFont systemFontOfSize:14];
     lblHave.text = @"Có";
     [viewHeader addSubview:lblHave];
-    lblNumOfDeal = [[UILabel alloc]initWithFrame:CGRectMake(36, 14, 40, 20)];
+    lblNumOfDeal = [[UILabel alloc]initWithFrame:CGRectMake(36, 54, 40, 20)];
     lblNumOfDeal.font = [UIFont boldSystemFontOfSize:14];
     lblNumOfDeal.text = @"1232";
     lblNumOfDeal.textAlignment = NSTextAlignmentCenter;
     [viewHeader addSubview:lblNumOfDeal];
     
-    lblHave = [[UILabel alloc]initWithFrame:CGRectMake(85, 14, 120, 20)];
+    lblHave = [[UILabel alloc]initWithFrame:CGRectMake(85, 54, 120, 20)];
     lblHave.font = [UIFont systemFontOfSize:14];
     lblHave.text = @"khuyến mãi";
     [viewHeader addSubview:lblHave];
@@ -75,7 +84,7 @@
     searchBars = [[UISearchBar alloc] init];
 //    searchBars.showsCancelButton = YES;
     //    searchBars.backgroundColor = [UIColor darkGrayColor];
-    [searchBars setFrame:CGRectMake(0, 5, 320, 34)];
+    [searchBars setFrame:CGRectMake(0, 5, ScreenWidth, 34)];
     searchBars.placeholder = @"Tìm kiếm";
     [searchBars setBackgroundColor:[UIColor clearColor]];
     [searchBars setBarTintColor:[UIColor clearColor]];
@@ -83,6 +92,38 @@
     
 }
 
+-(void)initData2:(int)iCount wOffset:(int)iOffset wType:(NSString *)sType
+{
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @123, @"category",
+                                    @437, @"city",
+                                    [NSNumber numberWithInt:iCount], @"fetch_count",
+                                    [NSNumber numberWithInt:iOffset], @"offset",
+                                    sType,@"fetch_type",
+                                    searchText,@"search_text",
+                                    nil];
+    
+    UA_log(@"%@",jsonDictionary);
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
+        [HUD hide:YES];
+        NSArray * arrProducts = [dict objectForKey:@"product"];
+        for (NSDictionary * dictItem in arrProducts) {
+            DealObject * item = [[DealObject alloc]init];
+            item.strTitle = [dictItem objectForKey:@"title"];
+            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
+            item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
+            item.strBrandImage = [dictItem objectForKey:@"image_link"];
+            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            [arrDeals addObject:item];
+        }
+        UA_log(@"%lu item", [arrDeals count]);
+        [tableViewSearch reloadData];
+    }];
+    
+}
 
 -(void)initData
 {
@@ -167,7 +208,7 @@
     // ^-Use UITextAlignmentCenter for older SDKs.
     label.textColor = [UIColor whiteColor]; // change this color
     self.navigationItem.titleView = label;
-    label.text = NSLocalizedString(_searchText, @"");
+    label.text = NSLocalizedString(searchText, @"");
     [label sizeToFit];
     
     revealController = [self revealViewController];
@@ -262,7 +303,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40;
+    return 84;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {

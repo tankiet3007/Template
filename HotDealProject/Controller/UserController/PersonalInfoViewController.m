@@ -8,16 +8,10 @@
 
 #import "PersonalInfoViewController.h"
 #import "AppDelegate.h"
-#import "TKDatabase.h"
 @interface PersonalInfoViewController ()
 
 @end
-typedef enum {
-    ProvinceCb,
-    DistrictCb,
-    PhuongXaCb,
-    GenderCb
-}ComboboxType;
+
 @implementation PersonalInfoViewController
 {
     UITextField* tfEmail;
@@ -28,104 +22,46 @@ typedef enum {
     UIButton* btnSave;
     UIToolbar *toolbar;
     BOOL isBirthdayAction;
-    
-    UITextField* tfSoNha;
-    UITextField* tfToaNha;
-    UITextField* tfDuong;
-    UILabel* lblTP;
-    UILabel* lblQuanHuyen;
-    UILabel* lblPhuongXa;
-    ComboboxType cbType;
-    MBProgressHUD *HUD;
-    
-    NSString * strEmail;
-    NSString * strFullname;
-    NSString * strBirthday;
-    NSString * strSonha;
-    NSString * strToaNha;
-    NSString * strDuong;
-    int  idTP;
-    int  idQuanHuyen;
-    int  idPhuongXa;
 }
 @synthesize pickerView;
 @synthesize pickerGender;
-//@synthesize tableViewInfo;
+@synthesize tableViewInfo;
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     [self initNavigationbar];
-    cbType = ProvinceCb;
     isBirthdayAction = TRUE;
-    [self initHUD];
     [self initUITableView];
     [self setupPickerGender];
     [self makePicker];
     [self setupToolBar];
     // Do any additional setup after loading the view from its nib.
 }
-
--(void)getUserInfo
-{
-    User * user = [[TKDatabase sharedInstance]getUserInfo];
-    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    user.user_id, @"user_id",
-                                    nil];
-    
-    [HUD show:YES];
-    [[TKAPI sharedInstance]getRequestAF:jsonDictionary withURL:URL_GET_USERINFO completion:^(NSDictionary * dict, NSError *error) {
-        UA_log(@"%@",dict);
-        [HUD hide:YES];
-    }];
-    
-}
-
-- (void)initHUD {
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];
-    //    HUD.labelText = LS(@"LoadingData");
-    [HUD hide:YES];
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:UITableViewStyleGrouped];
-    
-    if (self)
-    {
-        
-    }
-    return self;
-}
 -(void)initUITableView
 {
-    //    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 40) style:UITableViewStyleGrouped];
-    //    [self.view addSubview:tableViewMain];
+    tableViewInfo = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 40) style:UITableViewStyleGrouped];
+    [self.view addSubview:tableViewInfo];
     
-    
-    //    [tableViewDays setDragDelegate:self refreshDatePermanentKey:@"HotNewsList"];
-    self.tableView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
+    tableViewInfo.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+    tableViewInfo.dataSource = self;
+    tableViewInfo.delegate = self;
     //    [tableViewMain setBounces:NO];
     //    tableViewMain.separatorColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.sectionHeaderHeight = 0.0;
+    tableViewInfo.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableViewInfo.showsVerticalScrollIndicator = NO;
+    tableViewInfo.sectionHeaderHeight = 0.0;
     
     UISwipeGestureRecognizer *topToBottom=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(closeKeyboard)];
     topToBottom.direction=UISwipeGestureRecognizerDirectionDown;
     
-    [self.tableView addGestureRecognizer:topToBottom];
-    //    self.tableView.scrollEnabled = NO;
-    //self.tableView.userInteractionEnabled;
+    [tableViewInfo addGestureRecognizer:topToBottom];
 }
-
 -(void)closeKeyboard
 {
     [self.view endEditing:YES];
-}- (void)didReceiveMemoryWarning {
+}
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -228,60 +164,22 @@ typedef enum {
         lblBirthday.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
         pickerView.hidden = YES;
         toolbar.hidden = YES;
-        pickerGender.hidden = YES;
         
     }
     else
     {
-        switch (cbType) {
-            case GenderCb:
-            {
-                NSInteger  iIndex =  [pickerGender selectedRowInComponent:0];
-                if (iIndex == 0) {
-                    lblGender.text = @"  Nam";
-                }
-                else
-                {
-                    lblGender.text = @"  Nữ";
-                }
-                
-                lblGender.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
-                pickerGender.hidden = YES;
-                toolbar.hidden = YES;
-                pickerView.hidden = YES;
-                break;
-            }
-            case ProvinceCb:
-            {
-                lblTP.text = @"  ProvinceCb";
-                pickerGender.hidden = YES;
-                toolbar.hidden = YES;
-                pickerView.hidden = YES;
-                lblGender.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
-                break;
-            }
-            case DistrictCb:
-            {
-                lblQuanHuyen.text = @"  DistrictCb";
-                pickerGender.hidden = YES;
-                toolbar.hidden = YES;
-                pickerView.hidden = YES;
-                lblGender.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
-                break;
-            }
-            case PhuongXaCb:
-            {
-                lblPhuongXa.text = @"  PhuongXaCb";
-                pickerGender.hidden = YES;
-                toolbar.hidden = YES;
-                pickerView.hidden = YES;
-                lblGender.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
-                break;
-            }
-            default:
-                break;
+        NSInteger  iIndex =  [pickerGender selectedRowInComponent:0];
+        if (iIndex == 0) {
+            lblGender.text = @"  Nam";
+        }
+        else
+        {
+            lblGender.text = @"  Nữ";
         }
         
+        lblGender.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+        pickerGender.hidden = YES;
+        toolbar.hidden = YES;
     }
 }
 
@@ -305,7 +203,6 @@ typedef enum {
 -(void)showPicker
 {
     isBirthdayAction = TRUE;
-    
     pickerView.backgroundColor = [UIColor whiteColor];
     pickerView.datePickerMode = UIDatePickerModeDate;
     pickerView.hidden = NO;
@@ -313,7 +210,7 @@ typedef enum {
     
     NSDate *currentDate = [NSDate date];
     [pickerView setMaximumDate:currentDate];
-    pickerGender.hidden = YES;
+    
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
@@ -355,38 +252,17 @@ typedef enum {
     
 }
 
-
--(void)showDropbox1
+-(void)showDropbox
 {
     isBirthdayAction = NO;
     pickerGender.hidden = NO;
     toolbar.hidden = NO;
-    cbType = GenderCb;
 }
--(void)showDropbox3
-{
-    //    UA_log(@"");
-    [self showDropbox1];
-    cbType = ProvinceCb;
-}
--(void)showDropbox4
-{
-    //    UA_log(@"");
-    [self showDropbox1];
-    cbType = DistrictCb;
-}
--(void)showDropbox5
-{
-    //        UA_log(@"");
-    [self showDropbox1];
-    cbType = PhuongXaCb;
-}
-
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return 3;
+    return 4;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -396,7 +272,6 @@ typedef enum {
         // Make cell unselectable
         cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
         UITextField* tf = nil ;
-        UILabel* lbl = nil ;
         switch ( indexPath.row ) {
             case 0: {
                 cellRe.textLabel.text = @"" ;
@@ -417,34 +292,6 @@ typedef enum {
                 [cellRe addSubview:tfPhone];
                 break ;
             }
-            case 3: {
-                
-                cellRe.textLabel.text = @"" ;
-                lbl = lblBirthday = [self makeLabel:@"  Ngày sinh"];
-                [cellRe addSubview:lbl];
-                UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
-                [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
-                [cellRe addSubview:imgArrow];
-                UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicker)];
-                // if labelView is not set userInteractionEnabled, you must do so
-                [lbl setUserInteractionEnabled:YES];
-                [lbl addGestureRecognizer:gesture];
-                break ;
-            }
-            case 4: {
-                
-                //                    cell.textLabel.text = @"Ngày sinh" ;
-                lbl = lblGender = [self makeLabel:@"  Giới tính"];
-                [cellRe addSubview:lbl];
-                UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
-                [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
-                [cellRe addSubview:imgArrow];
-                UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox1)];
-                // if labelView is not set userInteractionEnabled, you must do so
-                [lbl setUserInteractionEnabled:YES];
-                [lbl addGestureRecognizer:gesture];
-                break ;
-            }
         }
         
         // Textfield dimensions
@@ -457,175 +304,69 @@ typedef enum {
         imgLine.image = [UIImage imageNamed:@"gach"];
         [cellRe.contentView addSubview:imgLine];
         
-        lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
-        
-        //        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicker)];
-        //        // if labelView is not set userInteractionEnabled, you must do so
-        //        [lbl setUserInteractionEnabled:YES];
-        //        [lbl addGestureRecognizer:gesture];
         return cellRe;
     }
-    //    if (indexPath.section == 1)
-    //    {
-    //        UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    //
-    //        // Make cell unselectable
-    //        cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
-    //        UILabel* lbl = nil ;
-    //        switch ( indexPath.row ) {
-    //            case 0: {
-    //
-    //                cellRe.textLabel.text = @"" ;
-    //                lbl = lblBirthday = [self makeLabel:@"  Ngày sinh"];
-    //                [cellRe addSubview:lbl];
-    //                break ;
-    //            }
-    //        }
-    //
-    //        // Textfield dimensions
-    //        lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
-    //        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-    //
-    //        UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
-    //        [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
-    //        [cellRe addSubview:imgArrow];
-    //        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicker)];
-    //        // if labelView is not set userInteractionEnabled, you must do so
-    //        [lbl setUserInteractionEnabled:YES];
-    //        [lbl addGestureRecognizer:gesture];
-    //
-    //        return cellRe;
-    //
-    //    }
-    //    if (indexPath.section == 2)
-    //    {
-    //        UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    //
-    //        // Make cell unselectable
-    //        cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
-    //        UILabel* lbl = nil ;
-    //        switch ( indexPath.row ) {
-    //            case 0: {
-    //
-    //                //                    cell.textLabel.text = @"Ngày sinh" ;
-    //                lbl = lblGender = [self makeLabel:@"  Giới tính"];
-    //                [cellRe addSubview:lbl];
-    //                break ;
-    //            }
-    //        }
-    //
-    //        // Textfield dimensions
-    //        lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
-    //        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-    //
-    //        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox)];
-    //        // if labelView is not set userInteractionEnabled, you must do so
-    //        [lbl setUserInteractionEnabled:YES];
-    //        [lbl addGestureRecognizer:gesture];
-    //        UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
-    //        [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
-    //        [cellRe addSubview:imgArrow];
-    //
-    //        return cellRe;
-    //
-    //    }
-    if (indexPath.section == 1) {
+    if (indexPath.section == 1)
+    {
         UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         
         // Make cell unselectable
         cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
-        UITextField* tf = nil ;
         UILabel* lbl = nil ;
         switch ( indexPath.row ) {
             case 0: {
-                cellRe.textLabel.text = @"" ;
-                tf = tfSoNha = [self makeTextField:@"" placeholder:@"Số nhà"];
-                tf.textColor = [UIColor lightGrayColor];
-                [cellRe addSubview:tfSoNha];
-                break ;
-            }
-            case 1: {
-                cellRe.textLabel.text = @"" ;
-                tf = tfToaNha = [self makeTextField:@"" placeholder:@"Toà nhà (lầu)"];
-                [cellRe addSubview:tfToaNha];
-                break ;
-            }
-            case 2: {
-                cellRe.textLabel.text = @"" ;
-                tf = tfDuong = [self makeTextField:@"" placeholder:@"Tên đường"];
-                [cellRe addSubview:tfDuong];
-                break ;
-            }
-            case 3:
-            {
                 
                 cellRe.textLabel.text = @"" ;
-                lbl = lblTP = [self makeLabel:@"  Tỉnh / Thành phố"];
+                lbl = lblBirthday = [self makeLabel:@"  Ngày sinh"];
                 [cellRe addSubview:lbl];
-                // Textfield dimensions
-                UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
-                [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
-                [cellRe addSubview:imgArrow];
-                
-                UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox3)];
-                // if labelView is not set userInteractionEnabled, you must do so
-                [lbl setUserInteractionEnabled:YES];
-                [lbl addGestureRecognizer:gesture];
                 break ;
             }
-                
-            case   4:
-            {
-                
-                cellRe.textLabel.text = @"" ;
-                lbl = lblQuanHuyen = [self makeLabel:@"  Quận / Huyện"];
-                [cellRe addSubview:lbl];
-                // Textfield dimensions
-                UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
-                [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
-                [cellRe addSubview:imgArrow];
-                UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox4)];
-                // if labelView is not set userInteractionEnabled, you must do so
-                [lbl setUserInteractionEnabled:YES];
-                [lbl addGestureRecognizer:gesture];
-                break ;
-            }
-                
-            case  5: {
-                
-                cellRe.textLabel.text = @"" ;
-                lbl = lblPhuongXa = [self makeLabel:@"  Phường / Xã"];
-                [cellRe addSubview:lbl];
-                // Textfield dimensions
-                UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
-                [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
-                [cellRe addSubview:imgArrow];
-                
-                UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox5)];
-                // if labelView is not set userInteractionEnabled, you must do so
-                [lbl setUserInteractionEnabled:YES];
-                [lbl addGestureRecognizer:gesture];
-                break ;
-            }
-                
         }
         
         // Textfield dimensions
-        tf.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
-        //        cell.contentView.backgroundColor = [UIColor clearColor];
-        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-        // We want to handle textFieldDidEndEditing
-        tf.delegate = self ;
-        UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(20, 38, ScreenWidth - 40, 2)];
-        imgLine.image = [UIImage imageNamed:@"gach"];
-        [cellRe.contentView addSubview:imgLine];
-        
-        
         lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
+        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
         
+        UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
+        [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
+        [cellRe addSubview:imgArrow];
+        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicker)];
+        // if labelView is not set userInteractionEnabled, you must do so
+        [lbl setUserInteractionEnabled:YES];
+        [lbl addGestureRecognizer:gesture];
         
+        return cellRe;
         
+    }
+    if (indexPath.section == 2)
+    {
+        UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         
+        // Make cell unselectable
+        cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
+        UILabel* lbl = nil ;
+        switch ( indexPath.row ) {
+            case 0: {
+                
+                //                    cell.textLabel.text = @"Ngày sinh" ;
+                lbl = lblGender = [self makeLabel:@"  Giới tính"];
+                [cellRe addSubview:lbl];
+                break ;
+            }
+        }
+        
+        // Textfield dimensions
+        lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 39);
+        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+        
+        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox)];
+        // if labelView is not set userInteractionEnabled, you must do so
+        [lbl setUserInteractionEnabled:YES];
+        [lbl addGestureRecognizer:gesture];
+        UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
+        [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
+        [cellRe addSubview:imgArrow];
+
         return cellRe;
         
     }
@@ -653,16 +394,10 @@ typedef enum {
 {
     
     if (section == 0) {
-        return 5;
-    }
-    if (section == 1) {
-        return 6;
+        return 3;
     }
     return 1;
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    return [textField resignFirstResponder];
-}
+
 @end

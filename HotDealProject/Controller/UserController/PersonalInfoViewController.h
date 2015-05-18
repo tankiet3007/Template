@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PersonalInfoViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate,UIPickerViewDelegate>
+@interface PersonalInfoViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate,UIPickerViewDelegate>
 @property (strong, nonatomic)  UIDatePicker *pickerView;
 @property (strong, nonatomic)  UIPickerView *pickerGender;
-//@property (nonatomic, strong)  UITableView * tableViewInfo;
+@property (nonatomic, strong)  UITableView * tableViewInfo;
 
 @end
+

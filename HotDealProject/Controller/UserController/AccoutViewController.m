@@ -145,11 +145,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-//        AccountInfoViewController * accountInfo = [[AccountInfoViewController alloc]init];
-//        [self.navigationController pushViewController:accountInfo animated:YES];
+        AccountInfoViewController * accountInfo = [[AccountInfoViewController alloc]init];
+        [self.navigationController pushViewController:accountInfo animated:YES];
         
-        PersonalInfoViewController * userInfo = [[PersonalInfoViewController alloc]init];
-        [self.navigationController pushViewController:userInfo animated:YES];
+//        PersonalInfoViewController * userInfo = [[PersonalInfoViewController alloc]init];
+//        [self.navigationController pushViewController:userInfo animated:YES];
     }
     if (indexPath.row == 1) {
         PaymentInfoViewController * payInfo = [[PaymentInfoViewController alloc]init];
