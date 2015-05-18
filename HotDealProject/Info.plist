@@ -26,6 +26,16 @@
 				<string>fb1442463146054208</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.hotdeal.HotDealProject</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.hotdeal.HotDealProject</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>

@@ -14,8 +14,11 @@
 #import "ForgotPasswordViewController.h"
 #import "MainViewController.h"
 #import "TKDatabase.h"
-
-@interface RegisAndLoginController ()
+#import <GooglePlus/GooglePlus.h>
+#import <GoogleOpenSource/GoogleOpenSource.h>
+static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p7838c.apps.googleusercontent.com";
+//kGTLAuthScopePlusLogin
+@interface RegisAndLoginController ()<GPPSignInDelegate>
 
 @end
 
@@ -37,9 +40,11 @@
     UILabel* lblGender;
     UIButton* btnRegister;
     UIButton* btnLoginFacebook;
+    UIButton* btnLoginGoogle;
     UIToolbar *toolbar;
     BOOL isBirthdayAction;
     MBProgressHUD *HUD;
+    GPPSignIn *signIn;
 }
 @synthesize pickerView;
 @synthesize pickerGender;
@@ -56,6 +61,7 @@
     [self setupPickerGender];
     [self makePicker];
     [self setupToolBar];
+    [self glLogin];
     // Do any additional setup after loading the view.
 }
 - (void)initHUD {
@@ -162,7 +168,7 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (isLoginFrame == TRUE) {
-        return  3;
+        return  4;
     }
     else
     {
@@ -260,9 +266,26 @@
             cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             return cellRe;
         }
-        else// (indexPath.section == 2)
+       if (indexPath.section == 2)
         {
             
+            UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            
+            // Make cell unselectable
+            cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
+            UIButton* button = nil ;
+            
+            button = btnLoginGoogle = [self makeButtonLoginGoogle];
+            [cellRe addSubview:btnLoginGoogle];
+            
+            // Textfield dimensions
+            button.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
+            //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+            return cellRe;
+        }
+        else
+        {
             UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
             
             // Make cell unselectable
@@ -528,6 +551,43 @@
     }];
 }
 
+-(void)glLogin
+{
+    signIn = [GPPSignIn sharedInstance];
+    signIn.shouldFetchGooglePlusUser = YES;
+    //signIn.shouldFetchGoogleUserEmail = YES;  // Uncomment to get the user's email
+    
+    // You previously set kClientId in the "Initialize the Google+ client" step
+    signIn.clientID = kClientId;
+    
+    // Uncomment one of these two statements for the scope you chose in the previous step
+    signIn.scopes = @[ kGTLAuthScopePlusLogin ];  // "https://www.googleapis.com/auth/plus.login" scope
+    //signIn.scopes = @[ @"profile" ];            // "profile" scope
+    signIn.shouldFetchGoogleUserID=YES;
+    signIn.shouldFetchGoogleUserEmail=YES;
+    signIn.shouldFetchGooglePlusUser = YES;
+    // Optional: declare signIn.actions, see "app activities"
+    signIn.delegate = self;
+}
+- (void)finishedWithAuth: (GTMOAuth2Authentication *)auth
+                   error: (NSError *) error {
+    NSLog(@"Received error %@ and auth object %@",error, auth);
+    if (error) {
+        // Do some error handling here.
+    } else {
+        GTLPlusPerson *per = signIn.googlePlusUser;
+        NSLog(@"Email= %@", signIn.authentication.userEmail);
+        NSLog(@"GoogleID=%@", per.identifier);
+        NSLog(@"Birthday=%@", per.birthday);
+        NSLog(@"User Name=%@", [per.name.givenName stringByAppendingFormat:@" %@", per.name.familyName]);
+        NSLog(@"Gender=%@", per.gender);
+    }
+}
+
+- (void)googlePlusLogin:(id)sender {
+    [[GPPSignIn sharedInstance]authenticate];
+}
+
 -(void)fetchUserInfo {
     
     if ([FBSDKAccessToken currentAccessToken]) {
@@ -618,12 +678,22 @@
 -(UIButton*) makeButtonLoginFacebook{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn setTitle:@"Đăng nhập bằng facebook" forState:UIControlStateNormal];
+    [btn setTitle:@"Đăng nhập bằng Facebook" forState:UIControlStateNormal];
     [btn setBackgroundColor:[UIColor redColor]];
     btn.titleLabel.font = [UIFont systemFontOfSize:13];
     [btn addTarget:self action:@selector(fbLogin) forControlEvents:UIControlEventTouchUpInside];
     return btn;
 }
+-(UIButton*) makeButtonLoginGoogle{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setTitle:@"Đăng nhập bằng Google" forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor redColor]];
+    btn.titleLabel.font = [UIFont systemFontOfSize:13];
+    [btn addTarget:self action:@selector(googlePlusLogin:) forControlEvents:UIControlEventTouchUpInside];
+    return btn;
+}
+
 -(void)registerClick
 {
     if ([self checkInput] == FALSE) {

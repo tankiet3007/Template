@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E911132B1B098BBF00EF49DB /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91113281B098BBF00EF49DB /* GoogleOpenSource.framework */; };
+		E911132C1B098BBF00EF49DB /* GooglePlus.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = E91113291B098BBF00EF49DB /* GooglePlus.bundle */; };
+		E911132D1B098BBF00EF49DB /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E911132A1B098BBF00EF49DB /* GooglePlus.framework */; };
+		E911132F1B098C4F00EF49DB /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E911132E1B098C4F00EF49DB /* AddressBook.framework */; };
+		E91113311B098C5600EF49DB /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91113301B098C5600EF49DB /* AssetsLibrary.framework */; };
+		E91113331B098C5F00EF49DB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91113321B098C5F00EF49DB /* CoreLocation.framework */; };
+		E91113351B098C6E00EF49DB /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91113341B098C6E00EF49DB /* CoreMotion.framework */; };
+		E91113371B098C8600EF49DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91113361B098C8600EF49DB /* CoreGraphics.framework */; };
+		E91113391B098C8B00EF49DB /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91113381B098C8B00EF49DB /* CoreText.framework */; };
+		E911133B1B098C9500EF49DB /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E911133A1B098C9500EF49DB /* MediaPlayer.framework */; };
+		E911133D1B098CA400EF49DB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E911133C1B098CA400EF49DB /* Security.framework */; };
+		E911133F1B098CB600EF49DB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E911133E1B098CB600EF49DB /* SystemConfiguration.framework */; };
 		E9239A471AF7321100CC4977 /* AccountInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9239A461AF7321100CC4977 /* AccountInfoViewController.m */; };
 		E9239A4B1AF7496B00CC4977 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9239A491AF7496B00CC4977 /* ChangePasswordViewController.m */; };
 		E9239A4C1AF7496B00CC4977 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9239A4A1AF7496B00CC4977 /* ChangePasswordViewController.xib */; };
@@ -192,6 +204,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E91113281B098BBF00EF49DB /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = "../backupfile_hotdeal/google-plus-ios-sdk-1.7.1/GoogleOpenSource.framework"; sourceTree = "<group>"; };
+		E91113291B098BBF00EF49DB /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlus.bundle; path = "../backupfile_hotdeal/google-plus-ios-sdk-1.7.1/GooglePlus.bundle"; sourceTree = "<group>"; };
+		E911132A1B098BBF00EF49DB /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = "../backupfile_hotdeal/google-plus-ios-sdk-1.7.1/GooglePlus.framework"; sourceTree = "<group>"; };
+		E911132E1B098C4F00EF49DB /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		E91113301B098C5600EF49DB /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		E91113321B098C5F00EF49DB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E91113341B098C6E00EF49DB /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		E91113361B098C8600EF49DB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E91113381B098C8B00EF49DB /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		E911133A1B098C9500EF49DB /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		E911133C1B098CA400EF49DB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E911133E1B098CB600EF49DB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E9239A451AF7321100CC4977 /* AccountInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccountInfoViewController.h; path = Controller/UserController/AccountInfoViewController.h; sourceTree = "<group>"; };
 		E9239A461AF7321100CC4977 /* AccountInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AccountInfoViewController.m; path = Controller/UserController/AccountInfoViewController.m; sourceTree = "<group>"; };
 		E9239A481AF7496B00CC4977 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePasswordViewController.h; path = Controller/UserController/ChangePasswordViewController.h; sourceTree = "<group>"; };
@@ -515,6 +539,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E911133F1B098CB600EF49DB /* SystemConfiguration.framework in Frameworks */,
+				E911133D1B098CA400EF49DB /* Security.framework in Frameworks */,
+				E911133B1B098C9500EF49DB /* MediaPlayer.framework in Frameworks */,
+				E91113391B098C8B00EF49DB /* CoreText.framework in Frameworks */,
+				E91113371B098C8600EF49DB /* CoreGraphics.framework in Frameworks */,
+				E91113351B098C6E00EF49DB /* CoreMotion.framework in Frameworks */,
+				E91113331B098C5F00EF49DB /* CoreLocation.framework in Frameworks */,
+				E91113311B098C5600EF49DB /* AssetsLibrary.framework in Frameworks */,
+				E911132F1B098C4F00EF49DB /* AddressBook.framework in Frameworks */,
+				E911132B1B098BBF00EF49DB /* GoogleOpenSource.framework in Frameworks */,
+				E911132C1B098BBF00EF49DB /* GooglePlus.bundle in Frameworks */,
+				E911132D1B098BBF00EF49DB /* GooglePlus.framework in Frameworks */,
 				E9B3A1331B01F018000DA4FC /* FBSDKCoreKit.framework in Frameworks */,
 				E9B3A1341B01F018000DA4FC /* FBSDKLoginKit.framework in Frameworks */,
 				E9B3A1351B01F018000DA4FC /* FBSDKShareKit.framework in Frameworks */,
@@ -1045,6 +1081,21 @@
 		E9AE20A21AD817A2002E11AC /* Framwork */ = {
 			isa = PBXGroup;
 			children = (
+				E911133E1B098CB600EF49DB /* SystemConfiguration.framework */,
+				E911133C1B098CA400EF49DB /* Security.framework */,
+				E911133A1B098C9500EF49DB /* MediaPlayer.framework */,
+				E91113381B098C8B00EF49DB /* CoreText.framework */,
+				E91113361B098C8600EF49DB /* CoreGraphics.framework */,
+				E91113341B098C6E00EF49DB /* CoreMotion.framework */,
+				E91113321B098C5F00EF49DB /* CoreLocation.framework */,
+				E91113301B098C5600EF49DB /* AssetsLibrary.framework */,
+				E911132E1B098C4F00EF49DB /* AddressBook.framework */,
+				E91113281B098BBF00EF49DB /* GoogleOpenSource.framework */,
+				E91113291B098BBF00EF49DB /* GooglePlus.bundle */,
+				E911132A1B098BBF00EF49DB /* GooglePlus.framework */,
+				E9B3A1301B01F018000DA4FC /* FBSDKCoreKit.framework */,
+				E9B3A1311B01F018000DA4FC /* FBSDKLoginKit.framework */,
+				E9B3A1321B01F018000DA4FC /* FBSDKShareKit.framework */,
 				E9AE209F1AD8124E002E11AC /* CoreFoundation.framework */,
 				E9AE209D1AD8114F002E11AC /* CoreData.framework */,
 				E9AE20991AD81134002E11AC /* AVFoundation.framework */,
@@ -1100,9 +1151,6 @@
 		E9D3BD5D1AD6BA5400F7429B = {
 			isa = PBXGroup;
 			children = (
-				E9B3A1301B01F018000DA4FC /* FBSDKCoreKit.framework */,
-				E9B3A1311B01F018000DA4FC /* FBSDKLoginKit.framework */,
-				E9B3A1321B01F018000DA4FC /* FBSDKShareKit.framework */,
 				E9AE20A21AD817A2002E11AC /* Framwork */,
 				E9D3BD681AD6BA5400F7429B /* HotDealProject */,
 				E9D3BD851AD6BA5400F7429B /* HotDealProjectTests */,
@@ -1551,12 +1599,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/kiettran/Documents/FacebookSDK,
+					"/Users/kiettran/Desktop/backupfile_hotdeal/google-plus-ios-sdk-1.7.1",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HotDealProject/Hotdeal-pch.pch";
 				INFOPLIST_FILE = HotDealProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1571,12 +1621,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/kiettran/Documents/FacebookSDK,
+					"/Users/kiettran/Desktop/backupfile_hotdeal/google-plus-ios-sdk-1.7.1",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HotDealProject/Hotdeal-pch.pch";
 				INFOPLIST_FILE = HotDealProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

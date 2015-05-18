@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <FBSDKCoreKit/FBSDKApplicationDelegate.h>
+#import <GooglePlus/GooglePlus.h>
 @class SWRevealViewController;
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) SWRevealViewController *viewController;
