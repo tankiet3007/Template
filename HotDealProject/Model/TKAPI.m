@@ -7,7 +7,7 @@
 //
 
 #import "TKAPI.h"
-
+#define TIMEOUT 10
 @implementation TKAPI
 + (TKAPI*)sharedInstance
 {
@@ -55,6 +55,7 @@
     [operationManager setSecurityPolicy:policy];
     operationManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     operationManager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [operationManager.requestSerializer setTimeoutInterval:TIMEOUT];
     operationManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     
     [operationManager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -95,6 +96,7 @@
     [operationManager setSecurityPolicy:policy];
     operationManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     operationManager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [operationManager.requestSerializer setTimeoutInterval:TIMEOUT];
     operationManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     
     [operationManager GET:url
@@ -135,6 +137,7 @@
     [operationManager setSecurityPolicy:policy];
     operationManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     operationManager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [operationManager.requestSerializer setTimeoutInterval:TIMEOUT];
     operationManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     
     [operationManager GET:url
@@ -184,7 +187,6 @@
         
         
         NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-        NSString * strData = [[NSString alloc]initWithData:response1 encoding:NSUTF8StringEncoding];
         if (response1 == nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 completion(nil, nil);

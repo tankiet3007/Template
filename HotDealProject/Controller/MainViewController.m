@@ -57,7 +57,7 @@
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
     bForceStop = FALSE;
     
-    [self initUITableView];
+    
     [self initNavigationbar];
       [self initHUD];
     strCategory = @"default";
@@ -140,7 +140,8 @@
         if ([arrDeals count] == 0) {
             return ;
         }
-        [tableViewMain reloadData];
+//        [tableViewMain reloadData];
+        [self initUITableView];
         
         [self setupNewDeal];
         }];

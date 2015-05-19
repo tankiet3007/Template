@@ -39,6 +39,7 @@
     NSMutableArray * autocompleteItem;
     NSMutableArray * rootData;
     BOOL isUserLogged;
+    UIImageView * imgLine;
 }
 #pragma mark - APLTableViewController
 
@@ -348,13 +349,21 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         sectionHeaderView.section = section;
         sectionHeaderView.delegate = self;
         if (section == 2) {
-            UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(0, 43, ScreenWidth - 40, 5)];
+            if (imgLine != nil) {
+                [imgLine removeFromSuperview];
+                imgLine = nil;
+            }
+            imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(0, 45, ScreenWidth - 40, 5)];
             imgLine.image = [UIImage imageNamed:@"gach"];
             
             [sectionHeaderView addSubview:imgLine];
         }
         if (section == 9) {
-            UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(0, 43, ScreenWidth - 40, 5)];
+            if (imgLine != nil) {
+                [imgLine removeFromSuperview];
+                imgLine = nil;
+            }
+            imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(0, 45, ScreenWidth - 40, 5)];
             imgLine.image = [UIImage imageNamed:@"gach"];
             
             [sectionHeaderView addSubview:imgLine];
