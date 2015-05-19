@@ -12,7 +12,7 @@
 #import "MenuTableViewCell.h"
 #import "AccountInfoViewController.h"
 #import "ChangePasswordViewController.h"
-#import "PaymentInfoViewController.h"
+#import "OrderListViewController.h"
 #import "UserAmountViewController.h"
 #import "MainViewController.h"
 #import "TKDatabase.h"
@@ -152,7 +152,7 @@
 //        [self.navigationController pushViewController:userInfo animated:YES];
     }
     if (indexPath.row == 1) {
-        PaymentInfoViewController * payInfo = [[PaymentInfoViewController alloc]init];
+        OrderListViewController * payInfo = [[OrderListViewController alloc]init];
         [self.navigationController pushViewController:payInfo animated:YES];
     }//UserAmountViewController
     if (indexPath.row == 2) {

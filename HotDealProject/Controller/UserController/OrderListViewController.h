@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PaymentInfoViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface OrderListViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tablePayment;
 @end

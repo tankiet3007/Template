@@ -8,7 +8,7 @@
 
 #import "BookSuccessViewController.h"
 #import "AppDelegate.h"
-#import "PaymentInfoViewController.h"
+#import "OrderListViewController.h"
 #import "MainViewController.h"
 @interface BookSuccessViewController ()
 
@@ -46,7 +46,7 @@
     [self.navigationController pushViewController:mainInfo animated:YES];
 }
 - (IBAction)manageInvoice:(id)sender {
-    PaymentInfoViewController * payInfo = [[PaymentInfoViewController alloc]init];
+    OrderListViewController * payInfo = [[OrderListViewController alloc]init];
     [self.navigationController pushViewController:payInfo animated:YES];
 }
 

@@ -6,18 +6,20 @@
 //  Copyright (c) 2015 Tran Tan Kiet. All rights reserved.
 //
 
-#import "PaymentInfoViewController.h"
+#import "OrderListViewController.h"
 #import "AppDelegate.h"
 #import "PayItemTableViewCell.h"
 #import "PayItem.h"
-#import "PaymentDetailViewController.h"
-@interface PaymentInfoViewController ()
+#import "OrderInfoViewController.h"
+#import "TKDatabase.h"
+@interface OrderListViewController ()
 
 @end
 
-@implementation PaymentInfoViewController
+@implementation OrderListViewController
 {
     NSMutableArray * arrListPayment;
+    MBProgressHUD *HUD;
 }
 @synthesize tablePayment;
 #define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
@@ -30,7 +32,8 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     arrListPayment = [[NSMutableArray alloc]init];
-    [self initData];
+    [self initHUD];
+    [self initData2];
     [self initNavigationbar];
     [self initUITableView];
     // Do any additional setup after loading the view.
@@ -41,6 +44,30 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    //    HUD.labelText = LS(@"LoadingData");
+    [HUD hide:YES];
+}
+-(void)initData2
+{
+//    User * user = [[TKDatabase sharedInstance]getUserInfo];
+//    NSString * strParam = F(@"user_id=%@",user.user_id);
+    NSString * strParam = @"8844";
+    NSDate *date = [NSDate date];
+//    NSString * strDate = F(@"%.0f",floor([date timeIntervalSince1970] * 1000));
+//    NSDate *date = [NSDate dateWithTimeIntervalSince1970:<#(NSTimeInterval)#>];
+    NSTimeInterval unixTimeStamp = floor([date timeIntervalSince1970]);
+    UA_log(@"%@", [NSDate getStringFromTimestamp:unixTimeStamp]);
+//    [HUD show:YES];
+//    [[TKAPI sharedInstance]getRequest:strParam withURL:URL_GET_ODER_LIST completion:^(NSDictionary * dict, NSError *error) {
+//        [HUD hide:YES];
+//            UA_log(@"%@",dict);
+//       
+//    }];
+
+}
 -(void)initData
 {
     PayItem * item = [[PayItem alloc]init];
@@ -147,7 +174,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PaymentDetailViewController * pItemVC = [[PaymentDetailViewController alloc]init];
+    OrderInfoViewController * pItemVC = [[OrderInfoViewController alloc]init];
     pItemVC.pItem = [arrListPayment objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:pItemVC animated:YES];
 }

@@ -75,6 +75,17 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
 
 }
 
++(NSString *)getStringFromTimestamp:(NSTimeInterval)timestamp
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy hh:mm:ss"];
+    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+     NSDate *messageDate = [NSDate dateWithTimeIntervalSince1970:timestamp];
+    
+    return [dateFormatter stringFromDate:messageDate];
+    
+}
+
 + (NSCalendar *) currentCalendar
 {
     static NSCalendar *sharedCalendar = nil;

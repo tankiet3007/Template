@@ -327,9 +327,9 @@
 {
     return YES;
 }
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchTextx
 {
-    if ([searchText length] == 0) {
+    if ([searchTextx length] == 0) {
         [self performSelector:@selector(hideKeyboardWithSearchBar:) withObject:searchBar afterDelay:0];
     }
 }

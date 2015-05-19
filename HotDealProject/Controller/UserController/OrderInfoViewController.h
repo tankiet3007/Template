@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PayItem.h"
-@interface PaymentDetailViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface OrderInfoViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tablePaymentDetail;
 @property (nonatomic, strong) PayItem * pItem;
 

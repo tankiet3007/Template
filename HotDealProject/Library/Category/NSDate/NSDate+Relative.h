@@ -32,6 +32,7 @@
 // Short string utilities
 - (NSString *) stringWithDateStyle: (NSDateFormatterStyle) dateStyle timeStyle: (NSDateFormatterStyle) timeStyle;
 - (NSString *) stringWithFormat: (NSString *) format;
++(NSString *)getStringFromTimestamp:(NSTimeInterval)timestamp;
 @property (nonatomic, readonly) NSString *shortString;
 @property (nonatomic, readonly) NSString *shortDateString;
 @property (nonatomic, readonly) NSString *shortTimeString;

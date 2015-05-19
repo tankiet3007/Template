@@ -6,20 +6,23 @@
 //  Copyright (c) 2015 Tran Tan Kiet. All rights reserved.
 //
 
-#import "PaymentDetailViewController.h"
+#import "OrderInfoViewController.h"
 #import "AppDelegate.h"
 #import "PayItemTableViewCell.h"
 #import "AutoSizeTableViewCell.h"
 #import "ProductTableViewCell.h"
 #import "HotNewDetailViewController.h"
-@interface PaymentDetailViewController ()
+@interface OrderInfoViewController ()
 #define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([SYSTEM_VERSION compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define IS_IOS8_OR_ABOVE                            (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
 @property (nonatomic, strong) AutoSizeTableViewCell *prototypeCell;
 @end
 
-@implementation PaymentDetailViewController
+@implementation OrderInfoViewController
+{
+    MBProgressHUD *HUD;
+}
 @synthesize pItem;
 @synthesize tablePaymentDetail;
 - (void)viewDidLoad {
@@ -27,10 +30,18 @@
     self.view.backgroundColor = [UIColor whiteColor];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
+    [self initHUD];
     [self initNavigationbar];
     [self initUITableView];
 
     // Do any additional setup after loading the view.
+}
+
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    //    HUD.labelText = LS(@"LoadingData");
+    [HUD hide:YES];
 }
 
 - (void)didReceiveMemoryWarning {
