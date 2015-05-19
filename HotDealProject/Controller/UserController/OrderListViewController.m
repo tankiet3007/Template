@@ -55,7 +55,7 @@
 //    User * user = [[TKDatabase sharedInstance]getUserInfo];
 //    NSString * strParam = F(@"user_id=%@",user.user_id);
 //    NSString * strParam = @"user_id=8844";
-    NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:@"8844",@"user_id", nil];
+    NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:@"8844",@"profile_id", nil];
 //    NSDate *date = [NSDate date];
 //    NSString * strDate = F(@"%.0f",floor([date timeIntervalSince1970] * 1000));
 //    NSDate *date = [NSDate dateWithTimeIntervalSince1970:<#(NSTimeInterval)#>];
@@ -121,7 +121,6 @@
     tablePayment.separatorColor = [UIColor clearColor];
     tablePayment.showsVerticalScrollIndicator = NO;
     tablePayment.sectionHeaderHeight = 0.0;
-    tablePayment.scrollEnabled = NO;
 }
 
 #pragma mark tableview delegate + datasource

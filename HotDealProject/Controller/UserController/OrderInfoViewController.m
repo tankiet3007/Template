@@ -22,6 +22,7 @@
 @implementation OrderInfoViewController
 {
     MBProgressHUD *HUD;
+    NSArray * arrProduct;
 }
 @synthesize pItem;
 @synthesize tablePaymentDetail;
@@ -30,6 +31,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
+    arrProduct = [pItem objectForKey:@"products"];
     [self initHUD];
     [self initNavigationbar];
     [self initUITableView];
@@ -51,11 +53,11 @@
 
 -(void)initData
 {
-    pItem = [[PayItem alloc]init];
-    pItem.strID = @"123456";
-    pItem.strBookDate = @"05/05/2015 20:33:15";
-    pItem.strStatus = @"Chưa hoàn tất";
-    pItem.strType = @"Credit card";
+//    pItem = [[PayItem alloc]init];
+//    pItem.strID = @"123456";
+//    pItem.strBookDate = @"05/05/2015 20:33:15";
+//    pItem.strStatus = @"Chưa hoàn tất";
+//    pItem.strType = @"Credit card";
 }
 -(void)backbtn_click:(id)sender
 {
@@ -89,6 +91,9 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 2) {
+        return [arrProduct count];
+    }
     return 1;
 }
 
@@ -127,20 +132,42 @@
 }
 - (void)configureCell:(PayItemTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    PayItem * item = [arrListPayment objectAtIndex:indexPath.row];
-    cell.lblBookID.text = F(@"Đơn hàng số %@",pItem.strID);
-    cell.lblBookDate.text = F(@"Ngày đặt %@",pItem.strBookDate);
-    cell.lblStatus.text = F(@"Trạng thái %@",pItem.strStatus);
+    cell.lblBookID.text = F(@"Đơn hàng số %@",[pItem objectForKey:@"order_id"]);
+    double timeStamp = [[pItem objectForKey:@"timestamp"]doubleValue];
+    NSString * strDate = [NSDate getStringFromTimestamp:timeStamp];
+    cell.lblBookDate.text = F(@"Ngày đặt %@",strDate);
+    cell.lblStatus.text = F(@"Trạng thái %@",[pItem objectForKey:@"status"]);
     
-    NSString * strTotalPrice = F(@"%ldđ", pItem.lTotalPrice);
+    NSString * strTotalPrice = F(@"%d", [[pItem objectForKey:@"total"]intValue]);
     strTotalPrice = [strTotalPrice formatStringToDecimal];
+    strTotalPrice = F(@"%@đ", strTotalPrice);
+    cell.lblTotalOfBill.text = strTotalPrice;
+
     UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 5, ScreenWidth -20, 100)];
+    [cell.contentView insertSubview:viewBG atIndex:0];
+    viewBG.layer.borderWidth = 0.5;
+    viewBG.layer.borderColor =[UIColor lightGrayColor].CGColor;
+}
+
+- (void)configureProductCell:(ProductTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary * dictProduct = [arrProduct objectAtIndex:indexPath.row];
+    cell.lblProductTitle.text = [dictProduct objectForKey:@"shortname"];
+
+    
+    NSString * strPrice = F(@"%d", [[dictProduct objectForKey:@"price"]intValue]);
+    strPrice = [strPrice formatStringToDecimal];
+    strPrice = F(@"%@đ", strPrice);
+    cell.lblPriceAndQuantity.text = F(@"Đơn giá: %@ - Số lượng: %d", strPrice, [[dictProduct objectForKey:@"amount"]intValue]);
+    cell.lblTotal.text = strPrice;
+    UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 5, ScreenWidth -20, 75)];
     [cell.contentView insertSubview:viewBG atIndex:0];
     viewBG.layer.borderWidth = 0.5;
     viewBG.layer.borderColor =[UIColor lightGrayColor].CGColor;
     
     
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
@@ -179,16 +206,8 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProductTableViewCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
+        [self configureProductCell:cell forRowAtIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 5, ScreenWidth -20, 70)];
-        [cell.contentView insertSubview:viewBG atIndex:0];
-        viewBG.layer.borderWidth = 0.5;
-        viewBG.layer.borderColor =[UIColor lightGrayColor].CGColor;
-        
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//        [self configureCellAuto:cell forRowAtIndexPath:indexPath];
-        
         return cell;
 
     }
@@ -198,7 +217,7 @@
 - (void)configureCellAuto:(AutoSizeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.titleLabel.text = @"Giao hàng tại địa chỉ";
-    cell.desLabel.text = @"Trần Tấn Kiệt\nĐTDd: 0936459200\nToà nhà Yoco Building, 41 Nguyễn Thị Minh Khai, Phường Bến Nghé, Quận 1, TP.HCM \n\n";
+    cell.desLabel.text = F(@"%@\nĐTDĐ: %@\nToà nhà Yoco Building, 41 Nguyễn Thị Minh Khai, Phường Bến Nghé, Quận 1, TP.HCM \n\n", [pItem objectForKey:@"firstname"], [pItem objectForKey:@"phone"]);
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     UILabel * lblTemp = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth - 60, 0)];
     lblTemp.lineBreakMode = NSLineBreakByWordWrapping;

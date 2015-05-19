@@ -10,6 +10,6 @@
 #import "PayItem.h"
 @interface OrderInfoViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tablePaymentDetail;
-@property (nonatomic, strong) PayItem * pItem;
+@property (nonatomic, strong) NSDictionary * pItem;
 
 @end
