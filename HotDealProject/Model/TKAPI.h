@@ -38,4 +38,5 @@ static NSString * const URL_UPDATE_CART = @"http://dev.hotdeal.vn/mapi/update-ca
 + (NSString *)postRequest:(NSDictionary *)params withURL:(NSString *)url;
 - (void)getRequestAF:(NSDictionary *)params withURL:(NSString *)url completion:(void(^)(NSDictionary*, NSError*))completion;
 - (void)getRequest:(NSString *)params withURL:(NSString *)url completion:(void(^)(NSDictionary*, NSError*))completion;
+- (void)getRequestAFarr:(NSDictionary *)params withURL:(NSString *)url completion:(void(^)(NSArray*, NSError*))completion;
 @end

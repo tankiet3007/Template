@@ -93,7 +93,7 @@
 
     [operationManager GET:url
       parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-          NSString *strResponeData = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+//          NSString *strResponeData = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
 //          NSLog(@"responseObject: %@", strResponeData);
           //        NSDictionary* dictionary = (NSDictionary*)responseObject;
           
@@ -117,6 +117,44 @@
              completion(nil, error);
          }];
 }
+
+- (void)getRequestAFarr:(NSDictionary *)params withURL:(NSString *)url completion:(void(^)(NSArray*, NSError*))completion
+{
+    AFSecurityPolicy *policy = [[AFSecurityPolicy alloc] init];
+    [policy setAllowInvalidCertificates:YES];
+    AFHTTPRequestOperationManager *operationManager = [AFHTTPRequestOperationManager manager];
+    [operationManager setSecurityPolicy:policy];
+    operationManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    operationManager.requestSerializer = [AFJSONRequestSerializer serializer];
+    operationManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    
+    [operationManager GET:url
+               parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   //          NSString *strResponeData = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+                   //          NSLog(@"responseObject: %@", strResponeData);
+                   //        NSDictionary* dictionary = (NSDictionary*)responseObject;
+                   
+                   NSArray* arr = [NSJSONSerialization
+                                               JSONObjectWithData:responseObject
+                                               options:kNilOptions
+                                               error:nil];
+                   
+                   if ([arr isKindOfClass:[NSArray class]] == YES)
+                   {
+                       completion(arr, nil);
+                   }
+                   else
+                   {
+                       completion(arr, nil);
+                   }
+                   
+               }
+                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      // handle failure
+                      completion(nil, error);
+                  }];
+}
+
 
 - (void)getRequest:(NSString *)params withURL:(NSString *)url completion:(void(^)(NSDictionary*, NSError*))completion
 {

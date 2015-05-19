@@ -107,7 +107,9 @@
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle:NSNumberFormatterDecimalStyle];
     NSNumber * myNumber = [f numberFromString:self];
-    return [f stringFromNumber:myNumber];
+     NSString * sResult =  [f stringFromNumber:myNumber];
+    sResult = [sResult stringByReplacingOccurrencesOfString:@"," withString:@"."];
+    return sResult;
 }
 
 @end

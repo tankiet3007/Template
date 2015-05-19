@@ -18,7 +18,7 @@
 
 @implementation OrderListViewController
 {
-    NSMutableArray * arrListPayment;
+   __block NSMutableArray * arrOrderlist;
     MBProgressHUD *HUD;
 }
 @synthesize tablePayment;
@@ -31,7 +31,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
-    arrListPayment = [[NSMutableArray alloc]init];
+    arrOrderlist = [[NSMutableArray alloc]init];
     [self initHUD];
     [self initData2];
     [self initNavigationbar];
@@ -54,18 +54,19 @@
 {
 //    User * user = [[TKDatabase sharedInstance]getUserInfo];
 //    NSString * strParam = F(@"user_id=%@",user.user_id);
-    NSString * strParam = @"8844";
-    NSDate *date = [NSDate date];
+//    NSString * strParam = @"user_id=8844";
+    NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:@"8844",@"user_id", nil];
+//    NSDate *date = [NSDate date];
 //    NSString * strDate = F(@"%.0f",floor([date timeIntervalSince1970] * 1000));
 //    NSDate *date = [NSDate dateWithTimeIntervalSince1970:<#(NSTimeInterval)#>];
-    NSTimeInterval unixTimeStamp = floor([date timeIntervalSince1970]);
-    UA_log(@"%@", [NSDate getStringFromTimestamp:unixTimeStamp]);
-//    [HUD show:YES];
-//    [[TKAPI sharedInstance]getRequest:strParam withURL:URL_GET_ODER_LIST completion:^(NSDictionary * dict, NSError *error) {
-//        [HUD hide:YES];
-//            UA_log(@"%@",dict);
-//       
-//    }];
+//    NSTimeInterval unixTimeStamp = floor([date timeIntervalSince1970]);
+//    UA_log(@"%@", [NSDate getStringFromTimestamp:unixTimeStamp]);
+    [HUD show:YES];
+    [[TKAPI sharedInstance]getRequestAFarr:params withURL:URL_GET_ODER_LIST completion:^(NSArray * arr, NSError *error) {
+        [HUD hide:YES];
+        arrOrderlist = [NSArray arrayWithArray:arr];
+        [tablePayment reloadData];
+    }];
 
 }
 -(void)initData
@@ -75,28 +76,28 @@
     item.strBookDate = @"05/05/2015 20:33:15";
     item.strStatus = @"Chưa hoàn tất";
     item.strType = @"Credit card";
-    [arrListPayment addObject:item];
+    [arrOrderlist addObject:item];
     
     item = [[PayItem alloc]init];
     item.strID = @"123456";
     item.strBookDate = @"05/05/2015 20:33:15";
     item.strStatus = @"Chưa hoàn tất";
         item.strType = @"Credit card";
-    [arrListPayment addObject:item];
+    [arrOrderlist addObject:item];
     
     item = [[PayItem alloc]init];
     item.strID = @"123456";
     item.strBookDate = @"05/05/2015 20:33:15";
     item.strStatus = @"Chưa hoàn tất";
         item.strType = @"Credit card";
-    [arrListPayment addObject:item];
+    [arrOrderlist addObject:item];
     
     item = [[PayItem alloc]init];
     item.strID = @"123456";
     item.strBookDate = @"05/05/2015 20:33:15";
     item.strStatus = @"Chưa hoàn tất";
         item.strType = @"Credit card";
-    [arrListPayment addObject:item];
+    [arrOrderlist addObject:item];
 }
 
 -(void)backbtn_click:(id)sender
@@ -131,7 +132,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [arrListPayment count];
+    return [arrOrderlist count];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -142,13 +143,17 @@
 
 - (void)configureCell:(PayItemTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PayItem * item = [arrListPayment objectAtIndex:indexPath.row];
-    cell.lblBookID.text = F(@"Đơn hàng số %@",item.strID);
-        cell.lblBookDate.text = F(@"Ngày đặt %@",item.strBookDate);
-        cell.lblStatus.text = F(@"Trạng thái %@",item.strStatus);
+    NSDictionary * item = [arrOrderlist objectAtIndex:indexPath.row];
+    cell.lblBookID.text = F(@"Đơn hàng số %@",[item objectForKey:@"order_id"]);
+    double timeStamp = [[item objectForKey:@"timestamp"]doubleValue];
+    NSString * strDate = [NSDate getStringFromTimestamp:timeStamp];
+        cell.lblBookDate.text = F(@"Ngày đặt %@",strDate);
+        cell.lblStatus.text = F(@"Trạng thái %@",[item objectForKey:@"status"]);
     
-    NSString * strTotalPrice = F(@"%ldđ", item.lTotalPrice);
+    NSString * strTotalPrice = F(@"%d", [[item objectForKey:@"total"]intValue]);
     strTotalPrice = [strTotalPrice formatStringToDecimal];
+    strTotalPrice = F(@"%@đ", strTotalPrice);
+    cell.lblTotalOfBill.text = strTotalPrice;
     UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 5, ScreenWidth -20, 100)];
     [cell.contentView insertSubview:viewBG atIndex:0];
     viewBG.layer.borderWidth = 0.5;
@@ -175,7 +180,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OrderInfoViewController * pItemVC = [[OrderInfoViewController alloc]init];
-    pItemVC.pItem = [arrListPayment objectAtIndex:indexPath.row];
+    pItemVC.pItem = [arrOrderlist objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:pItemVC animated:YES];
 }
 
