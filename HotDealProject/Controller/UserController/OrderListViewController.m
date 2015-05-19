@@ -113,7 +113,7 @@
 
 -(void)initUITableView
 {
-    tablePayment = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, ScreenWidth, ScreenHeight - 66 - 40) style:UITableViewStylePlain];
+    tablePayment = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 66 ) style:UITableViewStylePlain];
     [self.view addSubview:tablePayment];
     tablePayment.backgroundColor = [UIColor whiteColor];
     tablePayment.dataSource = self;

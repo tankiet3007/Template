@@ -242,6 +242,8 @@
 {
     if (indexPath.section == 2) {
         HotNewDetailViewController * detailVC = [[HotNewDetailViewController alloc]init];
+        NSDictionary * dictItem = [arrProduct objectAtIndex:indexPath.row];
+        detailVC.iProductID = [[dictItem objectForKey:@"product_id"]intValue];
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }

@@ -206,7 +206,7 @@
     UILabel * lblStandarPrice = [[UILabel alloc]initWithFrame:CGRectMake(0, Y(imageSlideTop) + HEIGHT(imageSlideTop), 150, 18)];
     lblStandarPrice.font = [UIFont systemFontOfSize:14];
     lblStandarPrice.textColor = [UIColor blackColor];
-    int price = [[dictDetail objectForKey:@"price"]intValue];
+    int price = [[dictDetail objectForKey:@"list_price"]intValue];
     NSString * strStardarPrice = F(@"%d", price);
     strStardarPrice = [strStardarPrice formatStringToDecimal];
     NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
@@ -217,7 +217,7 @@
     
     UILabel * lblDiscountPrice = [[UILabel alloc]initWithFrame:CGRectMake(0, Y(lblStandarPrice) + HEIGHT(lblStandarPrice), 150, 25)];
     
-    int list_price = [[dictDetail objectForKey:@"list_price"]intValue];
+    int list_price = [[dictDetail objectForKey:@"price"]intValue];
     NSString * strDiscountPrice = F(@"%d",  list_price);
     strDiscountPrice = [strDiscountPrice formatStringToDecimal];
     strDiscountPrice = F(@"%@đ", strDiscountPrice);
@@ -234,7 +234,7 @@
     UILabel *  lblDiscountPercent = [[UILabel alloc]initWithFrame:CGRectMake(X(imvDown) + 5, Y(imvDown)+2, WIDTH(imvDown)-5, 25)];
     
     lblDiscountPercent.numberOfLines = 1;
-    float calculatePercent = (float)((float)price/(float)list_price) *100;
+    float calculatePercent = (float)((float)list_price/(float)price) *100;
     lblDiscountPercent.text = F(@"%.0f%%", calculatePercent);
     lblDiscountPercent.textAlignment = NSTextAlignmentCenter;
     lblDiscountPercent.font = [UIFont boldSystemFontOfSize:15];
