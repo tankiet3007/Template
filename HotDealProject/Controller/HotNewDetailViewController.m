@@ -75,9 +75,11 @@
     
     [HUD show:YES];
     [[TKAPI sharedInstance]getRequest:strParam withURL:URL_GET_DEAL_CONTENT completion:^(NSDictionary * dict, NSError *error) {
-        //        UA_log(@"%@",dict);
-        dictDetail = dict;
         [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
+         dictDetail = dict;
         [self setupLabelDescription];
         [self setupSlide];
         [self setupViewHeader];

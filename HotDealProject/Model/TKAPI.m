@@ -36,7 +36,7 @@
                                                        options:NSJSONWritingPrettyPrinted error:&error];
     [theRequest setHTTPMethod:@"POST"];
     [theRequest addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-   
+    
     // should check for and handle errors here but we aren't
     [theRequest setHTTPBody:jsonData];
     NSURLResponse *response = nil;
@@ -56,28 +56,34 @@
     operationManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     operationManager.requestSerializer = [AFJSONRequestSerializer serializer];
     operationManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
- 
+    
     [operationManager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       
-        NSString *strResponeData = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
-//         NSLog(@"responseObject: %@", strResponeData);
-//        NSDictionary* dictionary = (NSDictionary*)responseObject;
-
-        NSDictionary* dictionary = [NSJSONSerialization
-                            JSONObjectWithData:responseObject
-                            options:kNilOptions
-                            error:nil];
         
-        if ([dictionary isKindOfClass:[NSDictionary class]] == YES)
-        {
-            completion(dictionary, nil);
+        //        NSString *strResponeData = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+        //         NSLog(@"responseObject: %@", strResponeData);
+        //        NSDictionary* dictionary = (NSDictionary*)responseObject;
+        if (responseObject == nil) {
+            completion(nil, nil);
+            return;
         }
         else
         {
-            completion(dictionary, nil);
+            NSDictionary* dictionary = [NSJSONSerialization
+                                        JSONObjectWithData:responseObject
+                                        options:kNilOptions
+                                        error:nil];
+            
+            if ([dictionary isKindOfClass:[NSDictionary class]] == YES)
+            {
+                completion(dictionary, nil);
+            }
+            else
+            {
+                completion(dictionary, nil);
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Error: %@", error);
+        //        NSLog(@"Error: %@", error);
         completion(nil, error);
     }];}
 
@@ -90,32 +96,35 @@
     operationManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     operationManager.requestSerializer = [AFJSONRequestSerializer serializer];
     operationManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
-
+    
     [operationManager GET:url
-      parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//          NSString *strResponeData = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
-//          NSLog(@"responseObject: %@", strResponeData);
-          //        NSDictionary* dictionary = (NSDictionary*)responseObject;
-          
-          NSDictionary* dictionary = [NSJSONSerialization
-                                      JSONObjectWithData:responseObject
-                                      options:kNilOptions
-                                      error:nil];
-          
-          if ([dictionary isKindOfClass:[NSDictionary class]] == YES)
-          {
-              completion(dictionary, nil);
-          }
-          else
-          {
-              completion(dictionary, nil);
-          }
-
-         }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             // handle failure
-             completion(nil, error);
-         }];
+               parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   if (responseObject == nil) {
+                       completion(nil, nil);
+                       return;
+                   }
+                   else
+                   {
+                       NSDictionary* dictionary = [NSJSONSerialization
+                                                   JSONObjectWithData:responseObject
+                                                   options:kNilOptions
+                                                   error:nil];
+                       
+                       if ([dictionary isKindOfClass:[NSDictionary class]] == YES)
+                       {
+                           completion(dictionary, nil);
+                       }
+                       else
+                       {
+                           completion(dictionary, nil);
+                       }
+                   }
+                   
+               }
+                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      // handle failure
+                      completion(nil, error);
+                  }];
 }
 
 - (void)getRequestAFarr:(NSDictionary *)params withURL:(NSString *)url completion:(void(^)(NSArray*, NSError*))completion
@@ -130,24 +139,27 @@
     
     [operationManager GET:url
                parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   //          NSString *strResponeData = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
-                   //          NSLog(@"responseObject: %@", strResponeData);
-                   //        NSDictionary* dictionary = (NSDictionary*)responseObject;
                    
-                   NSArray* arr = [NSJSONSerialization
-                                               JSONObjectWithData:responseObject
-                                               options:kNilOptions
-                                               error:nil];
-                   
-                   if ([arr isKindOfClass:[NSArray class]] == YES)
-                   {
-                       completion(arr, nil);
+                   if (responseObject == nil) {
+                       completion(nil, nil);
+                       return;
                    }
                    else
                    {
-                       completion(arr, nil);
+                       NSArray* arr = [NSJSONSerialization
+                                       JSONObjectWithData:responseObject
+                                       options:kNilOptions
+                                       error:nil];
+                       
+                       if ([arr isKindOfClass:[NSArray class]] == YES)
+                       {
+                           completion(arr, nil);
+                       }
+                       else
+                       {
+                           completion(arr, nil);
+                       }
                    }
-                   
                }
                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                       // handle failure
@@ -160,40 +172,48 @@
 {
     dispatch_queue_t queue = dispatch_queue_create("com.get", 0);
     dispatch_async(queue, ^{
-    NSString *paramString = F(@"%@?%@", url, params);
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:paramString]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    
-    [request setHTTPMethod: @"GET"];
-    
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    
-    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    NSString * strData = [[NSString alloc]initWithData:response1 encoding:NSUTF8StringEncoding];
-    NSDictionary* dictionary = [NSJSONSerialization
-                                JSONObjectWithData:response1
-                                options:kNilOptions
-                                error:nil];
-    
-    if ([dictionary isKindOfClass:[NSDictionary class]] == YES)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completion(dictionary, nil);
-        });
+        NSString *paramString = F(@"%@?%@", url, params);
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:paramString]
+                                                               cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                           timeoutInterval:10];
         
-    }
-    else
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completion(dictionary, nil);
-        });
-
-    }
-
-//    UA_log(@"data: %@",strData);
+        [request setHTTPMethod: @"GET"];
+        
+        NSError *requestError;
+        NSURLResponse *urlResponse = nil;
+        
+        
+        NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+        NSString * strData = [[NSString alloc]initWithData:response1 encoding:NSUTF8StringEncoding];
+        if (response1 == nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(nil, nil);
+            });
+        }
+        else
+        {
+            NSDictionary* dictionary = [NSJSONSerialization
+                                        JSONObjectWithData:response1
+                                        options:kNilOptions
+                                        error:nil];
+            
+            if ([dictionary isKindOfClass:[NSDictionary class]] == YES)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(dictionary, nil);
+                });
+                
+            }
+            else
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(dictionary, nil);
+                });
+                
+            }
+        }
+        //    UA_log(@"data: %@",strData);
     });
+    
 }
 @end

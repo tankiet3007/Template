@@ -64,7 +64,7 @@
     [HUD show:YES];
     [[TKAPI sharedInstance]getRequestAFarr:params withURL:URL_GET_ODER_LIST completion:^(NSArray * arr, NSError *error) {
         [HUD hide:YES];
-        arrOrderlist = [NSArray arrayWithArray:arr];
+        arrOrderlist = [NSMutableArray arrayWithArray:arr];
         [tablePayment reloadData];
     }];
 

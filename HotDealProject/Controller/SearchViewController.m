@@ -107,6 +107,9 @@
     [HUD show:YES];
     [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
         [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
         NSArray * arrProducts = [dict objectForKey:@"product"];
         for (NSDictionary * dictItem in arrProducts) {
             DealObject * item = [[DealObject alloc]init];

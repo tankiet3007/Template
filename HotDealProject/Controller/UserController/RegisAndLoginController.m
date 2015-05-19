@@ -512,8 +512,10 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
     UA_log(@"%@",jsonDictionary);
     [HUD show:YES];
     [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_SIGN_IN completion:^(NSDictionary * dict, NSError *error) {
-        //        [self showMainView:dict wError:error];
         [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
         BOOL response = [[dict objectForKey:@"response"]boolValue];
         if (response == TRUE) {
             NSString* user_id = F(@"%@",[dict objectForKey:@"user_id"]);
@@ -627,6 +629,9 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
                  [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_CONNECT_SOCICAL completion:^(NSDictionary * dict, NSError *error) {
                      //        [self showMainView:dict wError:error];
                      [HUD hide:YES];
+                     if (dict == nil) {
+                         return;
+                     }
                      BOOL response = [[dict objectForKey:@"response"]boolValue];
                      if (response == TRUE) {
                          NSString* user_id = F(@"%@",[dict objectForKey:@"user_id"]);
@@ -714,6 +719,9 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
     [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_SIGN_UP completion:^(NSDictionary * dict, NSError *error) {
 //        [self showMainView:dict wError:error];
         [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
         BOOL response = [[dict objectForKey:@"response"]boolValue];
         if (response == TRUE) {
             NSString* user_id = F(@"%@",[dict objectForKey:@"user_id"]);

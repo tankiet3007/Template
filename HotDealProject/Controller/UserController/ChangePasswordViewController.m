@@ -137,8 +137,10 @@
     
     [HUD show:YES];
     [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_CHANGE_PASSWORD completion:^(NSDictionary * dict, NSError *error) {
-        //        [self showMainView:dict wError:error];
         [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
         BOOL response = [[dict objectForKey:@"response"]boolValue];
         if (response == TRUE) {
             //            NSString* user_id = F(@"%@",[dict objectForKey:@"user_id"]);

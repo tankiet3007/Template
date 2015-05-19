@@ -35,7 +35,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
-//    AppDelegate * appdelegate = ApplicationDelegate;
+    AppDelegate * appdelegate = ApplicationDelegate;
+    [appdelegate initNavigationbar:self withTitle:strTitle];
     [self setupSegment];
     isShowSortMenu = YES;
     arrDeals = [[NSMutableArray alloc]init];
@@ -43,7 +44,7 @@
     [self initData];
     [self initUITableView];
     [self initTableViewForSort];
-    [self initNavigationbar];
+//    [self initNavigationbar];
 //    [appdelegate initNavigationbar:self withTitle:@"DANH MỤC"];
     // Do any additional setup after loading the view.
 }
@@ -150,41 +151,41 @@
     [arrDeals addObject:item];
 }
 
--(void)initNavigationbar
-{
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero] ;
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont boldSystemFontOfSize:20.0];
-    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-    label.textAlignment = NSTextAlignmentCenter;
-    // ^-Use UITextAlignmentCenter for older SDKs.
-    label.textColor = [UIColor whiteColor]; // change this color
-    self.navigationItem.titleView = label;
-//    label.text = NSLocalizedString(@"DANH MỤC", @"");
-    label.text = strTitle;
-    [label sizeToFit];
-    
-    revealController = [self revealViewController];
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
-    //    UITapGestureRecognizer *tap = [revealController tapGestureRecognizer];
-    //    tap.delegate = self;
-    //
-    //    [self.view addGestureRecognizer:tap];
-    //    [self.navigationController.navigationBar addGestureRecognizer:revealController.panGestureRecognizer];
-    
-    UIImage *image = [UIImage imageNamed:@"menu_n.png"];
-    UIButton * rBtest = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rBtest addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-    [rBtest setBackgroundImage:image forState:UIControlStateNormal];
-    [rBtest setFrame:CGRectMake(0, 0, 30, 30)];
-    
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rBtest];
-    self.navigationItem.leftBarButtonItem = revealButtonItem;
-    
-}
+//-(void)initNavigationbar
+//{
+//    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+//    
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero] ;
+//    label.backgroundColor = [UIColor clearColor];
+//    label.font = [UIFont boldSystemFontOfSize:20.0];
+//    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+//    label.textAlignment = NSTextAlignmentCenter;
+//    // ^-Use UITextAlignmentCenter for older SDKs.
+//    label.textColor = [UIColor whiteColor]; // change this color
+//    self.navigationItem.titleView = label;
+////    label.text = NSLocalizedString(@"DANH MỤC", @"");
+//    label.text = strTitle;
+//    [label sizeToFit];
+//    
+//    revealController = [self revealViewController];
+//    [revealController panGestureRecognizer];
+//    [revealController tapGestureRecognizer];
+//    //    UITapGestureRecognizer *tap = [revealController tapGestureRecognizer];
+//    //    tap.delegate = self;
+//    //
+//    //    [self.view addGestureRecognizer:tap];
+//    //    [self.navigationController.navigationBar addGestureRecognizer:revealController.panGestureRecognizer];
+//    
+//    UIImage *image = [UIImage imageNamed:@"menu_n.png"];
+//    UIButton * rBtest = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [rBtest addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+//    [rBtest setBackgroundImage:image forState:UIControlStateNormal];
+//    [rBtest setFrame:CGRectMake(0, 0, 30, 30)];
+//    
+//    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rBtest];
+//    self.navigationItem.leftBarButtonItem = revealButtonItem;
+//    
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

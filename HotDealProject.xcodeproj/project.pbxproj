@@ -133,7 +133,6 @@
 		E9AE208F1AD80B68002E11AC /* CustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AE20771AD80B68002E11AC /* CustomBadge.m */; };
 		E9AE20901AD80B68002E11AC /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AE20791AD80B68002E11AC /* RadioButton.m */; };
 		E9AE20911AD80B68002E11AC /* ViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AE207B1AD80B68002E11AC /* ViewUtils.m */; };
-		E9AE20981AD80E70002E11AC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AE20971AD80E70002E11AC /* Reachability.m */; };
 		E9AE209B1AD81134002E11AC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE20991AD81134002E11AC /* AVFoundation.framework */; };
 		E9AE209C1AD81134002E11AC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE209A1AD81134002E11AC /* Foundation.framework */; };
 		E9AE209E1AD8114F002E11AC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE209D1AD8114F002E11AC /* CoreData.framework */; };
@@ -437,8 +436,6 @@
 		E9AE20791AD80B68002E11AC /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButton.m; sourceTree = "<group>"; };
 		E9AE207A1AD80B68002E11AC /* ViewUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtils.h; sourceTree = "<group>"; };
 		E9AE207B1AD80B68002E11AC /* ViewUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUtils.m; sourceTree = "<group>"; };
-		E9AE20961AD80E70002E11AC /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		E9AE20971AD80E70002E11AC /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		E9AE20991AD81134002E11AC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E9AE209A1AD81134002E11AC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E9AE209D1AD8114F002E11AC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -1071,8 +1068,6 @@
 		E9AE20951AD80E70002E11AC /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				E9AE20961AD80E70002E11AC /* Reachability.h */,
-				E9AE20971AD80E70002E11AC /* Reachability.m */,
 			);
 			name = Network;
 			path = Library/Network;
@@ -1415,7 +1410,6 @@
 				E9AE20191AD80A5E002E11AC /* MagicalImportFunctions.m in Sources */,
 				E9485B9F1AE006E2005D1688 /* AFURLSessionManager.m in Sources */,
 				E9AE20231AD80A5E002E11AC /* NSManagedObject+MagicalRecord.m in Sources */,
-				E9AE20981AD80E70002E11AC /* Reachability.m in Sources */,
 				E98FCF3E1AD8CA9100992BF0 /* JingDianMapCell.m in Sources */,
 				E9485B9D1AE006E2005D1688 /* AFURLRequestSerialization.m in Sources */,
 				E9AE20271AD80A5E002E11AC /* NSManagedObjectContext+MagicalSaves.m in Sources */,

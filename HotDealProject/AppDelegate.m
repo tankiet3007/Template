@@ -21,7 +21,7 @@ static NSString * const kRecipesStoreName = @"HotDealProject.sqlite";//HotDealPr
 
 @implementation AppDelegate
 {
-        LeftMenuViewController *rearViewController;
+    LeftMenuViewController *rearViewController;
 }
 
 
@@ -44,7 +44,7 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self setupDB];
-   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     if (/* DISABLES CODE */ (1)) {
         _masterViewController = [[StartupViewController alloc]init];
         //
@@ -59,10 +59,11 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
         mainRevealController.delegate = self;
         
         self.viewController = mainRevealController;
-         [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+        [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
         
         self.window.rootViewController = self.viewController;
         [self.window makeKeyAndVisible];
+        [self checkNetwork];
         return YES;
     }
     else
@@ -75,15 +76,40 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
         
         SWRevealViewController *mainRevealController = [[SWRevealViewController alloc]
                                                         initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
-         [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+        [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
         mainRevealController.delegate = self;
         self.viewController = mainRevealController;
         self.window.rootViewController = self.viewController;
         [self.window makeKeyAndVisible];
-
+        [self checkNetwork];
+        return YES;
     }
 }
 
+-(void)checkNetwork
+{
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        
+        NSLog(@"Reachability changed: %@", AFStringFromNetworkReachabilityStatus(status));
+        
+        
+        switch (status) {
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                // -- Reachable -- //
+                NSLog(@"Reachable");
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+            default:
+                // -- Not reachable -- //
+                NSLog(@"Not Reachable");
+                break;
+        }
+        
+    }];
+}
 -(void)initNavigationbar:(UIViewController *)controller withTitle: (NSString *)strTitle
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero] ;

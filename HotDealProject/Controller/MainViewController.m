@@ -7,8 +7,6 @@
 //
 
 #import "MainViewController.h"
-
-#import "Reachability.h"
 #import "DealItem.h"
 #import "HotNewDetailViewController.h"
 #import "SWRevealViewController.h"
@@ -29,7 +27,6 @@
 @implementation MainViewController
 {
     SWRevealViewController *revealController;
-    Reachability * reachability;
     ImageSlide *imageSlideTop;
     UIScrollView * scrollView;
     UIScrollView * scrollViewCategory;
@@ -48,6 +45,7 @@
     MBProgressHUD *HUD;
     BOOL bForceStop;
     NSString * strCategory;
+    BOOL isConnection;
 }
 @synthesize tableViewMain;
 #pragma mark init Method
@@ -58,7 +56,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
     bForceStop = FALSE;
-    [self checkNetwork];
+    
     [self initUITableView];
     [self initNavigationbar];
       [self initHUD];
@@ -119,6 +117,9 @@
     [HUD show:YES];
     [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
         [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
         NSArray * arrProducts = [dict objectForKey:@"product"];
         for (NSDictionary * dictItem in arrProducts) {
              DealObject * item = [[DealObject alloc]init];
@@ -159,6 +160,9 @@
     [HUD show:YES];
     [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
         [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
         NSArray * arrProducts = [dict objectForKey:@"product"];
         for (NSDictionary * dictItem in arrProducts) {
             DealObject * item = [[DealObject alloc]init];
@@ -189,6 +193,9 @@
     [HUD show:YES];
     [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
         [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
         NSArray * arrProducts = [dict objectForKey:@"product"];
         if ([arrProducts count] == 0) {
             bForceStop = YES;
@@ -312,23 +319,10 @@
     
 }
 
--(void)checkNetwork
+-(BOOL) isInternetReachable
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkChanged:) name:kReachabilityChangedNotification object:nil];
-    
-    reachability = [Reachability reachabilityForInternetConnection];
-    [reachability startNotifier];
-}
-- (void)networkChanged:(NSNotification *)notification
-{
-    
-    NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
-    
-    if(remoteHostStatus == NotReachable) {
-        NSLog(@"not reachable");
-    }
-    else if (remoteHostStatus == ReachableViaWiFi) { NSLog(@"wifi"); }
-    else if (remoteHostStatus == ReachableViaWWAN) { NSLog(@"carrier"); }
+    BOOL isConnected = [AFNetworkReachabilityManager sharedManager].reachable;
+    return isConnected;
 }
 
 -(void)initNavigationbar
@@ -579,14 +573,19 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 4) {
-        HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
-        DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
-        detail.iProductID = dealObj.product_id;
-//        detail.dealObj = dealObj;
-//        detail.arrDealRelateds = arrDeals;
-        [self.navigationController pushViewController:detail animated:YES];
+    if ([self isInternetReachable]) {
+        if (indexPath.section == 4) {
+            HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
+            DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
+            detail.iProductID = dealObj.product_id;
+            [self.navigationController pushViewController:detail animated:YES];
+        }
     }
+    else
+    {
+        ALERT(LS(@"MessageBoxTitle"), LS(@"NetworkError"));
+    }
+    
 }
 
 #pragma mark - Drag delegate methods
@@ -615,24 +614,34 @@
 
 -(void)clickOnCategory:(id)sender
 {
-    UIButton * btnTag = (UIButton *)sender;
-    UA_log(@"button is at %ld index", (long)btnTag.tag);
-    
-    CategoryViewController * category = [[CategoryViewController alloc]init];
-    category.strTitle = @"Danh mục";
-    [self.navigationController pushViewController:category animated:YES];
+    if ([self isInternetReachable]) {
+        UIButton * btnTag = (UIButton *)sender;
+        UA_log(@"button is at %ld index", (long)btnTag.tag);
+        
+        CategoryViewController * category = [[CategoryViewController alloc]init];
+        category.strTitle = @"Danh mục";
+        [self.navigationController pushViewController:category animated:YES];
+    }
+    else
+    {
+        ALERT(LS(@"MessageBoxTitle"), LS(@"NetworkError"));
+    }
 }
 
 -(void)clickOnItem:(id)sender
 {
-    UIButton * btnTag = (UIButton *)sender;
-    UA_log(@"button is at %ld index", (long)btnTag.tag);
-    HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
-    DealObject * dealObj = [arrDeals objectAtIndex:(long)btnTag.tag];
-//    detail.dealObj = dealObj;
-//    detail.arrDealRelateds = arrDeals;
-    detail.iProductID = dealObj.product_id;
-    [self.navigationController pushViewController:detail animated:YES];
+    if ([self isInternetReachable]) {
+        UIButton * btnTag = (UIButton *)sender;
+        UA_log(@"button is at %ld index", (long)btnTag.tag);
+        HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
+        DealObject * dealObj = [arrDeals objectAtIndex:(long)btnTag.tag];
+        detail.iProductID = dealObj.product_id;
+        [self.navigationController pushViewController:detail animated:YES];
+    }
+    else
+    {
+        ALERT(LS(@"MessageBoxTitle"), LS(@"NetworkError"));
+    }
 }
 
 -(void)updateTotal

@@ -93,11 +93,11 @@
     if (savedValue != nil) {
         iIndexSelected = [savedValue integerValue];
     }
-    arrLocation = [NSArray arrayWithObjects:@"Hà Nội",@"Hồ Chí Minh",@"Bình Dương",@"Đà Nẵng",@"Tỉnh thành khác", nil];
+    arrLocation = [NSArray arrayWithObjects:@"Hà Nội",@"Hồ Chí Minh", nil];
 }
 -(void)initUITableView
 {
-    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(20, 80, ScreenWidth-40, 200) style:UITableViewStylePlain];
+    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(20, 80, ScreenWidth-40, 80) style:UITableViewStylePlain];
     [self.view addSubview:tableViewMain];
     tableViewMain.layer.borderWidth = 0.3;
     tableViewMain.layer.borderColor = [UIColor lightGrayColor].CGColor;

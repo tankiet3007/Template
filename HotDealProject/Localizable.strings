@@ -18,3 +18,4 @@
 "location" = "Địa điểm sử dụng";
 "condition" = "Lưu ý khi mua";
 "detail" = "Chi tiết khuyến mãi";
+"NetworkError" = "Không có kết nối mạng";

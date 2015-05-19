@@ -168,6 +168,10 @@
         User * user = [[TKDatabase sharedInstance]getUserInfo];
         NSDictionary * dictParameter = [NSDictionary dictionaryWithObjectsAndKeys:user.user_id,@"user_id", nil];
         [[TKAPI sharedInstance]postRequestAF:dictParameter withURL:URL_SIGN_OUT completion:^(NSDictionary *dict, NSError * error) {
+            if (dict == nil) {
+//                ALERT(LS(@"MessageBoxTitle"), LS(@"NetworkError"))
+                return;
+            }
             if ([[dict objectForKey:@"response"]boolValue] == TRUE) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
                 MainViewController * mainVC = [[MainViewController alloc]init];
