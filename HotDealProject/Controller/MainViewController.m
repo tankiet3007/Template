@@ -46,6 +46,7 @@
     BOOL bForceStop;
     NSString * strCategory;
     BOOL isConnection;
+    float headerHeight;
 }
 @synthesize tableViewMain;
 #pragma mark init Method
@@ -54,6 +55,13 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [UIColor whiteColor];
+    if (IS_IPHONE_6) {
+        headerHeight = HEADER_HEIGHT + 30;
+    }
+    else
+    {
+        headerHeight = HEADER_HEIGHT;
+    }
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
     bForceStop = FALSE;
     
@@ -97,8 +105,8 @@
         [imageSlideTop removeFromSuperview];
         imageSlideTop = nil;
     }
-    imageSlideTop = [[ImageSlide alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, HEADER_HEIGHT)];
-    NSMutableArray * galleryImages = [NSMutableArray arrayWithObjects:@"clickme-1-320x200",@"clickme-1-320x200", nil];
+    imageSlideTop = [[ImageSlide alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, headerHeight)];
+    NSMutableArray * galleryImages = [NSMutableArray arrayWithObjects:@"http://desktop.freewallpaper4.me/view/original/5976/link-from-legend-of-zelda.jpg",@"http://desktop.freewallpaper4.me/view/original/5976/link-from-legend-of-zelda.jpg", nil];
     imageSlideTop.galleryImages = galleryImages;
     imageSlideTop.delegate = self;
     [imageSlideTop initScrollLocal2];
@@ -234,9 +242,10 @@
     
     int x = 0;
     for (int i = 0; i < 10; i++) {
-        UIButton * btnCategory = [UIButton buttonWithType:UIButtonTypeSystem];
+        UIButton * btnCategory = [UIButton buttonWithType:UIButtonTypeCustom];
         [btnCategory setFrame:CGRectMake(x, 0, 130, 70)];
-        [btnCategory setBackgroundImage:[UIImage imageNamed:@"clickme-1-320x200"] forState:UIControlStateNormal];
+//        [btnCategory setBackgroundImage:[UIImage imageNamed:@"clickme-1-320x200"] forState:UIControlStateNormal];
+        [btnCategory sd_setImageWithURL:[NSURL URLWithString:@"http://images5.fanpop.com/image/photos/31700000/Link-Zelda-the-legend-of-zelda-31742637-900-678.png"] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
         btnCategory.tag = i;
         [btnCategory addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
         x += btnCategory.frame.size.width + PADDING;
@@ -279,7 +288,8 @@
         strDiscountPrice = F(@"%@đ", strDiscountPrice);
         itemS.lblDiscountPrice.text = strDiscountPrice;
         itemS.lblTitle.text = item.strTitle;
-        
+//        [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:item.strBrandImage] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
+        [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://www.fightersgeneration.com/characters2/link-wind11.jpg"] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
         if (item.isNew == FALSE) {
             itemS.lblNew.hidden = YES;
         }
@@ -379,9 +389,9 @@
 -(void)shoppingCart
 {
     
-    if ([arrProduct count] == 0) {
-        return;
-    }
+//    if ([arrProduct count] == 0) {
+//        return;
+//    }
     ShoppingCartController * shopping = [[ShoppingCartController alloc]init];
     shopping.delegate = self;
     [self.navigationController pushViewController:shopping animated:YES];
@@ -403,7 +413,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return HEADER_HEIGHT;
+        return headerHeight;
     }    if (indexPath.section == 1) {
         return 230;
     }
@@ -485,7 +495,8 @@
         if (item.iType == 1) {
             cell.lblEVoucher.hidden = YES;
         }
-        
+//        [cell.imgBrand sd_setImageWithURL:[NSURL URLWithString:item.strBrandImage] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
+        [cell.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://www.fightersgeneration.com/characters2/link-wind11.jpg"] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
         NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
         strStardarPrice = [strStardarPrice formatStringToDecimal];
         NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};

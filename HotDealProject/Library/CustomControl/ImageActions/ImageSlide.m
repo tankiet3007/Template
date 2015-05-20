@@ -9,8 +9,7 @@
 #import "ImageSlide.h"
 
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
-#import "UIButton+WebCache.h"
-#import "UIImageView+WebCache.h"
+
 @implementation ImageSlide
 {
     int currentPage;
@@ -127,10 +126,13 @@
         frame.origin.y = 0;
         frame.size = _scrollView.frame.size;
         NSString *filePath = urlImage;
-        UIImage *imageT = [UIImage imageNamed:filePath];
+//        
+//        UIImage *imageT = [UIImage imageNamed:filePath];
+        NSString * photourl = [_galleryImages objectAtIndex:i];
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
 //        [button.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [button setBackgroundImage:imageT forState:UIControlStateNormal];
+//        [button setBackgroundImage:imageT forState:UIControlStateNormal];
+         [button sd_setImageWithURL:[NSURL URLWithString:photourl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
         button.tag = i;
         [button addTarget:self action:@selector(topCellClick:) forControlEvents:UIControlEventTouchUpInside];
         

@@ -75,6 +75,21 @@
     }
     arrProduct = [[NSMutableArray alloc]init];
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
+    
+    if ([arrProduct count] == 0) {
+        tableViewProduct.hidden = YES;
+        UIView * viewEmpty = [[UIView alloc]initWithFrame:CGRectMake(10, 10, ScreenWidth - 20, 30)];
+        UILabel * lblEmpty = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, ScreenWidth - 20, 20)];
+        lblEmpty.font = [UIFont boldSystemFontOfSize:14];
+        lblEmpty.text = @"Không có sản phẩm nào trong giỏ hàng";
+        viewEmpty.layer.cornerRadius = 5;
+        viewEmpty.layer.masksToBounds = YES;
+        [viewEmpty addSubview:lblEmpty];
+        viewEmpty.backgroundColor = [UIColor lightGrayColor];
+        [self.view addSubview:viewEmpty];
+    }
+
+    
 }
 
 - (void)didReceiveMemoryWarning {

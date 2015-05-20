@@ -650,6 +650,17 @@
         ALERT(@"Thông báo!", @"Vui lòng chọn số lượng");
         return;
     }
+    ProductObject * item = [[ProductObject alloc]init];
+    item.strProductID = F(@"%@",[dictDetail objectForKey:@"product_id"]);
+    item.strTitle = [dictDetail objectForKey:@"title"];
+    item.iCurrentQuantity = 1;
+    item.iMaxQuantity = 5;
+    item.lDiscountPrice = [[dictDetail objectForKey:@"price"]intValue];
+    item.lStandarPrice = [[dictDetail objectForKey:@"list_price"]intValue];
+    [arrProduct addObject:item];
+    [[TKDatabase sharedInstance]addProduct:item];
+    [self updateTotal];
+
     ShoppingCartController * cart = [[ShoppingCartController alloc]init];
     [self.navigationController pushViewController:cart animated:YES];
 }
