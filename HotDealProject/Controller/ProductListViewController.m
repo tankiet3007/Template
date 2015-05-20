@@ -35,6 +35,7 @@
 @synthesize tableViewProduct;
 @synthesize arrProduct;
 @synthesize delegate;
+@synthesize dictDealDetail;
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
@@ -51,7 +52,7 @@
     [appdelegate initNavigationbar:self withTitle:@"Chọn số lượng"];
     
 
-    [self initData];
+    [self initData2];
     
     // Do any additional setup after loading the view.
 }
@@ -62,7 +63,25 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+-(void)initData2
+{
+    if ([arrProduct count] != 0 && arrProduct != nil) {
+        return;
+    }
+    
+    arrProduct = [dictDealDetail objectForKey:@"child_products"];
+    if ([arrProduct count] == 0) {
+        arrProduct = [[NSMutableArray alloc]init];
+        ProductObject * item = [[ProductObject alloc]init];
+        item.strProductID = F(@"%@",[dictDealDetail objectForKey:@"product_id"]);
+        item.strTitle = [dictDealDetail objectForKey:@"title"];
+        item.iCurrentQuantity = 0;
+        item.iMaxQuantity = 5;
+        item.lDiscountPrice = [[dictDealDetail objectForKey:@"price"]intValue];
+        item.lStandarPrice = [[dictDealDetail objectForKey:@"list_price"]intValue];
+        [arrProduct addObject:item];
+    }
+}
 -(void)initData
 {
     if ([arrProduct count] != 0 && arrProduct != nil) {
@@ -71,7 +90,6 @@
     arrProduct = [[NSMutableArray alloc]init];
     
     ProductObject * item = [[ProductObject alloc]init];
-    item.strDealID = @"1";
      item.strProductID = @"1";
     item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
     item.iCurrentQuantity = 0;
@@ -82,7 +100,6 @@
     
     item = [[ProductObject alloc]init];
     item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
-    item.strDealID = @"2";
     item.strProductID = @"2";
     item.iCurrentQuantity = 0;
     item.iMaxQuantity = 2;
@@ -93,7 +110,6 @@
     item = [[ProductObject alloc]init];
     item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
     item.iCurrentQuantity = 0;
-    item.strDealID = @"3";
     item.strProductID = @"3";
     item.iMaxQuantity = 3;
     item.lDiscountPrice = 30000;

@@ -55,7 +55,6 @@
     AppDelegate * appdelegate = ApplicationDelegate;
     [appdelegate initNavigationbar:self withTitle:@"Giỏ hàng"];
     
-    
     [self initData];
     
     // Do any additional setup after loading the view.
@@ -232,6 +231,7 @@
     ProductObject * productObj = [arrProduct objectAtIndex:iIndexRow];
     [arrProduct removeObject:productObj];
     [[TKDatabase sharedInstance]removeProduct:productObj.strProductID];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"notiDealCount" object:nil];
     if ([arrProduct count] == 0) {
         tableViewProduct.hidden = YES;
         UIView * viewEmpty = [[UIView alloc]initWithFrame:CGRectMake(10, 10, ScreenWidth - 20, 30)];

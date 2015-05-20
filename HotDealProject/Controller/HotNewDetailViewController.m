@@ -34,7 +34,7 @@
     int iSelectedItem;
     NSMutableArray * arrSelectedAldreay;
     BBBadgeBarButtonItem *barButton;
-    NSArray * arrProduct;
+    NSMutableArray * arrProduct;
     MBProgressHUD *HUD;
     __block NSDictionary * dictDetail;
 }
@@ -352,7 +352,13 @@
         [cell.contentView insertSubview:viewBG atIndex:0];
         viewBG.layer.borderWidth = 0.5;
         viewBG.layer.borderColor =[UIColor lightGrayColor].CGColor;
-        
+        NSArray * arrProducts = [dictDetail objectForKey:@"child_products"];
+        if ([arrProducts count] == 0) {
+            iSelectedItem = 1;
+            cell.lblNumofVoucher.text = @"1 voucher";
+        }
+        else
+        {
         if (dealObj.iType == 0) {
             if (iSelectedItem == 0) {
                 cell.lblNumofVoucher.text = @"Chọn số lượng";
@@ -372,6 +378,7 @@
                 cell.lblNumofVoucher.text = F(@"%d voucher",iSelectedItem);
             }
             
+        }
         }
         return cell;
     }
@@ -547,6 +554,7 @@
     if (indexPath.section == 1) {
         ProductListViewController * pList = [[ProductListViewController alloc]init];
         pList.arrProduct = arrSelectedAldreay;
+        pList.dictDealDetail = dictDetail;
         pList.delegate = self;
         [self.navigationController pushViewController:pList animated:YES];
         return;
@@ -613,14 +621,26 @@
         ALERT(@"Thông báo!", @"Vui lòng chọn số lượng");
         return;
     }
+    
+    ProductObject * item = [[ProductObject alloc]init];
+    item.strProductID = F(@"%@",[dictDetail objectForKey:@"product_id"]);
+    item.strTitle = [dictDetail objectForKey:@"title"];
+    item.iCurrentQuantity = 1;
+    item.iMaxQuantity = 5;
+    item.lDiscountPrice = [[dictDetail objectForKey:@"price"]intValue];
+    item.lStandarPrice = [[dictDetail objectForKey:@"list_price"]intValue];
+    [arrProduct addObject:item];
+    [[TKDatabase sharedInstance]addProduct:item];
+    [self updateTotal];
+    
 //    User * user
-        NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        [NSNumber numberWithInt:_iProductID ], @"product_id",
-                                        
-                                        nil];
+//        NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                        [NSNumber numberWithInt:_iProductID ], @"product_id",
+//                                        
+//                                        nil];
 //    NSString * strParam = F(@"product_id=%@",[NSNumber numberWithInt:_iProductID ]);
     
-    [HUD show:YES];
+//    [HUD show:YES];
 //    [[TKAPI sharedInstance]postRequestAF:strParam withURL:URL_ADD_TO_CART completion:^(NSDictionary * dict, NSError *error) {
 //    }];
 }

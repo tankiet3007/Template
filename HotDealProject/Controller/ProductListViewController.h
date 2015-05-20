@@ -16,6 +16,7 @@
 
 @property(nonatomic,strong)UITableView * tableViewProduct;
 @property(nonatomic,strong)NSMutableArray * arrProduct;
+@property(nonatomic,strong)NSDictionary * dictDealDetail;
 @end
 @protocol ProductListDelegate <NSObject>
 -(void)updateTotalSeletedItem:(NSMutableArray *)arrTotalItem;
