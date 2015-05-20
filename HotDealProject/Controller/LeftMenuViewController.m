@@ -317,6 +317,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         MenuItem *item = (MenuItem *)[(self.sectionInfoArray)[indexPath.section] menuItem];
         UA_log(@"%@",(item.subItem)[indexPath.row]);
         categoryVC.strTitle = (item.subItem)[indexPath.row];
+        categoryVC.isFrommenu = YES;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:categoryVC];
         [revealVC setFrontViewController:navigationController animated:YES];
         [revealVC revealToggle:nil];

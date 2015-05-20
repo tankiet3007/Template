@@ -10,4 +10,5 @@
 @interface CategoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) UITableView * tableviewCategory;
 @property (nonatomic,strong) NSString * strTitle;
+@property (nonatomic, assign) BOOL isFrommenu;
 @end
