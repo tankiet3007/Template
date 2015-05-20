@@ -34,7 +34,7 @@
     NSUInteger iTagedButton;
     NSUInteger iSelectedQuantity;
     UIToolbar *toolBar;
-    //    NSMutableArray * arrSelectedItem;
+     MBProgressHUD *HUD;
 }
 @synthesize tableViewProduct;
 @synthesize arrProduct;
@@ -45,6 +45,7 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [UIColor whiteColor];
+    [self initHUD];
     //    arrSelectedItem = [[NSMutableArray alloc]init];
     iTagedButton = -1;
     iSelectedQuantity = -1;
@@ -60,6 +61,12 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    //    HUD.labelText = LS(@"LoadingData");
+    [HUD hide:YES];
+}
 
 -(void)backbtn_click:(id)sender
 {
@@ -206,23 +213,21 @@
     [btnChoiceProducts setBackgroundColor:[UIColor greenColor]];
     [btnChoiceProducts setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnChoiceProducts setTitle:@"THANH TOÁN" forState:UIControlStateNormal];
-    [btnChoiceProducts addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
+    [btnChoiceProducts addTarget:self action:@selector(checkout) forControlEvents:UIControlEventTouchUpInside];
     return btnChoiceProducts;
 }
--(void)loginClick
+-(void)checkout
 {
+    User * user = [[TKDatabase sharedInstance]getUserInfo];
+    NSMutableArray * arrProducts = [[NSMutableArray alloc]init];
+    for (ProductObject * item in arrProduct) {
+        NSDictionary * dictItem = [NSDictionary dictionaryWithObjectsAndKeys:item.strProductID,@"product_id",[NSNumber numberWithInt:item.iCurrentQuantity],@"quantity", nil];
+        [arrProducts addObject:dictItem];
+    }
+    NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:arrProducts, @"product_list",user.user_id, @"user_id", nil];
+    UA_log(@"%@", params);
     PaymentViewController * paymentVC = [[PaymentViewController alloc]init];
     [self.navigationController pushViewController:paymentVC animated:YES];
-//    UA_log(@"clicked");
-//    for (ProductObject * item  in arrProduct) {
-//        UA_log(@"%d",item.iCurrentQuantity);
-//        if (item.iCurrentQuantity != 0) {
-//            [[TKDatabase sharedInstance]addProduct:item];
-//        }
-//    }
-//    //    [self.delegate updateTotalSeletedItem:arrProduct];
-//    [self.delegate updateTotal];
-//    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)showDropbox:(id)sender
 {
