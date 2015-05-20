@@ -268,27 +268,35 @@
     }
     else
     {
-    DealCell *cell = (DealCell *)[tableView dequeueReusableCellWithIdentifier:nil];
-    if (cell == nil)
-    {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"DealCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }    //    [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
-    DealObject * item = [arrDeals objectAtIndex:indexPath.row];
-    NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
-    strStardarPrice = [strStardarPrice formatStringToDecimal];
-    NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.lblStandarPrice.attributedText = attributedString;
-    [cell.lblStandarPrice sizeToFit];
-    cell.lblNumOfBook.text = F(@"%d",item.buy_number);
-    
-    NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
-    strDiscountPrice = [strDiscountPrice formatStringToDecimal];
-    strDiscountPrice = F(@"%@đ", strDiscountPrice);
-    cell.lblDiscountPrice.text = strDiscountPrice;
-    cell.lblTitle.text = item.strTitle;
+        DealCell *cell = (DealCell *)[tableView dequeueReusableCellWithIdentifier:nil];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"DealCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }    //    [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
+        DealObject * item = [arrDeals objectAtIndex:indexPath.row];
+        if (item.isNew == FALSE) {
+            cell.lblNew.hidden = YES;
+        }
+        if (item.iType == 1) {
+            cell.lblEVoucher.hidden = YES;
+        }
+        //        [cell.imgBrand sd_setImageWithURL:[NSURL URLWithString:item.strBrandImage] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
+        [cell.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://www.fightersgeneration.com/characters2/link-wind11.jpg"] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
+        NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
+        strStardarPrice = [strStardarPrice formatStringToDecimal];
+        NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+        NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.lblStandarPrice.attributedText = attributedString;
+        [cell.lblStandarPrice sizeToFit];
+        cell.lblNumOfBook.text = F(@"%d",item.buy_number);
+        
+        NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
+        strDiscountPrice = [strDiscountPrice formatStringToDecimal];
+        strDiscountPrice = F(@"%@đ", strDiscountPrice);
+        cell.lblDiscountPrice.text = strDiscountPrice;
+        cell.lblTitle.text = item.strTitle;
     return cell;
     }
 

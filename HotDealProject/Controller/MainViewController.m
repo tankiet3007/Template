@@ -165,6 +165,10 @@
                                     sType,@"fetch_type",
                                     nil];
 
+    NSMutableIndexSet *indetsetToUpdate = [[NSMutableIndexSet alloc]init];
+    
+    [indetsetToUpdate addIndex:4];
+    
     UA_log(@"%@",jsonDictionary);
     [HUD show:YES];
     [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
@@ -182,10 +186,14 @@
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
             item.iType = [[dictItem objectForKey:@"type"]intValue];
+            if ([arrDeals count]>10) {
+                break;
+            }
             [arrDeals addObject:item];
         }
         UA_log(@"%lu item", [arrDeals count]);
-        [tableViewMain reloadData];
+        [tableViewMain reloadSections:indetsetToUpdate withRowAnimation:UITableViewRowAnimationFade];
+//        [tableViewMain reloadData];
     }];
 
 }
@@ -564,10 +572,8 @@
 -(void)mySegmentControlAction
 {
     arrDeals = [[NSMutableArray alloc]init];
-    NSMutableIndexSet *indetsetToUpdate = [[NSMutableIndexSet alloc]init];
+   
     
-    [indetsetToUpdate addIndex:4];
-    [tableViewMain reloadSections:indetsetToUpdate withRowAnimation:UITableViewRowAnimationFade];
     if (segmentedControl.selectedSegmentIndex == 0) {
 //        UA_log(@"0");
         strCategory = @"default";
@@ -580,7 +586,7 @@
         UA_log(@"2");
         strCategory = @"sale";
     }
-    [self initData:1 wOffset:10 wType:strCategory];
+    [self initData2:1 wOffset:10 wType:strCategory];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

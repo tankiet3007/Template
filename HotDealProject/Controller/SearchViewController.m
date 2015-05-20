@@ -280,6 +280,14 @@
         cell = [nib objectAtIndex:0];
     }    //    [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
     DealObject * item = [arrDeals objectAtIndex:indexPath.row];
+    if (item.isNew == FALSE) {
+        cell.lblNew.hidden = YES;
+    }
+    if (item.iType == 1) {
+        cell.lblEVoucher.hidden = YES;
+    }
+    //        [cell.imgBrand sd_setImageWithURL:[NSURL URLWithString:item.strBrandImage] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
+    [cell.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://www.fightersgeneration.com/characters2/link-wind11.jpg"] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
     NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
     strStardarPrice = [strStardarPrice formatStringToDecimal];
     NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
@@ -294,6 +302,7 @@
     strDiscountPrice = F(@"%@đ", strDiscountPrice);
     cell.lblDiscountPrice.text = strDiscountPrice;
     cell.lblTitle.text = item.strTitle;
+
     
     if (item.isNew == FALSE) {
         cell.lblNew.hidden = YES;
