@@ -47,6 +47,7 @@
     NSString * strCategory;
     BOOL isConnection;
     float headerHeight;
+    UILabel * lblLastestDeal;
 }
 @synthesize tableViewMain;
 #pragma mark init Method
@@ -57,6 +58,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     if (IS_IPHONE_6) {
         headerHeight = HEADER_HEIGHT + 30;
+    }
+    if (IS_IPHONE_6_PLUS) {
+        headerHeight = HEADER_HEIGHT + 50;
     }
     else
     {
@@ -129,6 +133,7 @@
             return;
         }
         NSArray * arrProducts = [dict objectForKey:@"product"];
+        UA_log(@"%lu item", [arrDeals count]);
         for (NSDictionary * dictItem in arrProducts) {
              DealObject * item = [[DealObject alloc]init];
             item.strTitle = [dictItem objectForKey:@"title"];
@@ -144,7 +149,7 @@
             }
             [arrDeals addObject:item];
         }
-        UA_log(@"%lu item", [arrDeals count]);
+        
         if ([arrDeals count] == 0) {
             return ;
         }
@@ -356,7 +361,7 @@
     // ^-Use UITextAlignmentCenter for older SDKs.
     label.textColor = [UIColor whiteColor]; // change this color
     self.navigationItem.titleView = label;
-    label.text = NSLocalizedString(@"Home", @"");
+    label.text = NSLocalizedString(@"Hotdeal", @"");
     [label sizeToFit];
     
     revealController = [self revealViewController];
@@ -469,19 +474,29 @@
         return cell;
     }
     if (indexPath.section == 1) {
+        static NSString *CellIdentifier = @"CellIdentifier";
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 15, ScreenWidth - 20, 20)];
-        NSDate * date = [NSDate date];
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"dd/MM"];
-        NSString * strToday = [formatter stringFromDate:date];
-        
-        NSLog(@"%@ ,%@", strToday ,[date stringWeekday]);
-        lblTitle.text = F(@"Deal mới nhất %@ ngày %@",[date stringWeekday],strToday);
-        lblTitle.font = [UIFont boldSystemFontOfSize:14];
-        lblTitle.textColor = [UIColor redColor];
-        [cell.contentView addSubview:lblTitle];
+//        NSArray * arrSubview = [cell.contentView subviews];
+        if (lblLastestDeal == nil) {
+            lblLastestDeal = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 15, ScreenWidth - 20, 20)];
+            NSDate * date = [NSDate date];
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"dd/MM"];
+            NSString * strToday = [formatter stringFromDate:date];
+            
+            NSLog(@"%@ ,%@", strToday ,[date stringWeekday]);
+            lblLastestDeal.text = F(@"Deal mới nhất %@ ngày %@",[date stringWeekday],strToday);
+            lblLastestDeal.font = [UIFont boldSystemFontOfSize:14];
+            lblLastestDeal.textColor = [UIColor redColor];
+            [cell.contentView addSubview:lblLastestDeal];
+        }
+        else
+            [cell.contentView addSubview:lblLastestDeal];
         [cell.contentView addSubview:scrollView];
         return cell;
     }

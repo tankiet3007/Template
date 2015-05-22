@@ -48,8 +48,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
+    [self.navigationItem setHidesBackButton:YES animated:YES];
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
-    [self initNavigationbar];
+    
     [self initHUD];
     [self initData];
     
@@ -80,6 +81,13 @@
             return;
         }
          dictDetail = dict;
+//    category: {
+//    category_id: 639,
+//    category_name: ""
+//    },
+        NSDictionary * dictCategory = [dict objectForKey:@"category"];
+        NSString * sTitle = [dictCategory objectForKey:@"category_name"];
+        [self initNavigationbar:sTitle];
         [self setupLabelDescription];
         [self setupSlide];
         [self setupViewHeader];
@@ -129,10 +137,13 @@
     [self.navigationController pushViewController:shopping animated:YES];
 }
 
--(void)initNavigationbar
+-(void)initNavigationbar:(NSString *)strTitle
 {
     AppDelegate * appdelegate = ApplicationDelegate;
-    [appdelegate initNavigationbar:self withTitle:@"CHI TIẾT"];
+    if (strTitle == nil || [strTitle isEqualToString:@""]) {
+        strTitle = @"CHI TIẾT";
+    }
+    [appdelegate initNavigationbar:self withTitle:strTitle];
     
     UIButton *customButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     // Add your action to your button
@@ -345,9 +356,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.imgPic.image = [UIImage imageNamed:@"beef"];
-        
-        //        cell.vContainer.layer.borderWidth = 0.5;
-        //        cell.vContainer.layer.borderColor =[UIColor lightGrayColor].CGColor;
+
         UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth -20, 45)];
         [cell.contentView insertSubview:viewBG atIndex:0];
         viewBG.layer.borderWidth = 0.5;

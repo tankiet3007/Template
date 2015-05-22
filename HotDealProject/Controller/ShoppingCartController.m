@@ -34,7 +34,7 @@
     NSUInteger iTagedButton;
     NSUInteger iSelectedQuantity;
     UIToolbar *toolBar;
-     MBProgressHUD *HUD;
+    MBProgressHUD *HUD;
 }
 @synthesize tableViewProduct;
 @synthesize arrProduct;
@@ -95,7 +95,7 @@
         viewEmpty.backgroundColor = [UIColor lightGrayColor];
         [self.view addSubview:viewEmpty];
     }
-
+    
     
 }
 
@@ -154,13 +154,13 @@
         
         NSString * strStardarPrice = F(@"%d", [self calculateCash]);
         strStardarPrice = [strStardarPrice formatStringToDecimal];
-//        NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-//        NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
+        //        NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+        //        NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         cell.lblTotalOfBill.text  = strStardarPrice;
         
-         cell.lblCash.text  = strStardarPrice;
+        cell.lblCash.text  = strStardarPrice;
         return cell;
         
     }
@@ -235,7 +235,7 @@
     UA_log(@"%ld",btnSelected.tag);
     iTagedButton = btnSelected.tag;
     ProductObject * item = [arrProduct objectAtIndex:btnSelected.tag];
-     numRowsInPicker = item.iMaxQuantity + 1;
+    numRowsInPicker = item.iMaxQuantity + 1;
     myPickerView.hidden = NO;
     toolBar.hidden = NO;
     tableViewProduct.userInteractionEnabled = NO;
