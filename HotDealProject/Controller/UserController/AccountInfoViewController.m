@@ -27,6 +27,9 @@
     NSArray * arrProduct;
     NSArray * arrProvine;
     NSString * strAddressL;
+    MBProgressHUD *HUD;
+    __block NSDictionary * dictRespone;
+    NSIndexPath * indexPathselected;
 }
 @synthesize tableInfo;
 - (void)viewDidLoad {
@@ -36,12 +39,44 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
     strAddressL = @"";
+    [self initHUD];
     [self getAllProvineSelected];
     [self initNavigationbar];
-    [self initUITableView];
+    
+    [self initData];
     // Do any additional setup after loading the view.
 }
 
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    //    HUD.labelText = LS(@"LoadingData");
+    [HUD hide:YES];
+}
+
+-(void)initData
+{
+    NSString * strParam = F(@"user_id=%@",[NSNumber numberWithInt:1]);
+//    NSDictionary * dictParam = [NSDictionary dictionaryWithObjectsAndKeys:@"4488",@"user_id", nil];
+    
+    [HUD show:YES];
+    [[TKAPI sharedInstance]getRequest:strParam withURL:URL_GET_USERINFO completion:^(NSDictionary * dict, NSError *error) {
+        [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
+        dictRespone = dict;
+        NSDictionary * dictAddress = [dict objectForKey:@"address"];
+        NSDictionary * dictWard = [dictAddress objectForKey:@"s_ward"];
+        NSDictionary * dictDictrict = [dictAddress objectForKey:@"s_district"];
+        NSDictionary * dictState = [dictAddress objectForKey:@"s_state"];
+        NSString * floorOptional = F(@"Lầu: %@",[dictAddress objectForKey:@"s_address_note"]);
+        strAddressL = F(@"%@\n%@\n%d %@ %@ %@ %@", [dict objectForKey:@"fullname"],[dict objectForKey:@"phone"],[[dictAddress objectForKey:@"s_address"]intValue],[dictWard objectForKey:@"name"],[dictDictrict objectForKey:@"name"],[dictState objectForKey:@"name"], floorOptional);
+        UA_log(@"%@", dict);
+        
+        [self initUITableView];
+    }];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -222,16 +257,14 @@
 {
     if (indexPath.section == 0) {
         PersonalInfoViewController * pInfo = [[PersonalInfoViewController alloc]init];
+        pInfo.dictResponse = dictRespone;
         [self.navigationController pushViewController:pInfo animated:YES];
     }
-//    if (indexPath.section == 1) {
-//        EmailPromotionViewController * email = [[EmailPromotionViewController alloc]init];
-//        email.delegate = self;
-//        [self.navigationController pushViewController:email animated:YES];
-//    }
     if (indexPath.section == 1) {
         AddressViewController * addressVC = [[AddressViewController alloc]init];
         addressVC.delegate = self;
+        addressVC.indexPathSelected = indexPathselected;
+        addressVC.dictResponse = dictRespone;
         [self.navigationController pushViewController:addressVC animated:YES];
     }
 }
@@ -243,9 +276,10 @@
 {
     [self getAllProvineSelected];
 }
--(void)updateAddress:(NSString *)strAddress
+-(void)updateAddress:(NSString *)strAddress wIndex:(NSIndexPath *)indexPath
 {
     strAddressL = strAddress;
+    indexPathselected = indexPath;
     [tableInfo reloadData];
 }
 @end

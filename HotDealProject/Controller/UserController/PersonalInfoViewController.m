@@ -26,6 +26,7 @@
 @synthesize pickerView;
 @synthesize pickerGender;
 @synthesize tableViewInfo;
+@synthesize dictResponse;
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])

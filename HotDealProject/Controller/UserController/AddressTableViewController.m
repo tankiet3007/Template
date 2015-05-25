@@ -14,7 +14,7 @@
 typedef enum {
     ProvinceCb,
     DistrictCb,
-    PhuongXaCb,
+    WardCb,
     AddressTypeCb
 }ComboboxType;
 @implementation AddressTableViewController
@@ -26,7 +26,7 @@ typedef enum {
     UITextField* tfPhone;
     UILabel* lblProvince;
     UILabel* lblDistrict;
-    UILabel* lblPhuongXa;
+    UILabel* lblWard;
     UILabel* strAddressType;
     UIToolbar *toolbar;
     UIButton* btnRegister;
@@ -34,13 +34,19 @@ typedef enum {
     NSArray * arrDistrict;
     NSArray * arrAddressType;
     ComboboxType cbType;
+    
+    NSDictionary * dictAddressSelected;
 }
 @synthesize pickerViewMain;
+@synthesize dictResponse;
+@synthesize iIndexAddress;
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     [self initNavigationBar];
+    NSArray * arrProfile = [dictResponse objectForKey:@"profiles"];
+    dictAddressSelected = [arrProfile objectAtIndex:iIndexAddress];
     cbType = ProvinceCb;
     [self initData];
     [self initUITableView];
@@ -76,7 +82,7 @@ typedef enum {
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 6;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -97,32 +103,33 @@ typedef enum {
         switch ( indexPath.row ) {
             case 0: {
                 cellRe.textLabel.text = @"" ;
-                tf = tfFullname = [self makeTextField:@"" placeholder:@"Địa chỉ email"];
-                tf.textColor = [UIColor lightGrayColor];
+                tf = tfFullname = [self makeTextField:[dictResponse objectForKey:@"fullname"] placeholder:@"Họ tên"];
+                //                tf.textColor = [UIColor lightGrayColor];
                 [cellRe addSubview:tfFullname];
                 break ;
             }
             case 1: {
                 cellRe.textLabel.text = @"" ;
-                tf = tfPhone = [self makeTextField:@"" placeholder:@"Số điện thoại"];
+                tf = tfPhone = [self makeTextField:[dictResponse objectForKey:@"phone"] placeholder:@"Số điện thoại"];
                 [cellRe addSubview:tfPhone];
                 break ;
             }
             case 2: {
                 cellRe.textLabel.text = @"" ;
-                tf = tfAddess = [self makeTextField:@"" placeholder:@"Số nhà"];
+                tf = tfAddess = [self makeTextField:[dictAddressSelected objectForKey:@"s_address"] placeholder:@"Số nhà"];
                 [cellRe addSubview:tfAddess];
                 break ;
             }
             case 3: {
                 cellRe.textLabel.text = @"" ;
-                tf = tfStreetName = [self makeTextField:@"" placeholder:@"Tên đường / phố"];
+                tf = tfStreetName = [self makeTextField:[dictAddressSelected objectForKey:@"s_address_2"] placeholder:@"Tên đường / phố"];
                 [cellRe addSubview:tfStreetName];
                 break ;
             }
             case 4: {
                 cellRe.textLabel.text = @"" ;
-                tf = tfBuilding = [self makeTextField:@"" placeholder:@"Tòa nhà (không bắt buôc)"];
+                NSString * strBuilding = [dictAddressSelected objectForKey:@"s_address_note"];
+                tf = tfBuilding = [self makeTextField:strBuilding placeholder:@"Tòa nhà,lẩu (không bắt buôc)"];
                 [cellRe addSubview:tfBuilding];
                 break ;
             }
@@ -150,8 +157,17 @@ typedef enum {
         switch ( indexPath.row ) {
             case 0: {
                 
-                //                    cell.textLabel.text = @"Ngày sinh" ;
-                lbl = lblProvince = [self makeLabel:@"  Quận / Huyện"];
+                NSDictionary * dictDictrict = [dictAddressSelected objectForKey:@"s_district"];
+                //                NSDictionary * dictDictrict = [dictItem objectForKey:@"s_district"];
+                //                NSDictionary * dictState = [dictItem objectForKey:@"s_state"];
+                if ([dictDictrict objectForKey:@"name"] != nil && ![[dictDictrict objectForKey:@"name"] isEqualToString:@""]) {
+                    lbl = lblDistrict = [self makeLabel:F(@"   %@",[dictDictrict objectForKey:@"name"])];
+                    lbl.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+                }
+                else
+                {
+                    lbl = lblDistrict = [self makeLabel:@"  Quận / Huyện"];
+                }
                 [cellRe addSubview:lbl];
                 break ;
             }
@@ -182,9 +198,15 @@ typedef enum {
         UILabel* lbl = nil ;
         switch ( indexPath.row ) {
             case 0: {
-                
-                //                    cell.textLabel.text = @"Ngày sinh" ;
-                lbl = lblProvince = [self makeLabel:@"  Phường / Xã"];
+                NSDictionary * dictWar = [dictAddressSelected objectForKey:@"s_ward"];
+                if ([dictWar objectForKey:@"name"] != nil && ![[dictWar objectForKey:@"name"] isEqualToString:@""]) {
+                    lbl = lblWard = [self makeLabel:F(@"   %@",[dictWar objectForKey:@"name"])];
+                    lbl.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+                }
+                else
+                {
+                    lbl = lblWard = [self makeLabel:@"  Phường / Xã"];
+                }
                 [cellRe addSubview:lbl];
                 break ;
             }
@@ -215,9 +237,15 @@ typedef enum {
         UILabel* lbl = nil ;
         switch ( indexPath.row ) {
             case 0: {
-                
-                //                    cell.textLabel.text = @"Ngày sinh" ;
-                lbl = lblProvince = [self makeLabel:@"  Tỉnh / Thành phố"];
+                NSDictionary * dictProvince = [dictAddressSelected objectForKey:@"s_state"];
+                if ([dictProvince objectForKey:@"name"] != nil && ![[dictProvince objectForKey:@"name"] isEqualToString:@""]) {
+                    lbl = lblProvince = [self makeLabel:F(@"   %@",[dictProvince objectForKey:@"name"])];
+                    lbl.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+                }
+                else
+                {
+                    lbl = lblProvince = [self makeLabel:@"  Tỉnh / Thành phố"];
+                }
                 [cellRe addSubview:lbl];
                 break ;
             }
@@ -228,40 +256,6 @@ typedef enum {
         cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
         
         UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox1)];
-        // if labelView is not set userInteractionEnabled, you must do so
-        [lbl setUserInteractionEnabled:YES];
-        [lbl addGestureRecognizer:gesture];
-        
-        UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
-        [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
-        [cellRe addSubview:imgArrow];
-        
-        
-        return cellRe;
-        
-    }
-    if (indexPath.section == 4)
-    {
-        UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        
-        // Make cell unselectable
-        cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
-        UILabel* lbl = nil ;
-        switch ( indexPath.row ) {
-            case 0: {
-                
-                //                    cell.textLabel.text = @"Ngày sinh" ;
-                lbl = lblProvince = [self makeLabel:@"  Loại địa chỉ"];
-                [cellRe addSubview:lbl];
-                break ;
-            }
-        }
-        
-        // Textfield dimensions
-        lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
-        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-        
-        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox4)];
         // if labelView is not set userInteractionEnabled, you must do so
         [lbl setUserInteractionEnabled:YES];
         [lbl addGestureRecognizer:gesture];
@@ -368,7 +362,7 @@ typedef enum {
 -(void)cancelButtonPressed:(id)sender{
     pickerViewMain.hidden = YES;
     toolbar.hidden = YES;
-        self.tableView.scrollEnabled = YES;
+    self.tableView.scrollEnabled = YES;
 }
 
 -(void)makePicker
@@ -395,11 +389,11 @@ typedef enum {
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     if (cbType == DistrictCb) {
-       return  [arrDistrict count];
+        return  [arrDistrict count];
         
     }
     if (cbType == ProvinceCb) {
-    return [arrProvince count];
+        return [arrProvince count];
     }
     else
     {
@@ -415,7 +409,7 @@ typedef enum {
 // tell the picker the title for a given component
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (cbType == DistrictCb) {
-       return [arrDistrict objectAtIndex:row];
+        return [arrDistrict objectAtIndex:row];
     }
     if (cbType == ProvinceCb) {
         return [arrProvince objectAtIndex:row];
@@ -481,9 +475,9 @@ typedef enum {
     toolbar.hidden = NO;
     cbType = ProvinceCb;
     [pickerViewMain reloadAllComponents];
-
-        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-            self.tableView.scrollEnabled = NO;
+    
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+    self.tableView.scrollEnabled = NO;
 }
 -(void)showDropbox2
 {
@@ -491,18 +485,18 @@ typedef enum {
     toolbar.hidden = NO;
     cbType = DistrictCb;
     [pickerViewMain reloadAllComponents];
-        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
-            self.tableView.scrollEnabled = NO;
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+    self.tableView.scrollEnabled = NO;
 }
 
 -(void)showDropbox3
 {
-    cbType = PhuongXaCb;
+    cbType = WardCb;
     pickerViewMain.hidden = NO;
     toolbar.hidden = NO;
     [pickerViewMain reloadAllComponents];
-        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
-            self.tableView.scrollEnabled = NO;
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+    self.tableView.scrollEnabled = NO;
 }
 
 -(void)showDropbox4
@@ -512,7 +506,7 @@ typedef enum {
     toolbar.hidden = NO;
     [pickerViewMain reloadAllComponents];
     [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-            self.tableView.scrollEnabled = NO;
+    self.tableView.scrollEnabled = NO;
 }
 
 -(UIButton*) makeButtonRegister{

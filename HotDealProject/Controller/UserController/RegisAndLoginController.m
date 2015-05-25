@@ -67,7 +67,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
 - (void)initHUD {
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
-//    HUD.labelText = LS(@"LoadingData");
+    //    HUD.labelText = LS(@"LoadingData");
     [HUD hide:YES];
 }
 
@@ -222,7 +222,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
                 case 0: {
                     cellRe.textLabel.text = @"" ;
                     tf = tfEmailLogin = [self makeTextField:@"" placeholder:@"Địa chỉ email"];
-//                    tf.textColor = [UIColor lightGrayColor];
+                    //                    tf.textColor = [UIColor lightGrayColor];
                     [cellRe addSubview:tfEmailLogin];
                     break ;
                 }
@@ -266,7 +266,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
             cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             return cellRe;
         }
-       if (indexPath.section == 2)
+        if (indexPath.section == 2)
         {
             
             UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
@@ -318,7 +318,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
                         break;
                     }
                     tf = tfEmail = [self makeTextField:@"" placeholder:@"Địa chỉ email"];
-//                    tf.textColor = [UIColor lightGrayColor];
+                    //                    tf.textColor = [UIColor lightGrayColor];
                     [cellRe addSubview:tfEmail];
                     break ;
                 }
@@ -508,7 +508,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
                                     pass, @"password",
                                     auto_signin, @"auto_signin",
                                     nil];
-
+    
     UA_log(@"%@",jsonDictionary);
     [HUD show:YES];
     [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_SIGN_IN completion:^(NSDictionary * dict, NSError *error) {
@@ -531,7 +531,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
             ALERT(LS(@"MessageBoxTitle"),response);
         }
     }];
-
+    
 }
 
 -(void)fbLogin
@@ -624,7 +624,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
                                                  nil];
                  //NSString * strDate = F(@"%.0f",floor([date timeIntervalSince1970] * 1000));
                  
-                  UA_log(@"%@",jsonDictionary);
+                 UA_log(@"%@",jsonDictionary);
                  [HUD show:YES];
                  [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_CONNECT_SOCICAL completion:^(NSDictionary * dict, NSError *error) {
                      //        [self showMainView:dict wError:error];
@@ -645,16 +645,16 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
                      {
                          NSString * response = [dict objectForKey:@"reason"];
                          ALERT(LS(@"MessageBoxTitle"),response);
-                     }        
+                     }
                  }];
-
                  
-//                 [[TKDatabase sharedInstance]addUser:email wFullname:name wGender:gender];
-//                 NSLog(@"Fetched User Information:%@", result);
-//                 ALERT(@"Thông báo", @"Đăng nhập thành công");
-//                 [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
-//                 MainViewController * mainVC = [[MainViewController alloc]init];
-//                 [self.navigationController pushViewController:mainVC animated:YES];
+                 
+                 //                 [[TKDatabase sharedInstance]addUser:email wFullname:name wGender:gender];
+                 //                 NSLog(@"Fetched User Information:%@", result);
+                 //                 ALERT(@"Thông báo", @"Đăng nhập thành công");
+                 //                 [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
+                 //                 MainViewController * mainVC = [[MainViewController alloc]init];
+                 //                 [self.navigationController pushViewController:mainVC animated:YES];
                  
                  
              }
@@ -708,13 +708,17 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
     NSString * password = [tfPassword.text MD5];
     NSString * fullname = tfFullname.text;
     NSString * birthday = [lblBirthday.text trim];
+    NSString * phone = [tfPhone.text trim];
+    NSString * gender = lblGender.text;
     NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     email, @"email",
                                     password, @"password",
-                                     fullname, @"fullname",
-                                     birthday, @"birthday",
+                                    fullname, @"fullname",
+                                    birthday, @"birthday",
+                                    phone, @"phone",
+                                    gender, @"gender",
                                     nil];
-     UA_log(@"%@",jsonDictionary);
+    UA_log(@"%@",jsonDictionary);
     [HUD show:YES];
     [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_SIGN_UP completion:^(NSDictionary * dict, NSError *error) {
         [HUD hide:YES];
@@ -734,7 +738,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
         {
             NSString * response = [dict objectForKey:@"reason"];
             ALERT(LS(@"MessageBoxTitle"),response);
-        }        
+        }
     }];
     
 }

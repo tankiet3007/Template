@@ -13,8 +13,8 @@ static NSString * const URL_SIGN_IN = @"http://dev.hotdeal.vn/mapi/sign-in";
 static NSString * const URL_CONNECT_SOCICAL = @"dev.http://hotdeal.vn/mapi/connect_socical";
 static NSString * const URL_SIGN_OUT = @"http://dev.hotdeal.vn/mapi/sign-out";
 static NSString * const URL_FORGOT_PASSWORD = @"http://dev.hotdeal.vn/mapi/reset-password";
-static NSString * const URL_GET_USERINFO = @"http://dev.hotdeal.vn/mapi/get-user-info";//http://hotdeal.vn/mapi/update-user-info
-static NSString * const URL_UPDATE_USER = @"http://dev.hotdeal.vn/mapi/update-user-info";
+static NSString * const URL_GET_USERINFO = @"http://dev.hotdeal.vn/mapi/get_user_info";//http://hotdeal.vn/mapi/update-user-info
+static NSString * const URL_UPDATE_USER = @"http://dev.hotdeal.vn/mapi/update_user_info";
 static NSString * const URL_CHANGE_PASSWORD = @"http://dev.hotdeal.vn/mapi/change-password";
 
 #pragma mark for deal

@@ -16,13 +16,16 @@
 
 @implementation AddressViewController
 {
+    NSMutableArray * arrRawAddress;
     NSMutableArray * arrAddress;
-    NSIndexPath * indexPathSelected;
+    
     UIView * vFooter;
 }
 #define RowHeight 70
 @synthesize tableAddress;
 @synthesize delegate;
+@synthesize dictResponse;
+@synthesize indexPathSelected;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -53,8 +56,27 @@
 
 -(void)initData
 {
+    arrRawAddress = [NSMutableArray new];
     arrAddress = [NSMutableArray new];
-    arrAddress = [NSMutableArray arrayWithObjects:@"33 ấp 4 xã Phước Kiển huyện Nhà Bè, TP.HCM, toà nha Yoco Building",@"41 Nguyễn Thị Minh Khai, toà nhà Yoco Buiding Phường Bến Nghé, Quận 1, TP.HCM", nil];
+//    arrAddress = [NSMutableArray arrayWithObjects:@"33 ấp 4 xã Phước Kiển huyện Nhà Bè, TP.HCM, toà nha Yoco Building",@"41 Nguyễn Thị Minh Khai, toà nhà Yoco Buiding Phường Bến Nghé, Quận 1, TP.HCM", nil];
+    arrRawAddress = [dictResponse objectForKey:@"profiles"];
+    for (NSDictionary * dictItem in arrRawAddress) {
+//        s_address_note: "a"
+        NSString * strAddressNode = [dictItem objectForKey:@"s_address_note"];
+        if ([strAddressNode isEqualToString:@""] || strAddressNode == nil) {
+            strAddressNode = @"";
+        }
+        else
+        {
+            strAddressNode = F(@"Lầu: %@,", strAddressNode);
+        }
+        NSDictionary * dictWard = [dictItem objectForKey:@"s_ward"];
+        NSDictionary * dictDictrict = [dictItem objectForKey:@"s_district"];
+        NSDictionary * dictState = [dictItem objectForKey:@"s_state"];
+        NSString * addressItem = F(@"%@ %@ %@ %@ %@",strAddressNode,[dictItem objectForKey:@"s_address"],[dictWard objectForKey:@"name"],[dictDictrict objectForKey:@"name"], [dictState objectForKey:@"name"]);
+        [arrAddress addObject:addressItem];
+    }
+    
 }
 -(void)initUITableView
 {
@@ -114,6 +136,10 @@
     if (![indexPathSelected isEqual:indexPath]) {
         cell.imgStatus.image = [UIImage imageNamed:@"radio"];
     }
+    else
+    {
+        cell.imgStatus.image = [UIImage imageNamed:@"radio_checked"];
+    }
     return cell;
     
 }
@@ -156,13 +182,17 @@
     indexPathSelected = indexPath;
     [tableAddress reloadData];
     [self.navigationController popViewControllerAnimated:YES];
-    [self.delegate updateAddress:[arrAddress objectAtIndex:indexPath.row]];
+    [self.delegate updateAddress:[arrAddress objectAtIndex:indexPath.row]wIndex:indexPath];
 }
 
 -(void)editAddress:(id)sender
 {
-    //    UIButton * btnEdit = (UIButton *)sender;
+    UIButton * btnEdit = (UIButton *)sender;
+    int iIndex = (int)btnEdit.tag;
+//    NSDictionary * dictAddress = [arrRawAddress objectAtIndex:iIndex];
     AddressTableViewController * addressTable = [[AddressTableViewController alloc]init];
+    addressTable.dictResponse = dictResponse;
+    addressTable.iIndexAddress = iIndex;
     addressTable.strTitle = @"Chỉnh sửa địa chỉ";
     [self.navigationController pushViewController:addressTable animated:YES];
     //    UA_log(@"%ld selected", btnEdit.tag);

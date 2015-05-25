@@ -17,6 +17,8 @@
 
 @property (strong, nonatomic) UIPickerView *pickerViewMain;
 @property (strong, nonatomic) NSString * strTitle;
+@property (strong, nonatomic) NSDictionary * dictResponse;
+@property (assign, nonatomic) int iIndexAddress;
 @end
 @protocol AddressTableDelegate <NSObject>
 -(void)updateTableAddress:(NSString *)strAddress;

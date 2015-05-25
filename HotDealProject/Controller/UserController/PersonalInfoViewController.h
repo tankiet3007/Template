@@ -12,6 +12,8 @@
 @property (strong, nonatomic)  UIDatePicker *pickerView;
 @property (strong, nonatomic)  UIPickerView *pickerGender;
 @property (nonatomic, strong)  UITableView * tableViewInfo;
+@property (nonatomic, strong)  NSDictionary * dictResponse;
+
 
 @end
 
