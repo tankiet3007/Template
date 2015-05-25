@@ -276,20 +276,20 @@
         switch ( indexPath.row ) {
             case 0: {
                 cellRe.textLabel.text = @"" ;
-                tf = tfEmail = [self makeTextField:@"" placeholder:@"Địa chỉ email"];
-                tf.textColor = [UIColor lightGrayColor];
+                tf = tfEmail = [self makeTextField:[dictResponse objectForKey:@"email"] placeholder:@"Địa chỉ email"];
+                //                tf.textColor = [UIColor lightGrayColor];
                 [cellRe addSubview:tfEmail];
                 break ;
             }
             case 1: {
                 cellRe.textLabel.text = @"" ;
-                tf = tfFullname = [self makeTextField:@"" placeholder:@"Họ tên"];
+                tf = tfFullname = [self makeTextField:[dictResponse objectForKey:@"fullname"] placeholder:@"Họ tên"];
                 [cellRe addSubview:tfFullname];
                 break ;
             }
             case 2: {
                 cellRe.textLabel.text = @"" ;
-                tf = tfPhone = [self makeTextField:@"" placeholder:@"Điện thoại di động"];
+                tf = tfPhone = [self makeTextField:[dictResponse objectForKey:@"phone"] placeholder:@"Điện thoại di động"];
                 [cellRe addSubview:tfPhone];
                 break ;
             }
@@ -318,7 +318,15 @@
             case 0: {
                 
                 cellRe.textLabel.text = @"" ;
-                lbl = lblBirthday = [self makeLabel:@"  Ngày sinh"];
+                NSString * strBirthday = [dictResponse objectForKey:@"birthday"];
+                if (strBirthday != nil && ![strBirthday isEqualToString:@""]) {
+                    lbl = lblBirthday = [self makeLabel:F(@"  %@",strBirthday)];
+                    lbl.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+                }
+                else
+                {
+                    lbl = lblBirthday = [self makeLabel:@"  Ngày sinh"];
+                }
                 [cellRe addSubview:lbl];
                 break ;
             }
@@ -349,8 +357,15 @@
         switch ( indexPath.row ) {
             case 0: {
                 
-                //                    cell.textLabel.text = @"Ngày sinh" ;
-                lbl = lblGender = [self makeLabel:@"  Giới tính"];
+                NSString * strGender = [dictResponse objectForKey:@"gender"];
+                if (strGender != nil && ![strGender isEqualToString:@""]) {
+                    lbl = lblGender = [self makeLabel:F(@"  %@",strGender)];
+                    lbl.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+                }
+                else
+                {
+                    lbl = lblGender = [self makeLabel:@"  Giới tính"];
+                }
                 [cellRe addSubview:lbl];
                 break ;
             }
@@ -367,7 +382,7 @@
         UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
         [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
         [cellRe addSubview:imgArrow];
-
+        
         return cellRe;
         
     }

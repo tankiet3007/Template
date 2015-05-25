@@ -40,6 +40,7 @@ typedef enum {
 @synthesize pickerViewMain;
 @synthesize dictResponse;
 @synthesize iIndexAddress;
+@synthesize isModify;
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])

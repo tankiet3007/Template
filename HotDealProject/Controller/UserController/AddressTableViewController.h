@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSString * strTitle;
 @property (strong, nonatomic) NSDictionary * dictResponse;
 @property (assign, nonatomic) int iIndexAddress;
+@property (assign, nonatomic) BOOL isModify;
 @end
 @protocol AddressTableDelegate <NSObject>
 -(void)updateTableAddress:(NSString *)strAddress;

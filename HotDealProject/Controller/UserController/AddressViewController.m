@@ -173,6 +173,7 @@
     AddressTableViewController * addressTable = [[AddressTableViewController alloc]init];
     addressTable.strTitle = @"Địa chỉ giao hàng";
     addressTable.delegate = self;
+    addressTable.isModify = NO;
     [self.navigationController pushViewController:addressTable animated:YES];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -194,6 +195,7 @@
     addressTable.dictResponse = dictResponse;
     addressTable.iIndexAddress = iIndex;
     addressTable.strTitle = @"Chỉnh sửa địa chỉ";
+    addressTable.isModify = YES;
     [self.navigationController pushViewController:addressTable animated:YES];
     //    UA_log(@"%ld selected", btnEdit.tag);
 }
