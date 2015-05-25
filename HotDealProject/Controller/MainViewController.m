@@ -20,6 +20,7 @@
 #import "TKDatabase.h"
 #define HEADER_HEIGHT 166
 #define PADDING 10
+#define FETCH_COUNT 10
 @interface MainViewController ()
 
 @end
@@ -73,7 +74,7 @@
     [self initNavigationbar];
       [self initHUD];
     strCategory = @"default";
-    [self initData:10 wOffset:1 wType:@"default" ];
+    [self initData:FETCH_COUNT wOffset:1 wType:@"default" ];
     
     [self setupSlide];
 //    [self setupNewDeal];
@@ -127,7 +128,7 @@
     arrDeals = [[NSMutableArray alloc]init];
     UA_log(@"%@",jsonDictionary);
     [HUD show:YES];
-    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
+    [[TKAPI sharedInstance]getRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
         [HUD hide:YES];
         if (dict == nil) {
             return;
@@ -144,12 +145,9 @@
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
             item.iType = [[dictItem objectForKey:@"type"]intValue];
-            if ([arrDeals count]>10) {
-                break;
-            }
             [arrDeals addObject:item];
         }
-        
+                UA_log(@"%lu item", [arrDeals count]);
         if ([arrDeals count] == 0) {
             return ;
         }
@@ -208,8 +206,8 @@
     NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     @123, @"category",
                                     @437, @"city",
-                                    [NSNumber numberWithInteger:[arrDeals count]], @"fetch_count",
-                                    [NSNumber numberWithInt:30], @"offset",
+                                    [NSNumber numberWithInteger:FETCH_COUNT], @"fetch_count",
+                                    [NSNumber numberWithLong:[arrDeals count]], @"offset",
                                     strCategory,@"fetch_type",
                                     nil];
     [HUD show:YES];
@@ -615,7 +613,7 @@
         UA_log(@"2");
         strCategory = @"sale";
     }
-    [self initData2:1 wOffset:10 wType:strCategory];
+    [self initData2:10 wOffset:1 wType:strCategory];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

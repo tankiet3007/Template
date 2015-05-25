@@ -53,26 +53,16 @@
     
     AFHTTPRequestOperationManager *operationManager = [AFHTTPRequestOperationManager manager];
     [operationManager setSecurityPolicy:policy];
-    operationManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    operationManager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [operationManager.requestSerializer setTimeoutInterval:TIMEOUT];
-    operationManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
-    
+    operationManager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [operationManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [operationManager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        //        NSString *strResponeData = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
-        //         NSLog(@"responseObject: %@", strResponeData);
-        //        NSDictionary* dictionary = (NSDictionary*)responseObject;
         if (responseObject == nil) {
             completion(nil, nil);
             return;
         }
         else
         {
-            NSDictionary* dictionary = [NSJSONSerialization
-                                        JSONObjectWithData:responseObject
-                                        options:kNilOptions
-                                        error:nil];
+            NSDictionary* dictionary = responseObject;
             
             if ([dictionary isKindOfClass:[NSDictionary class]] == YES)
             {

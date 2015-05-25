@@ -709,7 +709,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
     NSString * fullname = tfFullname.text;
     NSString * birthday = [lblBirthday.text trim];
     NSString * phone = [tfPhone.text trim];
-    NSString * gender = lblGender.text;
+    NSString * gender = [lblGender.text trim];
     NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     email, @"email",
                                     password, @"password",
