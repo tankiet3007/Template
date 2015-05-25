@@ -236,7 +236,6 @@
         UA_log(@"%lu item", [arrDeals count]);
         [tableViewMain reloadData];
     }];
-
 }
 
 

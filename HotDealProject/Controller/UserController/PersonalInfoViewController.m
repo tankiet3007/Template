@@ -8,6 +8,8 @@
 
 #import "PersonalInfoViewController.h"
 #import "AppDelegate.h"
+#import "TKDatabase.h"
+
 @interface PersonalInfoViewController ()
 
 @end
@@ -22,6 +24,7 @@
     UIButton* btnSave;
     UIToolbar *toolbar;
     BOOL isBirthdayAction;
+     MBProgressHUD *HUD;
 }
 @synthesize pickerView;
 @synthesize pickerGender;
@@ -37,8 +40,16 @@
     [self setupPickerGender];
     [self makePicker];
     [self setupToolBar];
+    [self initHUD];
     // Do any additional setup after loading the view from its nib.
 }
+
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    [HUD hide:YES];
+}
+
 -(void)initUITableView
 {
     tableViewInfo = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 40) style:UITableViewStyleGrouped];
@@ -101,6 +112,42 @@
 -(void)saveClick
 {
     UA_log(@"Save Click");
+    NSString * email = tfEmail.text;
+    NSString * fullname = tfFullname.text;
+    NSString * phone = tfPhone.text;
+    NSString * birthday = [lblBirthday.text trim];
+    NSString * gender = [lblGender.text trim];//1 nam 2 nu
+    if ([gender isEqualToString:@"Nam"]) {
+        gender = @"1";
+    }
+    else
+    {
+        gender = @"2";
+    }
+    User * user = [[TKDatabase sharedInstance]getUserInfo];
+    NSDictionary * address = [dictResponse objectForKey:@"address"];
+    NSDictionary * dictFinal = [NSDictionary dictionaryWithObjectsAndKeys:@"1",@"user_id",email,@"email", fullname, @"fullname",phone, @"phone", birthday,@"birthday",address, @"address", nil];
+    UA_log(@"%@", dictFinal);
+    
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:dictFinal withURL:URL_UPDATE_USER completion:^(NSDictionary *dict, NSError *error) {
+        [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
+        BOOL response = [[dict objectForKey:@"response"]boolValue];
+        if (response == TRUE) {
+             ALERT(LS(@"MessageBoxTitle"), @"Thay đổi thông tin thành công");
+            [self.delegate updateInfo];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            NSString * response = [dict objectForKey:@"reason"];
+            ALERT(LS(@"MessageBoxTitle"),response);
+        }
+    }];
+
 }
 -(UITextField*) makeTextField: (NSString*)text
                   placeholder: (NSString*)placeholder  {

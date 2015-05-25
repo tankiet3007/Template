@@ -11,7 +11,7 @@
 #import "TKDatabase.h"
 #import "AppDelegate.h"
 #import "AutoSizeTableViewCell.h"
-#import "PersonalInfoViewController.h"
+
 
 //#import "EmailPromotionViewController.h"
 @interface AccountInfoViewController ()
@@ -50,7 +50,6 @@
 - (void)initHUD {
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
-    //    HUD.labelText = LS(@"LoadingData");
     [HUD hide:YES];
 }
 
@@ -258,6 +257,7 @@
     if (indexPath.section == 0) {
         PersonalInfoViewController * pInfo = [[PersonalInfoViewController alloc]init];
         pInfo.dictResponse = dictRespone;
+        pInfo.delegate = self;
         [self.navigationController pushViewController:pInfo animated:YES];
     }
     if (indexPath.section == 1) {
@@ -281,5 +281,26 @@
     strAddressL = strAddress;
     indexPathselected = indexPath;
     [tableInfo reloadData];
+}
+-(void)updateInfo
+{
+    NSString * strParam = F(@"user_id=%@",[NSNumber numberWithInt:1]);
+    [HUD show:YES];
+    [[TKAPI sharedInstance]getRequest:strParam withURL:URL_GET_USERINFO completion:^(NSDictionary * dict, NSError *error) {
+        [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
+        dictRespone = dict;
+        NSDictionary * dictAddress = [dict objectForKey:@"address"];
+        NSDictionary * dictWard = [dictAddress objectForKey:@"s_ward"];
+        NSDictionary * dictDictrict = [dictAddress objectForKey:@"s_district"];
+        NSDictionary * dictState = [dictAddress objectForKey:@"s_state"];
+        NSString * floorOptional = F(@"Lầu: %@",[dictAddress objectForKey:@"s_address_note"]);
+        strAddressL = F(@"%@\n%@\n%d %@ %@ %@ %@", [dict objectForKey:@"fullname"],[dict objectForKey:@"phone"],[[dictAddress objectForKey:@"s_address"]intValue],[dictWard objectForKey:@"name"],[dictDictrict objectForKey:@"name"],[dictState objectForKey:@"name"], floorOptional);
+        UA_log(@"%@", dict);
+        
+        [tableInfo reloadData];
+    }];
 }
 @end

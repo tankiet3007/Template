@@ -119,14 +119,14 @@
     [self addSubview:_pageControl];
     
     for (int i = 0; i < [_galleryImages count]; i++) {
-        NSString * urlImage = [_galleryImages objectAtIndex:i];
+//        NSString * urlImage = [_galleryImages objectAtIndex:i];
         
         CGRect frame;
         frame.origin.x = _scrollView.frame.size.width * i;
         frame.origin.y = 0;
         frame.size = _scrollView.frame.size;
-        NSString *filePath = urlImage;
-//        
+//        NSString *filePath = urlImage;
+//
 //        UIImage *imageT = [UIImage imageNamed:filePath];
         NSString * photourl = [_galleryImages objectAtIndex:i];
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];

@@ -184,10 +184,11 @@
         imageSlideTop = nil;
     }
     imageSlideTop = [[ImageSlide alloc]initWithFrame:CGRectMake(0, 50, ScreenWidth- PADDING *2, ScreenWidth- PADDING *2 -20)];
-    NSMutableArray * galleryImages = [NSMutableArray arrayWithObjects:@"beef",@"beef",@"beef",@"beef",@"beef", nil];
+    NSArray * arrImage = [dictDetail objectForKey:@"images"];
+    NSMutableArray * galleryImages = [NSMutableArray arrayWithArray:arrImage];
     imageSlideTop.galleryImages = galleryImages;
     imageSlideTop.delegate = self;
-    [imageSlideTop initScroll];
+    [imageSlideTop initScrollLocal2];
 }
 -(void)setupViewHeader
 {
