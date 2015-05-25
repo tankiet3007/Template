@@ -140,6 +140,7 @@ static NSManagedObjectContext * __context = nil;
     user.user_id = user_id;
     [__context MR_saveToPersistentStoreAndWait];
 }
+
 -(User *)getUserInfo
 {
     NSArray *arrUser = [User MR_findAll];
@@ -158,5 +159,31 @@ static NSManagedObjectContext * __context = nil;
     User *vResult = [arrUser objectAtIndex:0];
     [vResult MR_deleteEntityInContext:__context];
     [__context MR_saveToPersistentStoreAndWait];
+}
+
+-(void)addState:(NSString *)stateID wStateName:(NSString *)stateName wStateLogictic:(NSString *)stateLogictic
+{
+    State  * state = [State MR_createEntityInContext:__context];
+    state.stateID = stateID;
+    state.stateName = stateName;
+    state.stateLogictic = stateLogictic;
+    [__context MR_saveOnlySelfAndWait];
+}
+-(void)addDistrict:(NSString *)districtID wDistrictName:(NSString *)districtName wDistrictLogictic:(NSString *)districtLogictic wStateID:(NSString *)stateID
+{
+    District * district = [District MR_createEntityInContext:__context];
+    district.districtID = districtID;
+    district.districtName = districtName;
+    district.districtLogictic = districtLogictic;
+    district.stateID = stateID;
+    [__context MR_saveOnlySelfAndWait];
+}
+-(void)addWard:(NSString *)wardID wWardName:(NSString *)wardName wDistrictID:(NSString *)districtID
+{
+    Ward * ward = [Ward MR_createEntityInContext:__context];
+    ward.wardID = wardID;
+    ward.wardName = wardName;
+    ward.dicstreetID = districtID;
+    [__context MR_saveOnlySelfAndWait];
 }
 @end

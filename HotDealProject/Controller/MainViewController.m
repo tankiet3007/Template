@@ -67,6 +67,7 @@
     {
         headerHeight = HEADER_HEIGHT;
     }
+    [self getLocation];
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
     bForceStop = FALSE;
     
@@ -764,5 +765,14 @@
         dialogView.alpha = 0;
     } completion:^(BOOL finished) {
     }];
+}
+-(void)getLocation
+{
+    [HUD show:YES];
+    [[TKAPI sharedInstance]getRequestAF:nil withURL:URL_GET_LOCATION completion:^(NSDictionary * dict, NSError *error) {
+        [HUD hide:YES];
+        UA_log(@"%@", dict);
+    }];
+
 }
 @end

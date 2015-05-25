@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="District" representedClassName="District" syncable="YES">
+        <attribute name="districtID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="districtLogictic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="districtName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stateID" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="ProductItem" representedClassName="ProductItem" syncable="YES">
         <attribute name="currentQuantity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="dealID" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,12 +21,25 @@
         <attribute name="provineName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="provineType" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="State" representedClassName="State" syncable="YES">
+        <attribute name="stateID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stateLogictic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stateName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Ward" representedClassName="Ward" syncable="YES">
+        <attribute name="dicstreetID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wardID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wardName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="ProductItem" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="Provine" positionX="-63" positionY="45" width="128" height="90"/>
         <element name="User" positionX="-63" positionY="45" width="128" height="60"/>
+        <element name="State" positionX="-63" positionY="45" width="128" height="90"/>
+        <element name="Ward" positionX="-54" positionY="54" width="128" height="90"/>
+        <element name="District" positionX="-36" positionY="63" width="128" height="105"/>
     </elements>
 </model>

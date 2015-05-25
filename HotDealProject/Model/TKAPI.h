@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #pragma mark for user
+//get_location
+static NSString * const URL_GET_LOCATION = @"http://dev.hotdeal.vn/mapi/get_location";
 static NSString * const URL_SIGN_UP = @"http://dev.hotdeal.vn/mapi/sign-up";
 static NSString * const URL_SIGN_IN = @"http://dev.hotdeal.vn/mapi/sign-in";
 static NSString * const URL_CONNECT_SOCICAL = @"dev.http://hotdeal.vn/mapi/connect_socical";
