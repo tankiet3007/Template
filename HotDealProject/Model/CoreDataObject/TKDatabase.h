@@ -32,4 +32,7 @@
 -(void)addState:(NSString *)stateID wStateName:(NSString *)stateName wStateLogictic:(NSString *)stateLogictic;
 -(void)addDistrict:(NSString *)districtID wDistrictName:(NSString *)districtName wDistrictLogictic:(NSString *)districtLogictic wStateID:(NSString *)stateID;
 -(void)addWard:(NSString *)wardID wWardName:(NSString *)wardName wDistrictID:(NSString *)districtID;
+-(NSArray *)getAllState;
+-(NSArray *)getAllDistrict;
+-(NSArray *)getAllWard;
 @end

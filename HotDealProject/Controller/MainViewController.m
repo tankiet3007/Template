@@ -73,19 +73,19 @@
     
     
     [self initNavigationbar];
-      [self initHUD];
+    [self initHUD];
     strCategory = @"default";
     [self initData:FETCH_COUNT wOffset:1 wType:@"default" ];
     
     [self setupSlide];
-//    [self setupNewDeal];
+    //    [self setupNewDeal];
     [self setupCategory];
     [self setupSegment];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateDealCount:) name:@"notiDealCount"
                                                object:nil];
-  
-//    [self showDialog];
+    
+    //    [self showDialog];
     // Do any additional setup after loading the view from its nib.
 }
 - (void)initHUD {
@@ -96,7 +96,7 @@
 }
 -(void)dealloc
 {
-        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"notiDealCount" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"notiDealCount" object:nil];
 }
 - (void)updateDealCount:(NSNotification *)notification {
     [self updateTotal];
@@ -137,7 +137,7 @@
         NSArray * arrProducts = [dict objectForKey:@"product"];
         UA_log(@"%lu item", [arrDeals count]);
         for (NSDictionary * dictItem in arrProducts) {
-             DealObject * item = [[DealObject alloc]init];
+            DealObject * item = [[DealObject alloc]init];
             item.strTitle = [dictItem objectForKey:@"title"];
             item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
@@ -148,16 +148,16 @@
             item.iType = [[dictItem objectForKey:@"type"]intValue];
             [arrDeals addObject:item];
         }
-                UA_log(@"%lu item", [arrDeals count]);
+        UA_log(@"%lu item", [arrDeals count]);
         if ([arrDeals count] == 0) {
             return ;
         }
-//        [tableViewMain reloadData];
+        //        [tableViewMain reloadData];
         [self initUITableView];
         
         [self setupNewDeal];
-        }];
-
+    }];
+    
 }
 -(void)initData2:(int)iCount wOffset:(int)iOffset wType:(NSString *)sType
 {
@@ -168,7 +168,7 @@
                                     [NSNumber numberWithInt:iOffset], @"offset",
                                     sType,@"fetch_type",
                                     nil];
-
+    
     NSMutableIndexSet *indetsetToUpdate = [[NSMutableIndexSet alloc]init];
     
     [indetsetToUpdate addIndex:4];
@@ -197,9 +197,9 @@
         }
         UA_log(@"%lu item", [arrDeals count]);
         [tableViewMain reloadSections:indetsetToUpdate withRowAnimation:UITableViewRowAnimationFade];
-//        [tableViewMain reloadData];
+        //        [tableViewMain reloadData];
     }];
-
+    
 }
 
 -(void)loadMoreDeal
@@ -255,7 +255,7 @@
     for (int i = 0; i < 10; i++) {
         UIButton * btnCategory = [UIButton buttonWithType:UIButtonTypeCustom];
         [btnCategory setFrame:CGRectMake(x, 0, 130, 70)];
-//        [btnCategory setBackgroundImage:[UIImage imageNamed:@"clickme-1-320x200"] forState:UIControlStateNormal];
+        //        [btnCategory setBackgroundImage:[UIImage imageNamed:@"clickme-1-320x200"] forState:UIControlStateNormal];
         [btnCategory sd_setImageWithURL:[NSURL URLWithString:@"http://images5.fanpop.com/image/photos/31700000/Link-Zelda-the-legend-of-zelda-31742637-900-678.png"] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
         btnCategory.tag = i;
         [btnCategory addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
@@ -299,7 +299,7 @@
         strDiscountPrice = F(@"%@đ", strDiscountPrice);
         itemS.lblDiscountPrice.text = strDiscountPrice;
         itemS.lblTitle.text = item.strTitle;
-//        [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:item.strBrandImage] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
+        //        [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:item.strBrandImage] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
         [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://www.fightersgeneration.com/characters2/link-wind11.jpg"] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
         if (item.isNew == FALSE) {
             itemS.lblNew.hidden = YES;
@@ -400,9 +400,9 @@
 -(void)shoppingCart
 {
     
-//    if ([arrProduct count] == 0) {
-//        return;
-//    }
+    //    if ([arrProduct count] == 0) {
+    //        return;
+    //    }
     ShoppingCartController * shopping = [[ShoppingCartController alloc]init];
     shopping.delegate = self;
     [self.navigationController pushViewController:shopping animated:YES];
@@ -479,7 +479,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        NSArray * arrSubview = [cell.contentView subviews];
+        //        NSArray * arrSubview = [cell.contentView subviews];
         if (lblLastestDeal == nil) {
             lblLastestDeal = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 15, ScreenWidth - 20, 20)];
             NSDate * date = [NSDate date];
@@ -530,7 +530,7 @@
         if (item.iType == 1) {
             cell.lblEVoucher.hidden = YES;
         }
-//        [cell.imgBrand sd_setImageWithURL:[NSURL URLWithString:item.strBrandImage] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
+        //        [cell.imgBrand sd_setImageWithURL:[NSURL URLWithString:item.strBrandImage] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
         [cell.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://www.fightersgeneration.com/characters2/link-wind11.jpg"] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
         NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
         strStardarPrice = [strStardarPrice formatStringToDecimal];
@@ -552,16 +552,16 @@
         }
         if (indexPath.row == [arrDeals count] - 1)
         {
-//            [HUD showAnimated:YES whileExecutingBlock:^{
-                [self loadMoreDeal];
-//            }completionBlock:^{
-//                [self.tableViewMain performSelectorOnMainThread:@selector(reloadData)
-//                                                       withObject:nil
-//                                                    waitUntilDone:NO];
-//                
-//            }];
+            //            [HUD showAnimated:YES whileExecutingBlock:^{
+            [self loadMoreDeal];
+            //            }completionBlock:^{
+            //                [self.tableViewMain performSelectorOnMainThread:@selector(reloadData)
+            //                                                       withObject:nil
+            //                                                    waitUntilDone:NO];
+            //
+            //            }];
         }
-
+        
         
         return cell;
     }
@@ -599,10 +599,10 @@
 -(void)mySegmentControlAction
 {
     arrDeals = [[NSMutableArray alloc]init];
-   
+    
     
     if (segmentedControl.selectedSegmentIndex == 0) {
-//        UA_log(@"0");
+        //        UA_log(@"0");
         strCategory = @"default";
     }
     if (segmentedControl.selectedSegmentIndex == 1) {
@@ -623,6 +623,9 @@
             HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
             DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
             detail.iProductID = dealObj.product_id;
+            [[TKDatabase sharedInstance]getAllState];
+            [[TKDatabase sharedInstance]getAllDistrict];
+            [[TKDatabase sharedInstance]getAllWard];
             [self.navigationController pushViewController:detail animated:YES];
         }
     }
@@ -769,10 +772,38 @@
 -(void)getLocation
 {
     [HUD show:YES];
-    [[TKAPI sharedInstance]getRequestAF:nil withURL:URL_GET_LOCATION completion:^(NSDictionary * dict, NSError *error) {
+    [[TKAPI sharedInstance]getRequest:nil withURL:URL_GET_LOCATION completion:^(NSDictionary * dict, NSError *error) {
         [HUD hide:YES];
-        UA_log(@"%@", dict);
+        dispatch_queue_t queue = dispatch_queue_create("com.get.location", 0);
+        dispatch_async(queue, ^{
+            NSArray * arrState = [dict objectForKey:@"states"];
+            NSArray * arrDistrict = [dict objectForKey:@"districts"];
+            NSArray * arrWard = [dict objectForKey:@"wards"];
+            for (NSDictionary * dictItem in arrState) {
+                NSString * ID_Tinh_Thanh = [dictItem objectForKey:@"ID_Tinh_Thanh"];
+                NSString * Ten_Tinh_Thanh = [dictItem objectForKey:@"Ten_Tinh_Thanh"];
+                NSString * logistic_location_id = [dictItem objectForKey:@"logistic_location_id"];
+                [[TKDatabase sharedInstance]addState:ID_Tinh_Thanh wStateName:Ten_Tinh_Thanh wStateLogictic:logistic_location_id];
+            }
+            for (NSDictionary * dictItem in arrDistrict) {
+                NSString * ID_Tinh_Thanh = [dictItem objectForKey:@"ID_Tinh_Thanh"];
+                NSString * ID_Quan_Huyen = [dictItem objectForKey:@"ID_Quan_Huyen"];
+                NSString * Ten_Quan_Huyen = [dictItem objectForKey:@"Ten_Quan_Huyen"];
+                NSString * logistic_location_id = [dictItem objectForKey:@"logistic_location_id"];
+                [[TKDatabase sharedInstance]addDistrict:ID_Quan_Huyen wDistrictName:Ten_Quan_Huyen wDistrictLogictic:logistic_location_id wStateID:ID_Tinh_Thanh];
+            }
+            
+            for (NSDictionary * dictItem in arrWard) {
+                NSString * ID_Phuong_Xa = [dictItem objectForKey:@"ID_Phuong_Xa"];
+                NSString * Ten_Phuong_Xa = [dictItem objectForKey:@"Ten_Phuong_Xa"];
+                NSString * ID_Quan_Huyen = [dictItem objectForKey:@"ID_Quan_Huyen"];
+                [[TKDatabase sharedInstance]addWard:ID_Phuong_Xa wWardName:Ten_Phuong_Xa wDistrictID:ID_Quan_Huyen];
+            }
+            UA_log(@"%lu [arrState count]", (unsigned long)[arrState count]);
+            UA_log(@"%lu [arrDistrict count]", (unsigned long)[arrDistrict count]);
+            UA_log(@"%lu [arrWard count]", (unsigned long)[arrWard count]);
+        });
     }];
-
+    
 }
 @end

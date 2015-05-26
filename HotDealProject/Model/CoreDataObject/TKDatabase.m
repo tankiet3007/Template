@@ -186,4 +186,23 @@ static NSManagedObjectContext * __context = nil;
     ward.dicstreetID = districtID;
     [__context MR_saveOnlySelfAndWait];
 }
+
+-(NSArray *)getAllState
+{
+    NSArray * arrState = [State MR_findAll];
+    UA_log(@"%lu", (unsigned long)[arrState count]);
+    return arrState;
+}
+-(NSArray *)getAllDistrict
+{
+    NSArray * arrDictrict = [District MR_findAll];
+    UA_log(@"%lu", (unsigned long)[arrDictrict count]);
+    return arrDictrict;
+}
+-(NSArray *)getAllWard
+{
+    NSArray * arrWard = [Ward MR_findAll];
+    UA_log(@"%lu", (unsigned long)[arrWard count]);
+    return arrWard;
+}
 @end
