@@ -7,7 +7,7 @@
 //
 
 #import "TKAPI.h"
-#define TIMEOUT 30
+#define TIMEOUT 15
 @implementation TKAPI
 + (TKAPI*)sharedInstance
 {

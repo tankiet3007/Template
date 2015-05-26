@@ -31,12 +31,13 @@
     [super viewDidLoad];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
-    [self initUITableView];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self initSearchBar];
     [self setupHeader];
     
     [self initNavigationbar];
     [self initHUD];
+    arrDeals = [[NSMutableArray alloc]init];
     [self initData2:10 wOffset:1 wType:@"default"];
     
     // Do any additional setup after loading the view.
@@ -123,82 +124,12 @@
             [arrDeals addObject:item];
         }
         UA_log(@"%lu item", [arrDeals count]);
-        [tableViewSearch reloadData];
+//        [tableViewSearch reloadData];
+        [self initUITableView];
     }];
     
 }
 
--(void)initData
-{
-    arrDeals = [[NSMutableArray alloc]init];
-    
-    DealObject * item = [[DealObject alloc]init];
-    item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
-    item.buy_number = 123;
-    item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
-    item.lDiscountPrice = 100000;
-    item.lStandarPrice = 400000;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
-    item.strDescription = @"Combo 20 viên rau câu phô mai Pháp tại Petits Choux à le Crème An An hương vị ngọt mát, beo béo thơm vị dâu, vanilla cho cả nhà giải nhiệt mùa hè. Chỉ 30.000đ cho trị giá 60.000đ";
-    item.buy_number = 456;
-    item.lDiscountPrice = 200000;
-    item.lStandarPrice = 1000000;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
-    item.buy_number = 789;
-    item.strDescription = @"Đầm xòe Zara họa tiết chấm bi xuất khẩu - Thiết kế thời trang với phần phối màu xen kẽ họa tiết chấm bi đẹp mắt giúp thể hiện nét đẹp thanh lịch, sành điệu của bạn gái. Chỉ 199.000đ cho trị giá 398.000đ Chỉ 199.000đ cho trị giá 398.000đ";
-    item.lDiscountPrice = 30000;
-    item.lStandarPrice = 200000;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
-    item.strDescription = @"Bộ miếng dán iPhone mạ vàng và ốp lưng silicon có thiết kế vừa vặn với khung máy sẽ giúp mang đến cho dế yêu của bạn một vẻ đẹp hoàn hảo và đẳng cấp. Chỉ 85.000đ cho trị giá 160.000đ";
-    item.buy_number = 111;
-    item.lDiscountPrice = 100000;
-    item.lStandarPrice = 400000;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
-    item.buy_number = 222;
-    item.lDiscountPrice = 200000;
-    item.lStandarPrice = 1000000;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
-    item.buy_number = 333;
-    item.lDiscountPrice = 30000;
-    item.lStandarPrice = 200000;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Buffet nướng và các món hè phố hơn 40 món tại Nhà hàng Con gà trống";
-    item.buy_number = 121;
-    item.lDiscountPrice = 100000;
-    item.lStandarPrice = 400000;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Buffet ốc và các món hè phố hơn 40 món tại Nhà hàng Cầu Vồng";
-    item.buy_number = 212;
-    item.lDiscountPrice = 200000;
-    item.lStandarPrice = 1000000;
-    [arrDeals addObject:item];
-    
-    item = [[DealObject alloc]init];
-    item.strTitle = @"Bánh kem BreadTalk thương hiệu bánh nổi tiếng đến từ Singapore";
-    item.buy_number = 999;
-    item.lDiscountPrice = 30000;
-    item.lStandarPrice = 200000;
-    [arrDeals addObject:item];
-}
 -(void)initNavigationbar
 {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
@@ -236,7 +167,7 @@
 
 -(void)initUITableView
 {
-    tableViewSearch = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 66) style:UITableViewStyleGrouped];
+    tableViewSearch = [[UITableView alloc]initWithFrame:CGRectMake(0, -40, ScreenWidth, ScreenHeight - 22) style:UITableViewStyleGrouped];
     [self.view addSubview:tableViewSearch];
     
     
