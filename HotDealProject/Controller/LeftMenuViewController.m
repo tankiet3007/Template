@@ -326,7 +326,8 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     {
         SearchViewController *searchVC = [SearchViewController alloc];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:searchVC];
-        searchVC.searchText = [autocompleteItem objectAtIndex:indexPath.row];
+//        searchVC.searchText = [autocompleteItem objectAtIndex:indexPath.row];
+        searchVC.searchText = @"buffet";
         [revealVC setFrontViewController:navigationController animated:YES];
         [revealVC revealToggle:nil];
     }

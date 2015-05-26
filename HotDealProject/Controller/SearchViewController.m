@@ -37,7 +37,7 @@
     
     [self initNavigationbar];
     [self initHUD];
-    [self initData];
+    [self initData2:10 wOffset:1 wType:@"default"];
     
     // Do any additional setup after loading the view.
 }
