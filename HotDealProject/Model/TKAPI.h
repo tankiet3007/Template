@@ -20,7 +20,7 @@ static NSString * const URL_UPDATE_USER = @"http://dev.hotdeal.vn/mapi/update-us
 static NSString * const URL_CHANGE_PASSWORD = @"http://dev.hotdeal.vn/mapi/change-password";
 
 #pragma mark for deal
-static NSString * const URL_GET_ODER_LIST = @"http://dev.hotdeal.vn/mapi/get_order_list";
+static NSString * const URL_GET_ODER_LIST = @"http://dev.hotdeal.vn/mapi/get-order-list";
 static NSString * const URL_DEAL_LIST = @"http://dev.hotdeal.vn/mapi/get-latest-deals";
 static NSString * const URL_SEARCH_DEAL = @"http://dev.hotdeal.vn/mapi/get_latest_deals";//http://hotdeal.vn/mapi/get-deal-content
 

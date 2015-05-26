@@ -68,7 +68,7 @@
         }
         else
         {
-            strAddressNode = F(@"Lầu: %@,", strAddressNode);
+            strAddressNode = F(@"%@,", strAddressNode);
         }
         NSDictionary * dictWard = [dictItem objectForKey:@"s_ward"];
         NSDictionary * dictDictrict = [dictItem objectForKey:@"s_district"];

@@ -12,6 +12,7 @@
 #import "AutoSizeTableViewCell.h"
 #import "ProductTableViewCell.h"
 #import "HotNewDetailViewController.h"
+#import "TKDatabase.h"
 @interface OrderInfoViewController ()
 #define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([SYSTEM_VERSION compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -107,12 +108,6 @@
             return UITableViewAutomaticDimension;
         }
         
-        // (7)
-        //self.prototypeCell.bounds = CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), CGRectGetHeight(self.prototypeCell.bounds));
-        
-        //    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
-        
-        // (8)
         [self.prototypeCell updateConstraintsIfNeeded];
         [self.prototypeCell layoutIfNeeded];
         
@@ -159,7 +154,12 @@
     strPrice = [strPrice formatStringToDecimal];
     strPrice = F(@"%@đ", strPrice);
     cell.lblPriceAndQuantity.text = F(@"Đơn giá: %@ - Số lượng: %d", strPrice, [[dictProduct objectForKey:@"amount"]intValue]);
-    cell.lblTotal.text = strPrice;
+    double total = [[dictProduct objectForKey:@"price"]intValue] * [[dictProduct objectForKey:@"amount"]intValue];
+    NSString * strTotal = F(@"%.0f",total);
+    strTotal = [strTotal formatStringToDecimal];
+    strTotal = F(@"%@đ", strTotal);
+    
+    cell.lblTotal.text = F(@"%@",strTotal);
     UIView * viewBG = [[UIView alloc]initWithFrame:CGRectMake(10, 5, ScreenWidth -20, 75)];
     [cell.contentView insertSubview:viewBG atIndex:0];
     viewBG.layer.borderWidth = 0.5;
@@ -217,7 +217,34 @@
 - (void)configureCellAuto:(AutoSizeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.titleLabel.text = @"Giao hàng tại địa chỉ";
-    cell.desLabel.text = F(@"%@\nĐTDĐ: %@\nToà nhà Yoco Building, 41 Nguyễn Thị Minh Khai, Phường Bến Nghé, Quận 1, TP.HCM \n\n", [pItem objectForKey:@"firstname"], [pItem objectForKey:@"phone"]);
+    
+    NSString * strAddressNode = [pItem objectForKey:@"s_address_note"];
+    if ([strAddressNode isEqualToString:@""] || strAddressNode == nil) {
+        strAddressNode = @"";
+    }
+    else
+    {
+        strAddressNode = F(@"%@", strAddressNode);
+    }
+    NSString * strAddressNode2 = [pItem objectForKey:@"s_address_2"];
+    if ([strAddressNode2 isEqualToString:@""] || strAddressNode2 == nil) {
+        strAddressNode2 = @"";
+    }
+    else
+    {
+        strAddressNode2 = F(@"%@", strAddressNode2);
+    }
+
+    NSString * wardID = [pItem objectForKey:@"s_ward"];
+    NSString * dictrictID = [pItem objectForKey:@"s_district"];
+    NSString * stateID = [pItem objectForKey:@"s_state"];
+    Ward * ward = [[TKDatabase sharedInstance]getWarByID:wardID];
+    District * district = [[TKDatabase sharedInstance]getDistrictByID:dictrictID];
+    State * state = [[TKDatabase sharedInstance]getStateByID:stateID];
+    NSString * addressItem = F(@"%@ \n%@, %@, %@, %@, %@, %@",[pItem objectForKey:@"firstname"],[pItem objectForKey:@"s_address"],strAddressNode, strAddressNode2,ward.wardName,district.districtName,state.stateName);
+
+    
+    cell.desLabel.text = F(@"%@\n\n", addressItem);
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     UILabel * lblTemp = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth - 60, 0)];
     lblTemp.lineBreakMode = NSLineBreakByWordWrapping;

@@ -295,4 +295,34 @@ static NSManagedObjectContext * __context = nil;
     }
     return arrWar;
 }
+
+-(Ward *)getWarByID:(NSString *)wardID
+{
+    NSArray *arrWard = [Ward MR_findByAttribute:@"wardID" withValue:wardID inContext:__context];
+    if ([arrWard count]==0) {
+        return nil;
+    }
+    Ward *vResult = [arrWard objectAtIndex:0];
+    return vResult;
+}
+-(State *)getStateByID:(NSString *)stateID
+{
+    NSArray *arrState = [State MR_findByAttribute:@"stateID" withValue:stateID inContext:__context];
+    if ([arrState count]==0) {
+        return nil;
+    }
+    State *vResult = [arrState objectAtIndex:0];
+    return vResult;
+}
+
+-(District *)getDistrictByID:(NSString *)districtID
+{
+    NSArray *arrDistrict = [District MR_findByAttribute:@"districtID" withValue:districtID inContext:__context];
+    if ([arrDistrict count]==0) {
+        return nil;
+    }
+    District *vResult = [arrDistrict objectAtIndex:0];
+    return vResult;
+
+}
 @end
