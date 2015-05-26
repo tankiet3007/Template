@@ -35,4 +35,6 @@
 -(NSArray *)getAllState;
 -(NSArray *)getAllDistrict;
 -(NSArray *)getAllWard;
+-(NSArray *)getDictrictByStateID:(NSString *)stateID;
+-(NSArray *)getWarByDistrictID:(NSString *)districtID;
 @end

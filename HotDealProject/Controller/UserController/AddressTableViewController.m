@@ -8,6 +8,7 @@
 
 #import "AddressTableViewController.h"
 #import "AppDelegate.h"
+#import "TKDatabase.h"
 @interface AddressTableViewController ()
 
 @end
@@ -32,10 +33,16 @@ typedef enum {
     UIButton* btnRegister;
     NSArray * arrProvince;
     NSArray * arrDistrict;
-    NSArray * arrAddressType;
+    NSArray * arrWard;
     ComboboxType cbType;
-    
     NSDictionary * dictAddressSelected;
+    
+    State * stateSelected;
+    District * districtSelected;
+    Ward * wardSelected;
+    
+    NSString * sStateID;
+    NSString * sDistrictID;
 }
 @synthesize pickerViewMain;
 @synthesize dictResponse;
@@ -53,6 +60,11 @@ typedef enum {
     [self initUITableView];
     [self setupPickerCommon];
     [self setupToolBar];
+    
+    NSDictionary * dictProvince = [dictAddressSelected objectForKey:@"s_state"];
+    sStateID = [dictProvince objectForKey:@"state_id"];
+    NSDictionary * dictDistrict = [dictAddressSelected objectForKey:@"s_district"];
+    sDistrictID = [dictDistrict objectForKey:@"district_id"];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -61,9 +73,10 @@ typedef enum {
 }
 -(void)initData
 {
-    arrProvince = [NSArray arrayWithObjects:@"TP.HCM",@"Hà Nội",@"Đà Nẵng",@"Vũng Tàu", nil];
+    //    arrProvince = [NSArray arrayWithObjects:@"TP.HCM",@"Hà Nội",@"Đà Nẵng",@"Vũng Tàu", nil];
+    arrProvince = [[TKDatabase sharedInstance]getAllState];
     arrDistrict = [NSArray arrayWithObjects:@"Quận 1",@"Quận 2",@"Quận 3",@"Quận 4",@"Quận 5",@"Quận 6",@"Quận 7", nil];
-    arrAddressType = [NSArray arrayWithObjects:@"Nhà riêng",@"Cơ quan", nil];
+    arrWard = [NSArray arrayWithObjects:@"Nhà riêng",@"Cơ quan", nil];
 }
 -(void)initNavigationBar
 {
@@ -161,13 +174,16 @@ typedef enum {
                 NSDictionary * dictDictrict = [dictAddressSelected objectForKey:@"s_district"];
                 //                NSDictionary * dictDictrict = [dictItem objectForKey:@"s_district"];
                 //                NSDictionary * dictState = [dictItem objectForKey:@"s_state"];
+                
                 if ([dictDictrict objectForKey:@"name"] != nil && ![[dictDictrict objectForKey:@"name"] isEqualToString:@""]) {
+                    arrDistrict = [[TKDatabase sharedInstance]getDictrictByStateID:sStateID];
                     lbl = lblDistrict = [self makeLabel:F(@"   %@",[dictDictrict objectForKey:@"name"])];
                     lbl.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
                 }
                 else
                 {
                     lbl = lblDistrict = [self makeLabel:@"  Quận / Huyện"];
+                    lblDistrict.userInteractionEnabled = NO;
                 }
                 [cellRe addSubview:lbl];
                 break ;
@@ -201,12 +217,17 @@ typedef enum {
             case 0: {
                 NSDictionary * dictWar = [dictAddressSelected objectForKey:@"s_ward"];
                 if ([dictWar objectForKey:@"name"] != nil && ![[dictWar objectForKey:@"name"] isEqualToString:@""]) {
+                    
+//                    NSString * warID = [dictWar objectForKey:@""];
+                    arrWard = [[TKDatabase sharedInstance]getWarByDistrictID:sDistrictID];
+                    
                     lbl = lblWard = [self makeLabel:F(@"   %@",[dictWar objectForKey:@"name"])];
                     lbl.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
                 }
                 else
                 {
                     lbl = lblWard = [self makeLabel:@"  Phường / Xã"];
+                    lblDistrict.userInteractionEnabled = NO;
                 }
                 [cellRe addSubview:lbl];
                 break ;
@@ -343,19 +364,52 @@ typedef enum {
     toolbar.hidden = YES;
 }
 -(void)doneButtonPressed:(id)sender{
-    //    NSInteger  iIndex =  [pickerGender selectedRowInComponent:0];
-    //    if (iIndex == 0) {
-    //        lblGender.text = @"  Nam";
-    //    }
-    //    else
-    //    {
-    //        lblGender.text = @"  Nữ";
-    //    }
-    //
-    //    lblGender.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
-    pickerViewMain.hidden = YES;
-    toolbar.hidden = YES;
-    self.tableView.scrollEnabled = YES;
+    switch (cbType) {
+        case ProvinceCb:
+        {
+            NSInteger  iIndex =  [pickerViewMain selectedRowInComponent:0];
+            State * state = [arrProvince objectAtIndex:iIndex];
+            arrDistrict = [[TKDatabase sharedInstance]getDictrictByStateID:state.stateID];
+            stateSelected = state;
+            lblProvince.text = F(@"  %@",state.stateName);
+            lblDistrict.userInteractionEnabled = YES;
+            pickerViewMain.hidden = YES;
+            toolbar.hidden = YES;
+            lblProvince.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+            break;
+        }
+        case DistrictCb:
+        {
+            
+            NSInteger  iIndex =  [pickerViewMain selectedRowInComponent:0];
+            District * district = [arrDistrict objectAtIndex:iIndex];
+            arrWard = [[TKDatabase sharedInstance]getWarByDistrictID:district.districtID];
+            districtSelected = district;
+            lblDistrict.text = F(@"  %@",district.districtName);
+            toolbar.hidden = YES;
+            pickerViewMain.hidden = YES;
+            lblWard.userInteractionEnabled = YES;
+            lblDistrict.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+            break;
+        }
+        case WardCb:
+        {
+            NSInteger  iIndex =  [pickerViewMain selectedRowInComponent:0];
+            Ward * ward = [arrWard objectAtIndex:iIndex];
+            wardSelected = ward;
+            lblWard.text = F(@"  %@",ward.wardName);
+            toolbar.hidden = YES;
+            pickerViewMain.hidden = YES;
+            lblWard.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+            break;
+        }
+        default:
+            break;
+    }
+    
+    //    pickerViewMain.hidden = YES;
+    //    toolbar.hidden = YES;
+    //    self.tableView.scrollEnabled = YES;
 }
 
 
@@ -398,7 +452,7 @@ typedef enum {
     }
     else
     {
-        return [arrAddressType count];
+        return [arrWard count];
     }
 }
 
@@ -410,13 +464,18 @@ typedef enum {
 // tell the picker the title for a given component
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (cbType == DistrictCb) {
-        return [arrDistrict objectAtIndex:row];
+        District * district = [arrDistrict objectAtIndex:row];
+        return district.districtName;
     }
     if (cbType == ProvinceCb) {
-        return [arrProvince objectAtIndex:row];
+        State * state = [arrProvince objectAtIndex:row];
+        return state.stateName;
     }
     else
-        return [arrAddressType objectAtIndex:row];
+    {
+        Ward * ward = [arrWard objectAtIndex:row];
+        return ward.wardName;
+    }
 }
 
 // tell the picker the width of each row for a given component

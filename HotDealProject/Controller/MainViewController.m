@@ -67,7 +67,7 @@
     {
         headerHeight = HEADER_HEIGHT;
     }
-    [self getLocation];
+    
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
     bForceStop = FALSE;
     
@@ -76,7 +76,7 @@
     [self initHUD];
     strCategory = @"default";
     [self initData:FETCH_COUNT wOffset:1 wType:@"default" ];
-    
+    [self getLocation];
     [self setupSlide];
     //    [self setupNewDeal];
     [self setupCategory];
@@ -623,9 +623,8 @@
             HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
             DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
             detail.iProductID = dealObj.product_id;
-            [[TKDatabase sharedInstance]getAllState];
-            [[TKDatabase sharedInstance]getAllDistrict];
-            [[TKDatabase sharedInstance]getAllWard];
+            [[TKDatabase sharedInstance]getDictrictByStateID:@"423"];
+            
             [self.navigationController pushViewController:detail animated:YES];
         }
     }
@@ -771,6 +770,12 @@
 }
 -(void)getLocation
 {
+    
+    NSString *savedValue = [[NSUserDefaults standardUserDefaults]
+                            stringForKey:@"SyncDone"];
+    if (savedValue != nil && ![savedValue isEqualToString:@""]) {
+        return;
+    }
     [HUD show:YES];
     [[TKAPI sharedInstance]getRequest:nil withURL:URL_GET_LOCATION completion:^(NSDictionary * dict, NSError *error) {
         [HUD hide:YES];
@@ -802,6 +807,9 @@
             UA_log(@"%lu [arrState count]", (unsigned long)[arrState count]);
             UA_log(@"%lu [arrDistrict count]", (unsigned long)[arrDistrict count]);
             UA_log(@"%lu [arrWard count]", (unsigned long)[arrWard count]);
+            NSString *valueToSave = @"SyncDone";
+            [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"SyncDone"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         });
     }];
     
