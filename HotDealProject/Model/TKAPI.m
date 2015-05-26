@@ -54,7 +54,7 @@
     AFHTTPRequestOperationManager *operationManager = [AFHTTPRequestOperationManager manager];
     [operationManager setSecurityPolicy:policy];
     operationManager.responseSerializer = [AFJSONResponseSerializer serializer];
-    [operationManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    [operationManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [operationManager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (responseObject == nil) {
             completion(nil, nil);

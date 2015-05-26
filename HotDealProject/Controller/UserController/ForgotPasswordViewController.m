@@ -59,7 +59,7 @@
                                     email, @"email",
                                     nil];
     
-    
+    [tfEmail resignFirstResponder];
     [HUD show:YES];
     [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_FORGOT_PASSWORD completion:^(NSDictionary * dict, NSError *error) {
         [HUD hide:YES];
@@ -70,7 +70,7 @@
         if (response == TRUE) {
 //            NSString* user_id = F(@"%@",[dict objectForKey:@"user_id"]);
 //            [[TKDatabase sharedInstance]addUser:user_id];
-            ALERT(LS(@"MessageBoxTitle"), @"Đăng nhâp thành công");
+            ALERT(LS(@"MessageBoxTitle"), @"Đổi mật khẩu thành công. Vui lòng kiểm tra email để thiết lập mật khẩu.");
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
 //            MainViewController * mainVC = [[MainViewController alloc]init];
 //            [self.navigationController pushViewController:mainVC animated:YES];

@@ -428,18 +428,18 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         return;
     }
     if (sectionOpened == 10) {//#import "RegisAndLoginController.h"
-//        if (isUserLogged == FALSE) {
-//            RegisAndLoginController * newVC = [[RegisAndLoginController alloc]init];
-//            
-//            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
-//            
-//            [revealVC setFrontViewController:navigationController animated:YES];
-//            [revealVC revealToggle:nil];
-//            return;
-//
-//        }
-//        else
-//        {
+        if (isUserLogged == FALSE) {
+            RegisAndLoginController * newVC = [[RegisAndLoginController alloc]init];
+            
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
+            
+            [revealVC setFrontViewController:navigationController animated:YES];
+            [revealVC revealToggle:nil];
+            return;
+
+        }
+        else
+        {
             AccoutViewController * newVC = [[AccoutViewController alloc]init];
             
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
@@ -447,7 +447,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             [revealVC setFrontViewController:navigationController animated:YES];
             [revealVC revealToggle:nil];
             return;
-//        }
+        }
     }//#import "HelpViewController.h"
     if (sectionOpened == 11) {//#import "RegisAndLoginController.h"
         HelpViewController * newVC = [[HelpViewController alloc]init];
@@ -545,14 +545,27 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC revealToggle:nil];
         return;
     }
-    if (sectionClosed == 10) {//AccoutViewController
-        AccoutViewController * newVC = [[AccoutViewController alloc]init];
-        
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
-        
-        [revealVC setFrontViewController:navigationController animated:YES];
-        [revealVC revealToggle:nil];
-        return;
+    if (sectionClosed == 10) {//#import "RegisAndLoginController.h"
+        if (isUserLogged == FALSE) {
+            RegisAndLoginController * newVC = [[RegisAndLoginController alloc]init];
+            
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
+            
+            [revealVC setFrontViewController:navigationController animated:YES];
+            [revealVC revealToggle:nil];
+            return;
+            
+        }
+        else
+        {
+            AccoutViewController * newVC = [[AccoutViewController alloc]init];
+            
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
+            
+            [revealVC setFrontViewController:navigationController animated:YES];
+            [revealVC revealToggle:nil];
+            return;
+        }
     }
     if (sectionClosed == 11) {//#import "RegisAndLoginController.h"
         HelpViewController * newVC = [[HelpViewController alloc]init];

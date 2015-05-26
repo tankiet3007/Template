@@ -55,7 +55,8 @@
 
 -(void)initData
 {
-    NSString * strParam = F(@"user_id=%@",[NSNumber numberWithInt:1]);
+    User * user = [[TKDatabase sharedInstance]getUserInfo];
+    NSString * strParam = F(@"user_id=%@",user.user_id);
 //    NSDictionary * dictParam = [NSDictionary dictionaryWithObjectsAndKeys:@"4488",@"user_id", nil];
     
     [HUD show:YES];
@@ -70,7 +71,24 @@
         NSDictionary * dictDictrict = [dictAddress objectForKey:@"s_district"];
         NSDictionary * dictState = [dictAddress objectForKey:@"s_state"];
         NSString * floorOptional = F(@"Lầu: %@",[dictAddress objectForKey:@"s_address_note"]);
-        strAddressL = F(@"%@\n%@\n%d %@ %@ %@ %@", [dict objectForKey:@"fullname"],[dict objectForKey:@"phone"],[[dictAddress objectForKey:@"s_address"]intValue],[dictWard objectForKey:@"name"],[dictDictrict objectForKey:@"name"],[dictState objectForKey:@"name"], floorOptional);
+        if ([dict objectForKey:@"fullname"] == nil || ![[dict objectForKey:@"fullname"] isEqualToString:@""]) {
+            strAddressL = @"";
+        }
+        else if ([dict objectForKey:@"phone"] == nil || ![[dict objectForKey:@"phone"] isEqualToString:@""]) {
+            strAddressL = @"";
+        }
+        else
+            if ([dictState objectForKey:@"name"] == nil || ![[dictState objectForKey:@"name"] isEqualToString:@""]) {
+                strAddressL = @"";
+            }
+            else
+                if ([dictState objectForKey:@"name"] == nil || ![[dictState objectForKey:@"name"] isEqualToString:@""]) {
+                    strAddressL = @"";
+                }
+                else
+                {
+                    strAddressL = F(@"%@\n%@\n%d %@ %@ %@ %@", [dict objectForKey:@"fullname"],[dict objectForKey:@"phone"],[[dictAddress objectForKey:@"s_address"]intValue],[dictWard objectForKey:@"name"],[dictDictrict objectForKey:@"name"],[dictState objectForKey:@"name"], floorOptional);
+                }
         UA_log(@"%@", dict);
         
         [self initUITableView];
@@ -211,7 +229,7 @@
     if (indexPath.section == 1) {
         cell.titleLabel.text = @"Địa chỉ nhận hàng";
         if ([strAddressL isEqualToString:@""] || strAddressL == nil) {
-            cell.desLabel.text = @"Trần Tấn Kiệt\nĐTDĐ:0936459200\nYoco Building\n41, Nguyễn Thị Minh Khai, Phường Bến Nghé, Quận 1, TP Hồ Chí Minh\n\n";
+            cell.desLabel.text = @"";
         }
         else
             cell.desLabel.text = F(@"%@\n\n",strAddressL);
@@ -284,7 +302,8 @@
 }
 -(void)updateInfo
 {
-    NSString * strParam = F(@"user_id=%@",[NSNumber numberWithInt:1]);
+    User * user = [[TKDatabase sharedInstance]getUserInfo];
+    NSString * strParam = F(@"user_id=%@",user.user_id);
     [HUD show:YES];
     [[TKAPI sharedInstance]getRequest:strParam withURL:URL_GET_USERINFO completion:^(NSDictionary * dict, NSError *error) {
         [HUD hide:YES];

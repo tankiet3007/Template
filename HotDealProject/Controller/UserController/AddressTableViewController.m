@@ -531,6 +531,7 @@ typedef enum {
 
 -(void)showDropbox1
 {
+        [self.view endEditing:YES];
     pickerViewMain.hidden = NO;
     toolbar.hidden = NO;
     cbType = ProvinceCb;

@@ -25,6 +25,7 @@
 {
     NSMutableArray * arrMenu;
     SWRevealViewController *revealController;
+     MBProgressHUD *HUD;
 }
 @synthesize btnAvatar, lblName, tableAccount;
 - (void)viewDidLoad {
@@ -32,11 +33,17 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     [self initNavigationbar];
+    [self initHUD];
     [self initData];
     [self initUITableView];
     // Do any additional setup after loading the view from its nib.
 }
-
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    //    HUD.labelText = LS(@"LoadingData");
+    [HUD hide:YES];
+}
 -(void)initNavigationbar
 {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
@@ -166,8 +173,10 @@
     if (indexPath.row == 5) {
         
         User * user = [[TKDatabase sharedInstance]getUserInfo];
+        [HUD show:YES];
         NSDictionary * dictParameter = [NSDictionary dictionaryWithObjectsAndKeys:user.user_id,@"user_id", nil];
         [[TKAPI sharedInstance]postRequestAF:dictParameter withURL:URL_SIGN_OUT completion:^(NSDictionary *dict, NSError * error) {
+            [HUD hide:YES];
             if (dict == nil) {
                 return;
             }

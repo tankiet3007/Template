@@ -126,7 +126,7 @@
     }
     User * user = [[TKDatabase sharedInstance]getUserInfo];
     NSDictionary * address = [dictResponse objectForKey:@"address"];
-    NSDictionary * dictFinal = [NSDictionary dictionaryWithObjectsAndKeys:@"1",@"user_id",email,@"email", fullname, @"fullname",phone, @"phone", birthday,@"birthday",address, @"address", nil];
+    NSDictionary * dictFinal = [NSDictionary dictionaryWithObjectsAndKeys:user.user_id,@"user_id",email,@"email", fullname, @"fullname",phone, @"phone", birthday,@"birthday",address, @"address", nil];
     UA_log(@"%@", dictFinal);
     
     [HUD show:YES];
@@ -152,6 +152,7 @@
 -(UITextField*) makeTextField: (NSString*)text
                   placeholder: (NSString*)placeholder  {
     UITextField *tf = [[UITextField alloc] init];
+    text = [text trim];
     tf.placeholder = placeholder ;
     tf.font = [UIFont systemFontOfSize:13];
     tf.text = text ;
@@ -250,6 +251,7 @@
 
 -(void)showPicker
 {
+        [self.view endEditing:YES];
     isBirthdayAction = TRUE;
     pickerView.backgroundColor = [UIColor whiteColor];
     pickerView.datePickerMode = UIDatePickerModeDate;
@@ -302,6 +304,7 @@
 
 -(void)showDropbox
 {
+    [self.view endEditing:YES];
     isBirthdayAction = NO;
     pickerGender.hidden = NO;
     toolbar.hidden = NO;
@@ -405,6 +408,7 @@
             case 0: {
                 
                 NSString * strGender = [dictResponse objectForKey:@"gender"];
+                
                 if (strGender != nil && ![strGender isEqualToString:@""]) {
                     lbl = lblGender = [self makeLabel:F(@"  %@",strGender)];
                     lbl.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
@@ -461,6 +465,9 @@
     }
     return 1;
 }
-
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+   return [textField resignFirstResponder];
+}
 
 @end
