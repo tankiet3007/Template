@@ -316,7 +316,7 @@
 }
 -(void)initUITableView
 {
-    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(0, 2, ScreenWidth, ScreenHeight - 66) style:UITableViewStylePlain];
+    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 66) style:UITableViewStylePlain];
     [self.view addSubview:tableViewMain];
     
     

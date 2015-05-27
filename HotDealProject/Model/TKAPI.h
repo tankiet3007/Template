@@ -32,6 +32,8 @@ static NSString * const URL_LIST_CART = @"http://dev.hotdeal.vn/mapi/list_cart";
 static NSString * const URL_GET_PAYMENT_METHOD = @"http://dev.hotdeal.vn/mapi/get_payment_methods";
 static NSString * const URL_GET_SHIPPING_METHOD = @"http://dev.hotdeal.vn/mapi/get_shipping_methods";
 static NSString * const URL_UPDATE_CART = @"http://dev.hotdeal.vn/mapi/update_cart";
+static NSString * const URL_GET_USER_POINT = @"http://dev.hotdeal.vn/mapi/get-user-points";
+//http://hotdeal.vn/mapi/get-user-points
 @interface TKAPI : NSObject
 
 

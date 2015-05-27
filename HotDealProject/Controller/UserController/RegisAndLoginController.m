@@ -275,14 +275,15 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
             cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
             UIButton* button = nil ;
             
-            button = btnLoginGoogle = [self makeButtonLoginGoogle];
-            [cellRe addSubview:btnLoginGoogle];
+            button = btnLoginFacebook = [self makeButtonLoginFacebook];
+            [cellRe addSubview:btnLoginFacebook];
             
             // Textfield dimensions
             button.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
             //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             return cellRe;
+            
         }
         else
         {
@@ -292,14 +293,15 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
             cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
             UIButton* button = nil ;
             
-            button = btnLoginFacebook = [self makeButtonLoginFacebook];
-            [cellRe addSubview:btnLoginFacebook];
+            button = btnLoginGoogle = [self makeButtonLoginGoogle];
+            [cellRe addSubview:btnLoginGoogle];
             
             // Textfield dimensions
             button.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
             //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
             return cellRe;
+            
         }
     }
     else
@@ -710,6 +712,13 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
     NSString * birthday = [lblBirthday.text trim];
     NSString * phone = [tfPhone.text trim];
     NSString * gender = [lblGender.text trim];
+    if ([gender isEqualToString:@"Nam"]) {
+        gender = @"1";
+    }
+    else
+    {
+        gender = @"2";
+    }
     NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     email, @"email",
                                     password, @"password",
