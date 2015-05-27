@@ -77,17 +77,19 @@
     [HUD show:YES];
     [[TKAPI sharedInstance]getRequest:strParam withURL:URL_GET_DEAL_CONTENT completion:^(NSDictionary * dict, NSError *error) {
         [HUD hide:YES];
+       
+         dictDetail = dict;
+        NSDictionary * dictCategory = [dict objectForKey:@"category"];
+        NSString * sTitle = [dictCategory objectForKey:@"category_name"];
+        [self initNavigationbar:sTitle];
         if (dict == nil) {
             return;
         }
-         dictDetail = dict;
 //    category: {
 //    category_id: 639,
 //    category_name: ""
 //    },
-        NSDictionary * dictCategory = [dict objectForKey:@"category"];
-        NSString * sTitle = [dictCategory objectForKey:@"category_name"];
-        [self initNavigationbar:sTitle];
+       
         [self setupLabelDescription];
         [self setupSlide];
         [self setupViewHeader];

@@ -19,15 +19,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     webView.delegate = self;
-
+    webView.scalesPageToFit = YES;
     [self initNavigationbar:sTitle];
+    
     if (url != nil) {
         NSURLRequest * request = [NSURLRequest requestWithURL:url];
         [webView loadRequest:request];
     }
     else
     {
-        [webView loadHTMLString:strContent baseURL:nil];
+        NSString *htmlString =
+        [NSString stringWithFormat:@"<font face='GothamRounded-Bold' size='6'>%@", strContent];
+        [webView loadHTMLString:htmlString baseURL:nil];
     }
     // Do any additional setup after loading the view from its nib.
 }
@@ -50,7 +53,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 
 - (void)webViewDidFinishLoad:(UIWebView *)webViews
 {
-//    [HUD hide:YES];
+
     NSString *pageTitle = [webViews stringByEvaluatingJavaScriptFromString:@"document.title"];
     if (pageTitle != nil && ![pageTitle isEqualToString:@""]) {
         [self initNavigationbar:pageTitle];
