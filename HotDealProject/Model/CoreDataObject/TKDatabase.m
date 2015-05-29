@@ -177,13 +177,13 @@ static NSManagedObjectContext * __context = nil;
 
 -(void)addState:(NSString *)stateID wStateName:(NSString *)stateName wStateLogictic:(NSString *)stateLogictic
 {
-    NSArray *arrProductItem = [State MR_findAll];
-    for (State * item in arrProductItem) {
-        if ([item.stateID isEqualToString:stateID]) {
-            [self updateState:stateID wStateName:stateName wStateLogictic:stateLogictic];
-            return;
-        }
-    }
+//    NSArray *arrProductItem = [State MR_findAll];
+//    for (State * item in arrProductItem) {
+//        if ([item.stateID isEqualToString:stateID]) {
+//            [self updateState:stateID wStateName:stateName wStateLogictic:stateLogictic];
+//            return;
+//        }
+//    }
     
     State  * state = [State MR_createEntityInContext:__context];
     state.stateID = stateID;
@@ -194,13 +194,13 @@ static NSManagedObjectContext * __context = nil;
 -(void)addDistrict:(NSString *)districtID wDistrictName:(NSString *)districtName wDistrictLogictic:(NSString *)districtLogictic wStateID:(NSString *)stateID
 {
     
-    NSArray *arrProductItem = [District MR_findAll];
-    for (District * item in arrProductItem) {
-        if ([item.districtID isEqualToString:districtID]) {
-            [self updateDictrict:districtID wDistrictName:districtName wDistrictLogictic:districtLogictic wStateID:stateID];
-            return;
-        }
-    }
+//    NSArray *arrProductItem = [District MR_findAll];
+//    for (District * item in arrProductItem) {
+//        if ([item.districtID isEqualToString:districtID]) {
+//            [self updateDictrict:districtID wDistrictName:districtName wDistrictLogictic:districtLogictic wStateID:stateID];
+//            return;
+//        }
+//    }
 
     
     District * district = [District MR_createEntityInContext:__context];
@@ -228,13 +228,13 @@ static NSManagedObjectContext * __context = nil;
 
 -(void)addWard:(NSString *)wardID wWardName:(NSString *)wardName wDistrictID:(NSString *)districtID
 {
-    NSArray *arrWard = [Ward MR_findAll];
-    for (Ward * item in arrWard) {
-        if ([item.wardID isEqualToString:wardID]) {
-            [self updateWar:wardID wWardName:wardName wDistrictID:districtID];
-            return;
-        }
-    }
+//    NSArray *arrWard = [Ward MR_findAll];
+//    for (Ward * item in arrWard) {
+//        if ([item.wardID isEqualToString:wardID]) {
+//            [self updateWar:wardID wWardName:wardName wDistrictID:districtID];
+//            return;
+//        }
+//    }
     
     Ward * ward = [Ward MR_createEntityInContext:__context];
     ward.wardID = wardID;

@@ -81,7 +81,7 @@
 -(void)initNavigationbar
 {
     AppDelegate * appdelegate = ApplicationDelegate;
-    [appdelegate initNavigationbar:self withTitle:@"Email khuyến mãi"];
+    [appdelegate initNavigationbar:self withTitle:@"Tiền trong tài khoản"];
 }
 
 /*

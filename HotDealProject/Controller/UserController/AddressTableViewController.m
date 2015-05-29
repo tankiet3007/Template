@@ -227,7 +227,7 @@ typedef enum {
                 else
                 {
                     lbl = lblWard = [self makeLabel:@"  Phường / Xã"];
-                    lblDistrict.userInteractionEnabled = NO;
+                    lblWard.userInteractionEnabled = NO;
                 }
                 [cellRe addSubview:lbl];
                 break ;

@@ -76,7 +76,7 @@
     [self initHUD];
     strCategory = @"default";
     [self initData:FETCH_COUNT wOffset:1 wType:@"default" ];
-    [self getLocation];
+    
     [self setupSlide];
     //    [self setupNewDeal];
     [self setupCategory];
@@ -129,8 +129,9 @@
     arrDeals = [[NSMutableArray alloc]init];
     UA_log(@"%@",jsonDictionary);
     [HUD show:YES];
+    [self getLocation];
     [[TKAPI sharedInstance]getRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
-        [HUD hide:YES];
+//        [HUD hide:YES];
         if (dict == nil) {
             return;
         }
@@ -156,6 +157,7 @@
         [self initUITableView];
         
         [self setupNewDeal];
+        [HUD hide:YES];
     }];
     
 }
@@ -774,13 +776,13 @@
     NSString *savedValue = [[NSUserDefaults standardUserDefaults]
                             stringForKey:@"SyncDone"];
     if (savedValue != nil && ![savedValue isEqualToString:@""]) {
+        [HUD hide:YES];
         return;
     }
-    [HUD show:YES];
+//    [HUD show:YES];
     [[TKAPI sharedInstance]getRequest:nil withURL:URL_GET_LOCATION completion:^(NSDictionary * dict, NSError *error) {
         [HUD hide:YES];
-        dispatch_queue_t queue = dispatch_queue_create("com.get.location", 0);
-        dispatch_async(queue, ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSArray * arrState = [dict objectForKey:@"states"];
             NSArray * arrDistrict = [dict objectForKey:@"districts"];
             NSArray * arrWard = [dict objectForKey:@"wards"];
@@ -810,6 +812,7 @@
             NSString *valueToSave = @"SyncDone";
             [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"SyncDone"];
             [[NSUserDefaults standardUserDefaults] synchronize];
+//        [HUD hide:YES];
         });
     }];
     
