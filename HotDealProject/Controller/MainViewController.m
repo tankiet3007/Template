@@ -622,6 +622,8 @@
 {
     if ([self isInternetReachable]) {
         if (indexPath.section == 4) {
+            NSDictionary * dict =  [[TKAPI sharedInstance]readFile:@"location.json"];
+//            UA_log(@"%@",dict);
             HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
             DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
             detail.iProductID = dealObj.product_id;
@@ -770,51 +772,56 @@
     } completion:^(BOOL finished) {
     }];
 }
+
 -(void)getLocation
 {
-    
-    NSString *savedValue = [[NSUserDefaults standardUserDefaults]
-                            stringForKey:@"SyncDone"];
-    if (savedValue != nil && ![savedValue isEqualToString:@""]) {
-        [HUD hide:YES];
-        return;
-    }
-//    [HUD show:YES];
-    [[TKAPI sharedInstance]getRequest:nil withURL:URL_GET_LOCATION completion:^(NSDictionary * dict, NSError *error) {
-        [HUD hide:YES];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSArray * arrState = [dict objectForKey:@"states"];
-            NSArray * arrDistrict = [dict objectForKey:@"districts"];
-            NSArray * arrWard = [dict objectForKey:@"wards"];
-            for (NSDictionary * dictItem in arrState) {
-                NSString * ID_Tinh_Thanh = [dictItem objectForKey:@"ID_Tinh_Thanh"];
-                NSString * Ten_Tinh_Thanh = [dictItem objectForKey:@"Ten_Tinh_Thanh"];
-                NSString * logistic_location_id = [dictItem objectForKey:@"logistic_location_id"];
-                [[TKDatabase sharedInstance]addState:ID_Tinh_Thanh wStateName:Ten_Tinh_Thanh wStateLogictic:logistic_location_id];
-            }
-            for (NSDictionary * dictItem in arrDistrict) {
-                NSString * ID_Tinh_Thanh = [dictItem objectForKey:@"ID_Tinh_Thanh"];
-                NSString * ID_Quan_Huyen = [dictItem objectForKey:@"ID_Quan_Huyen"];
-                NSString * Ten_Quan_Huyen = [dictItem objectForKey:@"Ten_Quan_Huyen"];
-                NSString * logistic_location_id = [dictItem objectForKey:@"logistic_location_id"];
-                [[TKDatabase sharedInstance]addDistrict:ID_Quan_Huyen wDistrictName:Ten_Quan_Huyen wDistrictLogictic:logistic_location_id wStateID:ID_Tinh_Thanh];
-            }
-            
-            for (NSDictionary * dictItem in arrWard) {
-                NSString * ID_Phuong_Xa = [dictItem objectForKey:@"ID_Phuong_Xa"];
-                NSString * Ten_Phuong_Xa = [dictItem objectForKey:@"Ten_Phuong_Xa"];
-                NSString * ID_Quan_Huyen = [dictItem objectForKey:@"ID_Quan_Huyen"];
-                [[TKDatabase sharedInstance]addWard:ID_Phuong_Xa wWardName:Ten_Phuong_Xa wDistrictID:ID_Quan_Huyen];
-            }
-            UA_log(@"%lu [arrState count]", (unsigned long)[arrState count]);
-            UA_log(@"%lu [arrDistrict count]", (unsigned long)[arrDistrict count]);
-            UA_log(@"%lu [arrWard count]", (unsigned long)[arrWard count]);
-            NSString *valueToSave = @"SyncDone";
-            [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"SyncDone"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-//        [HUD hide:YES];
-        });
-    }];
-    
+    [[TKAPI sharedInstance]getRequestLocation:nil withURL:URL_GET_LOCATION];
 }
+//-(void)getLocation
+//{
+//    
+//    NSString *savedValue = [[NSUserDefaults standardUserDefaults]
+//                            stringForKey:@"SyncDone"];
+//    if (savedValue != nil && ![savedValue isEqualToString:@""]) {
+//        [HUD hide:YES];
+//        return;
+//    }
+////    [HUD show:YES];
+//    [[TKAPI sharedInstance]getRequest:nil withURL:URL_GET_LOCATION completion:^(NSDictionary * dict, NSError *error) {
+//        [HUD hide:YES];
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            NSArray * arrState = [dict objectForKey:@"states"];
+//            NSArray * arrDistrict = [dict objectForKey:@"districts"];
+//            NSArray * arrWard = [dict objectForKey:@"wards"];
+//            for (NSDictionary * dictItem in arrState) {
+//                NSString * ID_Tinh_Thanh = [dictItem objectForKey:@"ID_Tinh_Thanh"];
+//                NSString * Ten_Tinh_Thanh = [dictItem objectForKey:@"Ten_Tinh_Thanh"];
+//                NSString * logistic_location_id = [dictItem objectForKey:@"logistic_location_id"];
+//                [[TKDatabase sharedInstance]addState:ID_Tinh_Thanh wStateName:Ten_Tinh_Thanh wStateLogictic:logistic_location_id];
+//            }
+//            for (NSDictionary * dictItem in arrDistrict) {
+//                NSString * ID_Tinh_Thanh = [dictItem objectForKey:@"ID_Tinh_Thanh"];
+//                NSString * ID_Quan_Huyen = [dictItem objectForKey:@"ID_Quan_Huyen"];
+//                NSString * Ten_Quan_Huyen = [dictItem objectForKey:@"Ten_Quan_Huyen"];
+//                NSString * logistic_location_id = [dictItem objectForKey:@"logistic_location_id"];
+//                [[TKDatabase sharedInstance]addDistrict:ID_Quan_Huyen wDistrictName:Ten_Quan_Huyen wDistrictLogictic:logistic_location_id wStateID:ID_Tinh_Thanh];
+//            }
+//            
+//            for (NSDictionary * dictItem in arrWard) {
+//                NSString * ID_Phuong_Xa = [dictItem objectForKey:@"ID_Phuong_Xa"];
+//                NSString * Ten_Phuong_Xa = [dictItem objectForKey:@"Ten_Phuong_Xa"];
+//                NSString * ID_Quan_Huyen = [dictItem objectForKey:@"ID_Quan_Huyen"];
+//                [[TKDatabase sharedInstance]addWard:ID_Phuong_Xa wWardName:Ten_Phuong_Xa wDistrictID:ID_Quan_Huyen];
+//            }
+//            UA_log(@"%lu [arrState count]", (unsigned long)[arrState count]);
+//            UA_log(@"%lu [arrDistrict count]", (unsigned long)[arrDistrict count]);
+//            UA_log(@"%lu [arrWard count]", (unsigned long)[arrWard count]);
+//            NSString *valueToSave = @"SyncDone";
+//            [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"SyncDone"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+////        [HUD hide:YES];
+//        });
+//    }];
+//    
+//}
 @end

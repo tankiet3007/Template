@@ -35,8 +35,8 @@ static NSString * const URL_UPDATE_CART = @"http://dev.hotdeal.vn/mapi/update_ca
 static NSString * const URL_GET_USER_POINT = @"http://dev.hotdeal.vn/mapi/get-user-points";
 //http://hotdeal.vn/mapi/get-user-points
 @interface TKAPI : NSObject
-
-
+-(NSDictionary *)readFile:(NSString *)filePath;
+- (void)getRequestLocation:(NSString *)params withURL:(NSString *)url;
 + (TKAPI*)sharedInstance;
 - (void)postRequestAF:(NSDictionary *)params withURL:(NSString *)url completion:(void(^)(NSDictionary*, NSError*))completion;
 + (NSString *)postRequest:(NSDictionary *)params withURL:(NSString *)url;

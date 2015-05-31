@@ -189,7 +189,7 @@ static NSManagedObjectContext * __context = nil;
     state.stateID = stateID;
     state.stateName = stateName;
     state.stateLogictic = stateLogictic;
-        [__context MR_saveToPersistentStoreAndWait];
+        [__context MR_saveOnlySelfAndWait];
 }
 -(void)addDistrict:(NSString *)districtID wDistrictName:(NSString *)districtName wDistrictLogictic:(NSString *)districtLogictic wStateID:(NSString *)stateID
 {
@@ -208,7 +208,7 @@ static NSManagedObjectContext * __context = nil;
     district.districtName = districtName;
     district.districtLogictic = districtLogictic;
     district.stateID = stateID;
-        [__context MR_saveToPersistentStoreAndWait];
+        [__context MR_saveOnlySelfAndWait];
 }
 
 -(void)updateDictrict:(NSString *)districtID wDistrictName:(NSString *)districtName wDistrictLogictic:(NSString *)districtLogictic wStateID:(NSString *)stateID
@@ -240,7 +240,7 @@ static NSManagedObjectContext * __context = nil;
     ward.wardID = wardID;
     ward.wardName = wardName;
     ward.dicstreetID = districtID;
-        [__context MR_saveToPersistentStoreAndWait];
+        [__context MR_saveOnlySelfAndWait];
 }
 
 -(void)updateWar:(NSString *)wardID wWardName:(NSString *)wardName wDistrictID:(NSString *)districtID

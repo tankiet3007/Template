@@ -208,4 +208,69 @@
     });
     
 }
+
+- (void)getRequestLocation:(NSString *)params withURL:(NSString *)url
+{
+    if ([self checkFileExist] == TRUE) {
+        return;
+    }
+    dispatch_queue_t queue = dispatch_queue_create("com.get", 0);
+    dispatch_async(queue, ^{
+        NSString *paramString = F(@"%@?%@", url, params);
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:paramString]
+                                                               cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                           timeoutInterval:10];
+        
+        [request setHTTPMethod: @"GET"];
+        
+        NSError *requestError;
+        NSURLResponse *urlResponse = nil;
+        
+        
+        NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+        [self writeTofile:response1];
+    });
+    
+}
+
+-(void)writeTofile:(NSData*)dataReponse
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"location.json"];
+    
+//    NSString *str = @"hello world";
+    [dataReponse writeToFile:filePath atomically:YES];
+//    [dataReponse writeToFile:filePath atomically:TRUE encoding:NSUTF8StringEncoding error:NULL];
+}
+
+-(BOOL)checkFileExist
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    //Get documents directory
+    NSArray *directoryPaths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectoryPath = [directoryPaths objectAtIndex:0];
+    NSString * filePath = [documentsDirectoryPath stringByAppendingPathComponent:@"location.json"];
+    if ([fileManager fileExistsAtPath:filePath]==YES) {
+        return TRUE;
+    }
+    return FALSE;
+}
+-(NSDictionary *)readFile:(NSString *)filePath
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    filePath = [documentsDirectory stringByAppendingPathComponent:filePath];
+    if ([self checkFileExist]== FALSE) {
+        return nil;
+    }
+    NSData *contents = [NSData dataWithContentsOfFile:filePath];
+    NSDictionary* dictionary = [NSJSONSerialization
+                                JSONObjectWithData:contents
+                                options:kNilOptions
+                                error:nil];
+    return dictionary;
+
+}
 @end
