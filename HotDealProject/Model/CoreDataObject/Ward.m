@@ -10,9 +10,4 @@
 
 
 @implementation Ward
-
-@dynamic wardID;
-@dynamic wardName;
-@dynamic dicstreetID;
-
 @end

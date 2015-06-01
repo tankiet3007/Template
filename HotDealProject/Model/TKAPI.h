@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "State.h"
+#import "District.h"
+#import "Ward.h"
 #pragma mark for user
 //get_location
 static NSString * const URL_GET_LOCATION = @"http://dev.hotdeal.vn/mapi/get_location";
@@ -43,4 +46,8 @@ static NSString * const URL_GET_USER_POINT = @"http://dev.hotdeal.vn/mapi/get-us
 - (void)getRequestAF:(NSDictionary *)params withURL:(NSString *)url completion:(void(^)(NSDictionary*, NSError*))completion;
 - (void)getRequest:(NSString *)params withURL:(NSString *)url completion:(void(^)(NSDictionary*, NSError*))completion;
 - (void)getRequestAFarr:(NSDictionary *)params withURL:(NSString *)url completion:(void(^)(NSArray*, NSError*))completion;
+-(NSDictionary *)getAddress;
+-(NSArray *)getAllState;
+-(NSArray *)getAllDistrict;
+-(NSArray *)getAllwar;
 @end

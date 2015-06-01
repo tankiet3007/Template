@@ -9,6 +9,10 @@
 #import "TKAPI.h"
 #define TIMEOUT 15
 @implementation TKAPI
+static NSDictionary * dictAddress;
+static NSArray * arrState;
+static NSArray * arrWar;
+static NSArray * arrDistrict;
 + (TKAPI*)sharedInstance
 {
     // 1
@@ -266,11 +270,89 @@
         return nil;
     }
     NSData *contents = [NSData dataWithContentsOfFile:filePath];
-    NSDictionary* dictionary = [NSJSONSerialization
+    dictAddress = [NSJSONSerialization
                                 JSONObjectWithData:contents
                                 options:kNilOptions
                                 error:nil];
-    return dictionary;
+    return dictAddress;
+}
+-(NSDictionary *)getAddress
+{
+    if (dictAddress != nil) {
+       return dictAddress;
+    }
+    dictAddress  = [self readFile:@"location.json"];
+//    [self getAllState];
+//        [self getAllDistrict];
+//    [self getAllwar];
+    return dictAddress;
+}
+
+-(NSArray *)getAllState
+{
+    if (arrState != nil) {
+        return arrState;
+    }
+    NSArray * arrStateLocal  = [[self getAddress]objectForKey:@"states"];
+    NSMutableArray * arrRaw = [[NSMutableArray alloc]init];
+    for (NSDictionary * dictItem in arrStateLocal) {
+        State * stateItem = [[State alloc]init];
+        stateItem.stateID = [dictItem objectForKey:@"ID_Tinh_Thanh"];
+        stateItem.stateName = [dictItem objectForKey:@"Ten_Tinh_Thanh"];
+        stateItem.stateLogictic = [dictItem objectForKey:@"logistic_location_id"];
+        [arrRaw addObject:stateItem];
+    }
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"stateName"
+                                                 ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    arrState = [arrRaw sortedArrayUsingDescriptors:sortDescriptors];
+    return arrState;
+}
+
+-(NSArray *)getAllDistrict
+{
+    if (arrDistrict != nil) {
+        return arrDistrict;
+    }
+    NSArray * arrDistrictLocal  = [[self getAddress]objectForKey:@"districts"];
+    NSMutableArray * arrRaw = [[NSMutableArray alloc]init];
+    for (NSDictionary * dictItem in arrDistrictLocal) {
+        District * districtItem = [[District alloc]init];
+        districtItem.stateID = [dictItem objectForKey:@"ID_Tinh_Thanh"];
+        districtItem.districtID = [dictItem objectForKey:@"ID_Quan_Huyen"];
+        districtItem.districtName = [dictItem objectForKey:@"Ten_Quan_Huyen"];
+        districtItem.districtLogictic = [dictItem objectForKey:@"logistic_location_id"];
+        [arrRaw addObject:districtItem];
+    }
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"districtName"
+                                                 ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    arrDistrict = [arrRaw sortedArrayUsingDescriptors:sortDescriptors];
+    return arrDistrict;
+}
+
+-(NSArray *)getAllwar
+{
+    if (arrWar != nil) {
+        return arrWar;
+    }
+    NSArray * arrWarLocal  = [[self getAddress]objectForKey:@"wards"];
+    NSMutableArray * arrRaw = [[NSMutableArray alloc]init];
+    for (NSDictionary * dictItem in arrWarLocal) {
+        Ward * wardItem = [[Ward alloc]init];
+        wardItem.wardID = [dictItem objectForKey:@"ID_Phuong_Xa"];
+        wardItem.wardName = [dictItem objectForKey:@"Ten_Phuong_Xa"];
+        wardItem.dicstreetID = [dictItem objectForKey:@"ID_Quan_Huyen"];
+        [arrRaw addObject:wardItem];
+    }
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"wardName"
+                                                 ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    arrWar = [arrRaw sortedArrayUsingDescriptors:sortDescriptors];
+    return arrWar;
 
 }
 @end

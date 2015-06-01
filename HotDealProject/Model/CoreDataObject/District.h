@@ -7,14 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
 
-@interface District : NSManagedObject
+@interface District:NSObject
 
-@property (nonatomic, retain) NSString * stateID;
-@property (nonatomic, retain) NSString * districtID;
-@property (nonatomic, retain) NSString * districtName;
-@property (nonatomic, retain) NSString * districtLogictic;
+@property (nonatomic, strong) NSString * stateID;
+@property (nonatomic, strong) NSString * districtID;
+@property (nonatomic, strong) NSString * districtName;
+@property (nonatomic, strong) NSString * districtLogictic;
 
 @end

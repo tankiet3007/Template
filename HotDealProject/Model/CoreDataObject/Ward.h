@@ -10,10 +10,10 @@
 #import <CoreData/CoreData.h>
 
 
-@interface Ward : NSManagedObject
+@interface Ward : NSObject
 
-@property (nonatomic, retain) NSString * wardID;
-@property (nonatomic, retain) NSString * wardName;
-@property (nonatomic, retain) NSString * dicstreetID;
+@property (nonatomic, strong) NSString * wardID;
+@property (nonatomic, strong) NSString * wardName;
+@property (nonatomic, strong) NSString * dicstreetID;
 
 @end

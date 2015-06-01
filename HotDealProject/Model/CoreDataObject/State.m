@@ -11,8 +11,4 @@
 
 @implementation State
 
-@dynamic stateID;
-@dynamic stateName;
-@dynamic stateLogictic;
-
 @end

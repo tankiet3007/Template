@@ -8,7 +8,7 @@
 
 #import "TKDatabase.h"
 #import "Provine.h"
-
+#import "TKAPI.h"
 static NSManagedObjectContext * __context = nil;
 @implementation TKDatabase
 + (TKDatabase*)sharedInstance
@@ -161,126 +161,15 @@ static NSManagedObjectContext * __context = nil;
     [__context MR_saveToPersistentStoreAndWait];
 }
 
--(void)updateState:(NSString *)stateID wStateName:(NSString *)stateName wStateLogictic:(NSString *)stateLogictic
-{
-    NSArray *arrState = [State MR_findByAttribute:@"stateID" withValue:stateID inContext:__context];
-    if ([arrState count]==0) {
-        return;
-    }
-    State *vResult = [arrState objectAtIndex:0];
-    vResult.stateID = stateID;
-    vResult.stateName = stateName;
-    vResult.stateLogictic = stateLogictic;
-    [__context MR_saveToPersistentStoreAndWait];
-}
-
-
--(void)addState:(NSString *)stateID wStateName:(NSString *)stateName wStateLogictic:(NSString *)stateLogictic
-{
-//    NSArray *arrProductItem = [State MR_findAll];
-//    for (State * item in arrProductItem) {
-//        if ([item.stateID isEqualToString:stateID]) {
-//            [self updateState:stateID wStateName:stateName wStateLogictic:stateLogictic];
-//            return;
-//        }
-//    }
-    
-    State  * state = [State MR_createEntityInContext:__context];
-    state.stateID = stateID;
-    state.stateName = stateName;
-    state.stateLogictic = stateLogictic;
-        [__context MR_saveOnlySelfAndWait];
-}
--(void)addDistrict:(NSString *)districtID wDistrictName:(NSString *)districtName wDistrictLogictic:(NSString *)districtLogictic wStateID:(NSString *)stateID
-{
-    
-//    NSArray *arrProductItem = [District MR_findAll];
-//    for (District * item in arrProductItem) {
-//        if ([item.districtID isEqualToString:districtID]) {
-//            [self updateDictrict:districtID wDistrictName:districtName wDistrictLogictic:districtLogictic wStateID:stateID];
-//            return;
-//        }
-//    }
-
-    
-    District * district = [District MR_createEntityInContext:__context];
-    district.districtID = districtID;
-    district.districtName = districtName;
-    district.districtLogictic = districtLogictic;
-    district.stateID = stateID;
-        [__context MR_saveOnlySelfAndWait];
-}
-
--(void)updateDictrict:(NSString *)districtID wDistrictName:(NSString *)districtName wDistrictLogictic:(NSString *)districtLogictic wStateID:(NSString *)stateID
-{
-    NSArray *arrState = [District MR_findByAttribute:@"districtID" withValue:districtID inContext:__context];
-    if ([arrState count]==0) {
-        return;
-    }
-    District *vResult = [arrState objectAtIndex:0];
-    vResult.districtID = districtID;
-    vResult.districtName = districtName;
-    vResult.districtLogictic = districtLogictic;
-    vResult.stateID = stateID;
-        [__context MR_saveToPersistentStoreAndWait];
-}
-
-
--(void)addWard:(NSString *)wardID wWardName:(NSString *)wardName wDistrictID:(NSString *)districtID
-{
-//    NSArray *arrWard = [Ward MR_findAll];
-//    for (Ward * item in arrWard) {
-//        if ([item.wardID isEqualToString:wardID]) {
-//            [self updateWar:wardID wWardName:wardName wDistrictID:districtID];
-//            return;
-//        }
-//    }
-    
-    Ward * ward = [Ward MR_createEntityInContext:__context];
-    ward.wardID = wardID;
-    ward.wardName = wardName;
-    ward.dicstreetID = districtID;
-        [__context MR_saveOnlySelfAndWait];
-}
-
--(void)updateWar:(NSString *)wardID wWardName:(NSString *)wardName wDistrictID:(NSString *)districtID
-{
-    NSArray *arrWar = [Ward MR_findByAttribute:@"wardID" withValue:wardID inContext:__context];
-    if ([arrWar count]==0) {
-        return;
-    }
-    Ward *vResult = [arrWar objectAtIndex:0];
-    vResult.wardID = wardID;
-    vResult.wardName = wardName;
-    vResult.dicstreetID = districtID;
-        [__context MR_saveToPersistentStoreAndWait];
-}
-
-
--(NSArray *)getAllState
-{
-    NSArray * arrState = [State MR_findAllSortedBy:@"stateName" ascending:YES];
-    UA_log(@"%lu", (unsigned long)[arrState count]);
-    return arrState;
-}
--(NSArray *)getAllDistrict
-{
-    NSArray * arrDictrict = [District MR_findAllSortedBy:@"districtName" ascending:YES];
-    UA_log(@"%lu", (unsigned long)[arrDictrict count]);
-    return arrDictrict;
-}
--(NSArray *)getAllWard
-{
-    NSArray * arrWard = [Ward MR_findAll];
-    UA_log(@"%lu", (unsigned long)[arrWard count]);
-    return arrWard;
-}
 -(NSArray *)getDictrictByStateID:(NSString *)stateID
 {
-//    NSArray *arrDictrict = [District MR_findByAttribute:@"stateID" withValue:stateID inContext:__context];
-    NSArray * arrDistrict = [District MR_findByAttribute:@"stateID" withValue:stateID andOrderBy:@"districtName" ascending:YES inContext:__context];
-    for (District * item in arrDistrict) {
-        UA_log(@"%@ \n", item.districtName);
+    NSMutableArray * arrDistrict = [NSMutableArray new];
+    
+    NSArray * allDist = [[TKAPI sharedInstance]getAllDistrict];
+    for (District * item in allDist) {
+        if ([item.stateID isEqualToString:stateID]) {
+            [arrDistrict addObject:item];
+        }
     }
     return arrDistrict;
 }
@@ -288,41 +177,53 @@ static NSManagedObjectContext * __context = nil;
 {
     
 //    NSArray *arrWar = [Ward MR_findByAttribute:@"dicstreetID" withValue:districtID inContext:__context];
-    NSArray * arrWar = [Ward MR_findByAttribute:@"dicstreetID" withValue:districtID andOrderBy:@"wardName" ascending:YES inContext:__context];
-    
-    for (Ward * item in arrWar) {
-        UA_log(@"%@ \n", item.wardName);
+    NSMutableArray * arrWar = [NSMutableArray new];
+    NSArray * allWar = [[TKAPI sharedInstance]getAllwar];
+    for (Ward * item in allWar) {
+        if ([item.dicstreetID isEqualToString :districtID]) {
+            [arrWar addObject:item];
+        }
     }
     return arrWar;
 }
 
 -(Ward *)getWarByID:(NSString *)wardID
 {
-    NSArray *arrWard = [Ward MR_findByAttribute:@"wardID" withValue:wardID inContext:__context];
-    if ([arrWard count]==0) {
-        return nil;
+     NSArray * allWar = [[TKAPI sharedInstance]getAllwar];
+    Ward * waSelected ;
+    for (Ward * item in allWar) {
+        if ([item.wardID isEqualToString:wardID]) {
+            waSelected = item;
+            break;
+        }
     }
-    Ward *vResult = [arrWard objectAtIndex:0];
-    return vResult;
+    return waSelected;
 }
 -(State *)getStateByID:(NSString *)stateID
 {
-    NSArray *arrState = [State MR_findByAttribute:@"stateID" withValue:stateID inContext:__context];
-    if ([arrState count]==0) {
-        return nil;
+    NSArray *arrState = [[TKAPI sharedInstance]getAllState];
+    State * staSelected;
+    for (State * item in arrState) {
+        if ([item.stateID isEqualToString:stateID]) {
+            staSelected = item;
+            break;
+        }
     }
-    State *vResult = [arrState objectAtIndex:0];
-    return vResult;
+    return staSelected;
 }
 
 -(District *)getDistrictByID:(NSString *)districtID
 {
-    NSArray *arrDistrict = [District MR_findByAttribute:@"districtID" withValue:districtID inContext:__context];
-    if ([arrDistrict count]==0) {
-        return nil;
+    NSArray *arrDistrict = [[TKAPI sharedInstance]getAllDistrict];
+    District * disSelected;
+    
+    for (District * item in arrDistrict) {
+        if ([item.districtID isEqualToString:districtID]) {
+            disSelected = item;
+            break;
+        }
     }
-    District *vResult = [arrDistrict objectAtIndex:0];
-    return vResult;
+    return disSelected;
 
 }
 @end

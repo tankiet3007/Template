@@ -31,6 +31,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
+    //            UA_log(@"%@",dict);
     [self initNavigationBar];
     [self setupFooterView];
     [self initData];

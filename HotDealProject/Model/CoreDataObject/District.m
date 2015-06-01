@@ -11,9 +11,4 @@
 
 @implementation District
 
-@dynamic stateID;
-@dynamic districtID;
-@dynamic districtName;
-@dynamic districtLogictic;
-
 @end

@@ -622,12 +622,10 @@
 {
     if ([self isInternetReachable]) {
         if (indexPath.section == 4) {
-            NSDictionary * dict =  [[TKAPI sharedInstance]readFile:@"location.json"];
-//            UA_log(@"%@",dict);
             HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
             DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
             detail.iProductID = dealObj.product_id;
-            [[TKDatabase sharedInstance]getDictrictByStateID:@"423"];
+//            [[TKDatabase sharedInstance]getDictrictByStateID:@"423"];
             
             [self.navigationController pushViewController:detail animated:YES];
         }

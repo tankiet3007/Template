@@ -10,10 +10,10 @@
 #import <CoreData/CoreData.h>
 
 
-@interface State : NSManagedObject
+@interface State :NSObject
 
-@property (nonatomic, retain) NSString * stateID;
-@property (nonatomic, retain) NSString * stateName;
-@property (nonatomic, retain) NSString * stateLogictic;
+@property (nonatomic, strong) NSString * stateID;
+@property (nonatomic, strong) NSString * stateName;
+@property (nonatomic, strong) NSString * stateLogictic;
 
 @end

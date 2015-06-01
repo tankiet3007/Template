@@ -74,7 +74,7 @@ typedef enum {
 -(void)initData
 {
     //    arrProvince = [NSArray arrayWithObjects:@"TP.HCM",@"Hà Nội",@"Đà Nẵng",@"Vũng Tàu", nil];
-    arrProvince = [[TKDatabase sharedInstance]getAllState];
+    arrProvince = [[TKAPI sharedInstance]getAllState];
     arrDistrict = [NSArray arrayWithObjects:@"Quận 1",@"Quận 2",@"Quận 3",@"Quận 4",@"Quận 5",@"Quận 6",@"Quận 7", nil];
     arrWard = [NSArray arrayWithObjects:@"Nhà riêng",@"Cơ quan", nil];
 }
