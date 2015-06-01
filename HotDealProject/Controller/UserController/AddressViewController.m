@@ -202,9 +202,9 @@
 }
 -(void)updateTableAddress:(NSString *)strAddress
 {
+    //call server to get newest address
     [arrAddress addObject:strAddress];
     [tableAddress setFrame:CGRectMake(10, 20, ScreenWidth -20 , RowHeight * [arrAddress count] + 50)];
-    
     [tableAddress reloadData];
     //    tableAddress = [[UITableView alloc]initWithFrame:CGRectMake(10, 20, ScreenWidth -20 , RowHeight * [arrAddress count] + 50) style:UITableViewStylePlain];
     

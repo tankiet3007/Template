@@ -311,13 +311,13 @@
             return;
         }
         dictRespone = dict;
-        NSDictionary * dictAddress = [dict objectForKey:@"address"];
-        NSDictionary * dictWard = [dictAddress objectForKey:@"s_ward"];
-        NSDictionary * dictDictrict = [dictAddress objectForKey:@"s_district"];
-        NSDictionary * dictState = [dictAddress objectForKey:@"s_state"];
-        NSString * floorOptional = F(@"Lầu: %@",[dictAddress objectForKey:@"s_address_note"]);
-        strAddressL = F(@"%@\n%@\n%d %@ %@ %@ %@", [dict objectForKey:@"fullname"],[dict objectForKey:@"phone"],[[dictAddress objectForKey:@"s_address"]intValue],[dictWard objectForKey:@"name"],[dictDictrict objectForKey:@"name"],[dictState objectForKey:@"name"], floorOptional);
-        UA_log(@"%@", dict);
+//        NSDictionary * dictAddress = [dict objectForKey:@"address"];
+//        NSDictionary * dictWard = [dictAddress objectForKey:@"s_ward"];
+//        NSDictionary * dictDictrict = [dictAddress objectForKey:@"s_district"];
+//        NSDictionary * dictState = [dictAddress objectForKey:@"s_state"];
+//        NSString * floorOptional = F(@"Lầu: %@",[dictAddress objectForKey:@"s_address_note"]);
+//        strAddressL = F(@"%@\n%@\n%d %@ %@ %@ %@", [dict objectForKey:@"fullname"],[dict objectForKey:@"phone"],[[dictAddress objectForKey:@"s_address"]intValue],[dictWard objectForKey:@"name"],[dictDictrict objectForKey:@"name"],[dictState objectForKey:@"name"], floorOptional);
+//        UA_log(@"%@", dict);
         
         [tableInfo reloadData];
     }];

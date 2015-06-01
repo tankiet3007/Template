@@ -172,38 +172,48 @@ typedef enum {
             case 0: {
                 
                 NSDictionary * dictDictrict = [dictAddressSelected objectForKey:@"s_district"];
-                //                NSDictionary * dictDictrict = [dictItem objectForKey:@"s_district"];
-                //                NSDictionary * dictState = [dictItem objectForKey:@"s_state"];
-                
                 if ([dictDictrict objectForKey:@"name"] != nil && ![[dictDictrict objectForKey:@"name"] isEqualToString:@""]) {
                     arrDistrict = [[TKDatabase sharedInstance]getDictrictByStateID:sStateID];
                     lbl = lblDistrict = [self makeLabel:F(@"   %@",[dictDictrict objectForKey:@"name"])];
                     lbl.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+                    
+                    // Textfield dimensions
+                    lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
+                    cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+                    
+                    UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox2)];
+                    // if labelView is not set userInteractionEnabled, you must do so
+                    [lbl setUserInteractionEnabled:YES];
+                    [lbl addGestureRecognizer:gesture];
+                    
+                    UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
+                    [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
+                    [cellRe addSubview:imgArrow];
+                    [cellRe addSubview:lbl];
+                    return cellRe;
+                    
                 }
                 else
                 {
                     lbl = lblDistrict = [self makeLabel:@"  Quận / Huyện"];
                     lblDistrict.userInteractionEnabled = NO;
+                    
+                    // Textfield dimensions
+                    lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
+                    cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+                    [cellRe addSubview:lbl];
+                    UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
+                    [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
+                    [cellRe addSubview:imgArrow];
+                    
+                    return cellRe;
                 }
-                [cellRe addSubview:lbl];
+                
                 break ;
             }
         }
         
-        // Textfield dimensions
-        lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
-        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-        
-        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox2)];
-        // if labelView is not set userInteractionEnabled, you must do so
-        [lbl setUserInteractionEnabled:YES];
-        [lbl addGestureRecognizer:gesture];
-        
-        UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
-        [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
-        [cellRe addSubview:imgArrow];
-        
-        return cellRe;
+       
         
     }
     if (indexPath.section == 3)
@@ -223,31 +233,39 @@ typedef enum {
                     
                     lbl = lblWard = [self makeLabel:F(@"   %@",[dictWar objectForKey:@"name"])];
                     lbl.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+                    
+                    // Textfield dimensions
+                    lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
+                    cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+                    [cellRe addSubview:lbl];
+                    UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox3)];
+                    // if labelView is not set userInteractionEnabled, you must do so
+                    [lbl setUserInteractionEnabled:YES];
+                    [lbl addGestureRecognizer:gesture];
+                    UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
+                    [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
+                    [cellRe addSubview:imgArrow];
+                    
+                    return cellRe;
                 }
                 else
                 {
                     lbl = lblWard = [self makeLabel:@"  Phường / Xã"];
                     lblWard.userInteractionEnabled = NO;
+                    
+                    lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
+                    cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+                    [cellRe addSubview:lbl];
+                    UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
+                    [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
+                    [cellRe addSubview:imgArrow];
+                       return cellRe;
                 }
-                [cellRe addSubview:lbl];
+               
                 break ;
             }
         }
         
-        // Textfield dimensions
-        lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
-        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-        
-        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox3)];
-        // if labelView is not set userInteractionEnabled, you must do so
-        [lbl setUserInteractionEnabled:YES];
-        [lbl addGestureRecognizer:gesture];
-        UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
-        [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
-        [cellRe addSubview:imgArrow];
-        
-        
-        return cellRe;
         
     }
     if (indexPath.section == 1)
@@ -373,9 +391,15 @@ typedef enum {
             stateSelected = state;
             lblProvince.text = F(@"  %@",state.stateName);
             lblDistrict.userInteractionEnabled = YES;
+            UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox2)];
+            // if labelView is not set userInteractionEnabled, you must do so
+            [lblDistrict setUserInteractionEnabled:YES];
+            [lblDistrict addGestureRecognizer:gesture];
+            
             pickerViewMain.hidden = YES;
             toolbar.hidden = YES;
             lblProvince.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+//            [self.tableView reloadData];
             break;
         }
         case DistrictCb:
@@ -390,6 +414,11 @@ typedef enum {
             pickerViewMain.hidden = YES;
             lblWard.userInteractionEnabled = YES;
             lblDistrict.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+            UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox3)];
+            // if labelView is not set userInteractionEnabled, you must do so
+            [lblWard setUserInteractionEnabled:YES];
+            [lblWard addGestureRecognizer:gesture];
+            
             break;
         }
         case WardCb:
