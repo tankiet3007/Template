@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -16,6 +16,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clickme-1-320x200" translatesAutoresizingMaskIntoConstraints="NO" id="MsX-IZ-b2K">
+                        <rect key="frame" x="3" y="10" width="314" height="218"/>
+                    </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0SJ-UJ-Myg">
                         <rect key="frame" x="3" y="199" width="314" height="33"/>
                         <subviews>
@@ -66,9 +69,6 @@
                             <constraint firstAttribute="trailing" secondItem="eQx-dp-hdn" secondAttribute="trailing" constant="22" id="aAz-S0-WZD"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clickme-1-320x200" translatesAutoresizingMaskIntoConstraints="NO" id="MsX-IZ-b2K">
-                        <rect key="frame" x="3" y="10" width="314" height="159"/>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MỚI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfJ-mP-xIc">
                         <rect key="frame" x="274" y="148" width="42" height="21"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -96,13 +96,13 @@
                     <constraint firstItem="MsX-IZ-b2K" firstAttribute="leading" secondItem="0SJ-UJ-Myg" secondAttribute="leading" id="4OC-YC-1sG"/>
                     <constraint firstAttribute="trailingMargin" secondItem="dfJ-mP-xIc" secondAttribute="trailing" constant="-4" id="8Xv-eS-eMT"/>
                     <constraint firstItem="MsX-IZ-b2K" firstAttribute="trailing" secondItem="3Re-2V-lUP" secondAttribute="trailing" id="9jz-Ur-orH"/>
-                    <constraint firstItem="3Re-2V-lUP" firstAttribute="top" secondItem="MsX-IZ-b2K" secondAttribute="bottom" id="EvY-Ys-1Bu"/>
+                    <constraint firstItem="3Re-2V-lUP" firstAttribute="top" secondItem="MsX-IZ-b2K" secondAttribute="bottom" constant="-59" id="EvY-Ys-1Bu"/>
                     <constraint firstItem="0SJ-UJ-Myg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="199" id="KI8-Pg-p7h"/>
                     <constraint firstAttribute="centerY" secondItem="3Re-2V-lUP" secondAttribute="centerY" constant="-70" id="Lp4-Xp-Jqq"/>
-                    <constraint firstItem="dfJ-mP-xIc" firstAttribute="bottom" secondItem="MsX-IZ-b2K" secondAttribute="bottom" id="NGq-A1-gK1"/>
+                    <constraint firstItem="dfJ-mP-xIc" firstAttribute="bottom" secondItem="MsX-IZ-b2K" secondAttribute="bottom" constant="-59" id="NGq-A1-gK1"/>
                     <constraint firstItem="MsX-IZ-b2K" firstAttribute="leading" secondItem="3Re-2V-lUP" secondAttribute="leading" id="OJQ-lE-WsV"/>
                     <constraint firstItem="MsX-IZ-b2K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-5" id="Pnw-qI-KVP"/>
-                    <constraint firstAttribute="centerY" secondItem="MsX-IZ-b2K" secondAttribute="centerY" constant="24.5" id="QgV-iV-WHb"/>
+                    <constraint firstAttribute="centerY" secondItem="MsX-IZ-b2K" secondAttribute="centerY" constant="-5" id="QgV-iV-WHb"/>
                     <constraint firstItem="MsX-IZ-b2K" firstAttribute="trailing" secondItem="0SJ-UJ-Myg" secondAttribute="trailing" id="SLC-Xd-LIM"/>
                     <constraint firstAttribute="bottomMargin" secondItem="0SJ-UJ-Myg" secondAttribute="bottom" constant="-12" id="T3V-1y-Aoh"/>
                     <constraint firstItem="dfJ-mP-xIc" firstAttribute="top" secondItem="6KO-hE-q1s" secondAttribute="bottom" constant="89" id="TOv-bN-nTe"/>

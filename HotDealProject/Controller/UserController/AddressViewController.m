@@ -9,7 +9,7 @@
 #import "AddressViewController.h"
 #import "AppDelegate.h"
 #import "AddressCell.h"
-
+#import "TKDatabase.h"
 @interface AddressViewController ()
 
 @end
@@ -18,7 +18,7 @@
 {
     NSMutableArray * arrRawAddress;
     NSMutableArray * arrAddress;
-    
+    MBProgressHUD *HUD;
     UIView * vFooter;
 }
 #define RowHeight 70
@@ -32,6 +32,7 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     //            UA_log(@"%@",dict);
+    [self initHUD];
     [self initNavigationBar];
     [self setupFooterView];
     [self initData];
@@ -54,7 +55,11 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    [HUD hide:YES];
+}
 -(void)initData
 {
     arrRawAddress = [NSMutableArray new];
@@ -81,14 +86,14 @@
 }
 -(void)initUITableView
 {
-    tableAddress = [[UITableView alloc]initWithFrame:CGRectMake(10, 20, ScreenWidth -20 , RowHeight * [arrAddress count] + 50) style:UITableViewStylePlain];
+    tableAddress = [[UITableView alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth -20 , RowHeight * [arrAddress count] + 20) style:UITableViewStyleGrouped];
     [self.view addSubview:tableAddress];
     //    [tableViewDays setDragDelegate:self refreshDatePermanentKey:@"HotNewsList"];
     tableAddress.backgroundColor = [UIColor whiteColor];
     tableAddress.dataSource = self;
     tableAddress.delegate = self;
-    tableAddress.layer.borderWidth = 0.3;
-    tableAddress.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//    tableAddress.layer.borderWidth = 0.3;
+//    tableAddress.layer.borderColor = [UIColor lightGrayColor].CGColor;
     tableAddress.separatorColor = [UIColor clearColor];
     tableAddress.showsVerticalScrollIndicator = NO;
     tableAddress.sectionHeaderHeight = 0.0;
@@ -202,12 +207,19 @@
 }
 -(void)updateTableAddress:(NSString *)strAddress
 {
-    //call server to get newest address
-    [arrAddress addObject:strAddress];
-    [tableAddress setFrame:CGRectMake(10, 20, ScreenWidth -20 , RowHeight * [arrAddress count] + 50)];
-    [tableAddress reloadData];
-    //    tableAddress = [[UITableView alloc]initWithFrame:CGRectMake(10, 20, ScreenWidth -20 , RowHeight * [arrAddress count] + 50) style:UITableViewStylePlain];
-    
+    User * user = [[TKDatabase sharedInstance]getUserInfo];
+    NSString * strParam = F(@"user_id=%@",user.user_id);
+    [HUD show:YES];
+    [[TKAPI sharedInstance]getRequest:strParam withURL:URL_GET_USERINFO completion:^(NSDictionary * dict, NSError *error) {
+        [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
+        dictResponse = dict;
+        [self initData];
+        [tableAddress setFrame:CGRectMake(10, 20, ScreenWidth -20 , RowHeight * [arrAddress count] + 50)];
+        [tableAddress reloadData];
+    }];
 }
 /*
  #pragma mark - Navigation

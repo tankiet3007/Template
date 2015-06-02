@@ -133,8 +133,8 @@
     User * user = [[TKDatabase sharedInstance]getUserInfo];
     NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     user.user_id,@"user_id",
-                                    [tfOldPassword.text MD5], @"old_password",
-                                     [tfNewPassword.text MD5], @"new_password",
+                                    tfOldPassword.text, @"old_password",
+                                    tfNewPassword.text, @"new_password",
                                     nil];
     
     

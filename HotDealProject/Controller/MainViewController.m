@@ -443,20 +443,20 @@
 //{
 //    return 60;
 //}
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (tableView.isDragging) {
-        UIView *myView = cell.contentView;
-        CALayer *layer = myView.layer;
-        CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
-        rotationAndPerspectiveTransform.m34 = 1.0 / -1000;
-        rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, -M_PI*0.5, 1.0f, 0.0f, 0.0f);
-        
-        layer.transform = rotationAndPerspectiveTransform;
-        [UIView animateWithDuration:.5 animations:^{
-            layer.transform = CATransform3DIdentity;
-        }];
-    }
-}
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (tableView.isDragging) {
+//        UIView *myView = cell.contentView;
+//        CALayer *layer = myView.layer;
+//        CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
+//        rotationAndPerspectiveTransform.m34 = 1.0 / -1000;
+//        rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, -M_PI*0.5, 1.0f, 0.0f, 0.0f);
+//        
+//        layer.transform = rotationAndPerspectiveTransform;
+//        [UIView animateWithDuration:.5 animations:^{
+//            layer.transform = CATransform3DIdentity;
+//        }];
+//    }
+//}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

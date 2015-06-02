@@ -43,6 +43,8 @@ typedef enum {
     
     NSString * sStateID;
     NSString * sDistrictID;
+    MBProgressHUD *HUD;
+
 }
 @synthesize pickerViewMain;
 @synthesize dictResponse;
@@ -53,6 +55,7 @@ typedef enum {
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     [self initNavigationBar];
+    [self initHUD];
     NSArray * arrProfile = [dictResponse objectForKey:@"profiles"];
     dictAddressSelected = [arrProfile objectAtIndex:iIndexAddress];
     cbType = ProvinceCb;
@@ -608,10 +611,95 @@ typedef enum {
     [btn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
     return btn;
 }
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    //    HUD.labelText = LS(@"LoadingData");
+    [HUD hide:YES];
+}
 -(void)registerClick
 {
-    UA_log(@"GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY");
-    [self.delegate updateTableAddress:@"GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY"];
-    [self.navigationController popViewControllerAnimated:YES];
+//    UA_log(@"GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY");
+    if (isModify == TRUE) {
+        NSString * profile_id = [dictAddressSelected objectForKey:@"profile_id"];
+        User * user = [[TKDatabase sharedInstance]getUserInfo];
+        NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        user.user_id,@"user_id",
+                                        tfFullname.text, @"s_firstname",
+                                        tfAddess.text, @"s_address",
+                                        tfStreetName.text,@"s_address_2",
+                                        tfBuilding.text, @"s_address_note",
+                                        stateSelected.stateID, @"s_state",
+                                        districtSelected.districtID,@"s_district",
+                                        wardSelected.wardID, @"s_ward",
+                                        tfPhone.text, @"s_phone",
+                                        profile_id,@"profile_id",
+                                        nil];
+        
+        
+        [HUD show:YES];
+        [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_UPDATE_PROFILE completion:^(NSDictionary * dict, NSError *error) {
+            [HUD hide:YES];
+            if (dict == nil) {
+                return;
+            }
+            BOOL response = [[dict objectForKey:@"response"]boolValue];
+            if (response == TRUE) {
+                //            NSString* user_id = F(@"%@",[dict objectForKey:@"user_id"]);
+                //            [[TKDatabase sharedInstance]addUser:user_id];
+                ALERT(LS(@"MessageBoxTitle"), @"Cập nhật địa chỉ giao hàng thành công");
+                [self.delegate updateTableAddress:@""];
+                [self.navigationController popViewControllerAnimated:YES];
+                //            [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
+                //            MainViewController * mainVC = [[MainViewController alloc]init];
+                //            [self.navigationController pushViewController:mainVC animated:YES];
+            }
+            else
+            {
+                NSString * response = [dict objectForKey:@"reason"];
+                ALERT(LS(@"MessageBoxTitle"),response);
+            }
+        }];
+    }
+    else
+    {
+    User * user = [[TKDatabase sharedInstance]getUserInfo];
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    user.user_id,@"user_id",
+                                    tfFullname.text, @"s_firstname",
+                                    tfAddess.text, @"s_address",
+                                    tfStreetName.text,@"s_address_2",
+                                    tfBuilding.text, @"s_address_note",
+                                    stateSelected.stateID, @"s_state",
+                                    districtSelected.districtID,@"s_district",
+                                    wardSelected.wardID, @"s_ward",
+                                    tfPhone.text, @"s_phone",
+                                    nil];
+    
+    
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_ADD_PROFILE completion:^(NSDictionary * dict, NSError *error) {
+        [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
+        BOOL response = [[dict objectForKey:@"response"]boolValue];
+        if (response == TRUE) {
+            //            NSString* user_id = F(@"%@",[dict objectForKey:@"user_id"]);
+            //            [[TKDatabase sharedInstance]addUser:user_id];
+            ALERT(LS(@"MessageBoxTitle"), @"Thêm địa chỉ giao hàng thành công");
+            [self.delegate updateTableAddress:@""];
+            [self.navigationController popViewControllerAnimated:YES];
+            //            [[NSNotificationCenter defaultCenter] postNotificationName:@"notiUpdateLeftmenu" object:nil];
+            //            MainViewController * mainVC = [[MainViewController alloc]init];
+            //            [self.navigationController pushViewController:mainVC animated:YES];
+        }
+        else
+        {
+            NSString * response = [dict objectForKey:@"reason"];
+            ALERT(LS(@"MessageBoxTitle"),response);
+        }
+    }];
+    }
 }
 @end

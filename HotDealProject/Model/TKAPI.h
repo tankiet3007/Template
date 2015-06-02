@@ -15,12 +15,14 @@
 static NSString * const URL_GET_LOCATION = @"http://dev.hotdeal.vn/mapi/get_location";
 static NSString * const URL_SIGN_UP = @"http://dev.hotdeal.vn/mapi/sign-up";
 static NSString * const URL_SIGN_IN = @"http://dev.hotdeal.vn/mapi/sign-in";
-static NSString * const URL_CONNECT_SOCICAL = @"http://dev.hotdeal.vn/mapi/connect-socical";
+static NSString * const URL_CONNECT_SOCICAL = @"http://dev.hotdeal.vn/mapi/connect_social";
 static NSString * const URL_SIGN_OUT = @"http://dev.hotdeal.vn/mapi/sign-out";
 static NSString * const URL_FORGOT_PASSWORD = @"http://dev.hotdeal.vn/mapi/reset-password";
 static NSString * const URL_GET_USERINFO = @"http://dev.hotdeal.vn/mapi/get_user_info";//http://hotdeal.vn/mapi/update-user-info
 static NSString * const URL_UPDATE_USER = @"http://dev.hotdeal.vn/mapi/update-user-info";
 static NSString * const URL_CHANGE_PASSWORD = @"http://dev.hotdeal.vn/mapi/change-password";
+static NSString * const URL_UPDATE_PROFILE = @"http://dev.hotdeal.vn/mapi/update_profile";
+static NSString * const URL_ADD_PROFILE = @"http://dev.hotdeal.vn/mapi/create_profile";
 
 #pragma mark for deal
 static NSString * const URL_GET_ODER_LIST = @"http://dev.hotdeal.vn/mapi/get-order-list";
@@ -35,8 +37,8 @@ static NSString * const URL_LIST_CART = @"http://dev.hotdeal.vn/mapi/list_cart";
 static NSString * const URL_GET_PAYMENT_METHOD = @"http://dev.hotdeal.vn/mapi/get_payment_methods";
 static NSString * const URL_GET_SHIPPING_METHOD = @"http://dev.hotdeal.vn/mapi/get_shipping_methods";
 static NSString * const URL_UPDATE_CART = @"http://dev.hotdeal.vn/mapi/update_cart";
-static NSString * const URL_GET_USER_POINT = @"http://dev.hotdeal.vn/mapi/get-user-points";
-//http://hotdeal.vn/mapi/get-user-points
+static NSString * const URL_GET_USER_POINT = @"http://dev.hotdeal.vn/mapi/get-user-points";//search_auto_complete
+static NSString * const URL_SEARCH_AUTO_COMPLETE = @"http://dev.hotdeal.vn/mapi/search_auto_complete";
 @interface TKAPI : NSObject
 -(NSDictionary *)readFile:(NSString *)filePath;
 - (void)getRequestLocation:(NSString *)params withURL:(NSString *)url;

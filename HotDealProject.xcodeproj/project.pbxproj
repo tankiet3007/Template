@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E90317861B1DA846007CDA75 /* SearchResultItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E90317851B1DA846007CDA75 /* SearchResultItem.m */; };
 		E911132B1B098BBF00EF49DB /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91113281B098BBF00EF49DB /* GoogleOpenSource.framework */; };
 		E911132C1B098BBF00EF49DB /* GooglePlus.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = E91113291B098BBF00EF49DB /* GooglePlus.bundle */; };
 		E911132D1B098BBF00EF49DB /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E911132A1B098BBF00EF49DB /* GooglePlus.framework */; };
@@ -206,6 +207,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E90317841B1DA846007CDA75 /* SearchResultItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchResultItem.h; path = Model/CoreDataObject/SearchResultItem.h; sourceTree = "<group>"; };
+		E90317851B1DA846007CDA75 /* SearchResultItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchResultItem.m; path = Model/CoreDataObject/SearchResultItem.m; sourceTree = "<group>"; };
 		E91113281B098BBF00EF49DB /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = "../backupfile_hotdeal/google-plus-ios-sdk-1.7.1/GoogleOpenSource.framework"; sourceTree = "<group>"; };
 		E91113291B098BBF00EF49DB /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlus.bundle; path = "../backupfile_hotdeal/google-plus-ios-sdk-1.7.1/GooglePlus.bundle"; sourceTree = "<group>"; };
 		E911132A1B098BBF00EF49DB /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = "../backupfile_hotdeal/google-plus-ios-sdk-1.7.1/GooglePlus.framework"; sourceTree = "<group>"; };
@@ -606,6 +609,8 @@
 				E997CBA61B13307F00B76628 /* State.m */,
 				E997CBA21B13307E00B76628 /* Ward.h */,
 				E997CBA31B13307E00B76628 /* Ward.m */,
+				E90317841B1DA846007CDA75 /* SearchResultItem.h */,
+				E90317851B1DA846007CDA75 /* SearchResultItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1377,6 +1382,7 @@
 				E9AE1FAE1AD80455002E11AC /* LeftMenuViewController.m in Sources */,
 				E9B3DA3D1AE24731009C668D /* AutoSizeTableViewCell.m in Sources */,
 				E9AE202E1AD80A5E002E11AC /* MagicalRecord+iCloud.m in Sources */,
+				E90317861B1DA846007CDA75 /* SearchResultItem.m in Sources */,
 				E9B407C91AE9F7720053D484 /* LoginCell.m in Sources */,
 				E9AE201B1AD80A5E002E11AC /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				E9F179A81AE79D0A004D743E /* ProductListViewController.m in Sources */,
@@ -1620,7 +1626,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "48ce29ec-3745-42d9-86e0-5c83c28062bc";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1643,7 +1649,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "48ce29ec-3745-42d9-86e0-5c83c28062bc";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

@@ -14,7 +14,7 @@
     id<AddressDelegate> delegate;
 }
 @property id<AddressDelegate>delegate;
-@property (nonatomic, strong)  NSDictionary * dictResponse;
+@property (nonatomic, strong) __block NSDictionary * dictResponse;
 @property (nonatomic, strong) NSIndexPath * indexPathSelected;
 @property (nonatomic, strong)UITableView * tableAddress;
 @end

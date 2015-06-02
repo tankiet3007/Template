@@ -5,7 +5,7 @@
 //  Created by Tran Tan Kiet on 4/9/15.
 //  Copyright (c) 2015 Tran Tan Kiet. All rights reserved.
 //
-
+#import "SearchResultItem.h"
 #import "LeftMenuViewController.h"
 #import "APLQuoteCell.h"
 #import "APLSectionInfo.h"
@@ -36,10 +36,11 @@
     SWRevealViewController *revealVC;
     UIButton * btnLogin;
     UITableView * autocompleteTableView;
-    NSMutableArray * autocompleteItem;
+    __block NSMutableArray * autocompleteItem;
     NSMutableArray * rootData;
     BOOL isUserLogged;
     UIImageView * imgLine;
+        MBProgressHUD *HUD;
 }
 #pragma mark - APLTableViewController
 
@@ -58,6 +59,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     revealVC = [self revealViewController];
+    [self initHUD];
     isUserLogged = FALSE;
     [self checkUserLogged];
     // Set up default values.
@@ -70,7 +72,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     self.openSectionIndex = NSNotFound;
     [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:SectionHeaderViewIdentifier];
     
-    [self initDataSearch];
+//    [self initDataSearch];
     [self initSearchTable];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -79,7 +81,12 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
     
 }
-
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    //    HUD.labelText = LS(@"LoadingData");
+    [HUD hide:YES];
+}
 -(void)initData2
 {
     NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -133,12 +140,12 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     arrMenu = [[NSMutableArray alloc]init];
     MenuItem * menuItem = [[MenuItem alloc]init];
     menuItem.name = F(@"Địa điểm : %@", location);
-    menuItem.logo = @"leftmenu_1";
+    menuItem.logo = @"leftmenu_1.jpg";
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Trang chủ";
-    menuItem.logo = @"leftmenu_1";
+    menuItem.logo = @"leftmenu_1.jpg";
     
     //    subMenu = [NSArray arrayWithObjects:@"Sub 1 - 1",@"Sub 1 - 2",@"Sub 1 - 3", nil];
     //    menuItem.subItem = subMenu;
@@ -146,70 +153,70 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Khuyến mãi mới";
-    menuItem.logo = @"leftmenu_2";
+    menuItem.logo = @"leftmenu_2.jpg";
     //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
     //    menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Thời trang - Phụ kiện";
-    menuItem.logo = @"leftmenu_3";
+    menuItem.logo = @"leftmenu_3.jpg";
     subMenu = [NSArray arrayWithObjects:@"Thời trang nữ",@"Thời trang nam",@"Thời trang trẻ em",@"Phụ kiện thời trang",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Nhà hàng - Ẩm thực";
-    menuItem.logo = @"leftmenu_4";
+    menuItem.logo = @"leftmenu_4.jpg";
     subMenu = [NSArray arrayWithObjects:@"Buffet",@"Nhà hàng - Quán ăn",@"Cafe - Kem  - Bánh",@"Thực phẩm",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Sức khoẻ - Làm đẹp";
-    menuItem.logo = @"leftmenu_5";
+    menuItem.logo = @"leftmenu_5.jpg";
     subMenu = [NSArray arrayWithObjects:@"Spa - Thẩm mỹ viện",@"Salon - Làm đẹp",@"Nha khoa - Sức khỏe",@"Mỹ phẩm",@"Dụng cụ làm đẹp",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Du lịch - Khách sạn";
-    menuItem.logo = @"leftmenu_6";
+    menuItem.logo = @"leftmenu_6.jpg";
     subMenu = [NSArray arrayWithObjects:@"Khách sạn - Resorts",@"Tour trong nước",@"Tour nước ngoài",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Điện tử - Công nghệ";
-    menuItem.logo = @"leftmenu_7";
+    menuItem.logo = @"leftmenu_7.jpg";
     subMenu = [NSArray arrayWithObjects:@"Phụ kiện công nghệ",@"Thiết bị điện tử",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Giải trí - Đào tạo";
-    menuItem.logo = @"leftmenu_8";
+    menuItem.logo = @"leftmenu_8.jpg";
     subMenu = [NSArray arrayWithObjects:@"Giải trí - Vui chơi",@"Đào tạo",@"Thể dục thẩm mỹ",@"Sách - Tạp chí", @"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Gia dụng - Nội thất";
-    menuItem.logo = @"leftmenu_9";
+    menuItem.logo = @"leftmenu_9.jpg";
     subMenu = [NSArray arrayWithObjects:@"Nhà cửa - Đời sống",@"Thiết bị điện tử",@"XEM TẤT CẢ", nil];
     menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Tài khoản";
-    menuItem.logo = @"leftmenu_10";
+    menuItem.logo = @"leftmenu_10.jpg";
     //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
     //    menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
     
     menuItem = [[MenuItem alloc]init];
     menuItem.name = @"Hỗ trợ";
-    menuItem.logo = @"leftmenu_11";
+    menuItem.logo = @"leftmenu_11.jpg";
     //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
     //    menuItem.subItem = subMenu;
     [arrMenu addObject:menuItem];
@@ -303,7 +310,9 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AutoCompleteRowIdentifier];
         }
         
-        cell.textLabel.text = [autocompleteItem objectAtIndex:indexPath.row];
+        SearchResultItem * searchValue = [autocompleteItem objectAtIndex:indexPath.row];
+        NSString * strValue = F(@"%@             Số lượng %d", searchValue.strValue, searchValue.iCount);
+        cell.textLabel.text = strValue;
         return cell;
         
     }
@@ -327,7 +336,9 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         SearchViewController *searchVC = [SearchViewController alloc];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:searchVC];
 //        searchVC.searchText = [autocompleteItem objectAtIndex:indexPath.row];
-        searchVC.searchText = @"buffet";
+//        searchVC.searchText = @"buffet";
+        SearchResultItem * searchItem = [autocompleteItem objectAtIndex:indexPath.row];
+        searchVC.searchText = searchItem.strValue;
         [revealVC setFrontViewController:navigationController animated:YES];
         [revealVC revealToggle:nil];
     }
@@ -612,11 +623,19 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    autocompleteTableView.hidden = NO;
+    if (searchText.length >= 3) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//            NSLog(@"parameter1: %d parameter2: %f", parameter1, parameter2);
+            [self initDataSearch];
+        });
+        
+        
+    }
     
-    NSString *substring = [NSString stringWithString:searchBar.text];
-    //    substring = [substring stringByReplacingCharactersInRange:range withString:string];
-    [self searchAutocompleteEntriesWithSubstring:substring];
+//
+//    NSString *substring = [NSString stringWithString:searchBar.text];
+//    //    substring = [substring stringByReplacingCharactersInRange:range withString:string];
+//    [self searchAutocompleteEntriesWithSubstring:substring];
     
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
@@ -633,8 +652,29 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 -(void)initDataSearch
 {
-    rootData = [[NSMutableArray alloc] initWithObjects:@"www.google.com",@"www.zing.vn", @"Tran Tan Kiet",@"Mai Thi Le Quyen", nil];
+//    rootData = [[NSMutableArray alloc] initWithObjects:@"www.google.com",@"www.zing.vn", @"Tran Tan Kiet",@"Mai Thi Le Quyen", nil];
+//    rootData = [[NSMutableArray alloc] init];
+    autocompleteTableView.hidden = NO;
     autocompleteItem = [[NSMutableArray alloc] init];
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    searchBars.text, @"txt_search",
+                                    nil];
+    [HUD show:YES];
+    [[TKAPI sharedInstance]getRequestAFarr:jsonDictionary withURL:URL_SEARCH_AUTO_COMPLETE completion:^(NSArray * arr, NSError *error) {
+        [HUD hide:YES];
+        if (arr == nil) {
+            return;
+        }
+        for (NSDictionary * dictItem in arr) {
+            SearchResultItem * item = [[SearchResultItem alloc]init];
+            item.iCount = [[dictItem objectForKey:@"count"]intValue];
+            item.strValue = [dictItem objectForKey:@"value"];
+            [autocompleteItem addObject:item];
+        }
+//        [autocompleteTableView reloadData];
+        [autocompleteTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    }];
+
 }
 
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {

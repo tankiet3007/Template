@@ -126,7 +126,7 @@
     }
     User * user = [[TKDatabase sharedInstance]getUserInfo];
     NSDictionary * address = [dictResponse objectForKey:@"address"];
-    NSDictionary * dictFinal = [NSDictionary dictionaryWithObjectsAndKeys:user.user_id,@"user_id",email,@"email", fullname, @"fullname",phone, @"phone", birthday,@"birthday",address, @"address", nil];
+    NSDictionary * dictFinal = [NSDictionary dictionaryWithObjectsAndKeys:user.user_id,@"user_id",gender, @"gender",email,@"email", fullname, @"fullname",phone, @"phone", birthday,@"birthday",address, @"address", nil];
     UA_log(@"%@", dictFinal);
     
     [HUD show:YES];
@@ -408,7 +408,12 @@
             case 0: {
                 
                 NSString * strGender = [dictResponse objectForKey:@"gender"];
-                
+                if ([strGender intValue] == 1) {
+                    strGender = @"Nam";
+                }
+                if ([strGender intValue] == 2) {
+                    strGender = @"Nữ";
+                }
                 if (strGender != nil && ![strGender isEqualToString:@""]) {
                     lbl = lblGender = [self makeLabel:F(@"  %@",strGender)];
                     lbl.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];

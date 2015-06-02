@@ -503,7 +503,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
 -(void)normalLogin
 {
     NSString * email = tfEmailLogin.text;
-    NSString * pass = [tfPasswordLogin.text MD5];
+    NSString * pass = tfPasswordLogin.text;
     NSString * auto_signin = @"1";
     NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     email, @"email",
@@ -606,11 +606,11 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
                  NSString * email = [dictionary objectForKey:@"email"];
                  NSString * gender = [dictionary objectForKey:@"gender"];
                  if ([gender isEqualToString:@"male"]) {
-                     gender = @"M";
+                     gender = @"1";
                  }
                  else
                  {
-                     gender = @"F";
+                     gender = @"2";
                  }
                  NSString * name = [dictionary objectForKey:@"name"];
                  NSString * link = [dictionary objectForKey:@"link"];
@@ -707,7 +707,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
         return;
     }
     NSString * email = tfEmail.text;
-    NSString * password = [tfPassword.text MD5];
+    NSString * password = tfPassword.text;
     NSString * fullname = tfFullname.text;
     NSString * birthday = [lblBirthday.text trim];
     NSString * phone = [tfPhone.text trim];
