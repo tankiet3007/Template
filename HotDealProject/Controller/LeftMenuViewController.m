@@ -21,6 +21,7 @@
 #import "HelpViewController.h"
 #import "RegisAndLoginController.h"
 #import "TKDatabase.h"
+#import "AutoCompleteRow.h"
 @interface LeftMenuViewController ()
 @property (nonatomic) NSMutableArray *sectionInfoArray;
 @property (nonatomic) NSInteger openSectionIndex;
@@ -302,17 +303,17 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     }
     else
     {
-        UITableViewCell *cell = nil;
-        static NSString *AutoCompleteRowIdentifier = @"AutoCompleteRowIdentifier";
-        cell = [tableView dequeueReusableCellWithIdentifier:AutoCompleteRowIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc]
-                    initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AutoCompleteRowIdentifier];
+        AutoCompleteRow *cell = nil;
+        static NSString *AutoCompleteRowIdentifier = @"AutoCompleteRow";
+        cell = (AutoCompleteRow *)[tableView dequeueReusableCellWithIdentifier:AutoCompleteRowIdentifier];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"AutoCompleteRow" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
         }
-        
         SearchResultItem * searchValue = [autocompleteItem objectAtIndex:indexPath.row];
-        NSString * strValue = F(@"%@             Số lượng %d", searchValue.strValue, searchValue.iCount);
-        cell.textLabel.text = strValue;
+        cell.strValue.text = searchValue.strValue;
+        cell.strQuantity.text =F(@"%d", searchValue.iCount);
         return cell;
         
     }
@@ -671,7 +672,6 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             item.strValue = [dictItem objectForKey:@"value"];
             [autocompleteItem addObject:item];
         }
-//        [autocompleteTableView reloadData];
         [autocompleteTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     }];
 

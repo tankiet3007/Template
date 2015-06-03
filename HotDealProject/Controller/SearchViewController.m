@@ -24,6 +24,7 @@
     UIView * viewHeader;
     UILabel * lblNumOfDeal;
     MBProgressHUD *HUD;
+    BOOL bForceStop;
 }
 @synthesize tableViewSearch,searchBars;
 @synthesize searchText;
@@ -32,6 +33,7 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [UIColor whiteColor];
+    bForceStop = FALSE;
     [self initSearchBar];
     [self setupHeader];
     
@@ -106,7 +108,7 @@
     
     UA_log(@"%@",jsonDictionary);
     [HUD show:YES];
-    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_SEARCH_DEAL completion:^(NSDictionary * dict, NSError *error) {
         [HUD hide:YES];
         if (dict == nil) {
             return;
@@ -250,17 +252,60 @@
     strDiscountPrice = F(@"%@đ", strDiscountPrice);
     cell.lblDiscountPrice.text = strDiscountPrice;
     cell.lblTitle.text = item.strTitle;
-
     
-    if (item.isNew == FALSE) {
-        cell.lblNew.hidden = YES;
+    if (bForceStop == TRUE) {
+        return cell;
     }
-    if (item.iType == 1) {
-        cell.lblEVoucher.hidden = YES;
+    if (indexPath.row == [arrDeals count] - 1)
+    {
+        [self loadMoreDeal];
     }
-
+    
+    
     return cell;
+
 }
+
+-(void)loadMoreDeal
+{
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @123, @"category",
+                                    @437, @"city",
+                                    [NSNumber numberWithInteger:[arrDeals count]], @"fetch_count",
+                                    [NSNumber numberWithInt:30], @"offset",
+                                    @"newest",@"fetch_type",
+                                    searchText,@"search_text",
+                                    nil];
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
+        [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
+        NSArray * arrProducts = [dict objectForKey:@"product"];
+        if ([arrProducts count] == 0) {
+            bForceStop = YES;
+            return;
+        }
+        
+        for (NSDictionary * dictItem in arrProducts) {
+            DealObject * item = [[DealObject alloc]init];
+            item.strTitle = [dictItem objectForKey:@"title"];
+            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
+            item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
+            item.strBrandImage = [dictItem objectForKey:@"image_link"];
+            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            [arrDeals addObject:item];
+        }
+        UA_log(@"%lu item", [arrDeals count]);
+        [tableViewSearch reloadData];
+    }];
+    
+}
+
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 84;

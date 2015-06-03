@@ -202,7 +202,7 @@
                   moduleName = "HotDealProject"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kiettran/Desktop/IOS_Template/HotDealProject/Controller/UserController/RegisAndLoginController.m"
-                  timestampString = "454930592.96214"
+                  timestampString = "454991412.134048"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "542"
@@ -217,7 +217,7 @@
                   moduleName = "HotDealProject"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kiettran/Desktop/IOS_Template/HotDealProject/Controller/UserController/RegisAndLoginController.m"
-                  timestampString = "454930592.962281"
+                  timestampString = "454991412.134372"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "542"
@@ -250,7 +250,7 @@
                   moduleName = "HotDealProject"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kiettran/Desktop/IOS_Template/HotDealProject/Controller/UserController/AddressTableViewController.m"
-                  timestampString = "454930592.963005"
+                  timestampString = "454991412.135526"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "641"
@@ -265,7 +265,7 @@
                   moduleName = "HotDealProject"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kiettran/Desktop/IOS_Template/HotDealProject/Controller/UserController/AddressTableViewController.m"
-                  timestampString = "454930592.963149"
+                  timestampString = "454991412.135721"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "641"
@@ -273,6 +273,22 @@
                   offsetFromSymbolStart = "75">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HotDealProject/Controller/LeftMenuViewController.m"
+            timestampString = "454991346.821294"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

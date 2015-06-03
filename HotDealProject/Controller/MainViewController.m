@@ -554,14 +554,7 @@
         }
         if (indexPath.row == [arrDeals count] - 1)
         {
-            //            [HUD showAnimated:YES whileExecutingBlock:^{
             [self loadMoreDeal];
-            //            }completionBlock:^{
-            //                [self.tableViewMain performSelectorOnMainThread:@selector(reloadData)
-            //                                                       withObject:nil
-            //                                                    waitUntilDone:NO];
-            //
-            //            }];
         }
         
         

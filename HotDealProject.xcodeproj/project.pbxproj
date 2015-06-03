@@ -187,6 +187,8 @@
 		E9D9BB171AFB5BA200FF07AB /* OrderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D9BB161AFB5BA200FF07AB /* OrderInfoViewController.m */; };
 		E9D9BB1B1AFB65C600FF07AB /* ProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D9BB191AFB65C600FF07AB /* ProductTableViewCell.m */; };
 		E9D9BB1C1AFB65C600FF07AB /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D9BB1A1AFB65C600FF07AB /* ProductTableViewCell.xib */; };
+		E9E876761B1E972D004AB156 /* AutoCompleteRow.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E876741B1E972D004AB156 /* AutoCompleteRow.m */; };
+		E9E876771B1E972D004AB156 /* AutoCompleteRow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9E876751B1E972D004AB156 /* AutoCompleteRow.xib */; };
 		E9F179A81AE79D0A004D743E /* ProductListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F179A71AE79D0A004D743E /* ProductListViewController.m */; };
 		E9F179AC1AE7A195004D743E /* ShortDealInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F179AA1AE7A195004D743E /* ShortDealInfoCell.m */; };
 		E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9F179AB1AE7A195004D743E /* ShortDealInfoCell.xib */; };
@@ -530,6 +532,9 @@
 		E9D9BB181AFB65C600FF07AB /* ProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductTableViewCell.h; path = Control/ProductTableViewCell.h; sourceTree = "<group>"; };
 		E9D9BB191AFB65C600FF07AB /* ProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductTableViewCell.m; path = Control/ProductTableViewCell.m; sourceTree = "<group>"; };
 		E9D9BB1A1AFB65C600FF07AB /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProductTableViewCell.xib; path = Control/ProductTableViewCell.xib; sourceTree = "<group>"; };
+		E9E876731B1E972D004AB156 /* AutoCompleteRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoCompleteRow.h; path = Control/AutoCompleteRow.h; sourceTree = "<group>"; };
+		E9E876741B1E972D004AB156 /* AutoCompleteRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AutoCompleteRow.m; path = Control/AutoCompleteRow.m; sourceTree = "<group>"; };
+		E9E876751B1E972D004AB156 /* AutoCompleteRow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AutoCompleteRow.xib; path = Control/AutoCompleteRow.xib; sourceTree = "<group>"; };
 		E9F179A61AE79D0A004D743E /* ProductListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductListViewController.h; path = Controller/ProductListViewController.h; sourceTree = "<group>"; };
 		E9F179A71AE79D0A004D743E /* ProductListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductListViewController.m; path = Controller/ProductListViewController.m; sourceTree = "<group>"; };
 		E9F179A91AE7A195004D743E /* ShortDealInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShortDealInfoCell.h; path = Control/ShortDealInfoCell.h; sourceTree = "<group>"; };
@@ -727,6 +732,9 @@
 				E9F3AB881B00639A00A91D9C /* AddressCell.h */,
 				E9F3AB891B00639A00A91D9C /* AddressCell.m */,
 				E9F3AB8A1B00639A00A91D9C /* AddressCell.xib */,
+				E9E876731B1E972D004AB156 /* AutoCompleteRow.h */,
+				E9E876741B1E972D004AB156 /* AutoCompleteRow.m */,
+				E9E876751B1E972D004AB156 /* AutoCompleteRow.xib */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -1323,6 +1331,7 @@
 				E97B700D1ADA01AF0099B5C2 /* DealItem.xib in Resources */,
 				E9F3AB8C1B00639A00A91D9C /* AddressCell.xib in Resources */,
 				E95945541ADB69AC00CDA3FF /* SectionHeaderView.xib in Resources */,
+				E9E876771B1E972D004AB156 /* AutoCompleteRow.xib in Resources */,
 				E9BAB7801AE8D8E9009BC234 /* ProductInfoStoredCell.xib in Resources */,
 				E9C049F41AE0F9360017C5CE /* DealCell.xib in Resources */,
 				E9B24BE21AF873E400322C0F /* BookSuccessViewController.xib in Resources */,
@@ -1453,6 +1462,7 @@
 				E9485B981AE006E2005D1688 /* AFHTTPRequestOperationManager.m in Sources */,
 				E959454F1ADB661F00CDA3FF /* APLSectionInfo.m in Sources */,
 				E9AE20261AD80A5E002E11AC /* NSManagedObjectContext+MagicalRecord.m in Sources */,
+				E9E876761B1E972D004AB156 /* AutoCompleteRow.m in Sources */,
 				E9C2E8251AE4BA9000D98DCC /* MenuTableViewCell.m in Sources */,
 				E9AE20201AD80A5E002E11AC /* NSManagedObject+MagicalAggregation.m in Sources */,
 				E9AE20311AD80A5E002E11AC /* MagicalRecord+ShorthandSupport.m in Sources */,
