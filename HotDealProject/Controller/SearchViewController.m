@@ -25,6 +25,7 @@
     UILabel * lblNumOfDeal;
     MBProgressHUD *HUD;
     BOOL bForceStop;
+    int iState;
 }
 @synthesize tableViewSearch,searchBars;
 @synthesize searchText;
@@ -33,6 +34,17 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    NSString *savedValue = [[NSUserDefaults standardUserDefaults]
+                            stringForKey:@"indexSelected"];
+    if (savedValue != nil) {
+        iState = [savedValue intValue];
+    }
+    if (iState == 1) {
+        iState = 437;
+    }
+    else
+        iState = 440;
     bForceStop = FALSE;
     [self initSearchBar];
     [self setupHeader];
@@ -99,7 +111,7 @@
 {
     NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     @123, @"category",
-                                    @437, @"city",
+                                    F(@"%d", iState), @"city",
                                     [NSNumber numberWithInt:iCount], @"fetch_count",
                                     [NSNumber numberWithInt:iOffset], @"offset",
                                     sType,@"fetch_type",
@@ -270,7 +282,7 @@
 {
     NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     @123, @"category",
-                                    @437, @"city",
+                                    F(@"%d", iState), @"city",
                                     [NSNumber numberWithInteger:[arrDeals count]], @"fetch_count",
                                     [NSNumber numberWithInt:30], @"offset",
                                     @"newest",@"fetch_type",

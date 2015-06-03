@@ -20,4 +20,5 @@
 @end
 @protocol AddressDelegate <NSObject>
 -(void)updateAddress:(NSString *)strAddress wIndex:(NSIndexPath *)indexPath;
+-(void)reloadUserInfoData;
 @end

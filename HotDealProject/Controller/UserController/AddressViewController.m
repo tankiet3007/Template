@@ -53,6 +53,7 @@
 }
 -(void)backbtn_click:(id)sender
 {
+    [self.delegate reloadUserInfoData];
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)initHUD {
@@ -86,7 +87,7 @@
 }
 -(void)initUITableView
 {
-    tableAddress = [[UITableView alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth -20 , RowHeight * [arrAddress count] + 20) style:UITableViewStyleGrouped];
+    tableAddress = [[UITableView alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth -20 , RowHeight * [arrAddress count] - 20) style:UITableViewStyleGrouped];
     [self.view addSubview:tableAddress];
     //    [tableViewDays setDragDelegate:self refreshDatePermanentKey:@"HotNewsList"];
     tableAddress.backgroundColor = [UIColor whiteColor];
@@ -198,6 +199,7 @@
     int iIndex = (int)btnEdit.tag;
 //    NSDictionary * dictAddress = [arrRawAddress objectAtIndex:iIndex];
     AddressTableViewController * addressTable = [[AddressTableViewController alloc]init];
+    addressTable.delegate  = self;
     addressTable.dictResponse = dictResponse;
     addressTable.iIndexAddress = iIndex;
     addressTable.strTitle = @"Chỉnh sửa địa chỉ";
@@ -217,7 +219,7 @@
         }
         dictResponse = dict;
         [self initData];
-        [tableAddress setFrame:CGRectMake(10, 20, ScreenWidth -20 , RowHeight * [arrAddress count] + 50)];
+        [tableAddress setFrame:CGRectMake(10, 0, ScreenWidth -20 , RowHeight * [arrAddress count] - 20)];
         [tableAddress reloadData];
     }];
 }

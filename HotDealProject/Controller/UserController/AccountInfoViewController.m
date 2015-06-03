@@ -300,6 +300,10 @@
     indexPathselected = indexPath;
     [tableInfo reloadData];
 }
+-(void)reloadUserInfoData
+{
+    [self updateInfo];
+}
 -(void)updateInfo
 {
     User * user = [[TKDatabase sharedInstance]getUserInfo];

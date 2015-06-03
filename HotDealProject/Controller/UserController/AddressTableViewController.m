@@ -43,6 +43,7 @@ typedef enum {
     
     NSString * sStateID;
     NSString * sDistrictID;
+    
     MBProgressHUD *HUD;
 
 }
@@ -68,6 +69,13 @@ typedef enum {
     sStateID = [dictProvince objectForKey:@"state_id"];
     NSDictionary * dictDistrict = [dictAddressSelected objectForKey:@"s_district"];
     sDistrictID = [dictDistrict objectForKey:@"district_id"];
+    NSDictionary * dictWard = [dictAddressSelected objectForKey:@"s_ward"];
+    stateSelected = [State new];
+    districtSelected = [District new];
+    wardSelected = [Ward new];
+    stateSelected.stateID = sStateID;
+    districtSelected.districtID = sDistrictID;
+    wardSelected.wardID = [dictWard objectForKey:@"ward_id"];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -608,7 +616,7 @@ typedef enum {
     [btn setTitle:@"GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY" forState:UIControlStateNormal];
     [btn setBackgroundColor:[UIColor redColor]];
     btn.titleLabel.font = [UIFont systemFontOfSize:12];
-    [btn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(doneClick) forControlEvents:UIControlEventTouchUpInside];
     return btn;
 }
 - (void)initHUD {
@@ -617,7 +625,7 @@ typedef enum {
     //    HUD.labelText = LS(@"LoadingData");
     [HUD hide:YES];
 }
--(void)registerClick
+-(void)doneClick
 {
 //    UA_log(@"GIAO HÀNG ĐẾN ĐỊA CHỈ NÀY");
     if (isModify == TRUE) {
