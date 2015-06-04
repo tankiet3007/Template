@@ -182,6 +182,11 @@
 		E9D3BD7A1AD6BA5400F7429B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9D3BD791AD6BA5400F7429B /* Images.xcassets */; };
 		E9D3BD7D1AD6BA5400F7429B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D3BD7B1AD6BA5400F7429B /* LaunchScreen.xib */; };
 		E9D3BD891AD6BA5400F7429B /* HotDealProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D3BD881AD6BA5400F7429B /* HotDealProjectTests.m */; };
+		E9D9B5A31B2023B0002C8E92 /* PaymentMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B5A21B2023B0002C8E92 /* PaymentMethod.m */; };
+		E9D9B5B01B202DC4002C8E92 /* MethodObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B5AF1B202DC4002C8E92 /* MethodObject.m */; };
+		E9D9B5B31B203B8D002C8E92 /* ShippingMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B5B21B203B8D002C8E92 /* ShippingMethod.m */; };
+		E9D9B5B71B20563C002C8E92 /* MethodCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B5B51B20563C002C8E92 /* MethodCell.m */; };
+		E9D9B5B81B20563C002C8E92 /* MethodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D9B5B61B20563C002C8E92 /* MethodCell.xib */; };
 		E9D9BB131AFB19A700FF07AB /* UserAmountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D9BB111AFB19A700FF07AB /* UserAmountViewController.m */; };
 		E9D9BB141AFB19A700FF07AB /* UserAmountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D9BB121AFB19A700FF07AB /* UserAmountViewController.xib */; };
 		E9D9BB171AFB5BA200FF07AB /* OrderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D9BB161AFB5BA200FF07AB /* OrderInfoViewController.m */; };
@@ -524,6 +529,15 @@
 		E9D3BD821AD6BA5400F7429B /* HotDealProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HotDealProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D3BD871AD6BA5400F7429B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9D3BD881AD6BA5400F7429B /* HotDealProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotDealProjectTests.m; sourceTree = "<group>"; };
+		E9D9B5A11B2023B0002C8E92 /* PaymentMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaymentMethod.h; path = Controller/PaymentMethod.h; sourceTree = "<group>"; };
+		E9D9B5A21B2023B0002C8E92 /* PaymentMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaymentMethod.m; path = Controller/PaymentMethod.m; sourceTree = "<group>"; };
+		E9D9B5AE1B202DC4002C8E92 /* MethodObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MethodObject.h; path = Model/MethodObject.h; sourceTree = "<group>"; };
+		E9D9B5AF1B202DC4002C8E92 /* MethodObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MethodObject.m; path = Model/MethodObject.m; sourceTree = "<group>"; };
+		E9D9B5B11B203B8D002C8E92 /* ShippingMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShippingMethod.h; path = Controller/ShippingMethod.h; sourceTree = "<group>"; };
+		E9D9B5B21B203B8D002C8E92 /* ShippingMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShippingMethod.m; path = Controller/ShippingMethod.m; sourceTree = "<group>"; };
+		E9D9B5B41B20563C002C8E92 /* MethodCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MethodCell.h; path = Control/MethodCell.h; sourceTree = "<group>"; };
+		E9D9B5B51B20563C002C8E92 /* MethodCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MethodCell.m; path = Control/MethodCell.m; sourceTree = "<group>"; };
+		E9D9B5B61B20563C002C8E92 /* MethodCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MethodCell.xib; path = Control/MethodCell.xib; sourceTree = "<group>"; };
 		E9D9BB101AFB19A700FF07AB /* UserAmountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserAmountViewController.h; path = Controller/UserController/UserAmountViewController.h; sourceTree = "<group>"; };
 		E9D9BB111AFB19A700FF07AB /* UserAmountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserAmountViewController.m; path = Controller/UserController/UserAmountViewController.m; sourceTree = "<group>"; };
 		E9D9BB121AFB19A700FF07AB /* UserAmountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserAmountViewController.xib; path = Controller/UserController/UserAmountViewController.xib; sourceTree = "<group>"; };
@@ -616,6 +630,8 @@
 				E997CBA31B13307E00B76628 /* Ward.m */,
 				E90317841B1DA846007CDA75 /* SearchResultItem.h */,
 				E90317851B1DA846007CDA75 /* SearchResultItem.m */,
+				E9D9B5AE1B202DC4002C8E92 /* MethodObject.h */,
+				E9D9B5AF1B202DC4002C8E92 /* MethodObject.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -735,6 +751,9 @@
 				E9E876731B1E972D004AB156 /* AutoCompleteRow.h */,
 				E9E876741B1E972D004AB156 /* AutoCompleteRow.m */,
 				E9E876751B1E972D004AB156 /* AutoCompleteRow.xib */,
+				E9D9B5B41B20563C002C8E92 /* MethodCell.h */,
+				E9D9B5B51B20563C002C8E92 /* MethodCell.m */,
+				E9D9B5B61B20563C002C8E92 /* MethodCell.xib */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -1167,6 +1186,10 @@
 				E9F3AB861B005BE500A91D9C /* AddressViewController.m */,
 				E9B3A12B1B01DF93000DA4FC /* AddressTableViewController.h */,
 				E9B3A12C1B01DF93000DA4FC /* AddressTableViewController.m */,
+				E9D9B5A11B2023B0002C8E92 /* PaymentMethod.h */,
+				E9D9B5A21B2023B0002C8E92 /* PaymentMethod.m */,
+				E9D9B5B11B203B8D002C8E92 /* ShippingMethod.h */,
+				E9D9B5B21B203B8D002C8E92 /* ShippingMethod.m */,
 			);
 			name = UserController;
 			sourceTree = "<group>";
@@ -1341,6 +1364,7 @@
 				E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */,
 				E9B3DA3E1AE24731009C668D /* AutoSizeTableViewCell.xib in Resources */,
 				E9D9BB1C1AFB65C600FF07AB /* ProductTableViewCell.xib in Resources */,
+				E9D9B5B81B20563C002C8E92 /* MethodCell.xib in Resources */,
 				E972563B1AF9F9580012D8DD /* EmailPromotionViewController.xib in Resources */,
 				E95945511ADB661F00CDA3FF /* carat.png in Resources */,
 				E9B24BDA1AF85C6000322C0F /* PayItemTableViewCell.xib in Resources */,
@@ -1377,6 +1401,7 @@
 				E93D3B011B03266B0004FA3A /* User.m in Sources */,
 				E9485B9C1AE006E2005D1688 /* AFURLConnectionOperation.m in Sources */,
 				E98D4FAD1AF5DE8B0013EF4C /* WebViewController.m in Sources */,
+				E9D9B5B71B20563C002C8E92 /* MethodCell.m in Sources */,
 				E997CBA71B13307F00B76628 /* State.m in Sources */,
 				E9AE203F1AD80A5E002E11AC /* UIImageView+HighlightedWebCache.m in Sources */,
 				E9D3BD721AD6BA5400F7429B /* HotDealProject.xcdatamodeld in Sources */,
@@ -1386,6 +1411,7 @@
 				E9AE208C1AD80B68002E11AC /* StrikeThroughLabel.m in Sources */,
 				E9AE20801AD80B68002E11AC /* INTULocationManager.m in Sources */,
 				E95945521ADB661F00CDA3FF /* MenuItem.m in Sources */,
+				E9D9B5B01B202DC4002C8E92 /* MethodObject.m in Sources */,
 				E9AE202A1AD80A5E002E11AC /* NSPersistentStore+MagicalRecord.m in Sources */,
 				E9B24BD91AF85C6000322C0F /* PayItemTableViewCell.m in Sources */,
 				E9AE1FAE1AD80455002E11AC /* LeftMenuViewController.m in Sources */,
@@ -1399,6 +1425,7 @@
 				E9239A4B1AF7496B00CC4977 /* ChangePasswordViewController.m in Sources */,
 				E959455F1ADB7F9900CDA3FF /* PromotionViewController.m in Sources */,
 				E9C049FD1AE143B80017C5CE /* UIScrollView+SVInfiniteScrolling.m in Sources */,
+				E9D9B5A31B2023B0002C8E92 /* PaymentMethod.m in Sources */,
 				E9AE203B1AD80A5E002E11AC /* UIButton+WebCache.m in Sources */,
 				E959455C1ADB7F7E00CDA3FF /* CategoryViewController.m in Sources */,
 				E9D3BD6F1AD6BA5400F7429B /* AppDelegate.m in Sources */,
@@ -1502,6 +1529,7 @@
 				E9AE208E1AD80B68002E11AC /* BBBadgeBarButtonItem.m in Sources */,
 				E98F11BB1AF9D49600BCDA7E /* PersonalInfoViewController.m in Sources */,
 				E98D4FC81AF62B6E0013EF4C /* ForgotPasswordViewController.m in Sources */,
+				E9D9B5B31B203B8D002C8E92 /* ShippingMethod.m in Sources */,
 				E9384F471ADF985300C3D703 /* TKAPI.m in Sources */,
 				E95945591ADB7CD800CDA3FF /* HotNewDetailViewController.m in Sources */,
 				E9AE208F1AD80B68002E11AC /* CustomBadge.m in Sources */,

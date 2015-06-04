@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface PaymentViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
+#import "PaymentMethod.h"
+#import "ShippingMethod.h"
+#import "MethodObject.h"
+@interface PaymentViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, PaymentMethodDelegate, ShippingMethodDelegate>
 @property (nonatomic, strong) UITableView * tablePayment;
 @end

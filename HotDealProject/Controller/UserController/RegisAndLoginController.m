@@ -615,14 +615,14 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
                  NSString * name = [dictionary objectForKey:@"name"];
                  NSString * link = [dictionary objectForKey:@"link"];
                  NSString * type = @"facebook";
-                 NSString * bod = @"1332043063";
+//                 NSString * bod = @"1332043063";
                  NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                                  email, @"email",
                                                  gender, @"gender",
                                                  name, @"name",
                                                  link, @"link",
                                                  type, @"type",
-                                                 bod, @"bod",
+//                                                 bod, @"bod",
                                                  nil];
                  //NSString * strDate = F(@"%.0f",floor([date timeIntervalSince1970] * 1000));
                  
@@ -712,12 +712,12 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
     NSString * birthday = [lblBirthday.text trim];
     NSString * phone = [tfPhone.text trim];
     NSString * gender = [lblGender.text trim];
-    if ([gender isEqualToString:@"Nam"]) {
-        gender = @"1";
+    if ([gender isEqualToString:@"Nữ"]) {
+        gender = @"2";
     }
     else
     {
-        gender = @"2";
+        gender = @"1";
     }
     NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     email, @"email",

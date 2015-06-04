@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "AutoSizeTableViewCell.h"
 #import "BookSuccessViewController.h"
+
 @interface PaymentViewController ()
 @property (nonatomic, strong) AutoSizeTableViewCell *prototypeCell;
 @end
@@ -19,17 +20,29 @@
 {
     UITextView* tvDescription;
     UIButton* btnPayment;
+     MBProgressHUD *HUD;
+    __block NSDictionary * dictRespone;
+    NSString * strAddressL;
+    NSString * strPaymentMethod;
+    NSString * strShippingMethod;
+    MethodObject * paymentMethod;
+    MethodObject * shippingMethod;
 }
 @synthesize tablePayment;
 #define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([SYSTEM_VERSION compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define IS_IOS8_OR_ABOVE                            (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
-
+- (void)initHUD {
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    [HUD hide:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
+    [self initHUD];
     [self initNavigationbar];
     [self initUITableView];
     // Do any additional setup after loading the view.
@@ -45,6 +58,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if([text isEqualToString:@"\n"]){
+        [textView resignFirstResponder];
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
 -(void)initUITableView
 {
     tablePayment = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, ScreenWidth, ScreenHeight - 66 - 40) style:UITableViewStylePlain];
@@ -57,14 +80,7 @@
     tablePayment.sectionHeaderHeight = 0.0;
     tablePayment.scrollEnabled = NO;
 }
-- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if([text isEqualToString:@"\n"]){
-        [textView resignFirstResponder];
-        return NO;
-    }else{
-        return YES;
-    }
-}
+
 -(void)initNavigationbar
 {
     AppDelegate * appdelegate = ApplicationDelegate;
@@ -74,7 +90,7 @@
 #pragma mark tableview delegate + datasource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return  4;
+    return  5;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -114,16 +130,73 @@
 {
     return UITableViewAutomaticDimension;
 }
+-(void)initData
+{
+    User * user = [[TKDatabase sharedInstance]getUserInfo];
+    NSString * strParam = F(@"user_id=%@",user.user_id);
+    [HUD show:YES];
+    [[TKAPI sharedInstance]getRequest:strParam withURL:URL_GET_USERINFO completion:^(NSDictionary * dict, NSError *error) {
+        [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
+        dictRespone = dict;
+        NSDictionary * dictAddress = [dict objectForKey:@"address"];
+        NSDictionary * dictWard = [dictAddress objectForKey:@"s_ward"];
+        NSDictionary * dictDictrict = [dictAddress objectForKey:@"s_district"];
+        NSDictionary * dictState = [dictAddress objectForKey:@"s_state"];
+        NSString * floorOptional = F(@"Lầu: %@",[dictAddress objectForKey:@"s_address_note"]);
+        if ([dict objectForKey:@"fullname"] == nil || ![[dict objectForKey:@"fullname"] isEqualToString:@""]) {
+            strAddressL = @"";
+        }
+        else if ([dict objectForKey:@"phone"] == nil || ![[dict objectForKey:@"phone"] isEqualToString:@""]) {
+            strAddressL = @"";
+        }
+        else
+            if ([dictState objectForKey:@"name"] == nil || ![[dictState objectForKey:@"name"] isEqualToString:@""]) {
+                strAddressL = @"";
+            }
+            else
+                if ([dictState objectForKey:@"name"] == nil || ![[dictState objectForKey:@"name"] isEqualToString:@""]) {
+                    strAddressL = @"";
+                }
+                else
+                {
+                    strAddressL = F(@"%@\n%@\n%d %@ %@ %@ %@", [dict objectForKey:@"fullname"],[dict objectForKey:@"phone"],[[dictAddress objectForKey:@"s_address"]intValue],[dictWard objectForKey:@"name"],[dictDictrict objectForKey:@"name"],[dictState objectForKey:@"name"], floorOptional);
+                }
+        UA_log(@"%@", dict);
+    }];
 
+}
 - (void)configureCell:(AutoSizeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
         cell.titleLabel.text = @"Địa chỉ giao hàng";
-        cell.desLabel.text = @"Trần Tấn Kiệt\nĐTDĐ:0936459200\nYoco Building\n41, Nguyễn Thị Minh Khai, Phường Bến Nghé, Quận 1, TP Hồ Chí Minh\n\n";
+        if ([strAddressL isEqualToString:@""] || strAddressL == nil) {
+            cell.desLabel.text = @"\n\n";
+        }
+        else
+            cell.desLabel.text = F(@"%@\n\n",strAddressL);
     }
     if (indexPath.section == 1) {
         cell.titleLabel.text = @"Hình thức thanh toán";
-        cell.desLabel.text = @"Bằng tiền mặt khi nhận hàng\n\n";//thay đổi
+//        cell.desLabel.text = @"Bằng tiền mặt khi nhận hàng\n\n";//thay đổi
+        strPaymentMethod = paymentMethod.strMethodName;
+        if ([strPaymentMethod isEqualToString:@""] || strPaymentMethod == nil) {
+            cell.desLabel.text = @"\n\n";
+        }
+        else
+            cell.desLabel.text = F(@"%@\n\n",strPaymentMethod);
+    }
+    if (indexPath.section == 2) {
+        cell.titleLabel.text = @"Hình thức giao hàng";
+//        cell.desLabel.text = @"Bằng tiền mặt khi nhận hàng\n\n";//thay đổi
+        strShippingMethod = shippingMethod.strMethodName;
+        if ([strShippingMethod isEqualToString:@""] || strShippingMethod == nil) {
+            cell.desLabel.text = @"\n\n";
+        }
+        else
+            cell.desLabel.text = F(@"%@\n\n",strShippingMethod);
     }
     
 //    if (indexPath.section == 2) {
@@ -153,7 +226,7 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 2) {
+    if (indexPath.section == 3) {
         UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         
         // Make cell unselectable
@@ -170,7 +243,7 @@
         [cellRe addSubview:tvDescription];
         return cellRe;
     }
-    if (indexPath.section == 3) {
+    if (indexPath.section == 4) {
         UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         
         // Make cell unselectable
@@ -254,7 +327,16 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (indexPath.section == 1) {
+        PaymentMethod * pMethod = [[PaymentMethod alloc]init];
+        pMethod.delegate = self;
+        [self.navigationController pushViewController:pMethod animated:YES];
+    }
+    if (indexPath.section == 2) {
+        ShippingMethod * pMethod = [[ShippingMethod alloc]init];
+         pMethod.delegate = self;
+        [self.navigationController pushViewController:pMethod animated:YES];
+    }
 }
 /*
 #pragma mark - Navigation
@@ -265,5 +347,14 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+-(void)updatePaymentMethod:(MethodObject *)methodObject
+{
+    paymentMethod = methodObject;
+    [tablePayment reloadData];
+}
+-(void)updateShippingMethod:(MethodObject *)methodObject
+{
+    shippingMethod = methodObject;
+        [tablePayment reloadData];
+}
 @end

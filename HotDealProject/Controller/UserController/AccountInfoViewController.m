@@ -13,7 +13,7 @@
 #import "AutoSizeTableViewCell.h"
 
 
-//#import "EmailPromotionViewController.h"
+#import "EmailPromotionViewController.h"
 @interface AccountInfoViewController ()
 #define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([SYSTEM_VERSION compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -170,7 +170,7 @@
 #pragma mark tableview delegate + datasource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return  2;
+    return  3;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -210,23 +210,23 @@
         cell.titleLabel.text = @"Thông tin cá nhân";
         cell.desLabel.text = @"\n";
     }
-//    if (indexPath.section == 1) {
-//        cell.titleLabel.text = @"Email khuyến mãi";
-//        NSString * strProvines = @"";
-//        for (NSString * strItem in arrProvine) {
-//            strProvines = F(@"%@, %@",strItem,strProvines);
-//        }
-//        if ([strProvines isEqualToString:@""]) {
-//            cell.desLabel.text = @"\n";
-//        }
-//        else
-//        {
-//            strProvines = F(@"%@ \n\n",strProvines);
-//            cell.desLabel.text = strProvines;
-//        }
-//    }
-    
     if (indexPath.section == 1) {
+        cell.titleLabel.text = @"Email khuyến mãi";
+        NSString * strProvines = @"";
+        for (NSString * strItem in arrProvine) {
+            strProvines = F(@"%@, %@",strItem,strProvines);
+        }
+        if ([strProvines isEqualToString:@""]) {
+            cell.desLabel.text = @"\n";
+        }
+        else
+        {
+            strProvines = F(@"%@ \n\n",strProvines);
+            cell.desLabel.text = strProvines;
+        }
+    }
+    
+    if (indexPath.section == 2) {
         cell.titleLabel.text = @"Địa chỉ nhận hàng";
         if ([strAddressL isEqualToString:@""] || strAddressL == nil) {
             cell.desLabel.text = @"";
@@ -279,6 +279,11 @@
         [self.navigationController pushViewController:pInfo animated:YES];
     }
     if (indexPath.section == 1) {
+        EmailPromotionViewController * pInfo = [[EmailPromotionViewController alloc]init];
+        pInfo.delegate = self;
+        [self.navigationController pushViewController:pInfo animated:YES];
+    }
+    if (indexPath.section == 2) {
         AddressViewController * addressVC = [[AddressViewController alloc]init];
         addressVC.delegate = self;
         addressVC.indexPathSelected = indexPathselected;

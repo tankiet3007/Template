@@ -369,6 +369,10 @@
                 
                 cellRe.textLabel.text = @"" ;
                 NSString * strBirthday = [dictResponse objectForKey:@"birthday"];
+                if ([strBirthday boolValue] == 0) {
+                    lbl = lblBirthday = [self makeLabel:@"  Ngày sinh"];
+                }
+                else{
                 if (strBirthday != nil && ![strBirthday isEqualToString:@""]) {
                     lbl = lblBirthday = [self makeLabel:F(@"  %@",strBirthday)];
                     lbl.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
@@ -376,6 +380,7 @@
                 else
                 {
                     lbl = lblBirthday = [self makeLabel:@"  Ngày sinh"];
+                }
                 }
                 [cellRe addSubview:lbl];
                 break ;
