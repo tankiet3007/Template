@@ -218,15 +218,16 @@
 }
 -(void)checkout
 {
-    User * user = [[TKDatabase sharedInstance]getUserInfo];
+//    User * user = [[TKDatabase sharedInstance]getUserInfo];
     NSMutableArray * arrProducts = [[NSMutableArray alloc]init];
     for (ProductObject * item in arrProduct) {
         NSDictionary * dictItem = [NSDictionary dictionaryWithObjectsAndKeys:item.strProductID,@"product_id",[NSNumber numberWithInt:item.iCurrentQuantity],@"quantity", nil];
         [arrProducts addObject:dictItem];
     }
-    NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:arrProducts, @"product_list",user.user_id, @"user_id", nil];
-    UA_log(@"%@", params);
+//    NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:arrProducts, @"product_list",user.user_id, @"user_id", nil];
+//    UA_log(@"%@", params);
     PaymentViewController * paymentVC = [[PaymentViewController alloc]init];
+    paymentVC.arrProduct = arrProducts;
     [self.navigationController pushViewController:paymentVC animated:YES];
 }
 -(void)showDropbox:(id)sender

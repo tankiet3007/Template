@@ -12,4 +12,5 @@
 #import "MethodObject.h"
 @interface PaymentViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, PaymentMethodDelegate, ShippingMethodDelegate>
 @property (nonatomic, strong) UITableView * tablePayment;
+@property (nonatomic, strong) NSMutableArray * arrProduct;
 @end

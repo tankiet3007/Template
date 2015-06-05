@@ -29,6 +29,7 @@
     MethodObject * shippingMethod;
 }
 @synthesize tablePayment;
+@synthesize arrProduct;
 #define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([SYSTEM_VERSION compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define IS_IOS8_OR_ABOVE                            (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
@@ -320,6 +321,9 @@
 }
 -(void)paymentClick
 {
+    if ([arrProduct count] == 0|| paymentMethod == nil|| shippingMethod == nil) {
+        return;
+    }
     BookSuccessViewController * bookVC = [[BookSuccessViewController alloc]init];
     [self.navigationController pushViewController:bookVC animated:YES];
 //    ALERT(@"Thong bao", @"Dat hang thanh cong");
