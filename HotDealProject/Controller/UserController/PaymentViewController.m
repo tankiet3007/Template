@@ -324,6 +324,15 @@
     if ([arrProduct count] == 0|| paymentMethod == nil|| shippingMethod == nil) {
         return;
     }
+    User * user = [[TKDatabase sharedInstance]getUserInfo];
+    NSDictionary * dictParameter = [NSDictionary dictionaryWithObjectsAndKeys:user.user_id,@"user_id",paymentMethod.strMethodID,@"payment_method",shippingMethod.strMethodID, @"shipping_method",arrProduct, @"products", nil];
+    [HUD show:YES];
+    [[TKAPI sharedInstance]postRequestAF:dictParameter withURL:URL_GET_USERINFO completion:^(NSDictionary * dict, NSError *error) {
+        [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
+    }];
     BookSuccessViewController * bookVC = [[BookSuccessViewController alloc]init];
     [self.navigationController pushViewController:bookVC animated:YES];
 //    ALERT(@"Thong bao", @"Dat hang thanh cong");

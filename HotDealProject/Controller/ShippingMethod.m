@@ -17,7 +17,7 @@
 @implementation ShippingMethod
 {
     MBProgressHUD *HUD;
-    NSMutableArray * arrPaymentMethod;
+    NSMutableArray * arrShippingMethod;
     MethodObject * methodSelected;
     UIButton* btnDone;
 }
@@ -34,7 +34,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
-    arrPaymentMethod = [[NSMutableArray alloc]init];
+    arrShippingMethod = [[NSMutableArray alloc]init];
     [self initHUD];
     [self initNavigationbar];
     [self initData];
@@ -73,7 +73,7 @@
     if (section == 1) {
         return 1;
     }
-    return [arrPaymentMethod count];
+    return [arrShippingMethod count];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -131,7 +131,7 @@
 
 - (void)configureCell:(MethodCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MethodObject * mObj = [arrPaymentMethod objectAtIndex:indexPath.row];
+    MethodObject * mObj = [arrShippingMethod objectAtIndex:indexPath.row];
     NSString * item = mObj.strMethodName;
     cell.lblTitle.text = item;
     
@@ -152,25 +152,50 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 -(void)initData
+{
+    User * user = [[TKDatabase sharedInstance]getUserInfo];
+    //    NSString * strParam = F(@"user_id=%@",user.user_id);
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    user.user_id, @"user_id",
+                                    nil];
+    
+    [HUD show:YES];
+    [[TKAPI sharedInstance]getRequestAFarr:jsonDictionary withURL:URL_GET_SHIPPING_METHOD completion:^(NSArray * arr, NSError *error) {
+        [HUD hide:YES];
+        if (arr == nil) {
+            return;
+        }
+        for (NSDictionary * dictItem in arr) {
+            MethodObject * mObj = [[MethodObject alloc]init];
+            mObj.strMethodID = [dictItem objectForKey:@"shipping_id"];
+            mObj.strMethodName = [dictItem objectForKey:@"shipping_name"];
+            mObj.strMethodOptional = [dictItem objectForKey:@"shipping_cost"];
+            [arrShippingMethod addObject:mObj];
+        }
+        
+    }];
+    
+}
+
+-(void)initData2
 {
     MethodObject * mObj = [[MethodObject alloc]init];
     mObj.strMethodID = @"11";
     mObj.strMethodName = @"Bằng tiền mặt khi nhận hàng";
-    [arrPaymentMethod addObject:mObj];
+    [arrShippingMethod addObject:mObj];
     
     mObj = [[MethodObject alloc]init];
     mObj.strMethodID = @"11";
     mObj.strMethodName = @"Bằng thẻ ATM nội địa";
-    [arrPaymentMethod addObject:mObj];
+    [arrShippingMethod addObject:mObj];
     
     mObj = [[MethodObject alloc]init];
     mObj.strMethodID = @"11";
     mObj.strMethodName = @"Bằng thẻ thanh toán quốc tế (Visa, master...)";
-    [arrPaymentMethod addObject:mObj];
+    [arrShippingMethod addObject:mObj];
     
-    methodSelected = [arrPaymentMethod objectAtIndex:0];
+    methodSelected = [arrShippingMethod objectAtIndex:0];
     
     //    User * user = [[TKDatabase sharedInstance]getUserInfo];
     //    NSString * strParam = F(@"user_id=%@",user.user_id);
@@ -189,7 +214,7 @@
     MethodCell *cell = (MethodCell *)[tableView cellForRowAtIndexPath:indexPath];
     cell.imgStatus.image = [UIImage imageNamed:@"radio_checked"];
     indexPathSelected = indexPath;
-    methodSelected = [arrPaymentMethod objectAtIndex:indexPath.row];
+    methodSelected = [arrShippingMethod objectAtIndex:indexPath.row];
     [tablePayment reloadData];
      }
     

@@ -156,6 +156,31 @@
 
 -(void)initData
 {
+    User * user = [[TKDatabase sharedInstance]getUserInfo];
+//    NSString * strParam = F(@"user_id=%@",user.user_id);
+    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    user.user_id, @"user_id",
+                                    nil];
+
+    [HUD show:YES];
+    [[TKAPI sharedInstance]getRequestAFarr:jsonDictionary withURL:URL_GET_PAYMENT_METHOD completion:^(NSArray * arr, NSError *error) {
+        [HUD hide:YES];
+        if (arr == nil) {
+            return;
+        }
+        for (NSDictionary * dictItem in arr) {
+            MethodObject * mObj = [[MethodObject alloc]init];
+            mObj.strMethodID = [dictItem objectForKey:@"payment_id"];
+            mObj.strMethodName = [dictItem objectForKey:@"payment_name"];
+            mObj.strMethodOptional = [dictItem objectForKey:@"payment_surchage"];
+            [arrPaymentMethod addObject:mObj];
+        }
+
+    }];
+
+}
+-(void)initData2
+{
     MethodObject * mObj = [[MethodObject alloc]init];
     mObj.strMethodID = @"11";
     mObj.strMethodName = @"Bằng tiền mặt khi nhận hàng";
