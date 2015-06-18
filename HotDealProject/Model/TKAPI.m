@@ -44,7 +44,7 @@ static NSArray * arrDistrict;
     // should check for and handle errors here but we aren't
     [theRequest setHTTPBody:jsonData];
     NSURLResponse *response = nil;
-    
+    UA_log(@"url: %@", url);
     NSData *result = [NSURLConnection sendSynchronousRequest:theRequest returningResponse:&response error:&error];
     NSString * strData = [[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding];
     UA_log(@"data: %@",strData);
@@ -59,6 +59,7 @@ static NSArray * arrDistrict;
     [operationManager setSecurityPolicy:policy];
     operationManager.responseSerializer = [AFJSONResponseSerializer serializer];
 //    [operationManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        UA_log(@"url: %@", url);
     [operationManager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (responseObject == nil) {
             completion(nil, nil);
@@ -92,7 +93,7 @@ static NSArray * arrDistrict;
     operationManager.requestSerializer = [AFJSONRequestSerializer serializer];
         [operationManager.requestSerializer setTimeoutInterval:TIMEOUT];
     operationManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
-    
+        UA_log(@"url: %@", url);
     [operationManager GET:url
                parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                    if (responseObject == nil) {
@@ -133,7 +134,7 @@ static NSArray * arrDistrict;
     operationManager.requestSerializer = [AFJSONRequestSerializer serializer];
         [operationManager.requestSerializer setTimeoutInterval:TIMEOUT];
     operationManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
-    
+        UA_log(@"url: %@", url);
     [operationManager GET:url
                parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                    
@@ -167,20 +168,22 @@ static NSArray * arrDistrict;
 
 - (void)getRequest:(NSString *)params withURL:(NSString *)url completion:(void(^)(NSDictionary*, NSError*))completion
 {
-    dispatch_queue_t queue = dispatch_queue_create("com.get", 0);
-    dispatch_async(queue, ^{
+//    dispatch_queue_t queue = dispatch_queue_create("com.get", 0);
+//    dispatch_async(queue, ^{
         NSString *paramString = F(@"%@?%@", url, params);
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:paramString]
-                                                               cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                           timeoutInterval:10];
+                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                           timeoutInterval:15];
         
         [request setHTTPMethod: @"GET"];
-        
+            UA_log(@"url: %@", url);
         NSError *requestError;
         NSURLResponse *urlResponse = nil;
         
         
         NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+        NSString * strData = [[NSString alloc]initWithData:response1 encoding:NSUTF8StringEncoding];
+    UA_log(@"%@", strData);
         if (response1 == nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 completion(nil, nil);
@@ -208,8 +211,8 @@ static NSArray * arrDistrict;
                 
             }
         }
-        //    UA_log(@"data: %@",strData);
-    });
+//        //    UA_log(@"data: %@",strData);
+//    });
     
 }
 

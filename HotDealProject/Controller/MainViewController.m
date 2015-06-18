@@ -38,6 +38,7 @@
     NSMutableArray * arrNew;
     NSMutableArray * arrNear;
     
+    __weak IBOutlet UILabel *lblNetwordStatus;
     NSMutableArray * arrDeals;
     BBBadgeBarButtonItem *barButton;
     NSArray * arrProduct;
@@ -79,7 +80,7 @@
     
     [self setupSlide];
     //    [self setupNewDeal];
-    [self setupCategory];
+//    [self setupCategory];
     [self setupSegment];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateDealCount:) name:@"notiDealCount"
@@ -133,6 +134,9 @@
     [[TKAPI sharedInstance]getRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
 //        [HUD hide:YES];
         if (dict == nil) {
+            [HUD hide:YES];
+            [self showDialog];
+            lblNetwordStatus.text = @"Có lỗi trong quá trình lấy dữ liệu";
             return;
         }
         NSArray * arrProducts = [dict objectForKey:@"product"];
@@ -191,7 +195,7 @@
             item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
-            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            item.iType = [[dictItem objectForKey:@"product_kind"]intValue];
             if ([arrDeals count]>10) {
                 break;
             }
@@ -412,12 +416,12 @@
 #pragma mark tableview delegate + datasource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return  5;
+    return  4;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 4) {
+    if (section == 3) {
         return [arrDeals count];
     }
     return 1;
@@ -430,13 +434,13 @@
     }    if (indexPath.section == 1) {
         return 230;
     }
+//    if (indexPath.section == 2) {
+//        return 120;
+//    }
     if (indexPath.section == 2) {
-        return 120;
-    }
-    if (indexPath.section == 3) {
         return 29;
     }
-    return 230;
+    return 350;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -500,25 +504,25 @@
         [cell.contentView addSubview:scrollView];
         return cell;
     }
+//    if (indexPath.section == 2) {
+//        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 5, ScreenWidth - 20, 20)];
+//        lblTitle.text = @"Chọn danh mục";
+//        lblTitle.font = [UIFont boldSystemFontOfSize:14];
+//        lblTitle.textColor = [UIColor redColor];
+//        [cell.contentView addSubview:lblTitle];
+//        [cell.contentView addSubview:scrollViewCategory];
+//        return cell;
+//    }
     if (indexPath.section == 2) {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UILabel * lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(PADDING, 5, ScreenWidth - 20, 20)];
-        lblTitle.text = @"Chọn danh mục";
-        lblTitle.font = [UIFont boldSystemFontOfSize:14];
-        lblTitle.textColor = [UIColor redColor];
-        [cell.contentView addSubview:lblTitle];
-        [cell.contentView addSubview:scrollViewCategory];
-        return cell;
-    }
-    if (indexPath.section == 3) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.contentView addSubview:viewHeader];
         
         return cell;
     }
-    if (indexPath.section == 4) {
+    if (indexPath.section == 3) {
         DealCell *cell = (DealCell *)[tableView dequeueReusableCellWithIdentifier:nil];
         if (cell == nil)
         {
@@ -712,9 +716,9 @@
     
     dialogView = [[UIView alloc] initWithFrame:CGRectMake(10, 50, ScreenWidth -20, 200)]; // or if it exists, MCQView *view = [[MCQView alloc] init];
     dialogView = (UIView *)[nib objectAtIndex:0]; // or if it exists, (MCQView *)[nib objectAtIndex:0];
-    [dialogView setFrame:CGRectMake(10, 200, ScreenWidth - 20, 200)];
+    [dialogView setFrame:CGRectMake(10, 50, ScreenWidth - 20, 200)];
     
-    dialogView.layer.borderWidth=1.0f;
+    dialogView.layer.borderWidth=0.5f;
     dialogView.layer.borderColor=[UIColor whiteColor].CGColor;
     dialogView.layer.cornerRadius = 5;
     dialogView.layer.masksToBounds = YES;
@@ -728,7 +732,8 @@
     
 }
 - (IBAction)refreshView:(id)sender {
-    
+        [self initData:FETCH_COUNT wOffset:1 wType:@"default"];
+    [self hiddenView:nil];
     
 }
 -(void)setDimView

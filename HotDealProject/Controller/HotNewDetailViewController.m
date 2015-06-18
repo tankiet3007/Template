@@ -69,9 +69,9 @@
 
 -(void)initData
 {
-    //    NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-    //                                    [NSNumber numberWithInt:_iProductID ], @"product_id",
-    //                                    nil];
+//        NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                        [NSNumber numberWithInt:_iProductID ], @"product_id",
+//                                        nil];
     NSString * strParam = F(@"product_id=%@",[NSNumber numberWithInt:_iProductID ]);
     
     [HUD show:YES];
@@ -89,9 +89,24 @@
 //    category_id: 639,
 //    category_name: ""
 //    },
-       
+        arrDealRelateds = [NSMutableArray new];
+        NSArray * arrProducts_recommend = [dict objectForKey:@"products_recommend"];
+        for (NSDictionary * dictItem in arrProducts_recommend) {
+            DealObject * item = [[DealObject alloc]init];
+            item.strTitle = [dictItem objectForKey:@"title"];
+            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
+            item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
+            item.isNew = YES;
+            item.strBrandImage = [dictItem objectForKey:@"image_link"];
+            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            [arrDealRelateds addObject:item];
+
+        }
         [self setupLabelDescription];
         [self setupSlide];
+        [self setupRelatedDeal];
         [self setupViewHeader];
         [self initUITableView];
         [self.view addSubview:[self setupBottomView]];
@@ -307,7 +322,7 @@
         return 88;
     }
     if (indexPath.section == 4) {
-        return 230;
+        return 350;
     }
     if (indexPath.section == 3) {
         if (IS_IOS8_OR_ABOVE) {
@@ -326,7 +341,7 @@
         // (9)
         return [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     }
-    return 230;
+    return 350;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

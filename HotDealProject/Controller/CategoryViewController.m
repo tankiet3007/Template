@@ -168,7 +168,7 @@
         return 44;
     }
     else
-        return 230;
+        return 350;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
