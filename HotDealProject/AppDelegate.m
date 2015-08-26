@@ -9,9 +9,17 @@
 #import "AppDelegate.h"
 #import "StartupViewController.h"
 #import "MainViewController.h"
+#import "AccoutViewController.h"
+#import "RegisAndLoginController.h"
+#import "HelpViewController.h"
 #import "LeftMenuViewController.h"
 #import "SWRevealViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "SignInViewController.h"
+#import "SignUpTableViewController.h"
+#import "SignUpViewController.h"
+#import "PaymentAndTransferViewController.h"
+#import "PostCommentAndRatingViewController.h"
 static NSString * const kRecipesStoreName = @"HotDealProject.sqlite";//HotDealProject.sqlite
 @interface AppDelegate ()<SWRevealViewControllerDelegate>
 
@@ -39,53 +47,120 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
     
 }
 
-
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self setupDB];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    if (/* DISABLES CODE */ (1)) {
-        _masterViewController = [[StartupViewController alloc]init];
-        //
-        rearViewController = [[LeftMenuViewController alloc] init];
-        
-        UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:_masterViewController];
-        UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
-        
-        SWRevealViewController *mainRevealController = [[SWRevealViewController alloc]
-                                                        initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
-        //    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHex:@"#bd0d18" alpha:1]];
-        mainRevealController.delegate = self;
-        
-        self.viewController = mainRevealController;
-        [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
-        
-        self.window.rootViewController = self.viewController;
-        [self.window makeKeyAndVisible];
-        [self checkNetwork];
-        return YES;
-    }
-    else
-    {
-        _masterViewController = [[MainViewController alloc]init];
-        rearViewController = [[LeftMenuViewController alloc] init];
-        
-        UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:_masterViewController];
-        UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
-        
-        SWRevealViewController *mainRevealController = [[SWRevealViewController alloc]
-                                                        initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
-        [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
-        mainRevealController.delegate = self;
-        self.viewController = mainRevealController;
-        self.window.rootViewController = self.viewController;
-        [self.window makeKeyAndVisible];
-        [self checkNetwork];
-        return YES;
-    }
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
+-(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self setupDB];
+    NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                               [UIColor whiteColor],UITextAttributeTextColor
+                                               , nil];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+    UINavigationController *nc1;
+    nc1 = [[UINavigationController alloc] init];
+    [nc1.navigationBar setTintColor:[UIColor blackColor]];
+    nc1.tabBarItem.title = @"Home";
+    UIImage *image1 = [UIImage imageNamed:@"cart.png"];
+    nc1.tabBarItem.image = [self imageWithImage:image1 scaledToSize:CGSizeMake(30, 30)];
+    
+    MainViewController *viewController1 = [[MainViewController alloc]init];
+    nc1.viewControllers = [NSArray arrayWithObjects:viewController1, nil];
+    
+    UINavigationController *nc2;
+    nc2 = [[UINavigationController alloc] init];
+    nc2.tabBarItem.title = @"Account";
+    UIImage *image2 = [UIImage imageNamed:@"cart.png"];
+    nc2.tabBarItem.image = [self imageWithImage:image2 scaledToSize:CGSizeMake(30, 30)];
+    [nc2.navigationBar setTintColor:[UIColor blackColor]];
+    SignInViewController *viewController2 = [[SignInViewController alloc]init];
+    nc2.viewControllers = [NSArray arrayWithObjects:viewController2, nil];
+    
+    
+    SignUpViewController *viewController3 = [[SignUpViewController alloc]init];
+    UINavigationController *nc3;
+    nc3 = [[UINavigationController alloc] init];
+    UIImage *image3 = [UIImage imageNamed:@"cart.png"];
+    nc3.tabBarItem.image = [self imageWithImage:image3 scaledToSize:CGSizeMake(30, 30)];
+    [nc3.navigationBar setTintColor:[UIColor blackColor]];
+    nc3.tabBarItem.title = @"Login";
+    nc3.viewControllers = [NSArray arrayWithObjects:viewController3, nil];
+    
+    PostCommentAndRatingViewController *viewController4 = [[PostCommentAndRatingViewController alloc]init];
+    UINavigationController *nc4;
+    nc4 = [[UINavigationController alloc] init];
+    [nc4.navigationBar setTintColor:[UIColor blackColor]];
+    nc4.tabBarItem.title = @"Help";
+    UIImage *image4 = [UIImage imageNamed:@"cart.png"];
+    nc4.tabBarItem.image = [self imageWithImage:image4 scaledToSize:CGSizeMake(30, 30)];
+    nc4.viewControllers = [NSArray arrayWithObjects:viewController4, nil];
+    
+    
+    self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:nc1, nc2,nc3,nc4 ,nil];
+    
+    [[UITabBar appearance] setSelectedImageTintColor:[UIColor redColor]];
+     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.window.rootViewController = self.tabBarController;
+    [self.window makeKeyAndVisible];
+    [self checkNetwork];
+    return YES;
+}
+
+/*- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+ self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+ [self setupDB];
+ [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+ if ((1)) {
+ _masterViewController = [[StartupViewController alloc]init];
+ //
+ rearViewController = [[LeftMenuViewController alloc] init];
+ 
+ UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:_masterViewController];
+ UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
+ 
+ SWRevealViewController *mainRevealController = [[SWRevealViewController alloc]
+ initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
+ //    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHex:@"#bd0d18" alpha:1]];
+ mainRevealController.delegate = self;
+ 
+ self.viewController = mainRevealController;
+ [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+ 
+ self.window.rootViewController = self.viewController;
+ [self.window makeKeyAndVisible];
+ [self checkNetwork];
+ return YES;
+ }
+ else
+ {
+ _masterViewController = [[MainViewController alloc]init];
+ rearViewController = [[LeftMenuViewController alloc] init];
+ 
+ UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:_masterViewController];
+ UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
+ 
+ SWRevealViewController *mainRevealController = [[SWRevealViewController alloc]
+ initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
+ [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+ mainRevealController.delegate = self;
+ self.viewController = mainRevealController;
+ self.window.rootViewController = self.viewController;
+ [self.window makeKeyAndVisible];
+ [self checkNetwork];
+ return YES;
+ }
+ }
+ */
 -(void)checkNetwork
 {
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
@@ -156,9 +231,11 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

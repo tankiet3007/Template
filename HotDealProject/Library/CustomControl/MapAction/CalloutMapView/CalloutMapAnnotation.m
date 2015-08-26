@@ -13,6 +13,7 @@
 @synthesize strLogo;
 @synthesize strPOI;
 @synthesize strTitle;
+@synthesize strID;
 - (id)initWithLatitude:(CLLocationDegrees)latitude
 		  andLongitude:(CLLocationDegrees)longitude {
 	if (self = [super init]) {

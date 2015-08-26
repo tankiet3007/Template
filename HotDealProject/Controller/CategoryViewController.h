@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface CategoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+#import "CategoryObject.h"
+@interface CategoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic,strong) UITableView * tableviewCategory;
 @property (nonatomic,strong) NSString * strTitle;
-@property (nonatomic, assign) BOOL isFrommenu;
+@property (nonatomic,strong) NSString * strCateId;
+@property (nonatomic, strong) CategoryObject * cateItem;
+@property (strong, nonatomic) UICollectionView *collectionView;
 @end

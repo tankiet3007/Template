@@ -10,31 +10,36 @@
 	<string>HotDealProject</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>BAFF2DEA8F355C70657E4B3D91DBE2BD894BC4C7</key>
-		<string>https://github.com/tankiet3007/Template.git</string>
+		<key>b46e8774-2913-4286-9e2e-5677a529d3d4++505</key>
+		<string>http://192.168.1.16/usvn/svn/Hotdeal_Mobile_App/trunk</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>HotDealProject.xcodeproj</string>
+	<string>IOS App/HotDealProject.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>BAFF2DEA8F355C70657E4B3D91DBE2BD894BC4C7</key>
-		<string>../..</string>
+		<key>b46e8774-2913-4286-9e2e-5677a529d3d4++505</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>b46e8774-2913-4286-9e2e-5677a529d3d4++505</key>
+		<string>http://192.168.1.16/usvn/svn/Hotdeal_Mobile_App</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/tankiet3007/Template.git</string>
+	<string>http://192.168.1.16/usvn/svn/Hotdeal_Mobile_App/trunk/IOS%20App/HotDealProject.xcodeproj</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>BAFF2DEA8F355C70657E4B3D91DBE2BD894BC4C7</string>
+	<string>b46e8774-2913-4286-9e2e-5677a529d3d4++505</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
+			<string>public.vcs.subversion</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>BAFF2DEA8F355C70657E4B3D91DBE2BD894BC4C7</string>
+			<string>b46e8774-2913-4286-9e2e-5677a529d3d4++505</string>
 			<key>IDESourceControlWCCName</key>
-			<string>IOS_Template</string>
+			<string>Hotdeal_Mobile_App</string>
 		</dict>
 	</array>
 </dict>

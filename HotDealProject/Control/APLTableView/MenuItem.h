@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) NSString * name;
 @property (nonatomic, strong) NSString * logo;
+@property (nonatomic, strong) NSString * cateID;
 @property (nonatomic, strong) NSArray * subItem;
 @end

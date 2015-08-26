@@ -168,7 +168,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (isLoginFrame == TRUE) {
-        return  4;
+        return  3;
     }
     else
     {
@@ -285,24 +285,24 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
             return cellRe;
             
         }
-        else
-        {
-            UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-            
-            // Make cell unselectable
-            cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
-            UIButton* button = nil ;
-            
-            button = btnLoginGoogle = [self makeButtonLoginGoogle];
-            [cellRe addSubview:btnLoginGoogle];
-            
-            // Textfield dimensions
-            button.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
-            //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-            return cellRe;
-            
-        }
+//        else
+//        {
+//            UITableViewCell *cellRe = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+//            
+//            // Make cell unselectable
+//            cellRe.selectionStyle = UITableViewCellSelectionStyleNone;
+//            UIButton* button = nil ;
+//            
+//            button = btnLoginGoogle = [self makeButtonLoginGoogle];
+//            [cellRe addSubview:btnLoginGoogle];
+//            
+//            // Textfield dimensions
+//            button.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
+//            //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+//            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+//            return cellRe;
+//            
+//        }
     }
     else
     {
@@ -466,7 +466,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
             
         }
     }
-    
+    return nil;
 }
 
 -(UILabel*) makeLabel: (NSString*)text{
@@ -533,7 +533,6 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
             ALERT(LS(@"MessageBoxTitle"),response);
         }
     }];
-    
 }
 
 -(void)fbLogin
@@ -764,12 +763,12 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
     lcell.tfEmail.borderStyle = UITextBorderStyleNone;
     lcell.tfPassword.borderStyle = UITextBorderStyleNone;
     
-    lcell.tfPassword.textColor = [UIColor darkGrayColor];
+    lcell.tfPassword.textColor = [UIColor blackColor];
     lcell.tfEmail.textColor = [UIColor darkGrayColor];
     lcell.tfEmail.returnKeyType = UIReturnKeyNext;
     lcell.tfPassword.returnKeyType = UIReturnKeyDone;
     lcell.tfPassword.secureTextEntry  = YES;
-    [lcell.btnLogin addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
+//    [lcell.btnLogin addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
     
     UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
     lcell.tfEmail.leftView = paddingView;
@@ -779,7 +778,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
     lcell.tfPassword.leftView = paddingView;
     lcell.tfPassword.leftViewMode = UITextFieldViewModeAlways;
     
-    [lcell.btnForgotPassword addTarget:self action:@selector(forgotPassClick) forControlEvents:UIControlEventTouchUpInside];
+//    [lcell.btnForgotPassword addTarget:self action:@selector(forgotPassClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)loginClick

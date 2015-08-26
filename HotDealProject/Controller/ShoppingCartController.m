@@ -95,8 +95,6 @@
         viewEmpty.backgroundColor = [UIColor lightGrayColor];
         [self.view addSubview:viewEmpty];
     }
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,9 +106,6 @@
 {
     tableViewProduct = [[UITableView alloc]initWithFrame:CGRectMake(0, -30, ScreenWidth, ScreenHeight - 40) style:UITableViewStyleGrouped];
     [self.view addSubview:tableViewProduct];
-    
-    
-    //    [tableViewDays setDragDelegate:self refreshDatePermanentKey:@"HotNewsList"];
     tableViewProduct.backgroundColor = [UIColor whiteColor];
     tableViewProduct.dataSource = self;
     tableViewProduct.delegate = self;
@@ -136,12 +131,6 @@
 {
     return 105;
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return 60;
-//}
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == [arrProduct count]) {
@@ -151,15 +140,10 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InvoiceCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
-        
         NSString * strStardarPrice = F(@"%d", [self calculateCash]);
         strStardarPrice = [strStardarPrice formatStringToDecimal];
-        //        NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-        //        NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        cell.lblTotalOfBill.text  = strStardarPrice;
-        
+        cell.lblQuantityProduct.text  = strStardarPrice;
         cell.lblCash.text  = strStardarPrice;
         return cell;
         
@@ -218,14 +202,14 @@
 }
 -(void)checkout
 {
-//    User * user = [[TKDatabase sharedInstance]getUserInfo];
+    User * user = [[TKDatabase sharedInstance]getUserInfo];
     NSMutableArray * arrProducts = [[NSMutableArray alloc]init];
     for (ProductObject * item in arrProduct) {
         NSDictionary * dictItem = [NSDictionary dictionaryWithObjectsAndKeys:item.strProductID,@"product_id",[NSNumber numberWithInt:item.iCurrentQuantity],@"quantity", nil];
         [arrProducts addObject:dictItem];
     }
-//    NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:arrProducts, @"product_list",user.user_id, @"user_id", nil];
-//    UA_log(@"%@", params);
+    NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:arrProducts, @"product_list",user.user_id, @"user_id", nil];
+    UA_log(@"%@", params);
     PaymentViewController * paymentVC = [[PaymentViewController alloc]init];
     paymentVC.arrProduct = arrProducts;
     [self.navigationController pushViewController:paymentVC animated:YES];
@@ -233,7 +217,7 @@
 -(void)showDropbox:(id)sender
 {
     UIButton * btnSelected = (UIButton *)sender;
-    UA_log(@"%ld",btnSelected.tag);
+    UA_log(@"%ld",(long)btnSelected.tag);
     iTagedButton = btnSelected.tag;
     ProductObject * item = [arrProduct objectAtIndex:btnSelected.tag];
     numRowsInPicker = item.iMaxQuantity + 1;
@@ -246,7 +230,7 @@
 -(void)destroyItem:(id)sender
 {
     UIButton * btnSelected = (UIButton *)sender;
-    UA_log(@"%ld",btnSelected.tag);
+    UA_log(@"%ld",(long)btnSelected.tag);
     int iIndexRow = (int)btnSelected.tag - 999;
     
     ProductObject * productObj = [arrProduct objectAtIndex:iIndexRow];
@@ -370,4 +354,5 @@
     }
     return i;
 }
+
 @end

@@ -68,10 +68,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     [self initData];
     [self setupLoginBtn];
     [self initSearchBar];
-    [self initUITableView];
-    UINib *sectionHeaderNib = [UINib nibWithNibName:@"SectionHeaderView" bundle:nil];
-    self.openSectionIndex = NSNotFound;
-    [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:SectionHeaderViewIdentifier];
+    
     
 //    [self initDataSearch];
     [self initSearchTable];
@@ -128,125 +125,178 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 -(void)initData
 {
-    NSString *savedValue = [[NSUserDefaults standardUserDefaults]
-                            stringForKey:@"indexSelected"];
-    NSInteger iIndexLocation = -1;
-    if (savedValue != nil) {
-        iIndexLocation = [savedValue integerValue];
-    }
-    NSArray * arrLocation = [NSArray arrayWithObjects:@"Hà Nội",@"Hồ Chí Minh",@"Bình Dương",@"Đà Nẵng",@"Tỉnh thành khác", nil];
-    NSString * location = [arrLocation objectAtIndex:iIndexLocation];
-    
-    NSArray * subMenu;
-    arrMenu = [[NSMutableArray alloc]init];
-    MenuItem * menuItem = [[MenuItem alloc]init];
-    menuItem.name = F(@"Địa điểm : %@", location);
-    menuItem.logo = @"leftmenu_1.jpg";
-    [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Trang chủ";
-    menuItem.logo = @"leftmenu_1.jpg";
-    
-    //    subMenu = [NSArray arrayWithObjects:@"Sub 1 - 1",@"Sub 1 - 2",@"Sub 1 - 3", nil];
-    //    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Khuyến mãi mới";
-    menuItem.logo = @"leftmenu_2.jpg";
-    //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
-    //    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Thời trang - Phụ kiện";
-    menuItem.logo = @"leftmenu_3.jpg";
-    subMenu = [NSArray arrayWithObjects:@"Thời trang nữ",@"Thời trang nam",@"Thời trang trẻ em",@"Phụ kiện thời trang",@"XEM TẤT CẢ", nil];
-    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Nhà hàng - Ẩm thực";
-    menuItem.logo = @"leftmenu_4.jpg";
-    subMenu = [NSArray arrayWithObjects:@"Buffet",@"Nhà hàng - Quán ăn",@"Cafe - Kem  - Bánh",@"Thực phẩm",@"XEM TẤT CẢ", nil];
-    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Sức khoẻ - Làm đẹp";
-    menuItem.logo = @"leftmenu_5.jpg";
-    subMenu = [NSArray arrayWithObjects:@"Spa - Thẩm mỹ viện",@"Salon - Làm đẹp",@"Nha khoa - Sức khỏe",@"Mỹ phẩm",@"Dụng cụ làm đẹp",@"XEM TẤT CẢ", nil];
-    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Du lịch - Khách sạn";
-    menuItem.logo = @"leftmenu_6.jpg";
-    subMenu = [NSArray arrayWithObjects:@"Khách sạn - Resorts",@"Tour trong nước",@"Tour nước ngoài",@"XEM TẤT CẢ", nil];
-    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Điện tử - Công nghệ";
-    menuItem.logo = @"leftmenu_7.jpg";
-    subMenu = [NSArray arrayWithObjects:@"Phụ kiện công nghệ",@"Thiết bị điện tử",@"XEM TẤT CẢ", nil];
-    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Giải trí - Đào tạo";
-    menuItem.logo = @"leftmenu_8.jpg";
-    subMenu = [NSArray arrayWithObjects:@"Giải trí - Vui chơi",@"Đào tạo",@"Thể dục thẩm mỹ",@"Sách - Tạp chí", @"XEM TẤT CẢ", nil];
-    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Gia dụng - Nội thất";
-    menuItem.logo = @"leftmenu_9.jpg";
-    subMenu = [NSArray arrayWithObjects:@"Nhà cửa - Đời sống",@"Thiết bị điện tử",@"XEM TẤT CẢ", nil];
-    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Tài khoản";
-    menuItem.logo = @"leftmenu_10.jpg";
-    //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
-    //    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
-    
-    menuItem = [[MenuItem alloc]init];
-    menuItem.name = @"Hỗ trợ";
-    menuItem.logo = @"leftmenu_11.jpg";
-    //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
-    //    menuItem.subItem = subMenu;
-    [arrMenu addObject:menuItem];
-    
-    
-    self.sectionInfoArray = nil;
-    if ((self.sectionInfoArray == nil) ||
-        ([self.sectionInfoArray count] != [self numberOfSectionsInTableView:self.tableView])) {
+   
+     [HUD show:YES];
+    [[TKAPI sharedInstance]getRequest:nil withURL:URL_GET_CATEGORY completion:^(NSDictionary * dict, NSError *error) {
+        [HUD hide:YES];
+        if (dict == nil) {
+            return;
+        }
+        NSString *savedValue = [[NSUserDefaults standardUserDefaults]
+                                stringForKey:@"indexSelected"];
+        NSInteger iIndexLocation = -1;
+        if (savedValue != nil) {
+            iIndexLocation = [savedValue integerValue];
+        }
+        NSArray * arrLocation = [NSArray arrayWithObjects:@"Hà Nội",@"Hồ Chí Minh", nil];
+        NSString * location = [arrLocation objectAtIndex:iIndexLocation];
+        arrMenu = [[NSMutableArray alloc]init];
+        MenuItem * menuItem = [[MenuItem alloc]init];
+        menuItem.name = F(@"Địa điểm : %@", location);
+        menuItem.logo = @"http://hotdeal.vn/skins/mobilev2/mobile/images/icon-food.png";
+        [arrMenu addObject:menuItem];
         
-        // For each play, set up a corresponding SectionInfo object to contain the default height for each row.
-        NSMutableArray *infoArray = [[NSMutableArray alloc] init];
+        menuItem = [[MenuItem alloc]init];
+        menuItem.name = @"Trang chủ";
+        menuItem.logo = @"http://hotdeal.vn/skins/mobilev2/mobile/images/icon-food.png";
         
-        for (MenuItem *item in arrMenu) {
-            
-            APLSectionInfo *sectionInfo = [[APLSectionInfo alloc] init];
-            sectionInfo.menuItem = item;
-            sectionInfo.open = NO;
-            
-            NSNumber *defaultRowHeight = @(DEFAULT_ROW_HEIGHT);
-            NSInteger countOfSubItem = [[sectionInfo.menuItem subItem] count];
-            for (NSInteger i = 0; i < countOfSubItem; i++) {
-                [sectionInfo insertObject:defaultRowHeight inRowHeightsAtIndex:i];
+        //    subMenu = [NSArray arrayWithObjects:@"Sub 1 - 1",@"Sub 1 - 2",@"Sub 1 - 3", nil];
+        //    menuItem.subItem = subMenu;
+        [arrMenu addObject:menuItem];
+        
+        menuItem = [[MenuItem alloc]init];
+        menuItem.name = @"Khuyến mãi mới";
+        menuItem.logo = @"http://hotdeal.vn/skins/mobilev2/mobile/images/icon-food.png";
+        //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
+        //    menuItem.subItem = subMenu;
+        [arrMenu addObject:menuItem];
+
+        NSArray * items = [dict objectForKey:@"items"];
+        for (NSDictionary * item in items) {
+            MenuItem * mItem = [[MenuItem alloc]init];
+            mItem.cateID = F(@"%@",[item objectForKey:@"category_id"]);
+            mItem.logo = [item objectForKey:@"icon"];
+            mItem.name = [item objectForKey:@"item"];
+            NSArray * subMenu = [item objectForKey:@"subitems"];
+            NSMutableArray * arrSubItems = [NSMutableArray new];
+            for (NSDictionary * sItem in subMenu) {
+                MenuItem * mItem = [[MenuItem alloc]init];
+                mItem.cateID = [sItem objectForKey:@"category_id"];
+//                mItem.logo = [sItem objectForKey:@"icon"];
+                mItem.name = [sItem objectForKey:@"item"];
+                [arrSubItems addObject:mItem];
             }
-            
-            [infoArray addObject:sectionInfo];
+            mItem.subItem = arrSubItems;
+            [arrMenu addObject:mItem];
         }
         
-        self.sectionInfoArray = infoArray;
-    }
+        menuItem = [[MenuItem alloc]init];
+        menuItem.name = @"Tài khoản";
+        menuItem.logo = @"http://hotdeal.vn/skins/mobilev2/mobile/images/icon-food.png";
+        //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
+        //    menuItem.subItem = subMenu;
+        [arrMenu addObject:menuItem];
+        
+        menuItem = [[MenuItem alloc]init];
+        menuItem.name = @"Hỗ trợ";
+        menuItem.logo = @"http://hotdeal.vn/skins/mobilev2/mobile/images/icon-food.png";
+        //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
+        //    menuItem.subItem = subMenu;
+        [arrMenu addObject:menuItem];
+
+        
+        self.sectionInfoArray = nil;
+        if ((self.sectionInfoArray == nil) ||
+            ([self.sectionInfoArray count] != [self numberOfSectionsInTableView:self.tableView])) {
+            
+            // For each play, set up a corresponding SectionInfo object to contain the default height for each row.
+            NSMutableArray *infoArray = [[NSMutableArray alloc] init];
+            
+            for (MenuItem *item in arrMenu) {
+                
+                APLSectionInfo *sectionInfo = [[APLSectionInfo alloc] init];
+                sectionInfo.menuItem = item;
+                sectionInfo.open = NO;
+                
+                NSNumber *defaultRowHeight = @(DEFAULT_ROW_HEIGHT);
+                NSInteger countOfSubItem = [[sectionInfo.menuItem subItem] count];
+                for (NSInteger i = 0; i < countOfSubItem; i++) {
+                    [sectionInfo insertObject:defaultRowHeight inRowHeightsAtIndex:i];
+                }
+                
+                [infoArray addObject:sectionInfo];
+            }
+            
+            self.sectionInfoArray = infoArray;
+        }
+        
+        [self initUITableView];
+        UINib *sectionHeaderNib = [UINib nibWithNibName:@"SectionHeaderView" bundle:nil];
+        self.openSectionIndex = NSNotFound;
+        [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:SectionHeaderViewIdentifier];
+
+        
+    }];
+   
+    
+//
+//   
+//    
+//    NSArray * subMenu;
+//    menuItem = [[MenuItem alloc]init];
+//    menuItem.name = @"Thời trang - Phụ kiện";
+//    menuItem.logo = @"leftmenu_3.jpg";
+//    subMenu = [NSArray arrayWithObjects:@"Thời trang nữ",@"Thời trang nam",@"Thời trang trẻ em",@"Phụ kiện thời trang",@"XEM TẤT CẢ", nil];
+//    menuItem.subItem = subMenu;
+//    [arrMenu addObject:menuItem];
+//    
+//    menuItem = [[MenuItem alloc]init];
+//    menuItem.name = @"Nhà hàng - Ẩm thực";
+//    menuItem.logo = @"leftmenu_4.jpg";
+//    subMenu = [NSArray arrayWithObjects:@"Buffet",@"Nhà hàng - Quán ăn",@"Cafe - Kem  - Bánh",@"Thực phẩm",@"XEM TẤT CẢ", nil];
+//    menuItem.subItem = subMenu;
+//    [arrMenu addObject:menuItem];
+//    
+//    menuItem = [[MenuItem alloc]init];
+//    menuItem.name = @"Sức khoẻ - Làm đẹp";
+//    menuItem.logo = @"leftmenu_5.jpg";
+//    subMenu = [NSArray arrayWithObjects:@"Spa - Thẩm mỹ viện",@"Salon - Làm đẹp",@"Nha khoa - Sức khỏe",@"Mỹ phẩm",@"Dụng cụ làm đẹp",@"XEM TẤT CẢ", nil];
+//    menuItem.subItem = subMenu;
+//    [arrMenu addObject:menuItem];
+//    
+//    menuItem = [[MenuItem alloc]init];
+//    menuItem.name = @"Du lịch - Khách sạn";
+//    menuItem.logo = @"leftmenu_6.jpg";
+//    subMenu = [NSArray arrayWithObjects:@"Khách sạn - Resorts",@"Tour trong nước",@"Tour nước ngoài",@"XEM TẤT CẢ", nil];
+//    menuItem.subItem = subMenu;
+//    [arrMenu addObject:menuItem];
+//    
+//    menuItem = [[MenuItem alloc]init];
+//    menuItem.name = @"Điện tử - Công nghệ";
+//    menuItem.logo = @"leftmenu_7.jpg";
+//    subMenu = [NSArray arrayWithObjects:@"Phụ kiện công nghệ",@"Thiết bị điện tử",@"XEM TẤT CẢ", nil];
+//    menuItem.subItem = subMenu;
+//    [arrMenu addObject:menuItem];
+//    
+//    menuItem = [[MenuItem alloc]init];
+//    menuItem.name = @"Giải trí - Đào tạo";
+//    menuItem.logo = @"leftmenu_8.jpg";
+//    subMenu = [NSArray arrayWithObjects:@"Giải trí - Vui chơi",@"Đào tạo",@"Thể dục thẩm mỹ",@"Sách - Tạp chí", @"XEM TẤT CẢ", nil];
+//    menuItem.subItem = subMenu;
+//    [arrMenu addObject:menuItem];
+//    
+//    menuItem = [[MenuItem alloc]init];
+//    menuItem.name = @"Gia dụng - Nội thất";
+//    menuItem.logo = @"leftmenu_9.jpg";
+//    subMenu = [NSArray arrayWithObjects:@"Nhà cửa - Đời sống",@"Thiết bị điện tử",@"XEM TẤT CẢ", nil];
+//    menuItem.subItem = subMenu;
+//    [arrMenu addObject:menuItem];
+//    
+//    menuItem = [[MenuItem alloc]init];
+//    menuItem.name = @"Tài khoản";
+//    menuItem.logo = @"leftmenu_10.jpg";
+//    //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
+//    //    menuItem.subItem = subMenu;
+//    [arrMenu addObject:menuItem];
+//    
+//    menuItem = [[MenuItem alloc]init];
+//    menuItem.name = @"Hỗ trợ";
+//    menuItem.logo = @"leftmenu_11.jpg";
+//    //    subMenu = [NSArray arrayWithObjects:@"Sub 2 - 1",@"Sub 2 - 2",@"Sub 2 - 3", nil];
+//    //    menuItem.subItem = subMenu;
+//    [arrMenu addObject:menuItem];
+    
+    
     
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -297,7 +347,8 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         MenuItem *item = (MenuItem *)[(self.sectionInfoArray)[indexPath.section] menuItem];
         UA_log(@"%@",(item.subItem)[indexPath.row]);
-        cell.lblSubMenu.text = (item.subItem)[indexPath.row];
+        MenuItem * sItem = [item.subItem objectAtIndex:indexPath.row];
+        cell.lblSubMenu.text = sItem.name;
         
         return cell;
     }
@@ -326,8 +377,10 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         CategoryViewController * categoryVC = [[CategoryViewController alloc]init];
         MenuItem *item = (MenuItem *)[(self.sectionInfoArray)[indexPath.section] menuItem];
         UA_log(@"%@",(item.subItem)[indexPath.row]);
-        categoryVC.strTitle = (item.subItem)[indexPath.row];
-        categoryVC.isFrommenu = YES;
+    
+        MenuItem * sItem = [item.subItem objectAtIndex:indexPath.row];
+        categoryVC.strCateId = sItem.cateID;
+        categoryVC.strTitle = sItem.name;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:categoryVC];
         [revealVC setFrontViewController:navigationController animated:YES];
         [revealVC revealToggle:nil];
@@ -336,10 +389,9 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     {
         SearchViewController *searchVC = [SearchViewController alloc];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:searchVC];
-//        searchVC.searchText = [autocompleteItem objectAtIndex:indexPath.row];
-//        searchVC.searchText = @"buffet";
         SearchResultItem * searchItem = [autocompleteItem objectAtIndex:indexPath.row];
         searchVC.searchText = searchItem.strValue;
+        searchVC.totalQuatity = searchItem.iCount;
         [revealVC setFrontViewController:navigationController animated:YES];
         [revealVC revealToggle:nil];
     }
@@ -358,7 +410,9 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         
         APLSectionInfo *sectionInfo = (self.sectionInfoArray)[section];
         sectionInfo.headerView = sectionHeaderView;
-        sectionHeaderView.imgSectionLogo.image = [UIImage imageNamed:sectionInfo.menuItem.logo];
+//        sectionHeaderView.imgSectionLogo.image = [UIImage imageNamed:sectionInfo.menuItem.logo];
+        [sectionHeaderView.imgSectionLogo sd_setImageWithURL:[NSURL URLWithString:sectionInfo.menuItem.logo] placeholderImage:nil];
+        UA_log(@"%@ --- %@", sectionInfo.menuItem.name, sectionInfo.menuItem.logo);
         sectionHeaderView.titleLabel.text = sectionInfo.menuItem.name;
         sectionHeaderView.section = section;
         sectionHeaderView.delegate = self;
@@ -372,7 +426,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             
             [sectionHeaderView addSubview:imgLine];
         }
-        if (section == 9) {
+        if (section == 8) {
             if (imgLine != nil) {
                 [imgLine removeFromSuperview];
                 imgLine = nil;
@@ -440,7 +494,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC revealToggle:nil];
         return;
     }
-    if (sectionOpened == 10) {//#import "RegisAndLoginController.h"
+    if (sectionOpened == [arrMenu count] -2) {//#import "RegisAndLoginController.h"
         if (isUserLogged == FALSE) {
             RegisAndLoginController * newVC = [[RegisAndLoginController alloc]init];
             
@@ -462,7 +516,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             return;
         }
     }//#import "HelpViewController.h"
-    if (sectionOpened == 11) {//#import "RegisAndLoginController.h"
+    if (sectionOpened == [arrMenu count] -1) {//#import "RegisAndLoginController.h"
         HelpViewController * newVC = [[HelpViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
@@ -479,6 +533,16 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
      Create an array containing the index paths of the rows to insert: These correspond to the rows for each quotation in the current section.
      */
     NSInteger countOfRowsToInsert = [sectionInfo.menuItem.subItem count];
+    if (countOfRowsToInsert == 0) {
+        CategoryViewController * categoryVC = [[CategoryViewController alloc]init];
+        MenuItem *item = (MenuItem *)[(self.sectionInfoArray)[sectionOpened] menuItem];
+        categoryVC.strTitle = item.name;
+        categoryVC.strCateId = item.cateID;
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:categoryVC];
+        [revealVC setFrontViewController:navigationController animated:YES];
+        [revealVC revealToggle:nil];
+        return;
+    }
     NSMutableArray *indexPathsToInsert = [[NSMutableArray alloc] init];
     for (NSInteger i = 0; i < countOfRowsToInsert; i++) {
         [indexPathsToInsert addObject:[NSIndexPath indexPathForRow:i inSection:sectionOpened]];
@@ -558,7 +622,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [revealVC revealToggle:nil];
         return;
     }
-    if (sectionClosed == 10) {//#import "RegisAndLoginController.h"
+    if (sectionClosed == [arrMenu count] -2) {//#import "RegisAndLoginController.h"
         if (isUserLogged == FALSE) {
             RegisAndLoginController * newVC = [[RegisAndLoginController alloc]init];
             
@@ -580,7 +644,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             return;
         }
     }
-    if (sectionClosed == 11) {//#import "RegisAndLoginController.h"
+    if (sectionClosed == [arrMenu count] -1) {//#import "RegisAndLoginController.h"
         HelpViewController * newVC = [[HelpViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newVC];
@@ -731,7 +795,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 }
 -(UIButton *)setupLoginBtn
 {
-    btnLogin = [[UIButton alloc]initWithFrame:CGRectMake(10, -5, 240, 40)];
+    btnLogin = [[UIButton alloc]initWithFrame:CGRectMake(10, 5, 240, 40)];
     [btnLogin setBackgroundColor:[UIColor greenColor]];
     [btnLogin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnLogin setTitle:@"ĐĂNG NHẬP" forState:UIControlStateNormal];

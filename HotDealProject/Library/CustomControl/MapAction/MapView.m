@@ -9,11 +9,14 @@
 #import "MapView.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "UIButton+WebCache.h"
+#import "INTULocationManager.h"
+
+#import "HotNewDetailViewController.h"
 #define spa 40000
 @implementation MapView
 {
     NSMutableArray *_annotationList;
-    
+    __block CLLocation *currLocation;
     CalloutMapAnnotation *_calloutAnnotation;
     CalloutMapAnnotation *_previousdAnnotation;
     
@@ -30,22 +33,15 @@
 
 - (void)setCenterCoordinate:(CLLocationCoordinate2D)centerCoordinate
                   zoomLevel:(NSUInteger)zoomLevels animated:(BOOL)animated {
-    MKCoordinateSpan spans = MKCoordinateSpanMake(0, 360/pow(2, 16)*self.frame.size.width/256);
-    //        MKCoordinateSpan spans = MKCoordinateSpanMake(1,13);
+//    MKCoordinateSpan spans = MKCoordinateSpanMake(0, 360/pow(2, 16)*self.frame.size.width/256);
+                MKCoordinateSpan spans = MKCoordinateSpanMake(0,0.01);
     [_mapView setRegion:MKCoordinateRegionMake(centerCoordinate, spans) animated:animated];
+    
 }
 
 - (void)initAnnotationList:(NSArray *)arrMapAnnotation
 {
     _annotationList = [[NSMutableArray alloc] init];
-    //    NSDictionary *dic1=[NSDictionary dictionaryWithObjectsAndKeys:@"10.7813562",@"latitude",@"106.6964668,17",@"longitude",nil];
-    //
-    //    NSDictionary *dic2=[NSDictionary dictionaryWithObjectsAndKeys:@"10.7717806",@"latitude",@"106.6583766,14",@"longitude",nil];
-    //
-    //    NSDictionary *dic3=[NSDictionary dictionaryWithObjectsAndKeys:@"10.700396",@"latitude",@"106.719235",@"longitude",nil];
-    
-    //    BasicMapAnnotation * basicMap = [[BasicMapAnnotation alloc]init];
-    //    basicMap._latitude =
     _annotationList = [NSMutableArray arrayWithArray:arrMapAnnotation];
     [self setAnnotionsWithList:_annotationList];
 }
@@ -68,12 +64,77 @@
             [_mapView   addAnnotation:mapItem];
             //            [_mapView selectAnnotation:mapItem animated:YES];
         }
-        [self zoomMapViewToFitAnnotationsWithExtraZoomToAdjust:20 withList:list];
+        //        [self zoomMapViewToFitAnnotationsWithExtraZoomToAdjust:12 withList:list];
     }
     @catch (NSException *exception) {
     }
 }
+- (void)startLocationRequest
+{
+    
+    INTULocationManager *locMgr = [INTULocationManager sharedInstance];
+    NSInteger iResult = [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity
+                                                           timeout:10
+                                              delayUntilAuthorized:YES
+                                                             block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+                                                                 
+                                                                 if (status == INTULocationStatusSuccess) {
+                                                                     // achievedAccuracy is at least the desired accuracy (potentially better)
+                                                                     currLocation = currentLocation;
+                                                                     [self zoomToCurrentLocation];
+                                                                     UA_log(@"%@", [NSString stringWithFormat:@"Location request successful! Current Location:\n%@", currentLocation]);
+                                                                 }
+                                                                 else if (status == INTULocationStatusTimedOut) {
+                                                                     // You may wish to inspect achievedAccuracy here to see if it is acceptable, if you plan to use currentLocation
+                                                                     UA_log(@"%@", [NSString stringWithFormat:@"Location request timed out. Current Location:\n%@", currentLocation]);
+                                                                 }
+                                                             }];
+    UA_log(@"%ld",(long)iResult);
+}
 
+- (void)zoomToCurrentLocation{
+    [UIView animateWithDuration:1.5 animations:^{
+        MKCoordinateSpan span;
+        span.latitudeDelta  = 1;
+        span.longitudeDelta = 1;
+        
+        MKCoordinateRegion region;
+        region.span = span;
+        region.center = currLocation.coordinate;
+        [self.mapView setRegion:region animated:YES];
+        
+        
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:1.5 animations:^{
+            [self setCenterCoordinate:currLocation.coordinate zoomLevel:15 animated:YES];
+        }];
+    }];
+    //    MKCoordinateSpan span;
+    //    span.latitudeDelta  = 1;
+    //    span.longitudeDelta = 1;
+    //
+    //    MKCoordinateRegion region;
+    //    region.span = span;
+    //    region.center = currLocation.coordinate;
+    //    [self.mapView setRegion:region animated:YES];
+    
+    //    [UIView animateWithDuration:1.5 animations:^{
+    ////       /[self setCenterCoordinate:_calloutAnnotation.coordinate zoomLevel:15 animated:YES];
+    //        [self setCenterCoordinate:currLocation.coordinate zoomLevel:15 animated:YES];
+    //
+    //    } completion:^(BOOL finished) {
+    //        [UIView animateWithDuration:1.5 animations:^{
+    //            MKCoordinateSpan span;
+    //            span.latitudeDelta  = 1;
+    //            span.longitudeDelta = 1;
+    //
+    //            MKCoordinateRegion region;
+    //            region.span = span;
+    //            region.center = currLocation.coordinate;
+    //            [self.mapView setRegion:region animated:YES];
+    //        }];
+    //    }];
+}
 - (void)zoomMapViewToFitAnnotationsWithExtraZoomToAdjust:(double)extraZoom withList :(NSMutableArray *)list
 {
     if ([list count] == 0) return;
@@ -114,8 +175,8 @@
             _calloutAnnotation.strTitle = bsAnnotation._title;
             _calloutAnnotation.strLogo = bsAnnotation._logo;
             _calloutAnnotation.strPOI = bsAnnotation._icon;
+            _calloutAnnotation.strID = bsAnnotation.iID;
             [mapView addAnnotation:_calloutAnnotation];
-            
             //        [mapView setCenterCoordinate:_calloutAnnotation.coordinate animated:YES];
             [self setCenterCoordinate:_calloutAnnotation.coordinate zoomLevel:15 animated:YES];
         }
@@ -150,6 +211,10 @@
     //        }
     //    }
 }
+-(void)annotationBtnAction:(UIButton*)sender
+{
+    
+}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     if ([annotation isKindOfClass:[CalloutMapAnnotation class]]) {
@@ -172,12 +237,27 @@
             cell.lblDescription.text = calloutAnno.strDescription;
             cell.lblTitle.text = calloutAnno.strTitle;
             
+            UIButton *tembtn=[UIButton buttonWithType:UIButtonTypeCustom];
+            
+            // Frame required to render on position and size. Add below line
+            [tembtn setFrame:CGRectMake(200, 15, 30, 30)];
+            tembtn.tag = calloutAnno.strID;
+            [tembtn setTitle:@"..." forState:UIControlStateNormal];
+            [tembtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            [tembtn addTarget:self action:@selector(annotationBtnAction:)
+             forControlEvents:UIControlEventTouchUpInside];
+//            tembtn.backgroundColor=[UIColor grayColor];
+            [cell addSubview:tembtn];
+            
+
+            
             NSString * strStandarURL = calloutAnno.strLogo;
             NSString *photourl;
             if ([strStandarURL containsString:@"http://"]||[strStandarURL containsString:@"https://"]) {
                 photourl = strStandarURL;
             }
-           
+            
+            
             [cell.imgLogo setImageWithURL:[NSURL URLWithString:photourl]
               usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
             cell.imgLogo.contentMode = UIViewContentModeScaleAspectFit;

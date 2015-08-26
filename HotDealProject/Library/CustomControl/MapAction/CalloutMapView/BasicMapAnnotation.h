@@ -8,14 +8,16 @@
     NSString * _icon;
     NSString * _logo;
     NSString * _content;
+    int iID;
 }
 
-@property (nonatomic, retain) NSString *_title;
+@property (nonatomic, copy) NSString *_title;
 @property (nonatomic) CLLocationDegrees _latitude;
 @property (nonatomic) CLLocationDegrees _longitude;
 @property (nonatomic, retain) NSString *_icon;
 @property (nonatomic, retain) NSString *_logo;
 @property (nonatomic, retain) NSString *_content;
+@property (nonatomic, assign) int iID;
 
 - (id)initWithLatitude:(CLLocationDegrees)latitude
 		  andLongitude:(CLLocationDegrees)longitude;

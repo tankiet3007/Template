@@ -15,7 +15,8 @@
 @property (nonatomic, assign) int iMaxQuantity;
 
 @property (nonatomic, strong) NSString * strProductID;
-//@property (nonatomic, strong) NSString * strDealID;
+@property (nonatomic,assign)double  iRate;
 @property (nonatomic,assign)long  lStandarPrice;
 @property (nonatomic,assign)long  lDiscountPrice;
+@property (nonatomic,assign)NSString *  strType;
 @end

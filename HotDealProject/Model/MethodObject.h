@@ -12,4 +12,6 @@
 @property (nonatomic, strong)NSString * strMethodName;
 @property (nonatomic, strong)NSString * strMethodID;
 @property (nonatomic, strong)NSString * strMethodOptional;
+@property (nonatomic, strong)NSString * strNormalImage;
+@property (nonatomic, strong)NSString * strSelectedImage;
 @end

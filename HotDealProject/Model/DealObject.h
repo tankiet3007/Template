@@ -18,4 +18,5 @@
 @property (nonatomic ,assign) BOOL isNew;
 @property (nonatomic,assign)long  lStandarPrice;
 @property (nonatomic,assign)long  lDiscountPrice;
+@property (nonatomic,assign)double  iRate;
 @end

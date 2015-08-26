@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface InvoiceCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel * lblQuantityProduct;
 @property (weak, nonatomic) IBOutlet UILabel *lblTotalOfBill;
-@property (weak, nonatomic) IBOutlet UILabel *lblTax;
 @property (weak, nonatomic) IBOutlet UILabel *lblMoneyAward;
 @property (weak, nonatomic) IBOutlet UILabel *lblCash;
+@property (weak, nonatomic) IBOutlet UIButton *btnCheckout;
 
 @end

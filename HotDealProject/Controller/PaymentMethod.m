@@ -40,7 +40,7 @@
     [self initNavigationbar];
     [self initData];
     indexPathSelected = [NSIndexPath indexPathForRow:0 inSection:0] ;
-    [self initUITableView];
+    
     
     // Do any additional setup after loading the view.
 }
@@ -175,7 +175,7 @@
             mObj.strMethodOptional = [dictItem objectForKey:@"payment_surchage"];
             [arrPaymentMethod addObject:mObj];
         }
-
+        [self initUITableView];
     }];
 
 }

@@ -322,6 +322,7 @@
 -(void)paymentClick
 {
     if ([arrProduct count] == 0|| paymentMethod == nil|| shippingMethod == nil) {
+        ALERT(LS(@"MessageBoxTitle"), @"Vui lòng chọn hình thức thanh toán và hình thức giao hàng");
         return;
     }
     User * user = [[TKDatabase sharedInstance]getUserInfo];

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, UISearchBarDelegate>
+@interface SearchViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, UISearchBarDelegate, UITextFieldDelegate>
 @property(nonatomic,strong)UITableView * tableViewSearch;
 @property (strong, nonatomic) UISearchBar *searchBars;
 @property (strong, nonatomic) NSString *searchText;
+@property (assign, nonatomic) int totalQuatity;
 @end

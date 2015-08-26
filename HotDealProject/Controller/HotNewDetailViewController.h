@@ -11,7 +11,8 @@
 #import "DealObject.h"
 #import "ProductListViewController.h"
 #import "ShoppingCartController.h"
-@interface HotNewDetailViewController : UIViewController<UIGestureRecognizerDelegate, UITableViewDataSource,UITableViewDelegate,slideImageDelegate, ProductListDelegate,ShoppingCartDelegate>
+@interface HotNewDetailViewController : UIViewController<UIGestureRecognizerDelegate, UITableViewDataSource,UITableViewDelegate,slideImageDelegate, ProductListDelegate,ShoppingCartDelegate, UIWebViewDelegate>
+@property(nonatomic,strong)UITableView * tableViewProduct;
 @property(nonatomic,strong)UITableView * tableViewDetail;
 @property (nonatomic, strong)DealObject * dealObj;
 @property (nonatomic,strong)NSMutableArray * arrDealRelateds;

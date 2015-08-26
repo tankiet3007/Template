@@ -13,7 +13,7 @@
 #import "BasicMapAnnotation.h"
 #import "CallOutAnnotationVifew.h"
 #import "JingDianMapCell.h"
-
+#import "DealObject.h"
 @protocol MapViewControllerDidSelectDelegate;
 @interface MapView : UIView<MKMapViewDelegate>
 
@@ -23,11 +23,13 @@
 
 -(void)initMap:(NSArray *)arrMapItem;
 - (void)resetAnnitations:(NSArray *)data;
-
+- (void)startLocationRequest;
+- (void)zoomToCurrentLocation;
 @end
 
 @protocol MapViewControllerDidSelectDelegate <NSObject>
 
 @optional
 - (void)customMKMapViewDidSelectedWithInfo:(id)info;
+- (void)customMKMapViewDidSelectedWithValue:(DealObject*)info;
 @end

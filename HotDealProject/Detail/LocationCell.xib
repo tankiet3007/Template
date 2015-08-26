@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="93" id="KGk-i7-Jjw" customClass="LocationCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Urban Station Coffee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKb-H4-ABF">
+                        <rect key="frame" x="13" y="6" width="243" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="243" id="155-N6-waG"/>
+                            <constraint firstAttribute="height" constant="21" id="2NI-Xf-TN0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29 Nguyễn Trãi, P2, Quận 5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTG-nj-RpE">
+                        <rect key="frame" x="13" y="27" width="249" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="249" id="SO2-om-jdU"/>
+                            <constraint firstAttribute="height" constant="17" id="mGf-bd-yXu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="083.272727" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BaV-YM-nUG">
+                        <rect key="frame" x="13" y="46" width="249" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="euu-iZ-PJq"/>
+                            <constraint firstAttribute="width" constant="249" id="sts-Gh-qvA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8.00AM-10.00PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Uv-a5-ziv">
+                        <rect key="frame" x="13" y="65" width="249" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="3TW-8W-WPY"/>
+                            <constraint firstAttribute="width" constant="249" id="NSl-Wr-ct3"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGf-Kb-NQs">
+                        <rect key="frame" x="264" y="22" width="45" height="45"/>
+                        <color key="backgroundColor" red="0.085916832679999999" green="0.82838147100000004" blue="0.1292698005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="45" id="Hds-Yf-4ox"/>
+                            <constraint firstAttribute="height" constant="45" id="v62-MR-sNp"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="4Uv-a5-ziv" firstAttribute="top" secondItem="BaV-YM-nUG" secondAttribute="bottom" constant="2" id="0ss-4Z-wdu"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="KGf-Kb-NQs" secondAttribute="trailing" constant="3" id="F87-WC-xiW"/>
+                    <constraint firstItem="MKb-H4-ABF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="H0n-xE-pOy"/>
+                    <constraint firstItem="4Uv-a5-ziv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="ODI-a7-pqJ"/>
+                    <constraint firstItem="BaV-YM-nUG" firstAttribute="top" secondItem="dTG-nj-RpE" secondAttribute="bottom" constant="2" id="Zdw-Hs-5UX"/>
+                    <constraint firstItem="BaV-YM-nUG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="ZyS-Qc-oCN"/>
+                    <constraint firstItem="dTG-nj-RpE" firstAttribute="top" secondItem="MKb-H4-ABF" secondAttribute="bottom" id="b8O-3R-ST2"/>
+                    <constraint firstItem="dTG-nj-RpE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="foP-iq-GkH"/>
+                    <constraint firstItem="KGf-Kb-NQs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="14" id="hUB-43-qjo"/>
+                    <constraint firstItem="MKb-H4-ABF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-2" id="qMm-FY-PSp"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="btnCall" destination="KGf-Kb-NQs" id="O8i-yE-D2J"/>
+                <outlet property="lblAddress" destination="dTG-nj-RpE" id="OCQ-rQ-HF7"/>
+                <outlet property="lblDration" destination="4Uv-a5-ziv" id="A9m-Aq-NC9"/>
+                <outlet property="lblName" destination="MKb-H4-ABF" id="MYX-Sv-iyA"/>
+                <outlet property="lblPhone" destination="BaV-YM-nUG" id="qYM-0S-9oJ"/>
+            </connections>
+            <point key="canvasLocation" x="261" y="239.5"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -168,8 +168,8 @@ static NSArray * arrDistrict;
 
 - (void)getRequest:(NSString *)params withURL:(NSString *)url completion:(void(^)(NSDictionary*, NSError*))completion
 {
-//    dispatch_queue_t queue = dispatch_queue_create("com.get", 0);
-//    dispatch_async(queue, ^{
+    dispatch_queue_t queue = dispatch_queue_create("com.get", 0);
+    dispatch_async(queue, ^{
         NSString *paramString = F(@"%@?%@", url, params);
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:paramString]
                                                                cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -179,8 +179,6 @@ static NSArray * arrDistrict;
             UA_log(@"url: %@", url);
         NSError *requestError;
         NSURLResponse *urlResponse = nil;
-        
-        
         NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
         NSString * strData = [[NSString alloc]initWithData:response1 encoding:NSUTF8StringEncoding];
     UA_log(@"%@", strData);
@@ -212,7 +210,7 @@ static NSArray * arrDistrict;
             }
         }
 //        //    UA_log(@"data: %@",strData);
-//    });
+    });
     
 }
 

@@ -121,11 +121,8 @@
 
 - (void)configureCell:(AddressCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.lblContain.text = [arrAddress objectAtIndex:indexPath.row];
-    
-    
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

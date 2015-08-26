@@ -44,6 +44,7 @@ static NSManagedObjectContext * __context = nil;
     NSNumber * numberStandarPrice = [NSNumber numberWithLong:pObject.lStandarPrice];
         NSNumber * numberDiscountPrice = [NSNumber numberWithLong:pObject.lDiscountPrice];
     productItem.productID = pObject.strProductID;
+    productItem.type = pObject.strType;
     productItem.productImage = pObject.strProductImage;
     productItem.title = pObject.strTitle;
     productItem.standarPrice = numberStandarPrice;

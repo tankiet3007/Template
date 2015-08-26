@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zx-hL-okh">
-                    <rect key="frame" x="107" y="51" width="80" height="80"/>
+                    <rect key="frame" x="107" y="10" width="80" height="80"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="4Hr-4V-1C6"/>
                         <constraint firstAttribute="width" constant="80" id="aSa-ne-W8E"/>
@@ -29,14 +29,14 @@
                     </state>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="deo-PL-tK9">
-                    <rect key="frame" x="20" y="169" width="280" height="248"/>
+                    <rect key="frame" x="20" y="119" width="280" height="248"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="248" id="rUe-1D-v3E"/>
                     </constraints>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kiettt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpa-Qj-7yB">
-                    <rect key="frame" x="38" y="135" width="215" height="21"/>
+                    <rect key="frame" x="38" y="94" width="215" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="D1b-Sr-Ffm"/>
                     </constraints>
@@ -49,9 +49,9 @@
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="3zx-hL-okh" secondAttribute="centerX" constant="13" id="20e-h5-Kwz"/>
                 <constraint firstItem="deo-PL-tK9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Dw2-Zo-RdY"/>
-                <constraint firstItem="gpa-Qj-7yB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="135" id="Kzr-vk-MNY"/>
+                <constraint firstItem="gpa-Qj-7yB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="94" id="Kzr-vk-MNY"/>
                 <constraint firstAttribute="trailing" secondItem="deo-PL-tK9" secondAttribute="trailing" constant="20" id="POx-dh-YR0"/>
-                <constraint firstItem="deo-PL-tK9" firstAttribute="top" secondItem="gpa-Qj-7yB" secondAttribute="bottom" constant="13" id="UX7-ee-cfw"/>
+                <constraint firstItem="deo-PL-tK9" firstAttribute="top" secondItem="gpa-Qj-7yB" secondAttribute="bottom" constant="4" id="UX7-ee-cfw"/>
                 <constraint firstItem="gpa-Qj-7yB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="38" id="dxU-vE-NEq"/>
                 <constraint firstItem="gpa-Qj-7yB" firstAttribute="top" secondItem="3zx-hL-okh" secondAttribute="bottom" constant="4" id="i6u-dO-cXU"/>
                 <constraint firstAttribute="trailing" secondItem="gpa-Qj-7yB" secondAttribute="trailing" constant="67" id="uLR-PS-OEh"/>

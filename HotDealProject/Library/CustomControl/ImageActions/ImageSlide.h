@@ -13,10 +13,11 @@
 @property (nonatomic, retain) UIScrollView *scrollView; //UIScrollview to hold the images
 @property (retain, nonatomic) UIPageControl *pageControl;
 @property (assign) id<slideImageDelegate> delegate;
-
+@property (nonatomic, assign) BOOL isHiddenPageControl;
 -(void)initScroll;
 -(void)initScroll2;
 -(void)initScrollLocal2;
+-(void)initScrollFullscreen;
 -(void)initScrollLocalForSetting:(int)indexSelected;
 @end
 @protocol slideImageDelegate <NSObject>
@@ -24,5 +25,5 @@
 -(void)playVideoWithLink:(NSString *)urlLink;
 -(void)loadWebview :(NSString *)urlLink;
 -(void)topCellClick:(long)index;
-
+-(void)setCurrentImage:(long)index;
 @end

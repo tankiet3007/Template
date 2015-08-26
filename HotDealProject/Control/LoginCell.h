@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface LoginCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIView *containViewLogin;
-@property (weak, nonatomic) IBOutlet UIButton *btnForgotPassword;
-@property (weak, nonatomic) IBOutlet UIButton *btnLogin;
 @property (weak, nonatomic) IBOutlet UITextField *tfEmail;
 @property (weak, nonatomic) IBOutlet UITextField *tfPassword;
+@property (weak, nonatomic) IBOutlet UITextField *tfConfirmPassword;
+@property (weak, nonatomic) IBOutlet UIButton *btnDateOfBirth;
+@property (weak, nonatomic) IBOutlet UIButton *btnGender;
 
 @end

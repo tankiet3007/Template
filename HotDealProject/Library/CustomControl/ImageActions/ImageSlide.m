@@ -95,24 +95,17 @@
 //@"1",@"type", @"http://tuyn.info/data/video2.mp4", @"linkType",@"action_2.2.png", @"urlImage", nil];
 -(void)initScrollLocal2
 {
-    //    [[NSTimer scheduledTimerWithTimeInterval:3
-    //                                      target:self
-    //                                    selector:@selector(scrollPages)
-    //                                    userInfo:Nil
-    //                                     repeats:YES] fire];
-    
-    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(10, 10, ScreenWidth -20,  self.frame.size.height)];
-    //    [self addSubview:_scrollView];
+    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth ,  self.frame.size.height)];
     _scrollView.delegate = self;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.pagingEnabled = YES;
     
     [self addSubview:_scrollView];
-    _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 0 + self.frame.size.height-30, self.frame.size.width, 30)];
+    _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 0 + self.frame.size.height-30, self.frame.size.width, 40)];
     _pageControl.hidden = NO;
     _pageControl.pageIndicatorTintColor = [UIColor whiteColor];
-    _pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    _pageControl.currentPageIndicatorTintColor = [UIColor redColor];
     _pageControl.backgroundColor = [UIColor clearColor];
     _pageControl.userInteractionEnabled = NO;
     //    _pageControl.backgroundColor = [UIColor grayColor];
@@ -130,7 +123,7 @@
 //        UIImage *imageT = [UIImage imageNamed:filePath];
         NSString * photourl = [_galleryImages objectAtIndex:i];
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [button.imageView setContentMode:UIViewContentModeScaleAspectFit];
+        [button.imageView setContentMode:UIViewContentModeCenter];
 //        [button setBackgroundImage:imageT forState:UIControlStateNormal];
          [button sd_setImageWithURL:[NSURL URLWithString:photourl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
         button.tag = i;
@@ -193,21 +186,26 @@
     _pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
     _pageControl.backgroundColor = [UIColor clearColor];
     _pageControl.userInteractionEnabled = NO;
+    
+    if (_isHiddenPageControl == YES) {
+        _pageControl.hidden = YES;
+    }
     //    _pageControl.backgroundColor = [UIColor grayColor];
     [self addSubview:_pageControl];
     
     for (int i = 0; i < [_galleryImages count]; i++) {
+        //        NSString * urlImage = [_galleryImages objectAtIndex:i];
+        
+        
         CGRect frame;
         frame.origin.x = _scrollView.frame.size.width * i;
         frame.origin.y = 0;
         frame.size = _scrollView.frame.size;
-        NSString *filePath = [_galleryImages objectAtIndex:i];
-//        NSString * strStandarURL = filePath;
-//        NSString *photourl;
-//        if ([strStandarURL containsString:@"http://"]||[strStandarURL containsString:@"https://"]) {
-//            photourl = strStandarURL;
-//        }
-        UIImage *imageT = [UIImage imageNamed:filePath];
+        //        NSString *filePath = urlImage;
+        //
+        //        UIImage *imageT = [UIImage imageNamed:filePath];
+        NSString * photourl = [_galleryImages objectAtIndex:i];
+
         UIImageView *imageView;
         imageView = [[UIImageView alloc] init];
         
@@ -219,8 +217,8 @@
 //        imageView = [[UIImageView alloc] initWithImage:imageT];
         imageView.clipsToBounds = YES;
         imageView.tag = 1;
-                imageView.image = imageT;
-//        [imageView setContentMode:UIViewContentModeScaleAspectFit];
+//                imageView.image = imageT;
+        [imageView setContentMode:UIViewContentModeScaleAspectFit];
         
         UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:frame];
         scrollView.delegate = self;
@@ -228,14 +226,95 @@
         imageView.frame = scrollView.bounds;
         [scrollView addSubview:imageView];
 
-//        [imageView setImageWithURL:[NSURL URLWithString:photourl]
-//       usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [imageView setImageWithURL:[NSURL URLWithString:photourl]
+       usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [_scrollView addSubview:scrollView];
     }
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture)];
     tapGesture.numberOfTapsRequired = 2;
     [_scrollView addGestureRecognizer:tapGesture];
+    
+    _scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * [_galleryImages count], _scrollView.frame.size.height);
+    
+    self.pageControl.currentPage = 0;
+    self.pageControl.numberOfPages = [self.galleryImages count];
+    _scrollView.delegate = self;
+    
+}
+
+-(void)changeScreen
+{
+    [self.delegate setCurrentImage:[_pageControl currentPage]+1];
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self.delegate setCurrentImage:[_pageControl currentPage]+1];
+}
+-(void)initScrollFullscreen
+{
+    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width,  self.frame.size.height)];
+    _scrollView.delegate = self;
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    _scrollView.showsVerticalScrollIndicator = NO;
+    _scrollView.pagingEnabled = YES;
+    
+    [self addSubview:_scrollView];
+    _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 0 + self.frame.size.height-30, self.frame.size.width, 30)];
+    _pageControl.userInteractionEnabled =YES;
+    _pageControl.hidden = NO;
+    _pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+    _pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    _pageControl.backgroundColor = [UIColor clearColor];
+//    _pageControl.userInteractionEnabled = NO;
+    [_pageControl addTarget:self action:@selector(changeScreen) forControlEvents:UIControlEventValueChanged];
+//    if (_isHiddenPageControl == YES) {
+//        _pageControl.hidden = YES;
+//    }
+    //    _pageControl.backgroundColor = [UIColor grayColor];
+    [self addSubview:_pageControl];
+    
+    for (int i = 0; i < [_galleryImages count]; i++) {
+        //        NSString * urlImage = [_galleryImages objectAtIndex:i];
+        
+        
+        CGRect frame;
+        frame.origin.x = _scrollView.frame.size.width * i;
+        frame.origin.y = 0;
+        frame.size = _scrollView.frame.size;
+        //        NSString *filePath = urlImage;
+        //
+        //        UIImage *imageT = [UIImage imageNamed:filePath];
+        NSString * photourl = [_galleryImages objectAtIndex:i];
+        
+        UIImageView *imageView;
+        imageView = [[UIImageView alloc] init];
+        
+        
+        
+        //        NSString *filePath = [_galleryImages objectAtIndex:i];
+        //        UIImage *imageT = [UIImage imageWithContentsOfFile:filePath];
+        //        UIImageView *imageView;
+        //        imageView = [[UIImageView alloc] initWithImage:imageT];
+        imageView.clipsToBounds = YES;
+        imageView.tag = 1;
+        //                imageView.image = imageT;
+        [imageView setContentMode:UIViewContentModeScaleAspectFit];
+        
+        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:frame];
+        scrollView.delegate = self;
+        scrollView.maximumZoomScale = 3.0f;
+        imageView.frame = scrollView.bounds;
+        [scrollView addSubview:imageView];
+        
+        [imageView setImageWithURL:[NSURL URLWithString:photourl]
+       usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [_scrollView addSubview:scrollView];
+    }
+    
+//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture)];
+//    tapGesture.numberOfTapsRequired = 2;
+//    [_scrollView addGestureRecognizer:tapGesture];
     
     _scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * [_galleryImages count], _scrollView.frame.size.height);
     
