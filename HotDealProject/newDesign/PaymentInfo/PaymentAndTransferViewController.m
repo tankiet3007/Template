@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "ScrollableCell.h"
 #import "PaymentInfoViewController.h"
+
 @interface PaymentAndTransferViewController ()
 
 @end
@@ -109,8 +110,9 @@
 }
 -(void)selectedDone
 {
-    PaymentInfoViewController * pInfo = [[PaymentInfoViewController alloc]init];
-    [self.navigationController pushViewController:pInfo animated:YES];
+//    PaymentInfoViewController * pInfo = [[PaymentInfoViewController alloc]init];
+//    [self.navigationController pushViewController:pInfo animated:YES];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

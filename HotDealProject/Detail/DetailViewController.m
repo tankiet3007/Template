@@ -23,6 +23,8 @@
 #import "LocationTableViewController.h"
 #import "CommentRatingViewController.h"
 #import "CartViewController.h"
+#import "PaymentTemplate.h"
+#import "PaymentInfoObject.h"
 @interface DetailViewController ()
 
 @end
@@ -34,6 +36,11 @@
     BBBadgeBarButtonItem *barButton;
     NSMutableArray * arrProduct;
     NSMutableArray * galleryImages;
+    CustomCollectionView * cV;
+    PaymentTemplate * pTemplate;
+    NSMutableArray * arrImageSelected;
+    UIView* dimView;
+    NSMutableArray * arrPaymentInfo;
 }
 @synthesize arrDealRelateds;
 @synthesize tableViewDetail;
@@ -49,6 +56,118 @@
     
 }
 #pragma mark initMethod
+-(void)animateViewComment
+{
+    [self setDimView];
+    cV = [[CustomCollectionView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight -200)];
+   
+    arrImageSelected = [NSMutableArray new];
+    cV.delegate = self;
+    
+    cV.frame = CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight - 180);
+    
+    [UIView animateWithDuration:0.5
+                          delay:0.1
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         cV.frame = CGRectMake(0, 80, ScreenWidth, ScreenHeight - 180);
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    //    [self.view addSubview:self.postStatusView];
+    [self.view addSubview:cV];
+    [cV initCollectionView];
+}
+-(void)initDataTemp
+{
+    arrPaymentInfo = [NSMutableArray new];
+    PaymentInfoObject * pObject = [PaymentInfoObject new];
+    pObject.strName = @"ĐƠN HÀNG";
+    pObject.strDescription = @"Combo nước uống tại Urban Station";
+    [arrPaymentInfo addObject:pObject];
+    
+    pObject = [PaymentInfoObject new];
+    pObject.strName = @"TỔNG GIÁ";
+    pObject.strDescription = @"85.000đ";
+    [arrPaymentInfo addObject:pObject];
+    
+    pObject = [PaymentInfoObject new];
+    pObject.strName = @"NGƯỜI NHẬN";
+    pObject.strDescription = @"Nguyễn Văn A";
+    [arrPaymentInfo addObject:pObject];
+    
+    pObject = [PaymentInfoObject new];
+    pObject.strName = @"EMAIL";
+    pObject.strDescription = @"abc@gmail.com";
+    [arrPaymentInfo addObject:pObject];
+    
+    pObject = [PaymentInfoObject new];
+    pObject.strName = @"ĐIỆN THOẠI";
+    pObject.strDescription = @"0909090000";
+    [arrPaymentInfo addObject:pObject];
+    
+    pObject = [PaymentInfoObject new];
+    pObject.strName = @"ĐỊA CHỈ";
+    pObject.strDescription = @"Lữ gia Plaza, 70 Lữ Gia";
+    [arrPaymentInfo addObject:pObject];
+    
+    pObject = [PaymentInfoObject new];
+    pObject.strName = @"THÀNH PHỐ";
+    pObject.strDescription = @"Hồ Chí Minh";
+    [arrPaymentInfo addObject:pObject];
+    
+    pObject = [PaymentInfoObject new];
+    pObject.strName = @"QUẬN";
+    pObject.strDescription = @"11";
+    [arrPaymentInfo addObject:pObject];
+    
+    pObject = [PaymentInfoObject new];
+    pObject.strName = @"GHI CHÚ";
+    pObject.strDescription = @"Giao hàng trong giờ hành chính, điện thoại trước khi giao hàng.";
+    [arrPaymentInfo addObject:pObject];
+}
+-(void)checkDone
+{
+    [self hiddenView:nil];
+}
+-(void)animateViewConfirm
+{
+    [self setDimView];
+    [self initDataTemp];
+    pTemplate = [[PaymentTemplate alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight -200)];
+    pTemplate.arrInfo = arrPaymentInfo;
+    pTemplate.delegate = self;
+    pTemplate.frame = CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight - 180);
+    
+    [UIView animateWithDuration:0.5
+                          delay:0.1
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         pTemplate.frame = CGRectMake(0, 80, ScreenWidth, ScreenHeight - 180);
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    [self.view addSubview:pTemplate];
+    [pTemplate initUITableView];
+    
+}
+
+-(void)dissmissSlideview
+{
+    [UIView animateWithDuration:0.5
+                          delay:0.1
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         cV.frame = CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight - 180);
+                         pTemplate.frame = CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight - 180);
+                     }
+                     completion:^(BOOL finished){
+                         if (finished)
+                             [cV removeFromSuperview];
+                         [pTemplate removeFromSuperview];
+                     }];
+}
+
 - (void)initHUD {
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
@@ -131,6 +250,36 @@
     self.navigationItem.rightBarButtonItem = barButton;
 }
 #pragma mark init Bottom Mennu
+- (void)hiddenView:(id)sender {
+    [self dissmissSlideview];
+    dimView.alpha = 0;
+}
+-(void)setDimView
+{
+    if (dimView != nil) {
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             dimView.alpha = 0.6;
+                         }];
+        return;
+    }
+    dimView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hiddenView:)];
+    tapGesture.numberOfTapsRequired = 1;
+    [dimView addGestureRecognizer:tapGesture];
+    
+    dimView.backgroundColor = [UIColor blackColor];
+    dimView.alpha = 0;
+    [self.view addSubview:dimView];
+    
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         dimView.alpha = 0.6;
+                     }];
+    
+}
+
 -(void)initBottomMenu
 {
     UIView * viewBottom = [[UIView alloc]initWithFrame:CGRectMake(0, ScreenHeight - 160, ScreenWidth, 50)];
@@ -179,8 +328,45 @@
 }
 -(void)commentAction
 {
+    [self animateViewComment];
+}
+-(void)openPicker
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SNPicker" bundle:nil];
+    self.imagePickerNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"ImagePickerNC"];
+    [self.imagePickerNavigationController setModalPresentationStyle:UIModalPresentationFullScreen];
+    self.imagePickerNavigationController.imagePickerDelegate = self;
+    self.imagePickerNavigationController.pickerType = kPickerTypePhoto;
+    [self presentViewController:self.imagePickerNavigationController animated:YES completion:^{ }];
+}
+
+- (void)imagePicker:(SNImagePickerNC *)imagePicker didFinishPickingWithMediaInfo:(NSMutableArray *)info
+{
+    __block int iNum = 0;
+    for (int i = 0; i < info.count; i++) {
+        iNum += 1;
+        ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
+        [assetLibrary assetForURL:info[i] resultBlock:^(ALAsset *asset) {
+            UIImage *image = [UIImage imageWithCGImage:[asset aspectRatioThumbnail]];
+            [arrImageSelected addObject:image];
+            if (iNum == info.count) {
+                cV.arrImageSelected = arrImageSelected;
+                [cV reloadData];
+            }
+        } failureBlock:^(NSError *error) {     }];
+    }
+    
+    /*
+     If you Pick a movie you can get an asset url like this and do something with asset
+     NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
+     */
+}
+
+- (void)imagePickerDidCancel:(SNImagePickerNC *)imagePicker
+{
     
 }
+
 -(void)shareFacebook
 {
     FBSDKShareLinkContent *params = [[FBSDKShareLinkContent alloc] init];
@@ -216,13 +402,8 @@
 }
 -(void)buyDirectly
 {
-    if ([arrProduct count] == 0) {
-        ALERT(@"Thông báo", @"Chưa có sản phẩm nào trong giỏ hàng");
-        return;
-    }
-    CartViewController * shopping = [[CartViewController alloc]init];
-    //        shopping.delegate = self;
-    [self.navigationController pushViewController:shopping animated:YES];
+//    [self shoppingCart];
+    [self animateViewConfirm];
 }
 -(void)shoppingCart
 {
@@ -231,7 +412,6 @@
         return;
     }
     CartViewController * shopping = [[CartViewController alloc]init];
-    //        shopping.delegate = self;
     [self.navigationController pushViewController:shopping animated:YES];
 }
 #pragma mark - Table view data source

@@ -9,10 +9,14 @@
 #import "CustomCollectionView.h"
 #import "ImageCell.h"
 #import "CustomCollectionItem.h"
+#import "CommentHeaderView.h"
+#import "DLStarRatingControl.h"
 @implementation CustomCollectionView
 {
     UIImageView * fullScreenImageView;
     UIButton * originalImageView;
+    DLStarRatingControl * rateControl;
+    UITextView * tvComment;
 }
 @synthesize collectionView;
 @synthesize arrImageSelected;
@@ -29,28 +33,61 @@
 }
 -(void)initCollectionView
 {
+    self.backgroundColor = [UIColor whiteColor];
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc]init];
     
     flowLayout.itemSize = CGSizeMake(100, 100);
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-100) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self), HEIGHT(self)-60) collectionViewLayout:flowLayout];
     
     self.collectionView.alwaysBounceVertical = YES;
     [self.collectionView registerNib:[UINib nibWithNibName:@"ImageCell" bundle:nil] forCellWithReuseIdentifier:@"ImageCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"CustomCollectionItem" bundle:nil] forCellWithReuseIdentifier:@"CustomCollectionItem"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"CollectionHeaderHome" bundle:nil]  forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CollectionHeaderHome"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"CommentHeaderView" bundle:nil]  forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CommentHeaderView"];
     [collectionView setBackgroundColor:[UIColor whiteColor]];
     collectionView.delegate = self;
     collectionView.dataSource = self;
     [self addSubview:collectionView];
     
+    [self initBottomMenu];
 }
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+        return CGSizeMake(ScreenWidth, 184);
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionViews viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionReusableView *reusableview = nil;
     
     if (kind == UICollectionElementKindSectionHeader) {
-        
+        CommentHeaderView *headerView = [collectionViews dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CommentHeaderView" forIndexPath:indexPath];
+        if (rateControl!= nil) {
+            [rateControl removeFromSuperview];
+            rateControl = nil;
+        }
+        rateControl = [[DLStarRatingControl alloc] initWithFrameCustom:CGRectMake(ScreenWidth/2 - 100, 40, 200, 40) andStars:5 isFractional:YES];
+        rateControl.delegate = self;
+        rateControl.backgroundColor = [UIColor clearColor];
+        rateControl.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        rateControl.rating = 4;
+        [headerView addSubview:rateControl];
+        tvComment = headerView.tvComment;
+        tvComment.layer.borderWidth = 1;
+        tvComment.layer.borderColor = [[UIColor lightGrayColor]CGColor];
+        tvComment.layer.cornerRadius = 5;
+        tvComment.layer.masksToBounds = YES;
+        tvComment.textColor = [UIColor lightGrayColor];
+        tvComment.font = [UIFont systemFontOfSize:13];
+        //    tvComment.text = LS(@"MessagePlaceHolder");
+        tvComment.delegate = self;
+        if(tvComment.text.length == 0){
+            tvComment.textColor = [UIColor lightGrayColor];
+            tvComment.text = @"Bình luận (giới hạn 150 ký tự)";
+            [tvComment resignFirstResponder];
+        }
+        reusableview = headerView;
     }
     return reusableview;
 }
@@ -71,29 +108,44 @@
     ImageCell *cell = (ImageCell *)[collectionViews dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
     cell.btnImageView.tag = indexPath.row;
+    [cell.btnImageView addTarget:self action:@selector(showPickerOrFullScreen:) forControlEvents:UIControlEventTouchUpInside];
     if (indexPath.row == [arrImageSelected count]) {
-        [cell.btnImageView addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btnImageView setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.btnImageView setBackgroundImage:nil forState:UIControlStateNormal];
+        cell.removeCell.hidden = YES;
         return cell;
     }
     else
     {
-        [cell.btnImageView addTarget:self action:@selector(showFullscreen:) forControlEvents:UIControlEventTouchUpInside];
         if ([arrImageSelected count] > 0) {
+            cell.removeCell.hidden = NO;
             UIImage * image = [arrImageSelected objectAtIndex:indexPath.row];
             [cell.btnImageView setBackgroundImage:image forState:UIControlStateNormal];
+            [cell.removeCell addTarget:self action:@selector(removeCell:) forControlEvents:UIControlEventTouchUpInside];
         }
         return cell;
     }
 }
-
+-(void)removeCell:(UIButton *)sender
+{
+    ImageCell * cell = (ImageCell *)sender.superview.superview;
+    NSIndexPath * indexPathAtCell = [self.collectionView indexPathForCell:cell];
+    [arrImageSelected removeObjectAtIndex:indexPathAtCell.row];
+    [collectionView reloadData];
+}
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     return CGSizeMake(90, 90);
 }
 
--(void)showPicker:(UIButton *)sender
+-(void)showPickerOrFullScreen:(UIButton *)sender
 {
-    [self.delegate openPicker];
+    if (sender.tag != [arrImageSelected count]) {
+        [self showFullscreen:sender];
+    }
+    else
+    {
+        [self.delegate openPicker];
+    }
 }
 -(void)showFullscreen:(UIButton *)sender
 {
@@ -102,7 +154,7 @@
     fullScreenImageView = [[UIImageView alloc] init];
     [fullScreenImageView setContentMode:UIViewContentModeScaleAspectFit];
     
-    fullScreenImageView.image = [UIImage imageNamed:@"demo2.jpg"];
+    fullScreenImageView.image = [arrImageSelected objectAtIndex:sender.tag];
     // ***********************************************************************************
     // You can either use this to zoom in from the center of your cell
     CGRect tempPoint = CGRectMake(sender.center.x, sender.center.y, 0, 0);
@@ -144,5 +196,41 @@
 {
     [fullScreenImageView removeFromSuperview];
     fullScreenImageView = nil;
+}
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        UA_log(@"%@ -- %f", tvComment.text, rateControl.rating);
+        return FALSE;
+    }
+    int lenght = textView.text.length + (text.length - range.length);
+    return lenght <= 150;
+}
+
+- (BOOL) textViewShouldBeginEditing:(UITextView *)textView
+{
+    tvComment.text = @"";
+    tvComment.textColor = [UIColor blackColor];
+    return YES;
+}
+-(void)initBottomMenu
+{
+    UIButton * btnDone = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btnDone setFrame:CGRectMake(0, HEIGHT(self) - 60 , WIDTH(self), 50)];
+    [btnDone setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+    [btnDone setTitle:@"GỬI BÌNH LUẬN" forState:UIControlStateNormal];
+    [btnDone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    btnDone.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    [btnDone addTarget:self action:@selector(selectedDone) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:btnDone];
+}
+-(void)selectedDone
+{
+    ALERT(@"OK", @"OK");
+}
+-(void)newRating:(DLStarRatingControl *)control :(float)rating
+{
+     ALERT(@"OK", F(@"%f", rating));
 }
 @end

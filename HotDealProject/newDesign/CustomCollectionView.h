@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "SNImagePickerNC.h"
+#import "DLStarRating/DLStarRatingControl.h"
 @protocol CustomCollectionViewDelegate;
-@interface CustomCollectionView : UIView <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface CustomCollectionView : UIView <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate,DLStarRatingDelegate>
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray * arrImageSelected;
 -(void)initCollectionView;

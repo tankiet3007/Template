@@ -10,4 +10,6 @@
 
 @interface ImageCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIButton *btnImageView;
+@property (weak, nonatomic) IBOutlet UIButton *removeCell;
+
 @end

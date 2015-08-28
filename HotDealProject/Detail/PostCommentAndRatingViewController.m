@@ -18,6 +18,10 @@
     NSMutableArray * arrImageSelected;
     CustomCollectionView * cV;
 }
+-(void)backbtn_click:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
@@ -43,8 +47,6 @@
 
 - (void)imagePicker:(SNImagePickerNC *)imagePicker didFinishPickingWithMediaInfo:(NSMutableArray *)info
 {
-    
-    // If you Pick a photos you can get images like this
     __block int iNum = 0;
     for (int i = 0; i < info.count; i++) {
         iNum += 1;

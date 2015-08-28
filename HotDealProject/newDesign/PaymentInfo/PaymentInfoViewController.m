@@ -12,12 +12,15 @@
 #import "PaymentInfoCell.h"
 #import "PaymentInfoObject.h"
 #import "PaymentSuccessViewController.h"
-
+#import "PaymentTemplate.h"
 @interface PaymentInfoViewController ()
 
 @end
 
 @implementation PaymentInfoViewController
+{
+    PaymentTemplate * payTemplate;
+}
 @synthesize arrPaymentInfo;
 @synthesize tablePaymentInfo;
 - (void)viewDidLoad {
@@ -33,14 +36,18 @@
 
 -(void)initUITableView
 {
-    tablePaymentInfo = [[UITableView alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth-20, ScreenHeight -160) style:UITableViewStyleGrouped];
-    [self.view addSubview:tablePaymentInfo];
-    tablePaymentInfo.backgroundColor = [UIColor whiteColor];
-    tablePaymentInfo.dataSource = self;
-    tablePaymentInfo.delegate = self;
-    tablePaymentInfo.separatorColor = [UIColor clearColor];
-    tablePaymentInfo.showsVerticalScrollIndicator = NO;
-    tablePaymentInfo.sectionHeaderHeight = 0.0;
+    payTemplate = [[PaymentTemplate alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth -20, ScreenHeight -160)];
+    payTemplate.arrInfo = arrPaymentInfo;
+    [payTemplate initUITableView];
+    [self.view addSubview:payTemplate];
+//    tablePaymentInfo = [[UITableView alloc]initWithFrame:CGRectMake(10, 0, ScreenWidth-20, ScreenHeight -160) style:UITableViewStyleGrouped];
+//    [self.view addSubview:tablePaymentInfo];
+//    tablePaymentInfo.backgroundColor = [UIColor whiteColor];
+//    tablePaymentInfo.dataSource = self;
+//    tablePaymentInfo.delegate = self;
+//    tablePaymentInfo.separatorColor = [UIColor clearColor];
+//    tablePaymentInfo.showsVerticalScrollIndicator = NO;
+//    tablePaymentInfo.sectionHeaderHeight = 0.0;
     
     UIButton * btnDone = [UIButton buttonWithType:UIButtonTypeSystem];
     [btnDone setFrame:CGRectMake(0, ScreenHeight-160, ScreenWidth, 50)];
@@ -54,8 +61,9 @@
 
 -(void)paymentDone
 {
-    PaymentSuccessViewController * pS = [[PaymentSuccessViewController alloc]init];
-    [self.navigationController pushViewController:pS animated:YES];
+//    PaymentSuccessViewController * pS = [[PaymentSuccessViewController alloc]init];
+//    [self.navigationController pushViewController:pS animated:YES];
+    [payTemplate reloadData];
 }
 
 -(void)initDataTemp
@@ -105,8 +113,6 @@
     pObject.strName = @"GHI CHÚ";
     pObject.strDescription = @"Giao hàng trong giờ hành chính, điện thoại trước khi giao hàng.";
     [arrPaymentInfo addObject:pObject];
-    
-    
 }
 -(void)backbtn_click:(id)sender
 {
@@ -122,55 +128,55 @@
     AppDelegate * appdelegate = ApplicationDelegate;
     [appdelegate initNavigationbar:self withTitle:strTitle];
 }
-#pragma mark tableview delegate + datasource
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return  1;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 9;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 40;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 60;
-}
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView * vHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH(tableView), 60)];
-    UILabel * lblHeaderTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, WIDTH(tableView), 34)];
-    lblHeaderTitle.text = @"THÔNG TIN GIAO HÀNG";
-    lblHeaderTitle.textColor = [UIColor darkGrayColor];
-    lblHeaderTitle.font = [UIFont boldSystemFontOfSize:18];
-    lblHeaderTitle.textAlignment = NSTextAlignmentCenter;
-    [vHeader addSubview:lblHeaderTitle];
-    
-    UIView * underLine = [[UIView alloc]initWithFrame:CGRectMake(0, 45, ScreenWidth - 20, 1)];
-    underLine.backgroundColor = [UIColor lightGrayColor];
-    [vHeader addSubview:underLine];
-    return vHeader;
-}
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *simpleTableIdentifier = @"PaymentInfoCell";
-    
-    PaymentInfoCell *cell = (PaymentInfoCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    if (cell == nil)
-    {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PaymentInfoCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    PaymentInfoObject * pObject = [arrPaymentInfo objectAtIndex:indexPath.row];
-    cell.lblName.text = pObject.strName;
-    cell.lblDescription.text = pObject.strDescription;
-    return cell;
-}
+//#pragma mark tableview delegate + datasource
+//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return  1;
+//}
+//
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return 9;
+//}
+//
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 40;
+//}
+//
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 60;
+//}
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UIView * vHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH(tableView), 60)];
+//    UILabel * lblHeaderTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, WIDTH(tableView), 34)];
+//    lblHeaderTitle.text = @"THÔNG TIN GIAO HÀNG";
+//    lblHeaderTitle.textColor = [UIColor darkGrayColor];
+//    lblHeaderTitle.font = [UIFont boldSystemFontOfSize:18];
+//    lblHeaderTitle.textAlignment = NSTextAlignmentCenter;
+//    [vHeader addSubview:lblHeaderTitle];
+//    
+//    UIView * underLine = [[UIView alloc]initWithFrame:CGRectMake(0, 45, ScreenWidth - 20, 1)];
+//    underLine.backgroundColor = [UIColor lightGrayColor];
+//    [vHeader addSubview:underLine];
+//    return vHeader;
+//}
+//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    static NSString *simpleTableIdentifier = @"PaymentInfoCell";
+//    
+//    PaymentInfoCell *cell = (PaymentInfoCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+//    if (cell == nil)
+//    {
+//        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PaymentInfoCell" owner:self options:nil];
+//        cell = [nib objectAtIndex:0];
+//    }
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    PaymentInfoObject * pObject = [arrPaymentInfo objectAtIndex:indexPath.row];
+//    cell.lblName.text = pObject.strName;
+//    cell.lblDescription.text = pObject.strDescription;
+//    return cell;
+//}
 @end

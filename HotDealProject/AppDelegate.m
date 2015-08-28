@@ -20,6 +20,7 @@
 #import "SignUpViewController.h"
 #import "PaymentAndTransferViewController.h"
 #import "PostCommentAndRatingViewController.h"
+#import "PaymentInfoViewController.h"
 static NSString * const kRecipesStoreName = @"HotDealProject.sqlite";//HotDealProject.sqlite
 @interface AppDelegate ()<SWRevealViewControllerDelegate>
 
@@ -95,7 +96,7 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
     nc3.tabBarItem.title = @"Login";
     nc3.viewControllers = [NSArray arrayWithObjects:viewController3, nil];
     
-    PostCommentAndRatingViewController *viewController4 = [[PostCommentAndRatingViewController alloc]init];
+    PaymentInfoViewController *viewController4 = [[PaymentInfoViewController alloc]init];
     UINavigationController *nc4;
     nc4 = [[UINavigationController alloc] init];
     [nc4.navigationBar setTintColor:[UIColor blackColor]];

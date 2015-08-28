@@ -10,9 +10,13 @@
 #import "ImageSlide.h"
 #import "DealObject.h"
 #import "ShoppingCartController.h"
-@interface DetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,slideImageDelegate,UIWebViewDelegate,UIGestureRecognizerDelegate>
+#import "CustomCollectionView.h"
+#import "Payment/PaymentTemplate.h"
+@interface DetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,slideImageDelegate,UIWebViewDelegate,UIGestureRecognizerDelegate,CustomCollectionViewDelegate, SNImagePickerDelegate, PaymentTemplateDelegate>
 @property(nonatomic,strong)UITableView * tableViewDetail;
 @property (nonatomic, strong)DealObject * dealObj;
 @property (nonatomic,strong)NSMutableArray * arrDealRelateds;
 @property (nonatomic, assign)int  iProductID;
+@property (strong, nonatomic) SNImagePickerNC *imagePickerNavigationController;
+
 @end

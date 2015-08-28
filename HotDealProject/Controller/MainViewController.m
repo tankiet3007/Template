@@ -164,7 +164,7 @@
         //        [HUD hide:YES];
         if (dict == nil) {
             [HUD hide:YES];
-            //            [self showDialog];
+            [self showDialog];
             //            lblNetwordStatus.text = @"Có lỗi trong quá trình lấy dữ liệu";
             
             return;
