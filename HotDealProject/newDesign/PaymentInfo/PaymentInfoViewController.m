@@ -49,14 +49,14 @@
 //    tablePaymentInfo.showsVerticalScrollIndicator = NO;
 //    tablePaymentInfo.sectionHeaderHeight = 0.0;
     
-    UIButton * btnDone = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btnDone setFrame:CGRectMake(0, ScreenHeight-160, ScreenWidth, 50)];
-    [btnDone setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
-    [btnDone setTitle:@"THANH TOÁN" forState:UIControlStateNormal];
-    [btnDone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    btnDone.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    [btnDone addTarget:self action:@selector(paymentDone) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnDone];
+//    UIButton * btnDone = [UIButton buttonWithType:UIButtonTypeSystem];
+//    [btnDone setFrame:CGRectMake(0, ScreenHeight-160, ScreenWidth, 50)];
+//    [btnDone setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+//    [btnDone setTitle:@"THANH TOÁN" forState:UIControlStateNormal];
+//    [btnDone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    btnDone.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+//    [btnDone addTarget:self action:@selector(paymentDone) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btnDone];
 }
 
 -(void)paymentDone

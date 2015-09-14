@@ -7,6 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5102153F1BA67ED600726F3C /* button-sign-in-with-yahoo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5102150B1BA67ED600726F3C /* button-sign-in-with-yahoo.png */; };
+		510215401BA67ED600726F3C /* profile-150x150.png in Resources */ = {isa = PBXBuildFile; fileRef = 5102150C1BA67ED600726F3C /* profile-150x150.png */; };
+		510215411BA67ED600726F3C /* Base64Transcoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5102150F1BA67ED600726F3C /* Base64Transcoder.m */; };
+		510215421BA67ED600726F3C /* NSData+OAuthResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 510215121BA67ED600726F3C /* NSData+OAuthResponse.m */; };
+		510215431BA67ED600726F3C /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = 510215141BA67ED600726F3C /* NSDictionary+QueryString.m */; };
+		510215441BA67ED600726F3C /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 510215161BA67ED600726F3C /* NSString+URLEncoding.m */; };
+		510215451BA67ED600726F3C /* YOAuthConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 510215191BA67ED600726F3C /* YOAuthConsumer.m */; };
+		510215461BA67ED600726F3C /* YOAuthRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5102151B1BA67ED600726F3C /* YOAuthRequest.m */; };
+		510215471BA67ED600726F3C /* YOAuthSignatureMethod_HMAC-SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 5102151E1BA67ED600726F3C /* YOAuthSignatureMethod_HMAC-SHA1.m */; };
+		510215481BA67ED600726F3C /* YOAuthSignatureMethod_PLAINTEXT.m in Sources */ = {isa = PBXBuildFile; fileRef = 510215201BA67ED600726F3C /* YOAuthSignatureMethod_PLAINTEXT.m */; };
+		510215491BA67ED600726F3C /* YOAuthToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 510215221BA67ED600726F3C /* YOAuthToken.m */; };
+		5102154A1BA67ED600726F3C /* YOAuthUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 510215241BA67ED600726F3C /* YOAuthUtil.m */; };
+		5102154B1BA67ED600726F3C /* YahooSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 510215281BA67ED600726F3C /* YahooSession.m */; };
+		5102154C1BA67ED600726F3C /* YOSAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 5102152A1BA67ED600726F3C /* YOSAccessToken.m */; };
+		5102154D1BA67ED600726F3C /* YOSAuthRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5102152C1BA67ED600726F3C /* YOSAuthRequest.m */; };
+		5102154E1BA67ED600726F3C /* YOSBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5102152E1BA67ED600726F3C /* YOSBaseRequest.m */; };
+		5102154F1BA67ED600726F3C /* YOSOpenSocialRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 510215301BA67ED600726F3C /* YOSOpenSocialRequest.m */; };
+		510215501BA67ED600726F3C /* YOSRequestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 510215321BA67ED600726F3C /* YOSRequestClient.m */; };
+		510215511BA67ED600726F3C /* YOSRequestToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 510215341BA67ED600726F3C /* YOSRequestToken.m */; };
+		510215521BA67ED600726F3C /* YOSResponseData.m in Sources */ = {isa = PBXBuildFile; fileRef = 510215361BA67ED600726F3C /* YOSResponseData.m */; };
+		510215531BA67ED600726F3C /* YOSTokenStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 510215381BA67ED600726F3C /* YOSTokenStore.m */; };
+		510215541BA67ED600726F3C /* YOSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5102153A1BA67ED600726F3C /* YOSUser.m */; };
+		510215551BA67ED600726F3C /* YOSUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5102153C1BA67ED600726F3C /* YOSUserRequest.m */; };
+		510215561BA67ED600726F3C /* YQLQueryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5102153E1BA67ED600726F3C /* YQLQueryRequest.m */; };
 		51249B9C1B7489E8007B9623 /* CategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51249B9A1B7489E8007B9623 /* CategoryCell.m */; };
 		51249B9D1B7489E8007B9623 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51249B9B1B7489E8007B9623 /* CategoryCell.xib */; };
 		513609141B8D9CA600F0CC08 /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 513609121B8D9CA600F0CC08 /* CommentHeaderView.m */; };
@@ -111,6 +135,7 @@
 		51DA073B1B84743400271871 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51DA07391B84743400271871 /* SignUpViewController.xib */; };
 		51E045211B78802E000AAACE /* TTRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E0451F1B78802E000AAACE /* TTRangeSlider.m */; };
 		51E045241B7882CF000AAACE /* CategoryTravelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E045231B7882CF000AAACE /* CategoryTravelViewController.m */; };
+		51FDCF2D1BA296F400B10851 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE209F1AD8124E002E11AC /* CoreFoundation.framework */; };
 		E90317861B1DA846007CDA75 /* SearchResultItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E90317851B1DA846007CDA75 /* SearchResultItem.m */; };
 		E911132F1B098C4F00EF49DB /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E911132E1B098C4F00EF49DB /* AddressBook.framework */; };
 		E91113311B098C5600EF49DB /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91113301B098C5600EF49DB /* AssetsLibrary.framework */; };
@@ -239,7 +264,6 @@
 		E9AE209B1AD81134002E11AC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE20991AD81134002E11AC /* AVFoundation.framework */; };
 		E9AE209C1AD81134002E11AC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE209A1AD81134002E11AC /* Foundation.framework */; };
 		E9AE209E1AD8114F002E11AC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE209D1AD8114F002E11AC /* CoreData.framework */; };
-		E9AE20A01AD8124E002E11AC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE209F1AD8124E002E11AC /* CoreFoundation.framework */; };
 		E9B0D4E21AF7AE97008F45A0 /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B0D4E11AF7AE97008F45A0 /* PaymentViewController.m */; };
 		E9B24BD51AF85B5300322C0F /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B24BD41AF85B5300322C0F /* OrderListViewController.m */; };
 		E9B24BD91AF85C6000322C0F /* PayItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B24BD71AF85C6000322C0F /* PayItemTableViewCell.m */; };
@@ -310,6 +334,55 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5102150B1BA67ED600726F3C /* button-sign-in-with-yahoo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-sign-in-with-yahoo.png"; sourceTree = "<group>"; };
+		5102150C1BA67ED600726F3C /* profile-150x150.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-150x150.png"; sourceTree = "<group>"; };
+		5102150F1BA67ED600726F3C /* Base64Transcoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64Transcoder.m; sourceTree = "<group>"; };
+		510215101BA67ED600726F3C /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
+		510215111BA67ED600726F3C /* NSData+OAuthResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+OAuthResponse.h"; sourceTree = "<group>"; };
+		510215121BA67ED600726F3C /* NSData+OAuthResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+OAuthResponse.m"; sourceTree = "<group>"; };
+		510215131BA67ED600726F3C /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+QueryString.h"; sourceTree = "<group>"; };
+		510215141BA67ED600726F3C /* NSDictionary+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+QueryString.m"; sourceTree = "<group>"; };
+		510215151BA67ED600726F3C /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		510215161BA67ED600726F3C /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		510215171BA67ED600726F3C /* YOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOAuth.h; sourceTree = "<group>"; };
+		510215181BA67ED600726F3C /* YOAuthConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOAuthConsumer.h; sourceTree = "<group>"; };
+		510215191BA67ED600726F3C /* YOAuthConsumer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOAuthConsumer.m; sourceTree = "<group>"; };
+		5102151A1BA67ED600726F3C /* YOAuthRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOAuthRequest.h; sourceTree = "<group>"; };
+		5102151B1BA67ED600726F3C /* YOAuthRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOAuthRequest.m; sourceTree = "<group>"; };
+		5102151C1BA67ED600726F3C /* YOAuthSignatureMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOAuthSignatureMethod.h; sourceTree = "<group>"; };
+		5102151D1BA67ED600726F3C /* YOAuthSignatureMethod_HMAC-SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YOAuthSignatureMethod_HMAC-SHA1.h"; sourceTree = "<group>"; };
+		5102151E1BA67ED600726F3C /* YOAuthSignatureMethod_HMAC-SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YOAuthSignatureMethod_HMAC-SHA1.m"; sourceTree = "<group>"; };
+		5102151F1BA67ED600726F3C /* YOAuthSignatureMethod_PLAINTEXT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOAuthSignatureMethod_PLAINTEXT.h; sourceTree = "<group>"; };
+		510215201BA67ED600726F3C /* YOAuthSignatureMethod_PLAINTEXT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOAuthSignatureMethod_PLAINTEXT.m; sourceTree = "<group>"; };
+		510215211BA67ED600726F3C /* YOAuthToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOAuthToken.h; sourceTree = "<group>"; };
+		510215221BA67ED600726F3C /* YOAuthToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOAuthToken.m; sourceTree = "<group>"; };
+		510215231BA67ED600726F3C /* YOAuthUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOAuthUtil.h; sourceTree = "<group>"; };
+		510215241BA67ED600726F3C /* YOAuthUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOAuthUtil.m; sourceTree = "<group>"; };
+		510215261BA67ED600726F3C /* YahooSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YahooSDK.h; sourceTree = "<group>"; };
+		510215271BA67ED600726F3C /* YahooSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YahooSession.h; sourceTree = "<group>"; };
+		510215281BA67ED600726F3C /* YahooSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YahooSession.m; sourceTree = "<group>"; };
+		510215291BA67ED600726F3C /* YOSAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOSAccessToken.h; sourceTree = "<group>"; };
+		5102152A1BA67ED600726F3C /* YOSAccessToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOSAccessToken.m; sourceTree = "<group>"; };
+		5102152B1BA67ED600726F3C /* YOSAuthRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOSAuthRequest.h; sourceTree = "<group>"; };
+		5102152C1BA67ED600726F3C /* YOSAuthRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOSAuthRequest.m; sourceTree = "<group>"; };
+		5102152D1BA67ED600726F3C /* YOSBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOSBaseRequest.h; sourceTree = "<group>"; };
+		5102152E1BA67ED600726F3C /* YOSBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOSBaseRequest.m; sourceTree = "<group>"; };
+		5102152F1BA67ED600726F3C /* YOSOpenSocialRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOSOpenSocialRequest.h; sourceTree = "<group>"; };
+		510215301BA67ED600726F3C /* YOSOpenSocialRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOSOpenSocialRequest.m; sourceTree = "<group>"; };
+		510215311BA67ED600726F3C /* YOSRequestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOSRequestClient.h; sourceTree = "<group>"; };
+		510215321BA67ED600726F3C /* YOSRequestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOSRequestClient.m; sourceTree = "<group>"; };
+		510215331BA67ED600726F3C /* YOSRequestToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOSRequestToken.h; sourceTree = "<group>"; };
+		510215341BA67ED600726F3C /* YOSRequestToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOSRequestToken.m; sourceTree = "<group>"; };
+		510215351BA67ED600726F3C /* YOSResponseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOSResponseData.h; sourceTree = "<group>"; };
+		510215361BA67ED600726F3C /* YOSResponseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOSResponseData.m; sourceTree = "<group>"; };
+		510215371BA67ED600726F3C /* YOSTokenStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOSTokenStore.h; sourceTree = "<group>"; };
+		510215381BA67ED600726F3C /* YOSTokenStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOSTokenStore.m; sourceTree = "<group>"; };
+		510215391BA67ED600726F3C /* YOSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOSUser.h; sourceTree = "<group>"; };
+		5102153A1BA67ED600726F3C /* YOSUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOSUser.m; sourceTree = "<group>"; };
+		5102153B1BA67ED600726F3C /* YOSUserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YOSUserRequest.h; sourceTree = "<group>"; };
+		5102153C1BA67ED600726F3C /* YOSUserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YOSUserRequest.m; sourceTree = "<group>"; };
+		5102153D1BA67ED600726F3C /* YQLQueryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YQLQueryRequest.h; sourceTree = "<group>"; };
+		5102153E1BA67ED600726F3C /* YQLQueryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQLQueryRequest.m; sourceTree = "<group>"; };
 		51249B991B7489E8007B9623 /* CategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryCell.h; path = newDesign/Category/CategoryCell.h; sourceTree = "<group>"; };
 		51249B9A1B7489E8007B9623 /* CategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryCell.m; path = newDesign/Category/CategoryCell.m; sourceTree = "<group>"; };
 		51249B9B1B7489E8007B9623 /* CategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CategoryCell.xib; path = newDesign/Category/CategoryCell.xib; sourceTree = "<group>"; };
@@ -820,6 +893,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51FDCF2D1BA296F400B10851 /* CoreFoundation.framework in Frameworks */,
 				E91113311B098C5600EF49DB /* AssetsLibrary.framework in Frameworks */,
 				E911133F1B098CB600EF49DB /* SystemConfiguration.framework in Frameworks */,
 				E911133D1B098CA400EF49DB /* Security.framework in Frameworks */,
@@ -833,7 +907,6 @@
 				E911132F1B098C4F00EF49DB /* AddressBook.framework in Frameworks */,
 				5182A8991B32BBE800A271E7 /* GoogleOpenSource.framework in Frameworks */,
 				5182A89B1B32BBE800A271E7 /* GooglePlus.framework in Frameworks */,
-				E9AE20A01AD8124E002E11AC /* CoreFoundation.framework in Frameworks */,
 				5182A8A11B32BD7900A271E7 /* FBSDKShareKit.framework in Frameworks */,
 				E9AE209E1AD8114F002E11AC /* CoreData.framework in Frameworks */,
 				E9AE209B1AD81134002E11AC /* AVFoundation.framework in Frameworks */,
@@ -851,6 +924,87 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5102150A1BA67ED600726F3C /* YOAssets */ = {
+			isa = PBXGroup;
+			children = (
+				5102150B1BA67ED600726F3C /* button-sign-in-with-yahoo.png */,
+				5102150C1BA67ED600726F3C /* profile-150x150.png */,
+			);
+			name = YOAssets;
+			path = Library/Yahoo/YOAssets;
+			sourceTree = "<group>";
+		};
+		5102150D1BA67ED600726F3C /* YOAuth */ = {
+			isa = PBXGroup;
+			children = (
+				5102150E1BA67ED600726F3C /* Crypto */,
+				510215111BA67ED600726F3C /* NSData+OAuthResponse.h */,
+				510215121BA67ED600726F3C /* NSData+OAuthResponse.m */,
+				510215131BA67ED600726F3C /* NSDictionary+QueryString.h */,
+				510215141BA67ED600726F3C /* NSDictionary+QueryString.m */,
+				510215151BA67ED600726F3C /* NSString+URLEncoding.h */,
+				510215161BA67ED600726F3C /* NSString+URLEncoding.m */,
+				510215171BA67ED600726F3C /* YOAuth.h */,
+				510215181BA67ED600726F3C /* YOAuthConsumer.h */,
+				510215191BA67ED600726F3C /* YOAuthConsumer.m */,
+				5102151A1BA67ED600726F3C /* YOAuthRequest.h */,
+				5102151B1BA67ED600726F3C /* YOAuthRequest.m */,
+				5102151C1BA67ED600726F3C /* YOAuthSignatureMethod.h */,
+				5102151D1BA67ED600726F3C /* YOAuthSignatureMethod_HMAC-SHA1.h */,
+				5102151E1BA67ED600726F3C /* YOAuthSignatureMethod_HMAC-SHA1.m */,
+				5102151F1BA67ED600726F3C /* YOAuthSignatureMethod_PLAINTEXT.h */,
+				510215201BA67ED600726F3C /* YOAuthSignatureMethod_PLAINTEXT.m */,
+				510215211BA67ED600726F3C /* YOAuthToken.h */,
+				510215221BA67ED600726F3C /* YOAuthToken.m */,
+				510215231BA67ED600726F3C /* YOAuthUtil.h */,
+				510215241BA67ED600726F3C /* YOAuthUtil.m */,
+			);
+			name = YOAuth;
+			path = Library/Yahoo/YOAuth;
+			sourceTree = "<group>";
+		};
+		5102150E1BA67ED600726F3C /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				5102150F1BA67ED600726F3C /* Base64Transcoder.m */,
+				510215101BA67ED600726F3C /* Base64Transcoder.h */,
+			);
+			path = Crypto;
+			sourceTree = "<group>";
+		};
+		510215251BA67ED600726F3C /* YOSDK */ = {
+			isa = PBXGroup;
+			children = (
+				510215261BA67ED600726F3C /* YahooSDK.h */,
+				510215271BA67ED600726F3C /* YahooSession.h */,
+				510215281BA67ED600726F3C /* YahooSession.m */,
+				510215291BA67ED600726F3C /* YOSAccessToken.h */,
+				5102152A1BA67ED600726F3C /* YOSAccessToken.m */,
+				5102152B1BA67ED600726F3C /* YOSAuthRequest.h */,
+				5102152C1BA67ED600726F3C /* YOSAuthRequest.m */,
+				5102152D1BA67ED600726F3C /* YOSBaseRequest.h */,
+				5102152E1BA67ED600726F3C /* YOSBaseRequest.m */,
+				5102152F1BA67ED600726F3C /* YOSOpenSocialRequest.h */,
+				510215301BA67ED600726F3C /* YOSOpenSocialRequest.m */,
+				510215311BA67ED600726F3C /* YOSRequestClient.h */,
+				510215321BA67ED600726F3C /* YOSRequestClient.m */,
+				510215331BA67ED600726F3C /* YOSRequestToken.h */,
+				510215341BA67ED600726F3C /* YOSRequestToken.m */,
+				510215351BA67ED600726F3C /* YOSResponseData.h */,
+				510215361BA67ED600726F3C /* YOSResponseData.m */,
+				510215371BA67ED600726F3C /* YOSTokenStore.h */,
+				510215381BA67ED600726F3C /* YOSTokenStore.m */,
+				510215391BA67ED600726F3C /* YOSUser.h */,
+				5102153A1BA67ED600726F3C /* YOSUser.m */,
+				5102153B1BA67ED600726F3C /* YOSUserRequest.h */,
+				5102153C1BA67ED600726F3C /* YOSUserRequest.m */,
+				5102153D1BA67ED600726F3C /* YQLQueryRequest.h */,
+				5102153E1BA67ED600726F3C /* YQLQueryRequest.m */,
+			);
+			name = YOSDK;
+			path = Library/Yahoo/YOSDK;
+			sourceTree = "<group>";
+		};
 		515392A21B86DB92004A495B /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1147,6 +1301,16 @@
 			name = CellWithWebview;
 			sourceTree = "<group>";
 		};
+		51FDCED91BA2945D00B10851 /* YahooSDK */ = {
+			isa = PBXGroup;
+			children = (
+				5102150A1BA67ED600726F3C /* YOAssets */,
+				5102150D1BA67ED600726F3C /* YOAuth */,
+				510215251BA67ED600726F3C /* YOSDK */,
+			);
+			name = YahooSDK;
+			sourceTree = "<group>";
+		};
 		E9384F441ADF981300C3D703 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1373,6 +1537,7 @@
 		E9AE1FB71AD804D2002E11AC /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				51FDCED91BA2945D00B10851 /* YahooSDK */,
 				518C097E1B8D71B20067331C /* SNImagePicker */,
 				51DA07271B8472D900271871 /* TPKeyboardAvoiding */,
 				518B07FD1B842CD500E0812B /* IQActionSheetPickerView */,
@@ -1900,6 +2065,7 @@
 			files = (
 				51BAA7151B8C107400D69C19 /* ProductDetailCell.xib in Resources */,
 				E95945561ADB6A3200CDA3FF /* APLQuoteCell.xib in Resources */,
+				510215401BA67ED600726F3C /* profile-150x150.png in Resources */,
 				5159DEE61B6A217F00F96E53 /* cupido.gif in Resources */,
 				518C097D1B8D61CB0067331C /* ImageCell.xib in Resources */,
 				E95945501ADB661F00CDA3FF /* carat-open.png in Resources */,
@@ -1950,6 +2116,7 @@
 				E9239A4C1AF7496B00CC4977 /* ChangePasswordViewController.xib in Resources */,
 				518918EB1B6873A00026727B /* star_highlighted@2x.png in Resources */,
 				515392A71B86DBF7004A495B /* HeaderDetailCell.xib in Resources */,
+				5102153F1BA67ED600726F3C /* button-sign-in-with-yahoo.png in Resources */,
 				518918E91B6873A00026727B /* star_highlighted-darker@2x.png in Resources */,
 				E98D4FC91AF62B6E0013EF4C /* ForgotPasswordViewController.xib in Resources */,
 				514B87031B8AD03400219DA7 /* WebDetailCell.xib in Resources */,
@@ -2006,6 +2173,7 @@
 				E9D9B5B01B202DC4002C8E92 /* MethodObject.m in Sources */,
 				E9AE202A1AD80A5E002E11AC /* NSPersistentStore+MagicalRecord.m in Sources */,
 				51DA07331B8472D900271871 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
+				5102154D1BA67ED600726F3C /* YOSAuthRequest.m in Sources */,
 				51DA07311B8472D900271871 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				518C09931B8D71B20067331C /* SNImagePickerNC.m in Sources */,
 				E9B24BD91AF85C6000322C0F /* PayItemTableViewCell.m in Sources */,
@@ -2016,6 +2184,7 @@
 				E9B407C91AE9F7720053D484 /* LoginCell.m in Sources */,
 				518C09921B8D71B20067331C /* SNCustomCell.m in Sources */,
 				514F1F6C1B8C798D004045D5 /* PostCommentAndRatingViewController.m in Sources */,
+				510215561BA67ED600726F3C /* YQLQueryRequest.m in Sources */,
 				E9AE201B1AD80A5E002E11AC /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				51BAA71D1B8C2E3900D69C19 /* LocationCell.m in Sources */,
 				E9F179A81AE79D0A004D743E /* ProductListViewController.m in Sources */,
@@ -2032,7 +2201,9 @@
 				51C9941B1B7365D40087C2F0 /* CategorySpaViewController.m in Sources */,
 				E98D4FC21AF627D50013EF4C /* HelpViewController.m in Sources */,
 				E9239A471AF7321100CC4977 /* AccountInfoViewController.m in Sources */,
+				510215551BA67ED600726F3C /* YOSUserRequest.m in Sources */,
 				E9AE20861AD80B68002E11AC /* UIColor+CreateMethods.m in Sources */,
+				510215501BA67ED600726F3C /* YOSRequestClient.m in Sources */,
 				51CB0E3F1B830CCE000E7DAF /* SignUpTableViewController.m in Sources */,
 				51B130301B67722A002BA844 /* SildeViewController.m in Sources */,
 				E9B3A12E1B01DF93000DA4FC /* AddressTableViewController.m in Sources */,
@@ -2043,6 +2214,7 @@
 				E93D3B061B032C350004FA3A /* MBProgressHUD.m in Sources */,
 				E9D9BB1B1AFB65C600FF07AB /* ProductTableViewCell.m in Sources */,
 				E97256411AFA08AD0012D8DD /* Provine.m in Sources */,
+				510215511BA67ED600726F3C /* YOSRequestToken.m in Sources */,
 				E9AE203C1AD80A5E002E11AC /* UIImage+GIF.m in Sources */,
 				E959454E1ADB661F00CDA3FF /* APLSectionHeaderView.m in Sources */,
 				E9B3DA381AE21431009C668D /* KindOfTransferDealCell.m in Sources */,
@@ -2051,14 +2223,17 @@
 				517025261B81B68A001B54D8 /* PaymentSuccessViewController.m in Sources */,
 				E9AE20281AD80A5E002E11AC /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				518918EC1B6873A00026727B /* UIView+Subviews.m in Sources */,
+				510215531BA67ED600726F3C /* YOSTokenStore.m in Sources */,
 				E9485B9A1AE006E2005D1688 /* AFNetworkReachabilityManager.m in Sources */,
 				51D1BA261B81853600359B6B /* PaymentInfoCell.m in Sources */,
 				E9F179AC1AE7A195004D743E /* ShortDealInfoCell.m in Sources */,
 				518B08031B842CD500E0812B /* IQActionSheetViewController.m in Sources */,
 				E9B24BE11AF873E400322C0F /* BookSuccessViewController.m in Sources */,
 				519BBD481B7069EC0057DE73 /* CustomCollectionItem.m in Sources */,
+				510215521BA67ED600726F3C /* YOSResponseData.m in Sources */,
 				E98D4FC41AF627D50013EF4C /* RegisAndLoginController.m in Sources */,
 				E997CBAA1B13307F00B76628 /* District.m in Sources */,
+				5102154C1BA67ED600726F3C /* YOSAccessToken.m in Sources */,
 				E98FCF401AD8CA9100992BF0 /* MapView.m in Sources */,
 				E98D4FC01AF627D50013EF4C /* AccoutViewController.m in Sources */,
 				51249B9C1B7489E8007B9623 /* CategoryCell.m in Sources */,
@@ -2068,13 +2243,16 @@
 				E9AE20251AD80A5E002E11AC /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				E9AE201D1AD80A5E002E11AC /* NSObject+MagicalDataImport.m in Sources */,
 				E9C049F31AE0F9360017C5CE /* DealCell.m in Sources */,
+				510215441BA67ED600726F3C /* NSString+URLEncoding.m in Sources */,
 				51BDD97E1B857C7A0034252E /* CartDealCell.m in Sources */,
 				E9AE20351AD80A5E002E11AC /* SDWebImageCompat.m in Sources */,
 				E9AE20371AD80A5E002E11AC /* SDWebImageDownloader.m in Sources */,
 				E9AE20381AD80A5E002E11AC /* SDWebImageDownloaderOperation.m in Sources */,
 				E9BAB7721AE898EC009BC234 /* ProductObject.m in Sources */,
+				510215541BA67ED600726F3C /* YOSUser.m in Sources */,
 				E9AE20361AD80A5E002E11AC /* SDWebImageDecoder.m in Sources */,
 				E9AE20391AD80A5E002E11AC /* SDWebImageManager.m in Sources */,
+				510215471BA67ED600726F3C /* YOAuthSignatureMethod_HMAC-SHA1.m in Sources */,
 				E9AE1FB21AD80455002E11AC /* StartupViewController.m in Sources */,
 				E9AE20191AD80A5E002E11AC /* MagicalImportFunctions.m in Sources */,
 				E9485B9F1AE006E2005D1688 /* AFURLSessionManager.m in Sources */,
@@ -2092,12 +2270,15 @@
 				51CB0E441B832B1D000E7DAF /* InfomationCell.m in Sources */,
 				514B870C1B8AF62400219DA7 /* CommentBasicCell.m in Sources */,
 				E9AE20411AD80A5E002E11AC /* UIImageView+WebCache.m in Sources */,
+				510215461BA67ED600726F3C /* YOAuthRequest.m in Sources */,
 				518918F41B687A2E0026727B /* SearchSupplierViewController.m in Sources */,
 				E9485B9B1AE006E2005D1688 /* AFSecurityPolicy.m in Sources */,
 				514B87021B8AD03400219DA7 /* WebDetailCell.m in Sources */,
 				E98FCF391AD8CA9100992BF0 /* ImageSlide.m in Sources */,
+				510215411BA67ED600726F3C /* Base64Transcoder.m in Sources */,
 				E9F3AB871B005BE500A91D9C /* AddressViewController.m in Sources */,
 				E9AE202D1AD80A5E002E11AC /* MagicalRecord+ErrorHandling.m in Sources */,
+				5102154B1BA67ED600726F3C /* YahooSession.m in Sources */,
 				E9AE202B1AD80A5E002E11AC /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				E9AE20911AD80B68002E11AC /* ViewUtils.m in Sources */,
 				5170252E1B81CC71001B54D8 /* ScrollableCell.m in Sources */,
@@ -2107,11 +2288,14 @@
 				E9D9BB171AFB5BA200FF07AB /* OrderInfoViewController.m in Sources */,
 				E9B24BDD1AF860B500322C0F /* PayItem.m in Sources */,
 				E9485B981AE006E2005D1688 /* AFHTTPRequestOperationManager.m in Sources */,
+				5102154F1BA67ED600726F3C /* YOSOpenSocialRequest.m in Sources */,
 				E959454F1ADB661F00CDA3FF /* APLSectionInfo.m in Sources */,
 				E9AE20261AD80A5E002E11AC /* NSManagedObjectContext+MagicalRecord.m in Sources */,
+				510215431BA67ED600726F3C /* NSDictionary+QueryString.m in Sources */,
 				51497B951B8C568B00F25DD1 /* CommentRatingViewController.m in Sources */,
 				51E045211B78802E000AAACE /* TTRangeSlider.m in Sources */,
 				E9E876761B1E972D004AB156 /* AutoCompleteRow.m in Sources */,
+				510215481BA67ED600726F3C /* YOAuthSignatureMethod_PLAINTEXT.m in Sources */,
 				E9C2E8251AE4BA9000D98DCC /* MenuTableViewCell.m in Sources */,
 				5159DEE31B6A20C200F96E53 /* AnimatedGIFImageSerialization.m in Sources */,
 				E9AE20201AD80A5E002E11AC /* NSManagedObject+MagicalAggregation.m in Sources */,
@@ -2132,6 +2316,7 @@
 				51C664461B82D9C600725F6E /* CellWithWebView.m in Sources */,
 				E9AE20811AD80B68002E11AC /* INTULocationRequest.m in Sources */,
 				E9D9BB131AFB19A700FF07AB /* UserAmountViewController.m in Sources */,
+				510215491BA67ED600726F3C /* YOAuthToken.m in Sources */,
 				515392A61B86DBF7004A495B /* HeaderDetailCell.m in Sources */,
 				E9485B971AE006E2005D1688 /* AFHTTPRequestOperation.m in Sources */,
 				519BBD4C1B7095BB0057DE73 /* MenuObject.m in Sources */,
@@ -2148,6 +2333,7 @@
 				5170252A1B81CBB9001B54D8 /* PaymentAndTransferViewController.m in Sources */,
 				518918F61B687A2E0026727B /* SupplierCell.m in Sources */,
 				E9B3DA331AE213E0009C668D /* CheckQuantityDealCell.m in Sources */,
+				5102154E1BA67ED600726F3C /* YOSBaseRequest.m in Sources */,
 				E9C2E8151AE4A13700D98DCC /* NewDealViewController.m in Sources */,
 				E9B24BD51AF85B5300322C0F /* OrderListViewController.m in Sources */,
 				5149F8461B85C23D00D780A0 /* ProductItem.m in Sources */,
@@ -2162,6 +2348,7 @@
 				E972563A1AF9F9580012D8DD /* EmailPromotionViewController.m in Sources */,
 				E9AE20291AD80A5E002E11AC /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				E978784D1AE92C8A003A3B84 /* InvoiceCell.m in Sources */,
+				510215421BA67ED600726F3C /* NSData+OAuthResponse.m in Sources */,
 				51B3D02B1B8FFE9100C3FE36 /* PaymentTemplate.m in Sources */,
 				E9AE20421AD80A5E002E11AC /* UIView+WebCacheOperation.m in Sources */,
 				514B87071B8AEF6700219DA7 /* CommentDetailCell.m in Sources */,
@@ -2171,6 +2358,8 @@
 				518918E41B6873A00026727B /* DLStarRatingControl.m in Sources */,
 				5159DEE01B6A207700F96E53 /* UzysAnimatedGifActivityIndicator.m in Sources */,
 				E98F11BB1AF9D49600BCDA7E /* PersonalInfoViewController.m in Sources */,
+				5102154A1BA67ED600726F3C /* YOAuthUtil.m in Sources */,
+				510215451BA67ED600726F3C /* YOAuthConsumer.m in Sources */,
 				E98D4FC81AF62B6E0013EF4C /* ForgotPasswordViewController.m in Sources */,
 				E9D9B5B31B203B8D002C8E92 /* ShippingMethod.m in Sources */,
 				E9384F471ADF985300C3D703 /* TKAPI.m in Sources */,
@@ -2310,8 +2499,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HotDealProject/Hotdeal-pch.pch";
 				INFOPLIST_FILE = HotDealProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0d0d1ea4-6d63-4552-9371-e31bd16af7bd";
@@ -2334,8 +2524,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HotDealProject/Hotdeal-pch.pch";
 				INFOPLIST_FILE = HotDealProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0d0d1ea4-6d63-4552-9371-e31bd16af7bd";

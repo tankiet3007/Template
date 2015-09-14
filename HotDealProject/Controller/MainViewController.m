@@ -164,13 +164,11 @@
         //        [HUD hide:YES];
         if (dict == nil) {
             [HUD hide:YES];
-            [self showDialog];
-            //            lblNetwordStatus.text = @"Có lỗi trong quá trình lấy dữ liệu";
-            
+            ALERT_DELEGATE(LS(@"MessageBoxTitle"), LS(@"NetworkError"), self);
+            [self initUITableView];
             return;
         }
         NSArray * arrProducts = [dict objectForKey:@"product"];
-        UA_log(@"%lu item", [arrDeals count]);
         for (NSDictionary * dictItem in arrProducts) {
             DealObject * item = [[DealObject alloc]init];
             item.strTitle = [dictItem objectForKey:@"title"];
@@ -183,7 +181,6 @@
             item.iType = [[dictItem objectForKey:@"type"]intValue];
             [arrDeals addObject:item];
         }
-        UA_log(@"%lu item", [arrDeals count]);
         if ([arrDeals count] == 0) {
             return ;
         }
@@ -231,7 +228,6 @@
             }
             [arrDeals addObject:item];
         }
-        UA_log(@"%lu item", [arrDeals count]);
         [tableViewMain reloadSections:indetsetToUpdate withRowAnimation:UITableViewRowAnimationFade];
         //        [tableViewMain reloadData];
     }];
@@ -271,7 +267,6 @@
             item.iType = [[dictItem objectForKey:@"type"]intValue];
             [arrDeals addObject:item];
         }
-        UA_log(@"%lu item", [arrDeals count]);
         [tableViewMain reloadData];
     }];
 }
@@ -322,7 +317,7 @@
     }
     scrollViewCategory = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 110)];
     scrollViewCategory.showsHorizontalScrollIndicator = NO;
-    scrollViewCategory.backgroundColor = [UIColor clearColor];
+    scrollViewCategory.backgroundColor = [UIColor whiteColor];
     
     //    [scrollViewCategory setBounces:NO];
     int x = 20;
@@ -330,13 +325,15 @@
         categoryItem = [arrCategory objectAtIndex:i];
         UIButton * btnCategory = [UIButton buttonWithType:UIButtonTypeCustom];
         [btnCategory setFrame:CGRectMake(x, 0, 52, 52)];
-        [btnCategory setBackgroundImage:[UIImage imageNamed:categoryItem.strImage] forState:UIControlStateNormal];
+//        [btnCategory setBackgroundImage:[UIImage imageNamed:categoryItem.strImage] forState:UIControlStateNormal];
+        [btnCategory setImage:[UIImage imageNamed:categoryItem.strImage] forState:UIControlStateNormal];
+        btnCategory.imageView.contentMode = UIViewContentModeScaleAspectFit;
         btnCategory.tag = i;
         [btnCategory addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
-        btnCategory.layer.borderColor = [UIColor colorWithHex:@"#D2D7D3" alpha:1].CGColor;
-        btnCategory.layer.cornerRadius = btnCategory.bounds.size.width/2;;
-        btnCategory.layer.borderWidth=1.0f;
-        btnCategory.layer.masksToBounds = YES;
+//        btnCategory.layer.borderColor = [UIColor colorWithHex:@"#D2D7D3" alpha:1].CGColor;
+//        btnCategory.layer.cornerRadius = btnCategory.bounds.size.width/2;;
+//        btnCategory.layer.borderWidth=1.0f;
+//        btnCategory.layer.masksToBounds = YES;
         [scrollViewCategory addSubview:btnCategory];
         
         UILabel * lblName = [[UILabel alloc]initWithFrame:CGRectMake(x, 52, 52, 30)];
@@ -598,6 +595,8 @@
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor whiteColor];
         [cell.contentView addSubview:scrollViewCategory];
         return cell;
     }
@@ -682,17 +681,24 @@
         NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
         strStardarPrice = [strStardarPrice formatStringToDecimal];
         NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-        NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
+        NSMutableAttributedString *attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
+        [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Helvetica" size:10]
+                                          , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strStardarPrice length], 1)];
+        
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-        cell.lblStandarPrice.attributedText = attributedString;
+        cell.lblStandarPrice.attributedText = attributedString2;
         [cell.lblStandarPrice sizeToFit];
         cell.lblNumOfBook.text = F(@"%d",item.buy_number);
         //        cell.lblNumOfBook.text = F(@"%d",23595);
         
         NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
         strDiscountPrice = [strDiscountPrice formatStringToDecimal];
-        strDiscountPrice = F(@"%@đ", strDiscountPrice);
-        cell.lblDiscountPrice.text = strDiscountPrice;
+//        strDiscountPrice = F(@"%@đ", strDiscountPrice);
+        attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strDiscountPrice) attributes:nil];
+        [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Helvetica" size:10]
+                                           , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strDiscountPrice length], 1)];
+        
+        cell.lblDiscountPrice.attributedText = attributedString2;
         cell.lblTitle.text = item.strTitle;
         
         if (bForceStop == TRUE) {
@@ -1035,11 +1041,11 @@
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0) {
+    if (buttonIndex == 1) {
         [self initData:FETCH_COUNT wOffset:1 wType:@"default"];
         return;
     }
-    if (buttonIndex == 1) {
+    if (buttonIndex == 0) {
         return;
     }
 }
@@ -1209,4 +1215,5 @@
     [self.navigationController pushViewController:searchVC animated:YES];
     return NO;
 }
+
 @end

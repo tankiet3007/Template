@@ -11,6 +11,6 @@
 #import "ShoppingCartController.h"
 #import "CartViewController.h"
 //#import "UITableView+DragLoad.h"
-@interface MainViewController : UIViewController<UIGestureRecognizerDelegate, UITableViewDataSource,UITableViewDelegate,slideImageDelegate, ShoppingCartDelegate, UIAlertViewDelegate, UITextFieldDelegate>
+@interface MainViewController : UIViewController<UIGestureRecognizerDelegate, UITableViewDataSource,UITableViewDelegate,slideImageDelegate, ShoppingCartDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 @property(nonatomic,strong)UITableView * tableViewMain;
 @end

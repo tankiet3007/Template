@@ -6,6 +6,7 @@
   Copyright (c) 2015 Tran Tan Kiet. All rights reserved.
 */
 "MessageBoxOK" = "Đồng ý";
+"MessageBoxCancel" = "Bỏ qua";
 
 "MessageBoxTitle" = "Thông báo";
 "CheckPasswordAndRetype"            = "Xác nhận mật khẩu không trùng với mật khẩu";
@@ -18,4 +19,4 @@
 "location" = "Địa điểm sử dụng";
 "condition" = "Lưu ý khi mua";
 "detail" = "Chi tiết khuyến mãi";
-"NetworkError" = "Không có kết nối mạng";
+"NetworkError" = "Không có kết nối mạng vui lòng thử lại";

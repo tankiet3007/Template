@@ -166,13 +166,23 @@
     NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
     strStardarPrice = [strStardarPrice formatStringToDecimal];
     NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
-    cell.lblStandarPrice.attributedText = attributedString;
+    NSMutableAttributedString *attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
+    [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Helvetica" size:10]
+                                       , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strStardarPrice length], 1)];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.lblStandarPrice.attributedText = attributedString2;
     [cell.lblStandarPrice sizeToFit];
+    //        cell.lblNumOfBook.text = F(@"%d",23595);
+    
     NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
     strDiscountPrice = [strDiscountPrice formatStringToDecimal];
-    strDiscountPrice = F(@"%@đ", strDiscountPrice);
-    cell.lblDiscountPrice.text = strDiscountPrice;
+    //        strDiscountPrice = F(@"%@đ", strDiscountPrice);
+    attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strDiscountPrice) attributes:nil];
+    [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Helvetica" size:10]
+                                       , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strDiscountPrice length], 1)];
+    
+    cell.lblDiscountPrice.attributedText = attributedString2;
     cell.lblTitle.text = item.strTitle;
     
     [cell.btnDestroy addTarget:self action:@selector(destroyItem:) forControlEvents:UIControlEventTouchUpInside];
@@ -221,13 +231,23 @@
     NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
     strStardarPrice = [strStardarPrice formatStringToDecimal];
     NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
-    cell.lblStandarPrice.attributedText = attributedString;
+    NSMutableAttributedString *attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
+    [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Helvetica" size:10]
+                                       , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strStardarPrice length], 1)];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.lblStandarPrice.attributedText = attributedString2;
     [cell.lblStandarPrice sizeToFit];
+    //        cell.lblNumOfBook.text = F(@"%d",23595);
+    
     NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
     strDiscountPrice = [strDiscountPrice formatStringToDecimal];
-    strDiscountPrice = F(@"%@đ", strDiscountPrice);
-    cell.lblDiscountPrice.text = strDiscountPrice;
+    //        strDiscountPrice = F(@"%@đ", strDiscountPrice);
+    attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strDiscountPrice) attributes:nil];
+    [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Helvetica" size:10]
+                                       , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strDiscountPrice length], 1)];
+    
+    cell.lblDiscountPrice.attributedText = attributedString2;
     cell.lblTitle.text = item.strTitle;
     
     [cell.btnDestroy addTarget:self action:@selector(destroyItem:) forControlEvents:UIControlEventTouchUpInside];
