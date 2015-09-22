@@ -105,7 +105,7 @@
 }
 - (void)configureCommentCell:(CommentDetailCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.starRating.rating = 3;
+    cell.starRating.rating = 3.5;
     cell.starRating.userInteractionEnabled = NO;
     cell.lblComment.text = @"Update 1: This manual calculation of the cell's height.";
     cell.lblComment.numberOfLines = 0;
@@ -126,7 +126,7 @@
 
 - (void)configureCommentBasicCell:(CommentBasicCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.starRating.rating = 4;
+    cell.starRating.rating = 3.5;
     cell.starRating.userInteractionEnabled = NO;
     cell.lblComment.text = @"Update 1: This answer was for iOS 7. I find auto layout in table view cells to be very unreliable since iOS 8, even for very simple layouts. After lots of experimentation, I (mostly) went back to doing manual layout and manual calculation of the cell's height.";
     cell.lblComment.numberOfLines = 0;

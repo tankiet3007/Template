@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblNumOfBook;
 @property (weak, nonatomic) IBOutlet UILabel *lblStandarPrice;
 @property (weak, nonatomic) IBOutlet UILabel *lblDiscountPrice;
-@property (weak, nonatomic) IBOutlet DLStarRatingControl *starRating;
+@property (strong, nonatomic) DLStarRatingControl *starRating;
 @property (weak, nonatomic) IBOutlet UILabel *lblNumberOfRating;
 @property (weak, nonatomic) IBOutlet UILabel *lblPercentage;
 

@@ -25,6 +25,7 @@
 	
     id  <DLStarRatingDelegate>__unsafe_unretained delegate;
     BOOL isFractionalRatingEnabled;
+    BOOL isLarge;
 }
 
 - (id)initWithFrame:(CGRect)frame;
@@ -38,6 +39,7 @@
 @property (nonatomic) float rating;
 @property (assign,nonatomic) id<DLStarRatingDelegate> delegate;
 @property (nonatomic,assign) BOOL isFractionalRatingEnabled;
+@property (nonatomic,assign) BOOL isLarge;
 
 @end
 

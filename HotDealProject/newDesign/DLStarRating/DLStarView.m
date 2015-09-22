@@ -27,7 +27,8 @@
             highlightedStar = [self croppedImage:highlightedStar];
             star = [self croppedImage:star];
         }
-        self.frame = CGRectMake((star.size.width*index), 0, (star.size.width/3)-0.2, star.size.height/3+kEdgeInsetBottom-1.5);
+//        self.frame = CGRectMake((star.size.width*index), 0, 1.3*((star.size.width/3)-0.2), 1.3*(star.size.height/3+kEdgeInsetBottom-1.5));
+        self.frame = CGRectMake((star.size.width*index), 0, 2*(star.size.width)/5, 2*(star.size.height+kEdgeInsetBottom)/4);
         [self setStarImage:star highlightedStarImage:highlightedStar];
 		[self setImageEdgeInsets:UIEdgeInsetsMake(0, 0, kEdgeInsetBottom, 0)];
 		[self setBackgroundColor:[UIColor clearColor]];
@@ -41,31 +42,26 @@
 }
 
 - (id)initWithCustom:(UIImage*)star highlighted:(UIImage*)highlightedStar position:(int)index allowFractions:(BOOL)fractions {
-	self = [super initWithFrame:CGRectZero];
+    self = [super initWithFrame:CGRectZero];
     
-	if (self) {
+    if (self) {
         [self setTag:index];
         if (fractions) {
             highlightedStar = [self croppedImage:highlightedStar];
             star = [self croppedImage:star];
         }
-        int x = 30;
-        if (index == 0) {
-            x = 0;
-        }
-        CGRect rect = CGRectMake(0, 0, star.size.width - 20, star.size.height+kEdgeInsetBottom-20);
-        self.frame = rect;
+        self.frame = CGRectMake((star.size.width*index), 0, 1.4*((star.size.width/3)+4), 1.4*(star.size.height/3+kEdgeInsetBottom-1.5));
+        //        self.frame = CGRectMake((star.size.width*index), 0, star.size.width, star.size.height+kEdgeInsetBottom);
         [self setStarImage:star highlightedStarImage:highlightedStar];
-		[self setImageEdgeInsets:UIEdgeInsetsMake(0, 0, kEdgeInsetBottom, 0)];
-		[self setBackgroundColor:[UIColor clearColor]];
+        [self setImageEdgeInsets:UIEdgeInsetsMake(0, 0, kEdgeInsetBottom, 0)];
+        [self setBackgroundColor:[UIColor clearColor]];
         if (index == 0) {
    	        [self setAccessibilityLabel:@"1 star"];
         } else {
    	        [self setAccessibilityLabel:[NSString stringWithFormat:@"%d stars", index+1]];
         }
-	}
-	return self;
-}
+    }
+    return self;}
 
 - (id)initWithCustom2:(UIImage*)star highlighted:(UIImage*)highlightedStar position:(int)index allowFractions:(BOOL)fractions {
     self = [super initWithFrame:CGRectZero];
@@ -76,8 +72,8 @@
             highlightedStar = [self croppedImage:highlightedStar];
             star = [self croppedImage:star];
         }
-        self.frame = CGRectMake((star.size.width*index), 0, star.size.width/2, star.size.height/2+kEdgeInsetBottom);
-//        self.frame = CGRectMake((star.size.width*index), 0, (star.size.width/3)-0.2, star.size.height/3+kEdgeInsetBottom-1.5);
+//        self.frame = CGRectMake((star.size.width*index), 0, star.size.width/2+ 2, star.size.height);
+         self.frame = CGRectMake((star.size.width*index), 0, 2*((star.size.width/3)-0.2), 2*(star.size.height/3+kEdgeInsetBottom-1.5));
         [self setStarImage:star highlightedStarImage:highlightedStar];
         [self setImageEdgeInsets:UIEdgeInsetsMake(0, 0, kEdgeInsetBottom, 0)];
         [self setBackgroundColor:[UIColor clearColor]];
@@ -114,10 +110,21 @@
 
 #pragma mark -
 #pragma mark Layouting
-
+- (void)centerIn2:(CGRect)_frame with:(int)numberOfStars {
+    CGSize size = self.frame.size;
+    
+    float height = self.frame.size.height;
+    float frameHeight = _frame.size.height;
+    float newY = (frameHeight-height)/2;
+    
+    float widthOfStars = self.frame.size.width * numberOfStars;
+    float frameWidth = _frame.size.width;
+    float gapToApply = (frameWidth-widthOfStars)/2;
+    
+    self.frame = CGRectMake((size.width*self.tag) + gapToApply, newY, size.width, size.height);
+}
 - (void)centerIn:(CGRect)_frame with:(int)numberOfStars {
 	CGSize size = self.frame.size;
-	
 	float height = self.frame.size.height;
 	float frameHeight = _frame.size.height;
 	float newY = (frameHeight-height)/2;
@@ -125,9 +132,21 @@
 	float widthOfStars = self.frame.size.width * numberOfStars;
 	float frameWidth = _frame.size.width;
 	float gapToApply = (frameWidth-widthOfStars)/2;
+    
     int tag = self.tag;
    	CGRect rect = CGRectMake((size.width*self.tag) + gapToApply + tag*5, newY, size.width, size.height);
     self.frame = rect;
+//    CGSize size = self.frame.size;
+//    
+//    float height = self.frame.size.height;
+//    float frameHeight = _frame.size.height;
+//    float newY = (frameHeight-height)/2;
+//    
+//    float widthOfStars = self.frame.size.width * numberOfStars;
+//    float frameWidth = _frame.size.width;
+//    float gapToApply = (frameWidth-widthOfStars)/2;
+//    
+//    self.frame = CGRectMake((size.width*self.tag) + gapToApply, newY, size.width, size.height);
 }
 
 - (void)setStarImage:(UIImage*)starImage highlightedStarImage:(UIImage*)highlightedImage {

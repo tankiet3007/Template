@@ -71,8 +71,10 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
     nc1 = [[UINavigationController alloc] init];
     [nc1.navigationBar setTintColor:[UIColor blackColor]];
     nc1.tabBarItem.title = @"Home";
-    UIImage *image1 = [UIImage imageNamed:@"cart.png"];
-    nc1.tabBarItem.image = [self imageWithImage:image1 scaledToSize:CGSizeMake(30, 30)];
+//    UIImage *image1 = [UIImage imageNamed:@"tab_home"];
+//    nc1.tabBarItem.image = [self imageWithImage:image1 scaledToSize:CGSizeMake(30, 30)];
+    nc1.tabBarItem.image = [UIImage imageNamed:@"tab_home"];
+    nc1.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_home_a"];
     
     MainViewController *viewController1 = [[MainViewController alloc]init];
     nc1.viewControllers = [NSArray arrayWithObjects:viewController1, nil];
@@ -80,8 +82,10 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
     UINavigationController *nc2;
     nc2 = [[UINavigationController alloc] init];
     nc2.tabBarItem.title = @"Account";
-    UIImage *image2 = [UIImage imageNamed:@"cart.png"];
-    nc2.tabBarItem.image = [self imageWithImage:image2 scaledToSize:CGSizeMake(30, 30)];
+//    UIImage *image2 = [UIImage imageNamed:@"tab_profile"];
+//    nc2.tabBarItem.image = [self imageWithImage:image2 scaledToSize:CGSizeMake(30, 30)];
+    nc2.tabBarItem.image = [UIImage imageNamed:@"tab_profile"];
+    nc2.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_profile_a"];
     [nc2.navigationBar setTintColor:[UIColor blackColor]];
     SignInViewController *viewController2 = [[SignInViewController alloc]init];
     nc2.viewControllers = [NSArray arrayWithObjects:viewController2, nil];
@@ -90,8 +94,10 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
     SignUpViewController *viewController3 = [[SignUpViewController alloc]init];
     UINavigationController *nc3;
     nc3 = [[UINavigationController alloc] init];
-    UIImage *image3 = [UIImage imageNamed:@"cart.png"];
-    nc3.tabBarItem.image = [self imageWithImage:image3 scaledToSize:CGSizeMake(30, 30)];
+//    UIImage *image3 = [UIImage imageNamed:@"tab_search"];
+//    nc3.tabBarItem.image = [self imageWithImage:image3 scaledToSize:CGSizeMake(30, 30)];
+    nc3.tabBarItem.image = [UIImage imageNamed:@"tab_search"];
+    nc3.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_search_a"];
     [nc3.navigationBar setTintColor:[UIColor blackColor]];
     nc3.tabBarItem.title = @"Login";
     nc3.viewControllers = [NSArray arrayWithObjects:viewController3, nil];
@@ -101,8 +107,12 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
     nc4 = [[UINavigationController alloc] init];
     [nc4.navigationBar setTintColor:[UIColor blackColor]];
     nc4.tabBarItem.title = @"Help";
-    UIImage *image4 = [UIImage imageNamed:@"cart.png"];
-    nc4.tabBarItem.image = [self imageWithImage:image4 scaledToSize:CGSizeMake(30, 30)];
+    nc4.tabBarItem.image = [UIImage imageNamed:@"tab_setting"];
+    nc4.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_setting_a"];
+
+//    UIImage *image4 = [UIImage imageNamed:@"tab_setting"];
+//    nc4.tabBarItem.image = [self imageWithImage:image4 scaledToSize:CGSizeMake(30, 30)];
+    
     nc4.viewControllers = [NSArray arrayWithObjects:viewController4, nil];
     
     
@@ -110,6 +120,7 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:nc1, nc2,nc3,nc4 ,nil];
     
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor redColor]];
+    [[UITabBar appearance]setBarTintColor:[UIColor whiteColor]];
      [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];

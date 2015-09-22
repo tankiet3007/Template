@@ -17,9 +17,10 @@
 @interface DLStarView : UIButton {
     
 }
-
+@property (nonatomic, assign)BOOL isLarge;
 - (id)initWithDefault:(UIImage*)star highlighted:(UIImage*)highlightedStar position:(int)index allowFractions:(BOOL)fractions;
 - (void)centerIn:(CGRect)_frame with:(int)numberOfStars;
+- (void)centerIn2:(CGRect)_frame with:(int)numberOfStars;
 - (void)setStarImage:(UIImage*)starImage highlightedStarImage:(UIImage*)highlightedImage;
 - (UIImage *)croppedImage:(UIImage*)image;
 - (id)initWithCustom:(UIImage*)star highlighted:(UIImage*)highlightedStar position:(int)index allowFractions:(BOOL)fractions;

@@ -25,8 +25,8 @@
 - (void)setupView {
 	self.clipsToBounds = YES;
 	currentIdx = -1;
-	star = [UIImage imageNamed:@"star.png"];    
-	highlightedStar = [UIImage imageNamed:@"star_highlighted.png"];
+	star = [UIImage imageNamed:@"start_grey"];
+	highlightedStar = [UIImage imageNamed:@"start_yellow"];
 
 	for (int i=0; i<numberOfStars; i++) {
 		DLStarView *v = [[DLStarView alloc] initWithDefault:self.star highlighted:self.highlightedStar position:i allowFractions:isFractionalRatingEnabled];
@@ -37,11 +37,11 @@
 - (void)setupView3 {
 	self.clipsToBounds = YES;
 	currentIdx = -1;
-	star = [UIImage imageNamed:@"star.png"];
-	highlightedStar = [UIImage imageNamed:@"star_highlighted.png"];
+	star = [UIImage imageNamed:@"start_grey"];
+	highlightedStar = [UIImage imageNamed:@"start_yellow"];
     
 	for (int i=0; i<numberOfStars; i++) {
-		DLStarView *v = [[DLStarView alloc] initWithCustom2:self.star highlighted:self.highlightedStar position:i allowFractions:isFractionalRatingEnabled];
+		DLStarView *v = [[DLStarView alloc] initWithDefault:self.star highlighted:self.highlightedStar position:i allowFractions:isFractionalRatingEnabled];
 		[self addSubview:v];
 	}
 }
@@ -49,8 +49,8 @@
 - (void)setupView2 {
     self.clipsToBounds = YES;
     currentIdx = -1;
-    star = [UIImage imageNamed:@"star.png"];
-    highlightedStar = [UIImage imageNamed:@"star_highlighted.png"];
+    star = [UIImage imageNamed:@"start_grey"];
+    highlightedStar = [UIImage imageNamed:@"start_yellow"];
     
     for (int i=0; i<numberOfStars; i++) {
         DLStarView *v = [[DLStarView alloc] initWithCustom:self.star highlighted:self.highlightedStar position:i allowFractions:isFractionalRatingEnabled];
@@ -73,6 +73,9 @@
 - (id)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {
+        isFractionalRatingEnabled = YES;
+        _isLarge = TRUE;
+        
 		numberOfStars = kDefaultNumberOfStars;
         if (isFractionalRatingEnabled)
             numberOfStars *=kNumberOfFractions;
@@ -89,45 +92,44 @@
 		numberOfStars = _numberOfStars;
         if (isFractionalRatingEnabled)
             numberOfStars *=kNumberOfFractions;
+        _isLarge = TRUE;
 		[self setupView];
 	}
 	return self;
 }
 
 - (id)initWithFrameCustom:(CGRect)frame andStars:(NSUInteger)_numberOfStars isFractional:(BOOL)isFract{
-	self = [super initWithFrame:frame];
-	if (self) {
-//        isFractionalRatingEnabled = isFract;
-//		numberOfStars = _numberOfStars;
-//        if (isFractionalRatingEnabled)
-//            numberOfStars *=kNumberOfFractions;
+    self = [super initWithFrame:frame];
+    if (self) {
         numberOfStars = kDefaultNumberOfStars;
         if (isFractionalRatingEnabled)
             numberOfStars *=kNumberOfFractions;
-		[self setupView2];
-	}
-	return self;
+        [self setupView2];
+    }
+    return self;
 }
 
 - (id)initWithFrameCustom2:(CGRect)frame andStars:(NSUInteger)_numberOfStars isFractional:(BOOL)isFract{
     self = [super initWithFrame:frame];
     if (self) {
-        //        isFractionalRatingEnabled = isFract;
-        //		numberOfStars = _numberOfStars;
-        //        if (isFractionalRatingEnabled)
-        //            numberOfStars *=kNumberOfFractions;
         numberOfStars = kDefaultNumberOfStars;
         if (isFractionalRatingEnabled)
             numberOfStars *=kNumberOfFractions;
-        [self setupView3];
-    }
+        [self setupView];    }
     return self;
 }
 
 
 - (void)layoutSubviews {
 	for (int i=0; i < numberOfStars; i++) {
-		[(DLStarView*)[self subViewWithTag:i] centerIn:self.frame with:numberOfStars];
+        if (_isLarge == TRUE) {
+            [(DLStarView*)[self subViewWithTag:i] centerIn2:self.frame with:numberOfStars];
+
+        }
+        else
+        {
+            [(DLStarView*)[self subViewWithTag:i] centerIn:self.frame with:numberOfStars];
+        }
 	}
 }
 
@@ -244,9 +246,10 @@
     if (isFractionalRatingEnabled) {
         _rating *=kNumberOfFractions;
     }
-	[self disableStarsDownTo:0];
-	currentIdx = (int)_rating-1;
-	[self enableStarsUpTo:currentIdx];
+    [self disableStarsDownTo:0];
+    currentIdx = (int)_rating-1;
+    [self enableStarsUpTo:currentIdx];
+
 }
 
 - (float)rating {
