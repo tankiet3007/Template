@@ -294,43 +294,47 @@
 -(void)initBottomMenu
 {
     UIView * viewBottom = [[UIView alloc]initWithFrame:CGRectMake(0, ScreenHeight - 160, ScreenWidth, 50)];
-    viewBottom.backgroundColor = [UIColor darkGrayColor];
-    UIButton * btnOne = [UIButton buttonWithType:UIButtonTypeSystem];
+    viewBottom.backgroundColor = [UIColor whiteColor];
+    viewBottom.layer.borderColor = [UIColor darkGrayColor].CGColor;
+    viewBottom.layer.borderWidth = 0.5;
+    UIButton * btnOne = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnOne setFrame:CGRectMake(0, 0, ScreenWidth/6, 50)];
-    btnOne.backgroundColor = [UIColor redColor];
+    btnOne.backgroundColor = [UIColor whiteColor];
     [btnOne addTarget:self action:@selector(commentAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [btnOne setTitle:@"CM" forState:UIControlStateNormal];
-    [btnOne.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
-    [btnOne setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    btnOne.layer.borderColor = [UIColor darkGrayColor].CGColor;
+    btnOne.layer.borderWidth = 0.5;
+    [btnOne setImage:[UIImage imageNamed:@"icon_comment"] forState:UIControlStateNormal];
+//    [btnOne.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
+//    [btnOne setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
     [viewBottom addSubview:btnOne];
     
-    UIButton * btnTwo = [UIButton buttonWithType:UIButtonTypeSystem];
+    UIButton * btnTwo = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnTwo setFrame:CGRectMake(ScreenWidth/6, 0, ScreenWidth/6, 50)];
-    btnTwo.backgroundColor = [UIColor greenColor];
+    btnTwo.backgroundColor = [UIColor whiteColor];
     [btnTwo addTarget:self action:@selector(shareFacebook) forControlEvents:UIControlEventTouchUpInside];
-    [btnTwo setTitle:@"FB" forState:UIControlStateNormal];
-    [btnTwo.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
-    [btnTwo setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnTwo  setImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
+//    [btnTwo.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
+//    [btnTwo setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     [viewBottom addSubview:btnTwo];
     
-    UIButton * btnThree = [UIButton buttonWithType:UIButtonTypeSystem];
+    UIButton * btnThree = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnThree setFrame:CGRectMake(ScreenWidth/3, 0, 2*ScreenWidth/6, 50)];
     btnThree.backgroundColor = [UIColor blueColor];
     [btnThree addTarget:self action:@selector(addToCart) forControlEvents:UIControlEventTouchUpInside];
-    [btnThree setTitle:@"CART" forState:UIControlStateNormal];
+    [btnThree  setImage:[UIImage imageNamed:@"icon_addtocart"] forState:UIControlStateNormal];
     [btnThree.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
-    [btnThree setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [btnThree setTitle:@"  GIỎ HÀNG" forState:UIControlStateNormal];
+    [btnThree setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [viewBottom addSubview:btnThree];
 
     
-    UIButton * btnFour = [UIButton buttonWithType:UIButtonTypeSystem];
+    UIButton * btnFour = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnFour setFrame:CGRectMake(2*ScreenWidth/3, 0, 2*ScreenWidth/6, 50)];
-    btnFour.backgroundColor = [UIColor yellowColor];
+    btnFour.backgroundColor = [UIColor greenColor];
     [btnFour addTarget:self action:@selector(buyDirectly) forControlEvents:UIControlEventTouchUpInside];
-    [btnFour setTitle:@"BUY" forState:UIControlStateNormal];
-    [btnFour.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    [btnFour setImage:[UIImage imageNamed:@"icon_addtocart"] forState:UIControlStateNormal];
+//    [btnFour.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
     [btnFour setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
     [viewBottom addSubview:btnFour];
@@ -650,8 +654,7 @@
 - (void)configureRatingCell:(RatingDetailCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.starRating.rating = 4;
-    cell.starRating.userInteractionEnabled = NO;
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
     vPadding.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
@@ -661,6 +664,22 @@
     vPadding2.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
     [cell.contentView addSubview:vPadding2];
     [cell.numOfComment addTarget:self action:@selector(openCommentView) forControlEvents:UIControlEventTouchUpInside];
+    
+//    NSArray * arrSubV = [cell.contentView subviews];
+//    for (UIView * vItem in arrSubV) {
+//        if (vItem.tag == 1002) {
+//            [vItem removeFromSuperview];
+//        }
+//    }
+//    DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(14, 25, 80, 26)];
+//    starRating.backgroundColor = [UIColor clearColor];
+    //        cell.starRating.rating =  item.iRate ;
+    cell.starRating.rating = 3.5;
+    cell.starRating.tag = 1002;
+    cell.starRating.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleBottomMargin;
+    cell.starRating.isFractionalRatingEnabled = YES;
+    cell.starRating.userInteractionEnabled = NO;
+
 }
 -(void)openCommentView
 {
@@ -678,6 +697,7 @@
     //Do something
     UIView * vPadding2 = [[UIView alloc]initWithFrame:CGRectMake(0, 150, ScreenWidth, 10)];
     vPadding2.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
+    [cell.contentView addSubview:vPadding2];
     [cell.btnFullList addTarget:self action:@selector(seeMoreLocation) forControlEvents:UIControlEventTouchUpInside];
 }
 - (void)configureHeaderCell:(HeaderDetailCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -784,12 +804,14 @@
 {
     if (section == 1) {
         UIView * vHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
-        UILabel * lblComment = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, 150, 25)];
+        UILabel * lblComment = [[UILabel alloc]initWithFrame:CGRectMake(35, 5, 150, 25)];
         lblComment.text = @"BÌNH LUẬN";
         lblComment.font = [UIFont boldSystemFontOfSize:15];
         lblComment.textColor = [UIColor blackColor];
         [vHeader addSubview:lblComment];
-        
+        UIImageView * imv = [[UIImageView alloc]initWithFrame:CGRectMake(7, 8, 15, 15)];
+        imv.image = [UIImage imageNamed:@"icon_small_comment"];
+        [vHeader addSubview:imv];
         UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(5, 35, ScreenWidth - 10, 1)];
         vPadding.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
         [vHeader addSubview:vPadding];
@@ -829,6 +851,9 @@
 - (void)configureCommentCell:(CommentDetailCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.starRating.rating = 3;
+    cell.starRating.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleBottomMargin;
+    cell.starRating.isFractionalRatingEnabled = YES;
+    cell.starRating.userInteractionEnabled = NO;
     cell.starRating.userInteractionEnabled = NO;
     cell.lblComment.text = @"Update 1: This manual calculation of the cell's height.";
     cell.lblComment.numberOfLines = 0;
@@ -850,6 +875,9 @@
 - (void)configureCommentBasicCell:(CommentBasicCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.starRating.rating = 4;
+    cell.starRating.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleBottomMargin;
+    cell.starRating.isFractionalRatingEnabled = YES;
+    cell.starRating.userInteractionEnabled = NO;
     cell.starRating.userInteractionEnabled = NO;
     cell.lblComment.text = @"Update 1: This answer was for iOS 7. I find auto layout in table view cells to be very unreliable since iOS 8, even for very simple layouts. After lots of experimentation, I (mostly) went back to doing manual layout and manual calculation of the cell's height.";
     cell.lblComment.numberOfLines = 0;

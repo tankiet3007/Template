@@ -163,11 +163,11 @@
 -(void)initNavigationbar
 {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    UIImage *image = [UIImage imageNamed:@"back_n"];
+    UIImage *image = [UIImage imageNamed:@"bt_back"];
     UIButton * rBtest = [UIButton buttonWithType:UIButtonTypeCustom];
     [rBtest addTarget:self action:@selector(backbtn_click:) forControlEvents:UIControlEventTouchUpInside];
     [rBtest setBackgroundImage:image forState:UIControlStateNormal];
-    image = [UIImage imageNamed:@"back_n"];
+    image = [UIImage imageNamed:@"bt_back"];
     [rBtest setFrame:CGRectMake(0, 0, 30, 30)];
     UIBarButtonItem *barItem = [[UIBarButtonItem alloc]initWithCustomView:rBtest];
     self.navigationItem.leftBarButtonItem = barItem;

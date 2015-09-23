@@ -62,6 +62,8 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        isFractionalRatingEnabled = YES;
+        _isLarge = TRUE;
 		numberOfStars = kDefaultNumberOfStars;
         if (isFractionalRatingEnabled)
             numberOfStars *=kNumberOfFractions;

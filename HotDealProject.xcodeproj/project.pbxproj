@@ -72,12 +72,6 @@
 		5182A8A31B32BF9E00A271E7 /* DealItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5182A8A21B32BF9E00A271E7 /* DealItem.xib */; };
 		518918E41B6873A00026727B /* DLStarRatingControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 518918D81B6873A00026727B /* DLStarRatingControl.m */; };
 		518918E51B6873A00026727B /* DLStarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 518918DA1B6873A00026727B /* DLStarView.m */; };
-		518918E61B6873A00026727B /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 518918DC1B6873A00026727B /* star.png */; };
-		518918E71B6873A00026727B /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518918DD1B6873A00026727B /* star@2x.png */; };
-		518918E81B6873A00026727B /* star_highlighted-darker.png in Resources */ = {isa = PBXBuildFile; fileRef = 518918DE1B6873A00026727B /* star_highlighted-darker.png */; };
-		518918E91B6873A00026727B /* star_highlighted-darker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518918DF1B6873A00026727B /* star_highlighted-darker@2x.png */; };
-		518918EA1B6873A00026727B /* star_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 518918E01B6873A00026727B /* star_highlighted.png */; };
-		518918EB1B6873A00026727B /* star_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518918E11B6873A00026727B /* star_highlighted@2x.png */; };
 		518918EC1B6873A00026727B /* UIView+Subviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 518918E31B6873A00026727B /* UIView+Subviews.m */; };
 		518918F41B687A2E0026727B /* SearchSupplierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 518918EF1B687A2E0026727B /* SearchSupplierViewController.m */; };
 		518918F51B687A2E0026727B /* SearchSupplierViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 518918F01B687A2E0026727B /* SearchSupplierViewController.xib */; };
@@ -446,12 +440,6 @@
 		518918D81B6873A00026727B /* DLStarRatingControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLStarRatingControl.m; sourceTree = "<group>"; };
 		518918D91B6873A00026727B /* DLStarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLStarView.h; sourceTree = "<group>"; };
 		518918DA1B6873A00026727B /* DLStarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLStarView.m; sourceTree = "<group>"; };
-		518918DC1B6873A00026727B /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
-		518918DD1B6873A00026727B /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
-		518918DE1B6873A00026727B /* star_highlighted-darker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_highlighted-darker.png"; sourceTree = "<group>"; };
-		518918DF1B6873A00026727B /* star_highlighted-darker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_highlighted-darker@2x.png"; sourceTree = "<group>"; };
-		518918E01B6873A00026727B /* star_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_highlighted.png; sourceTree = "<group>"; };
-		518918E11B6873A00026727B /* star_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_highlighted@2x.png"; sourceTree = "<group>"; };
 		518918E21B6873A00026727B /* UIView+Subviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Subviews.h"; sourceTree = "<group>"; };
 		518918E31B6873A00026727B /* UIView+Subviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Subviews.m"; sourceTree = "<group>"; };
 		518918EE1B687A2E0026727B /* SearchSupplierViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSupplierViewController.h; sourceTree = "<group>"; };
@@ -1005,6 +993,22 @@
 			path = Library/Yahoo/YOSDK;
 			sourceTree = "<group>";
 		};
+		510215571BA67FCB00726F3C /* json-framework */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "json-framework";
+			path = "Library/Yahoo/json-framework";
+			sourceTree = "<group>";
+		};
+		510215581BA6803A00726F3C /* YOSSocial */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = YOSSocial;
+			path = Library/Yahoo/YOSSocial;
+			sourceTree = "<group>";
+		};
 		515392A21B86DB92004A495B /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1060,25 +1064,11 @@
 				518918D81B6873A00026727B /* DLStarRatingControl.m */,
 				518918D91B6873A00026727B /* DLStarView.h */,
 				518918DA1B6873A00026727B /* DLStarView.m */,
-				518918DB1B6873A00026727B /* images */,
 				518918E21B6873A00026727B /* UIView+Subviews.h */,
 				518918E31B6873A00026727B /* UIView+Subviews.m */,
 			);
 			name = DLStarRating;
 			path = newDesign/DLStarRating;
-			sourceTree = "<group>";
-		};
-		518918DB1B6873A00026727B /* images */ = {
-			isa = PBXGroup;
-			children = (
-				518918DC1B6873A00026727B /* star.png */,
-				518918DD1B6873A00026727B /* star@2x.png */,
-				518918DE1B6873A00026727B /* star_highlighted-darker.png */,
-				518918DF1B6873A00026727B /* star_highlighted-darker@2x.png */,
-				518918E01B6873A00026727B /* star_highlighted.png */,
-				518918E11B6873A00026727B /* star_highlighted@2x.png */,
-			);
-			path = images;
 			sourceTree = "<group>";
 		};
 		518918ED1B687A2E0026727B /* Rating */ = {
@@ -1304,6 +1294,8 @@
 		51FDCED91BA2945D00B10851 /* YahooSDK */ = {
 			isa = PBXGroup;
 			children = (
+				510215581BA6803A00726F3C /* YOSSocial */,
+				510215571BA67FCB00726F3C /* json-framework */,
 				5102150A1BA67ED600726F3C /* YOAssets */,
 				5102150D1BA67ED600726F3C /* YOAuth */,
 				510215251BA67ED600726F3C /* YOSDK */,
@@ -2071,7 +2063,6 @@
 				E95945501ADB661F00CDA3FF /* carat-open.png in Resources */,
 				E9C0FE311ADCB8E30042502C /* LocationTableViewCell.xib in Resources */,
 				5159DEE71B6A217F00F96E53 /* jgr.gif in Resources */,
-				518918E61B6873A00026727B /* star.png in Resources */,
 				514B870D1B8AF62400219DA7 /* CommentBasicCell.xib in Resources */,
 				E98D4FAE1AF5DE8B0013EF4C /* WebViewController.xib in Resources */,
 				E9AE1FB31AD80455002E11AC /* StartupViewController.xib in Resources */,
@@ -2094,14 +2085,12 @@
 				51BDD97F1B857C7A0034252E /* CartDealCell.xib in Resources */,
 				E9F3AB911B00A03F00A91D9C /* Localizable.strings in Resources */,
 				518C098C1B8D71B20067331C /* check.png in Resources */,
-				518918EA1B6873A00026727B /* star_highlighted.png in Resources */,
 				5149F8431B85AE8400D780A0 /* CartTravelCell.xib in Resources */,
 				519BBD491B7069EC0057DE73 /* CustomCollectionItem.xib in Resources */,
 				E9F179AD1AE7A195004D743E /* ShortDealInfoCell.xib in Resources */,
 				E9B3DA3E1AE24731009C668D /* AutoSizeTableViewCell.xib in Resources */,
 				E9D9BB1C1AFB65C600FF07AB /* ProductTableViewCell.xib in Resources */,
 				5182A8A31B32BF9E00A271E7 /* DealItem.xib in Resources */,
-				518918E71B6873A00026727B /* star@2x.png in Resources */,
 				E9D9B5B81B20563C002C8E92 /* MethodCell.xib in Resources */,
 				E972563B1AF9F9580012D8DD /* EmailPromotionViewController.xib in Resources */,
 				51DA073B1B84743400271871 /* SignUpViewController.xib in Resources */,
@@ -2109,15 +2098,12 @@
 				E95945511ADB661F00CDA3FF /* carat.png in Resources */,
 				518918F51B687A2E0026727B /* SearchSupplierViewController.xib in Resources */,
 				514B87081B8AEF6700219DA7 /* CommentDetailCell.xib in Resources */,
-				518918E81B6873A00026727B /* star_highlighted-darker.png in Resources */,
 				51C664421B82D97A00725F6E /* SignInViewController.xib in Resources */,
 				E9B24BDA1AF85C6000322C0F /* PayItemTableViewCell.xib in Resources */,
 				514B86FE1B8AC50F00219DA7 /* LocationDetailCell.xib in Resources */,
 				E9239A4C1AF7496B00CC4977 /* ChangePasswordViewController.xib in Resources */,
-				518918EB1B6873A00026727B /* star_highlighted@2x.png in Resources */,
 				515392A71B86DBF7004A495B /* HeaderDetailCell.xib in Resources */,
 				5102153F1BA67ED600726F3C /* button-sign-in-with-yahoo.png in Resources */,
-				518918E91B6873A00026727B /* star_highlighted-darker@2x.png in Resources */,
 				E98D4FC91AF62B6E0013EF4C /* ForgotPasswordViewController.xib in Resources */,
 				514B87031B8AD03400219DA7 /* WebDetailCell.xib in Resources */,
 				517025271B81B68A001B54D8 /* PaymentSuccessViewController.xib in Resources */,
@@ -2500,7 +2486,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HotDealProject/Hotdeal-pch.pch";
 				INFOPLIST_FILE = HotDealProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2526,7 +2512,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HotDealProject/Hotdeal-pch.pch";
 				INFOPLIST_FILE = HotDealProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";

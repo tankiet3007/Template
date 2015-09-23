@@ -347,11 +347,11 @@
     self.navigationItem.titleView = btnTitle;
     
     
-    UIImage *image = [UIImage imageNamed:@"back_n"];
+    UIImage *image = [UIImage imageNamed:@"bt_back"];
     UIButton * rBtest = [UIButton buttonWithType:UIButtonTypeCustom];
     [rBtest addTarget:self action:@selector(backbtn_click:) forControlEvents:UIControlEventTouchUpInside];
     [rBtest setBackgroundImage:image forState:UIControlStateNormal];
-    image = [UIImage imageNamed:@"back_n"];
+    image = [UIImage imageNamed:@"bt_back"];
     //    [rBtest setBackgroundImage:image forState:UIControlStateHighlighted];
     [rBtest setFrame:CGRectMake(0, 0, 30, 30)];
     UIBarButtonItem *barItem = [[UIBarButtonItem alloc]initWithCustomView:rBtest];
@@ -596,7 +596,7 @@
         float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
         cell.lblPercentage.text = F(@"%.0f%%", calculatePercent);
         
-        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(80, 37, 120, 26)];
+        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(75, 41, 120, 26)andStars:5 isFractional:YES];
         starRating.backgroundColor = [UIColor clearColor];
         //        cell.starRating.rating =  item.iRate ;
         starRating.rating = 3.5;

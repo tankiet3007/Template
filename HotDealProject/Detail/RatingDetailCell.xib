@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -12,14 +12,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q1q-xa-cxv" customClass="DLStarRatingControl">
-                        <rect key="frame" x="9" y="18" width="104" height="26"/>
+                        <rect key="frame" x="15" y="22" width="80" height="26"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="104" id="WWC-49-LpF"/>
+                            <constraint firstAttribute="width" constant="80" id="WWC-49-LpF"/>
                             <constraint firstAttribute="height" constant="26" id="rN0-nG-98E"/>
                         </constraints>
                     </view>
@@ -38,14 +38,14 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Qbb-nZ-ied" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="TZG-mR-ZHC"/>
-                    <constraint firstItem="q1q-xa-cxv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="VPz-Il-rxc"/>
+                    <constraint firstItem="q1q-xa-cxv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="14" id="VPz-Il-rxc"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Qbb-nZ-ied" secondAttribute="trailing" constant="19" id="YiX-fM-fZY"/>
-                    <constraint firstItem="q1q-xa-cxv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="tEB-97-ssg"/>
+                    <constraint firstItem="q1q-xa-cxv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="tEB-97-ssg"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="numOfComment" destination="Qbb-nZ-ied" id="lRH-Zj-wyc"/>
-                <outlet property="starRating" destination="q1q-xa-cxv" id="PEu-q5-Myi"/>
+                <outlet property="starRating" destination="q1q-xa-cxv" id="8tU-H1-YTF"/>
             </connections>
             <point key="canvasLocation" x="261" y="222"/>
         </tableViewCell>

@@ -674,7 +674,7 @@
         float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
         cell.lblPercentage.text = F(@"%.0f%%", calculatePercent);
 //        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(82, 37, 120, 26) andStars:5 isFractional:YES];
-        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(80, 37, 120, 26)];
+        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(75, 41, 120, 26)];
         starRating.backgroundColor = [UIColor clearColor];
         //        cell.starRating.rating =  item.iRate ;
         starRating.rating = 3.5;
