@@ -482,7 +482,7 @@
     // Add your action to your button
     [customButton addTarget:self action:@selector(shoppingCart) forControlEvents:UIControlEventTouchUpInside];
     // Customize your button as you want, with an image if you have a pictogram to display for example
-    [customButton setImage:[UIImage imageNamed:@"cart.png"] forState:UIControlStateNormal];
+    [customButton setImage:[UIImage imageNamed:@"icon_cart.png"] forState:UIControlStateNormal];
 //    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithCustomView:customButton];
     barButton = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:customButton];
     barButton.badgeOriginX = 25;
@@ -674,7 +674,7 @@
         float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
         cell.lblPercentage.text = F(@"%.0f%%", calculatePercent);
 //        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(82, 37, 120, 26) andStars:5 isFractional:YES];
-        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(89, 37, 120, 26)];
+        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(80, 37, 120, 26)];
         starRating.backgroundColor = [UIColor clearColor];
         //        cell.starRating.rating =  item.iRate ;
         starRating.rating = 3.5;

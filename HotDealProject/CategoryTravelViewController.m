@@ -8,7 +8,7 @@
 
 #import "CategoryTravelViewController.h"
 #import "AppDelegate.h"
-#import "HotNewDetailViewController.h"
+#import "DetailViewController.h"
 #import "SWRevealViewController.h"
 #import "DealCell.h"
 #import "SupplierCell.h"
@@ -596,10 +596,15 @@
         float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
         cell.lblPercentage.text = F(@"%.0f%%", calculatePercent);
         
-        cell.starRating.backgroundColor = [UIColor clearColor];
-        //        cell.starRating.rating =  item.iRate ;
-        cell.starRating.rating = 4;
-        cell.starRating.userInteractionEnabled = NO;
+        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(80, 37, 120, 26)];
+        starRating.backgroundColor = [UIColor clearColor];
+        //        cell.starRating.rating =  item.iRate ;
+        starRating.rating = 3.5;
+        starRating.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleBottomMargin;
+        starRating.isFractionalRatingEnabled = YES;
+        starRating.userInteractionEnabled = NO;
+        [cell.contentView addSubview:starRating];
+        
         NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
         strStardarPrice = [strStardarPrice formatStringToDecimal];
         NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
@@ -675,7 +680,7 @@
 {
     if ([tableView isEqual:tableviewCategory]) {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
-        HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
+        DetailViewController * detail = [[DetailViewController alloc]init];
         DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
         detail.iProductID = dealObj.product_id;
         [self.navigationController pushViewController:detail animated:YES];

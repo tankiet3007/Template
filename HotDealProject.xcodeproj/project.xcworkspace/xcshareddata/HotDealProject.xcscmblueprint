@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "b46e8774-2913-4286-9e2e-5677a529d3d4++505",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "b46e8774-2913-4286-9e2e-5677a529d3d4++505" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "b46e8774-2913-4286-9e2e-5677a529d3d4++505" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "12E9A479-5AB6-402F-93AB-D11F3D8E566F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "b46e8774-2913-4286-9e2e-5677a529d3d4++505" : "Hotdeal_Mobile_App"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "HotDealProject",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "IOS App\/HotDealProject.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/192.168.1.16\/usvn\/svn\/Hotdeal_Mobile_App",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "b46e8774-2913-4286-9e2e-5677a529d3d4++505"
+    }
+  ]
+}

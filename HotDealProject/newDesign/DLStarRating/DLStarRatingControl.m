@@ -25,8 +25,8 @@
 - (void)setupView {
 	self.clipsToBounds = YES;
 	currentIdx = -1;
-	star = [UIImage imageNamed:@"start_grey"];
-	highlightedStar = [UIImage imageNamed:@"start_yellow"];
+	star = [UIImage imageNamed:@"star_gray1"];
+	highlightedStar = [UIImage imageNamed:@"star_yellow1"];
 
 	for (int i=0; i<numberOfStars; i++) {
 		DLStarView *v = [[DLStarView alloc] initWithDefault:self.star highlighted:self.highlightedStar position:i allowFractions:isFractionalRatingEnabled];
@@ -37,8 +37,8 @@
 - (void)setupView3 {
 	self.clipsToBounds = YES;
 	currentIdx = -1;
-	star = [UIImage imageNamed:@"start_grey"];
-	highlightedStar = [UIImage imageNamed:@"start_yellow"];
+	star = [UIImage imageNamed:@"star_gray1"];
+	highlightedStar = [UIImage imageNamed:@"star_yellow1"];
     
 	for (int i=0; i<numberOfStars; i++) {
 		DLStarView *v = [[DLStarView alloc] initWithDefault:self.star highlighted:self.highlightedStar position:i allowFractions:isFractionalRatingEnabled];
@@ -49,8 +49,8 @@
 - (void)setupView2 {
     self.clipsToBounds = YES;
     currentIdx = -1;
-    star = [UIImage imageNamed:@"start_grey"];
-    highlightedStar = [UIImage imageNamed:@"start_yellow"];
+    star = [UIImage imageNamed:@"star_gray1"];
+    highlightedStar = [UIImage imageNamed:@"star_yellow1"];
     
     for (int i=0; i<numberOfStars; i++) {
         DLStarView *v = [[DLStarView alloc] initWithCustom:self.star highlighted:self.highlightedStar position:i allowFractions:isFractionalRatingEnabled];

@@ -8,7 +8,7 @@
 
 #import "CategorySpaViewController.h"
 #import "AppDelegate.h"
-#import "HotNewDetailViewController.h"
+#import "DetailViewController.h"
 #import "SWRevealViewController.h"
 #import "DealCell.h"
 #import "SupplierCell.h"
@@ -522,7 +522,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
+    DetailViewController * detail = [[DetailViewController alloc]init];
     DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
     detail.iProductID = dealObj.product_id;
     [self.navigationController pushViewController:detail animated:YES];

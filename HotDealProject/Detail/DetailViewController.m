@@ -249,7 +249,7 @@
     
     UIButton *customButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [customButton addTarget:self action:@selector(shoppingCart) forControlEvents:UIControlEventTouchUpInside];
-    [customButton setImage:[UIImage imageNamed:@"cart.png"] forState:UIControlStateNormal];
+    [customButton setImage:[UIImage imageNamed:@"icon_cart.png"] forState:UIControlStateNormal];
     barButton = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:customButton];
     barButton.badgeOriginX = 25;
     barButton.badgeOriginY = -5;
