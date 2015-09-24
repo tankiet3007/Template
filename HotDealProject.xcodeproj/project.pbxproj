@@ -96,6 +96,8 @@
 		519BBD481B7069EC0057DE73 /* CustomCollectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 519BBD461B7069EC0057DE73 /* CustomCollectionItem.m */; };
 		519BBD491B7069EC0057DE73 /* CustomCollectionItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 519BBD471B7069EC0057DE73 /* CustomCollectionItem.xib */; };
 		519BBD4C1B7095BB0057DE73 /* MenuObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 519BBD4B1B7095BB0057DE73 /* MenuObject.m */; };
+		51A9DEA51BB3B02B00F2ACAD /* MenuFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9DEA31BB3B02B00F2ACAD /* MenuFooter.m */; settings = {ASSET_TAGS = (); }; };
+		51A9DEA61BB3B02B00F2ACAD /* MenuFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51A9DEA41BB3B02B00F2ACAD /* MenuFooter.xib */; settings = {ASSET_TAGS = (); }; };
 		51B130301B67722A002BA844 /* SildeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B1302F1B67722A002BA844 /* SildeViewController.m */; };
 		51B3D02B1B8FFE9100C3FE36 /* PaymentTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B3D02A1B8FFE9100C3FE36 /* PaymentTemplate.m */; };
 		51BAA7101B8C0C9E00D69C19 /* DetailHasProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BAA70F1B8C0C9E00D69C19 /* DetailHasProductViewController.m */; };
@@ -479,6 +481,9 @@
 		519BBD471B7069EC0057DE73 /* CustomCollectionItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCollectionItem.xib; sourceTree = "<group>"; };
 		519BBD4A1B7095BB0057DE73 /* MenuObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuObject.h; path = Model/MenuObject.h; sourceTree = "<group>"; };
 		519BBD4B1B7095BB0057DE73 /* MenuObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuObject.m; path = Model/MenuObject.m; sourceTree = "<group>"; };
+		51A9DEA21BB3B02B00F2ACAD /* MenuFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuFooter.h; path = newDesign/Category/MenuFooter.h; sourceTree = "<group>"; };
+		51A9DEA31BB3B02B00F2ACAD /* MenuFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuFooter.m; path = newDesign/Category/MenuFooter.m; sourceTree = "<group>"; };
+		51A9DEA41BB3B02B00F2ACAD /* MenuFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuFooter.xib; path = newDesign/Category/MenuFooter.xib; sourceTree = "<group>"; };
 		51B1302E1B67722A002BA844 /* SildeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SildeViewController.h; path = newDesign/SildeViewController.h; sourceTree = "<group>"; };
 		51B1302F1B67722A002BA844 /* SildeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SildeViewController.m; path = newDesign/SildeViewController.m; sourceTree = "<group>"; };
 		51B3D0291B8FFE9100C3FE36 /* PaymentTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaymentTemplate.h; path = Detail/Payment/PaymentTemplate.h; sourceTree = "<group>"; };
@@ -1204,6 +1209,9 @@
 				51249B991B7489E8007B9623 /* CategoryCell.h */,
 				51249B9A1B7489E8007B9623 /* CategoryCell.m */,
 				51249B9B1B7489E8007B9623 /* CategoryCell.xib */,
+				51A9DEA21BB3B02B00F2ACAD /* MenuFooter.h */,
+				51A9DEA31BB3B02B00F2ACAD /* MenuFooter.m */,
+				51A9DEA41BB3B02B00F2ACAD /* MenuFooter.xib */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -2074,6 +2082,7 @@
 				E9BAB7801AE8D8E9009BC234 /* ProductInfoStoredCell.xib in Resources */,
 				5182A89A1B32BBE800A271E7 /* GooglePlus.bundle in Resources */,
 				51CB0E401B830CCE000E7DAF /* SignUpTableViewController.xib in Resources */,
+				51A9DEA61BB3B02B00F2ACAD /* MenuFooter.xib in Resources */,
 				5170252F1B81CC71001B54D8 /* ScrollableCell.xib in Resources */,
 				E9C049F41AE0F9360017C5CE /* DealCell.xib in Resources */,
 				E9B24BE21AF873E400322C0F /* BookSuccessViewController.xib in Resources */,
@@ -2234,6 +2243,7 @@
 				E9AE20351AD80A5E002E11AC /* SDWebImageCompat.m in Sources */,
 				E9AE20371AD80A5E002E11AC /* SDWebImageDownloader.m in Sources */,
 				E9AE20381AD80A5E002E11AC /* SDWebImageDownloaderOperation.m in Sources */,
+				51A9DEA51BB3B02B00F2ACAD /* MenuFooter.m in Sources */,
 				E9BAB7721AE898EC009BC234 /* ProductObject.m in Sources */,
 				510215541BA67ED600726F3C /* YOSUser.m in Sources */,
 				E9AE20361AD80A5E002E11AC /* SDWebImageDecoder.m in Sources */,
