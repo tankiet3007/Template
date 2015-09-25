@@ -65,7 +65,7 @@
     UIButton * btnRollUp;
 }
 #define RowHeight 44
-#define CollectionItemHeight1 50
+#define CollectionItemHeight1 43
 #define CollectionItemHeight2 33
 @synthesize tableviewCategory;
 @synthesize strTitle;
@@ -681,7 +681,13 @@
         [self initCollectionWithNumOfItem:[arrMenu1 count]];
     }
     if (iIndexMenu == 2) {
-        [self initCollectionWithNumOfItem:[arrMenu2 count]];
+        if (is_segment1 == TRUE) {
+            [self initCollectionWithNumOfItem:[arrMenu2 count]];
+        }
+        else
+        {
+             [self initCollectionWithNumOfItem:[arrMenu2_2 count]];
+        }
     }
     if (iIndexMenu == 3) {
         [self initCollectionWithNumOfItem:[arrMenu3 count]];
@@ -992,29 +998,14 @@
 -(void)changeSegment:(UIButton *)sender
 {
     if (sender.tag == 0) {
-        [vSegment2 removeFromSuperview];
-        [vSegment1 removeFromSuperview];
         is_segment1 = TRUE;
-        vSegment1 = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/4 - 30, 24, 40, 2)];
-        vSegment1.backgroundColor = [UIColor colorWithHex:@"#0cba06" alpha:1];
-        [vHeaderLocation addSubview:vSegment1];
-        [collectionView reloadData];
+        [self initCollectionWithNumOfItem:[arrMenu2 count]];
+        
     }
     else
     {
-        [vSegment2 removeFromSuperview];
-        [vSegment1 removeFromSuperview];
         is_segment1 = FALSE;
-        if (IS_IPHONE_6 || IS_IPHONE_6_PLUS) {
-            vSegment2 = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/2+10, 24, 150, 2)];
-        }
-        else
-        {
-            vSegment2 = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/2-7, 24, 150, 2)];
-        }
-        vSegment2.backgroundColor = [UIColor colorWithHex:@"#0cba06" alpha:1];
-        [vHeaderLocation addSubview:vSegment2];
-        [collectionView reloadData];
+        [self initCollectionWithNumOfItem:[arrMenu2_2 count]];
     }
 }
 -(void)initCollectionWithNumOfItem:(int)quantity
@@ -1111,15 +1102,21 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          if (iIndexMenu == 1) {
-                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight1 + 30 + 40);
+                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight1 + 30 + 25);
                          }
                          if (iIndexMenu == 2) {
-                             collectionView.frame = CGRectMake(0, 40 + 30, ScreenWidth, (iMenuRow1 +1)*CollectionItemHeight1 - 60+ 40);
+                             if (is_segment1 == TRUE) {
+                                 collectionView.frame = CGRectMake(0, 40 + 30, ScreenWidth, (iMenuRow1 +1)*CollectionItemHeight1 - 10+ 5);
+                             }
+                             else
+                             {
+                                 collectionView.frame = CGRectMake(0, 40 + 30, ScreenWidth, (iMenuRow1 +1)*CollectionItemHeight1 - 32+ 50);
+                             }
                              
                          }
                          if(iIndexMenu == 3)
                          {
-                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight2 + 30+ 40);
+                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight2 + 30+ 15);
                          }
                          
                      }
@@ -1274,12 +1271,12 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (iIndexMenu == 1||iIndexMenu == 2) {
         if (IS_IPHONE_6) {
-            return  CGSizeMake(105, 50);
+            return  CGSizeMake(105, 43);
         }
         if (IS_IPHONE_6_PLUS) {
-            return  CGSizeMake(115, 50);
+            return  CGSizeMake(115, 43);
         }
-        return CGSizeMake(90, 50);
+        return CGSizeMake(90, 43);
     }
     else
     {
@@ -1294,7 +1291,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    return CGSizeMake(ScreenWidth, 30.0f);
+    return CGSizeMake(ScreenWidth, 20);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)theCollectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)theIndexPath
@@ -1307,7 +1304,7 @@
         theView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"MenuFooter" forIndexPath:theIndexPath];
         
         if (theView==nil) {
-            theView =(MenuFooter*)[[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+            theView =(MenuFooter*)[[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 20)];
         }
         btnRollUp = theView.btnRoll;
         [btnRollUp addTarget:self action:@selector(rollMenuUp) forControlEvents:UIControlEventTouchUpInside];
