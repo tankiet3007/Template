@@ -450,6 +450,7 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CategoryCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
+       
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.btnName.titleLabel.numberOfLines = 2;
         cell.btnName.titleLabel.textAlignment = NSTextAlignmentCenter;

@@ -15,6 +15,7 @@
 #import "CustomCollectionItem.h"
 #import "MenuObject.h"
 #import "CategoryCell.h"
+#import "MenuFooter.h"
 #define CellHeight1 50
 @interface CategoryTravelViewController ()
 
@@ -67,6 +68,8 @@
     int iIndexMenu;
     
     TTRangeSlider * tRangeSlider;
+    UIButton * btnRollUp;
+    UIView * viewBackground;
 }
 #define RowHeight 44
 #define CollectionItemHeight1 50
@@ -401,11 +404,14 @@
         [viewPrice removeFromSuperview];
         viewPrice = nil;
     }
-    //    [self dissmissMenu];
-    //    [self setDimView:YES];
-    tableViewSubCategory1 = [[UITableView alloc]initWithFrame:CGRectMake(0, 50, 110, [arrMenu1 count] *CellHeight1)];
+    
+    viewBackground = [[UIView alloc]initWithFrame:CGRectMake(0, 50, ScreenWidth, ScreenHeight - 200)];
+    viewBackground.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:viewBackground];
+    
+    tableViewSubCategory1 = [[UITableView alloc]initWithFrame:CGRectMake(0, 10, 110, [arrMenu1 count] *CellHeight1)];
     tableViewSubCategory1.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:0.3];
-    [self.view addSubview:tableViewSubCategory1];
+    [viewBackground addSubview:tableViewSubCategory1];
     tableViewSubCategory1.layer.shadowOpacity = 1;
     tableViewSubCategory1.layer.shadowRadius = 1.0;
     tableViewSubCategory1.clipsToBounds = YES;
@@ -417,6 +423,13 @@
     tableViewSubCategory1.showsVerticalScrollIndicator = NO;
     tableViewSubCategory1.sectionHeaderHeight = 0.0;
     [btnKind setTitleColor:[UIColor colorWithHex:@"#0cba06" alpha:1] forState:UIControlStateNormal];
+    
+    btnRollUp = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnRollUp.frame = CGRectMake(ScreenWidth/2 - 30, ScreenHeight - 215, 60, 16);
+    [btnRollUp setImage:[UIImage imageNamed:@"bt_roll"] forState:UIControlStateNormal];
+    [viewBackground addSubview:btnRollUp];
+    [btnRollUp addTarget:self action:@selector(dissmissMenu) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
 -(void)initTableViewSub2
@@ -425,9 +438,9 @@
         [tableViewSubCategory2 removeFromSuperview];
         tableViewSubCategory2 = nil;
     }
-    tableViewSubCategory2 = [[UITableView alloc]initWithFrame:CGRectMake(110, 50, 110, [arrMenu1 count] *CellHeight1)];
+    tableViewSubCategory2 = [[UITableView alloc]initWithFrame:CGRectMake(110,10, 110, [arrMenu1 count] *CellHeight1)];
     tableViewSubCategory2.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:0.3];
-    [self.view addSubview:tableViewSubCategory2];
+    [viewBackground addSubview:tableViewSubCategory2];
     tableViewSubCategory2.layer.shadowOpacity = 1;
     tableViewSubCategory2.layer.shadowRadius = 1.0;
     tableViewSubCategory2.clipsToBounds = YES;
@@ -446,9 +459,9 @@
         [tableViewSubCategory3 removeFromSuperview];
         tableViewSubCategory3 = nil;
     }
-    tableViewSubCategory3 = [[UITableView alloc]initWithFrame:CGRectMake(220, 50, 110, [arrMenu1 count] *CellHeight1)];
+    tableViewSubCategory3 = [[UITableView alloc]initWithFrame:CGRectMake(215, 10, 110, [arrMenu1 count] *CellHeight1)];
     tableViewSubCategory3.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:0.3];
-    [self.view addSubview:tableViewSubCategory3];
+    [viewBackground addSubview:tableViewSubCategory3];
     tableViewSubCategory3.layer.shadowOpacity = 1;
     tableViewSubCategory3.layer.shadowRadius = 1.0;
     tableViewSubCategory3.clipsToBounds = YES;
@@ -495,6 +508,7 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CategoryCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
+         cell.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:0.3];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.btnName.titleLabel.numberOfLines = 2;
         cell.btnName.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -836,7 +850,8 @@
     else
     {
         isShowSortMenu2 = YES;
-        
+        [self removeAllMenu];
+        [self setDimView:YES];
         [self initTableViewForSort];
         lastBtnMenu = sender;
     }
@@ -877,6 +892,9 @@
     else
     {
         isShowSortMenu2 = YES;
+        [self removeAllMenu];
+        [self setDimView:YES];
+        
         [self initPriceView];
         lastBtnMenu = sender;
     }
@@ -1026,6 +1044,13 @@
     btnUpdatePrice.backgroundColor = [UIColor colorWithHex:@"#0cba06" alpha:1];
     [btnUpdatePrice addTarget:self action:@selector(updateRangeOfPrice) forControlEvents:UIControlEventTouchUpInside];
     [viewPrice addSubview:btnUpdatePrice];
+    
+    UIButton * btnScrollUp = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnScrollUp.frame = CGRectMake(ScreenWidth/2 - 30, 164 , 60, 16);
+    [btnScrollUp setImage:[UIImage imageNamed:@"bt_roll"] forState:UIControlStateNormal];
+    [viewPrice addSubview:btnScrollUp];
+    [btnScrollUp addTarget:self action:@selector(dissmissMenu) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 -(void)updateRangeOfPrice
 {
@@ -1048,6 +1073,7 @@
     [btnKind addTarget:self action:@selector(kindSelect:) forControlEvents:UIControlEventTouchUpInside];
     btnKind.frame = CGRectMake(5, 5, ScreenWidth/4 - 20, 30);
     btnKind.titleLabel.numberOfLines = 2;
+    btnKind.titleLabel.textAlignment = NSTextAlignmentCenter;
     [btnKind.titleLabel setFont:[UIFont boldSystemFontOfSize:9]];
     [btnKind setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     [viewMenu addSubview:btnKind];
@@ -1056,6 +1082,7 @@
     btnConvenient = [UIButton buttonWithType:UIButtonTypeSystem];
     [btnConvenient setTitle:@"TIỆN NGHI" forState:UIControlStateNormal];
     [btnConvenient addTarget:self action:@selector(convenientSelect:) forControlEvents:UIControlEventTouchUpInside];
+        btnConvenient.titleLabel.textAlignment = NSTextAlignmentCenter;
     btnConvenient.frame = CGRectMake(ScreenWidth/4, 5, ScreenWidth/4 - 20, 30);
     [btnConvenient.titleLabel setFont:[UIFont boldSystemFontOfSize:9]];
     btnConvenient.titleLabel.numberOfLines = 2;
@@ -1065,6 +1092,7 @@
     
     btnPrice = [UIButton buttonWithType:UIButtonTypeSystem];
     [btnPrice setTitle:@"GIÁ" forState:UIControlStateNormal];
+    btnPrice.titleLabel.textAlignment = NSTextAlignmentCenter;
     [btnPrice addTarget:self action:@selector(priceSelect:) forControlEvents:UIControlEventTouchUpInside];
     btnPrice.frame = CGRectMake(ScreenWidth/2, 5, ScreenWidth/4 - 20, 30);
     [btnPrice.titleLabel setFont:[UIFont boldSystemFontOfSize:9]];
@@ -1079,6 +1107,7 @@
     [btnFilter addTarget:self action:@selector(filterSelect:) forControlEvents:UIControlEventTouchUpInside];
     btnFilter.frame = CGRectMake((3*ScreenWidth/4)+5, 5, ScreenWidth/4 - 20, 30);
     btnFilter.titleLabel.numberOfLines = 2;
+    btnFilter.titleLabel.textAlignment = NSTextAlignmentCenter;
     [btnFilter.titleLabel setFont:[UIFont boldSystemFontOfSize:9]];
     [btnFilter setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     [viewMenu addSubview:btnFilter];
@@ -1248,6 +1277,7 @@
     [tableViewSubCategory1 removeFromSuperview];
     [tableViewSubCategory2 removeFromSuperview];
     [tableViewSubCategory3 removeFromSuperview];
+    [viewBackground removeFromSuperview];
 }
 -(void)dissmissMenu
 {
@@ -1310,11 +1340,11 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          if (iIndexMenu == 2) {
-                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight1 + 30);
+                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight1 + 30+15);
                          }
                          if(iIndexMenu == 4)
                          {
-                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight2 + 30);
+                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight2 + 30+15);
                          }
                          
                      }
@@ -1365,7 +1395,7 @@
     [[collectionView delegate] collectionView:collectionView didSelectItemAtIndexPath:indexPath];
     if (iIndexMenu == 2) {
         lastIndexPathMenu2 = indexPath;
-        [btnKind setTitle:button.titleLabel.text forState:UIControlStateNormal];
+        [btnConvenient setTitle:button.titleLabel.text forState:UIControlStateNormal];
     }
     if (iIndexMenu == 3) {
         lastIndexPathMenu3 = indexPath;
@@ -1468,4 +1498,30 @@
     //    [self dissmissMenu];
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    return CGSizeMake(ScreenWidth, 20);
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)theCollectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)theIndexPath
+{
+    MenuFooter  *theView = nil;
+    
+    if(kind == UICollectionElementKindSectionFooter)
+    {
+        [collectionView registerNib:[UINib nibWithNibName:@"MenuFooter" bundle:nil]  forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"MenuFooter"];
+        theView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"MenuFooter" forIndexPath:theIndexPath];
+        
+        if (theView==nil) {
+            theView =(MenuFooter*)[[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 20)];
+        }
+        btnRollUp = theView.btnRoll;
+        [btnRollUp addTarget:self action:@selector(rollMenuUp) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return theView;
+}
+-(void)rollMenuUp
+{
+    [self dissmissMenu];
+}
 @end
