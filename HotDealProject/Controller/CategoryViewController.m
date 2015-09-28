@@ -347,6 +347,11 @@
     lblName6.numberOfLines = 2;
     [viewCT addSubview:lblName6];
     
+    UIButton * btnScrollUp = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnScrollUp.frame = CGRectMake(ScreenWidth/2 - 30, y + size*3 + 28, 60, 16);
+    [btnScrollUp setImage:[UIImage imageNamed:@"bt_roll"] forState:UIControlStateNormal];
+    [viewCT addSubview:btnScrollUp];
+    [btnScrollUp addTarget:self action:@selector(dissmissProductview) forControlEvents:UIControlEventTouchUpInside];
     
     [UIView animateWithDuration:0.2
                           delay:0.1
@@ -981,14 +986,15 @@
         [vHeaderLocation removeFromSuperview];
         vHeaderLocation = nil;
     }
-    [UIView animateWithDuration:0
+    [UIView animateWithDuration:0.5
                           delay:0
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         self.collectionView.frame = CGRectMake(0, 50, ScreenWidth, collectionView.frame.size.height);
+                         
                      }
                      completion:^(BOOL finished){
                          if (finished)
+                             self.collectionView.frame = CGRectMake(0, 50, ScreenWidth, collectionView.frame.size.height);
                              [self.collectionView removeFromSuperview];
                          dimView.alpha = 0;
                      }];

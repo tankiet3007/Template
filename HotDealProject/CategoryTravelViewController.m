@@ -321,6 +321,11 @@
     lblName6.numberOfLines = 2;
     [viewCT addSubview:lblName6];
     
+    UIButton * btnScrollUp = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnScrollUp.frame = CGRectMake(ScreenWidth/2 - 30, y + size*3 + 28, 60, 16);
+    [btnScrollUp setImage:[UIImage imageNamed:@"bt_roll"] forState:UIControlStateNormal];
+    [viewCT addSubview:btnScrollUp];
+    [btnScrollUp addTarget:self action:@selector(dissmissProductview) forControlEvents:UIControlEventTouchUpInside];
     
     [UIView animateWithDuration:0.2
                           delay:0.1

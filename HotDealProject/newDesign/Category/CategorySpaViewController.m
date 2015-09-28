@@ -14,6 +14,7 @@
 #import "SupplierCell.h"
 #import "CustomCollectionItem.h"
 #import "MenuObject.h"
+#import "MenuFooter.h"
 @interface CategorySpaViewController ()
 
 @end
@@ -47,7 +48,7 @@
     NSMutableArray * arrMenu3;
     NSIndexPath * lastIndexPathMenu1;
     NSIndexPath * lastIndexPathMenu3;
-    
+    UIButton * btnRollUp;
     int iIndexMenu;
 }
 #define RowHeight 44
@@ -325,6 +326,11 @@
     lblName6.numberOfLines = 2;
     [viewCT addSubview:lblName6];
     
+    UIButton * btnScrollUp = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnScrollUp.frame = CGRectMake(ScreenWidth/2 - 30, y + size*3 + 28, 60, 16);
+    [btnScrollUp setImage:[UIImage imageNamed:@"bt_roll"] forState:UIControlStateNormal];
+    [viewCT addSubview:btnScrollUp];
+    [btnScrollUp addTarget:self action:@selector(dissmissProductview) forControlEvents:UIControlEventTouchUpInside];
     
     [UIView animateWithDuration:0.2
                           delay:0.1
@@ -822,11 +828,11 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          if (iIndexMenu == 1) {
-                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight1 + 30);
+                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight1 + 30+25);
                          }
                          if(iIndexMenu == 3)
                          {
-                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight2 + 30);
+                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight2 + 30+15);
                          }
                          
                      }
@@ -922,12 +928,12 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (iIndexMenu == 1) {
         if (IS_IPHONE_6) {
-            return  CGSizeMake(105, 50);
+            return  CGSizeMake(105, 43);
         }
         if (IS_IPHONE_6_PLUS) {
-            return  CGSizeMake(115, 50);
+            return  CGSizeMake(115, 43);
         }
-        return CGSizeMake(90, 50);
+        return CGSizeMake(90, 43);
     }
     else
     {
@@ -939,6 +945,32 @@
         }
         return CGSizeMake(90, 33);
     }
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    return CGSizeMake(ScreenWidth, 20);
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)theCollectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)theIndexPath
+{
+    MenuFooter  *theView = nil;
+    
+    if(kind == UICollectionElementKindSectionFooter)
+    {
+        [collectionView registerNib:[UINib nibWithNibName:@"MenuFooter" bundle:nil]  forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"MenuFooter"];
+        theView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"MenuFooter" forIndexPath:theIndexPath];
+        
+        if (theView==nil) {
+            theView =(MenuFooter*)[[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 20)];
+        }
+        btnRollUp = theView.btnRoll;
+        [btnRollUp addTarget:self action:@selector(rollMenuUp) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return theView;
+}
+-(void)rollMenuUp
+{
+    [self hiddenView:nil];
 }
 
 @end

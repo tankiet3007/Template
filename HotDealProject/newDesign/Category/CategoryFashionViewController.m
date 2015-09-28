@@ -15,6 +15,8 @@
 #import "CustomCollectionItem.h"
 #import "MenuObject.h"
 #import "CategoryCell.h"
+#import "MenuFooter.h"
+
 @interface CategoryFashionViewController ()
 
 @end
@@ -53,6 +55,9 @@
     NSIndexPath * lastIndexPathMenu3;
     
     int iIndexMenu;
+    UIButton * btnRollUp;
+    
+    UIView * viewBackground;
 }
 #define RowHeight 44
 #define CollectionItemHeight1 50
@@ -134,20 +139,33 @@
     }];
     
 }
-
+//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+//{
+//    return 20;
+//}
+//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    UIView * viewScrollUp = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH(tableView), 20)];
+//    UIButton * btnScrollUp = [UIButton buttonWithType:UIButtonTypeCustom];
+//    btnScrollUp.frame = CGRectMake(WIDTH(tableView)/2 - 23, 2, 46, 16);
+//    [btnScrollUp setImage:[UIImage imageNamed:@"bt_roll"] forState:UIControlStateNormal];
+//    [viewScrollUp addSubview:btnScrollUp];
+//    [btnScrollUp addTarget:self action:@selector(rollMenuUp) forControlEvents:UIControlEventTouchUpInside];
+//    return viewScrollUp;
+//}
 -(void)initTableViewForSort
 {
     if (tableViewSubCategory != nil) {
         [tableViewSubCategory removeFromSuperview];
         tableViewSubCategory = nil;
     }
-    tableViewSubCategory = [[UITableView alloc]initWithFrame:CGRectMake(0, 50, 110, [arrMenu1 count] *CellHeight1)];
-    tableViewSubCategory.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:0.3];
-    [self.view addSubview:tableViewSubCategory];
-    tableViewSubCategory.layer.shadowOpacity = 1;
-    tableViewSubCategory.layer.shadowRadius = 1.0;
-    tableViewSubCategory.clipsToBounds = YES;
+    viewBackground = [[UIView alloc]initWithFrame:CGRectMake(0, 50, ScreenWidth, [arrMenu1 count] *CellHeight1 +20)];
+    viewBackground.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:viewBackground];
+    
+    tableViewSubCategory = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 110, [arrMenu1 count] *CellHeight1+12)];
     tableViewSubCategory.backgroundColor = [UIColor whiteColor];
+    [viewBackground addSubview:tableViewSubCategory];
     tableViewSubCategory.dataSource = self;
     tableViewSubCategory.delegate = self;
     [tableViewSubCategory setAllowsSelection:YES];
@@ -155,6 +173,11 @@
     tableViewSubCategory.showsVerticalScrollIndicator = NO;
     tableViewSubCategory.sectionHeaderHeight = 0.0;
     //    tableViewSubCategory.hidden = YES;
+    btnRollUp = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnRollUp.frame = CGRectMake(ScreenWidth/2 - 30, HEIGHT(tableViewSubCategory)- 8, 60, 16);
+    [btnRollUp setImage:[UIImage imageNamed:@"bt_roll"] forState:UIControlStateNormal];
+    [viewBackground addSubview:btnRollUp];
+    [btnRollUp addTarget:self action:@selector(hiddenView:) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)showCategory
 {
@@ -327,6 +350,11 @@
     lblName6.numberOfLines = 2;
     [viewCT addSubview:lblName6];
     
+    UIButton * btnScrollUp = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnScrollUp.frame = CGRectMake(ScreenWidth/2 - 30, y + size*3 + 28, 60, 16);
+    [btnScrollUp setImage:[UIImage imageNamed:@"bt_roll"] forState:UIControlStateNormal];
+    [viewCT addSubview:btnScrollUp];
+    [btnScrollUp addTarget:self action:@selector(dissmissProductview) forControlEvents:UIControlEventTouchUpInside];
     
     [UIView animateWithDuration:0.2
                           delay:0.1
@@ -426,6 +454,7 @@
         cell.btnName.titleLabel.numberOfLines = 2;
         cell.btnName.titleLabel.textAlignment = NSTextAlignmentCenter;
         [cell.btnName addTarget:self action:@selector(buttonClicked2:) forControlEvents:UIControlEventTouchUpInside];
+        cell.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:0.3];
         MenuObject * item  = [MenuObject new];
         item = [arrMenu1 objectAtIndex:indexPath.row];
         if ([indexPath isEqual:lastIndexPathMenu1]) {
@@ -567,16 +596,17 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([tableView isEqual:tableViewSubCategory]) {
-        if (indexPath.row == 0) {
-            [self dissmissMenu];
-            return;
-        }
-        [self initCollectionWithNumOfItem:[arrMenu1_1 count]];
         CategoryCell * cell = (CategoryCell*)[tableView cellForRowAtIndexPath:indexPath];
         [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
         lastIndexPathMenu1 = indexPath;
         isShowSortMenu2 = NO;
+        if (indexPath.row == 0) {
+            [self dissmissMenu];
+            [btnKind setTitle:cell.btnName.titleLabel.text forState:UIControlStateNormal];
+            return;
+        }
+        [self initCollectionWithNumOfItem:[arrMenu1_1 count]];
         [tableView reloadData];
     }
     else
@@ -862,7 +892,8 @@
 {
     [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    tableViewSubCategory.hidden = YES;
+//    tableViewSubCategory.hidden = YES;
+    viewBackground.hidden = YES;
     isShowSortMenu3 = YES;
     [UIView animateWithDuration:0
                           delay:0
@@ -896,11 +927,10 @@
         self.collectionView = nil;
     }
     if (iIndexMenu == 1) {
-        //    if (iIndexMenu == 1){
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(110, 41, 2*ScreenWidth/3, iMenuRow1*CellHeight1 + 30) collectionViewLayout:flowLayout];
         [btnKind setTitleColor:[UIColor colorWithHex:@"#0cba06" alpha:1] forState:UIControlStateNormal];
     }
-    
+
     if (iIndexMenu == 3)    {
         [btnFilter setTitleColor:[UIColor colorWithHex:@"#0cba06" alpha:1] forState:UIControlStateNormal];
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight2) collectionViewLayout:flowLayout];
@@ -915,19 +945,25 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          if (iIndexMenu == 1) {
-                             collectionView.frame = CGRectMake(110, 41, 2*ScreenWidth/3, iMenuRow1*CellHeight1 + 30);
+                             collectionView.frame = CGRectMake(110, 5, 2*ScreenWidth/3, iMenuRow1*CellHeight1 + 30 +20);
                          }
-                         if(iIndexMenu == 3)
+                        if(iIndexMenu == 3)
                          {
-                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight2 + 30);
+                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight2 + 30+15);
                          }
                          
                      }
                      completion:^(BOOL finished){
                      }];
     //    [self.view addSubview:self.postStatusView];
-    
-    [self.view addSubview:collectionView];
+    if (iIndexMenu == 1)
+    {
+        [viewBackground addSubview:collectionView];
+    }
+    else
+    {
+        [self.view addSubview:collectionView];
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -954,7 +990,7 @@
         lastIndexPathMenu3 = indexPath;
         [btnFilter setTitle:cell.btnName.titleLabel.text forState:UIControlStateNormal];
     }
-    [self dissmissMenu];
+    [self hiddenView:nil];
     
     [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -1016,12 +1052,12 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (iIndexMenu == 1) {
         if (IS_IPHONE_6) {
-            return  CGSizeMake(105, 50);
+            return  CGSizeMake(105, 43);
         }
         if (IS_IPHONE_6_PLUS) {
-            return  CGSizeMake(115, 50);
+            return  CGSizeMake(115, 43);
         }
-        return CGSizeMake(90, 50);
+        return CGSizeMake(90, 43);
     }
     else
     {
@@ -1051,8 +1087,43 @@
 
 -(void)lastIndexSelect:(NSIndexPath*)indexPath
 {
+    if (indexPath.row == 0) {
+        [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
+    else
+    {
     [[tableViewSubCategory delegate] tableView:tableViewSubCategory didSelectRowAtIndexPath:indexPath];
     [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
 }
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    return CGSizeMake(ScreenWidth, 20);
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)theCollectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)theIndexPath
+{
+    MenuFooter  *theView = nil;
+    
+    if(kind == UICollectionElementKindSectionFooter)
+    {
+        [collectionView registerNib:[UINib nibWithNibName:@"MenuFooter" bundle:nil]  forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"MenuFooter"];
+        theView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"MenuFooter" forIndexPath:theIndexPath];
+        
+        if (theView==nil) {
+            theView =(MenuFooter*)[[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 20)];
+        }
+        btnRollUp = theView.btnRoll;
+        [btnRollUp addTarget:self action:@selector(rollMenuUp) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return theView;
+}
+-(void)rollMenuUp
+{
+    [self hiddenView:nil];
+}
+
 @end

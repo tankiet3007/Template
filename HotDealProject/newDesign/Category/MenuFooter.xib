@@ -12,12 +12,12 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPl-1S-naa">
-                    <rect key="frame" x="137" y="0.0" width="46" height="16"/>
+                    <rect key="frame" x="130" y="0.0" width="60" height="16"/>
                     <state key="normal" title="Button" image="bt_roll"/>
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="yPl-1S-naa" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="137" id="CQv-fD-a4b"/>
+                <constraint firstItem="yPl-1S-naa" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="130" id="CQv-fD-a4b"/>
                 <constraint firstItem="yPl-1S-naa" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" id="HGg-4y-qkA"/>
                 <constraint firstItem="yPl-1S-naa" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="MH4-4O-McP"/>
                 <constraint firstItem="yPl-1S-naa" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="wMF-jC-lo1"/>
