@@ -32,7 +32,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(12)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhI-cA-1Gs">
-                        <rect key="frame" x="211" y="44" width="19" height="12"/>
+                        <rect key="frame" x="180" y="44" width="19" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -86,10 +86,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ToI-6y-mMT" customClass="DLStarRatingControl">
-                        <rect key="frame" x="97" y="37" width="109" height="26"/>
+                        <rect key="frame" x="97" y="37" width="72" height="26"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="109" id="KuG-gk-Z4q"/>
+                            <constraint firstAttribute="width" constant="72" id="KuG-gk-Z4q"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -101,7 +101,7 @@
                     <constraint firstItem="sRh-KD-bvC" firstAttribute="firstBaseline" secondItem="tmm-Aa-Mhj" secondAttribute="firstBaseline" constant="-1" id="5FO-A7-Y4O"/>
                     <constraint firstItem="sRh-KD-bvC" firstAttribute="top" secondItem="ToI-6y-mMT" secondAttribute="bottom" id="5LW-Tb-oAk"/>
                     <constraint firstItem="sRh-KD-bvC" firstAttribute="baseline" secondItem="PPG-96-XDq" secondAttribute="baseline" constant="5" id="BMx-ZV-IxQ"/>
-                    <constraint firstItem="xhI-cA-1Gs" firstAttribute="leading" secondItem="ToI-6y-mMT" secondAttribute="trailing" constant="5" id="Cgz-t8-zMx"/>
+                    <constraint firstItem="xhI-cA-1Gs" firstAttribute="leading" secondItem="ToI-6y-mMT" secondAttribute="trailing" constant="11" id="Cgz-t8-zMx"/>
                     <constraint firstItem="wSd-Zx-sCG" firstAttribute="leading" secondItem="Afl-xB-A5z" secondAttribute="leadingMargin" constant="-1" id="DUN-Vv-NRf"/>
                     <constraint firstAttribute="centerX" secondItem="1Ex-2h-Ek9" secondAttribute="centerX" constant="47" id="FiX-mX-FCR"/>
                     <constraint firstItem="sRh-KD-bvC" firstAttribute="leading" secondItem="1Ex-2h-Ek9" secondAttribute="trailing" constant="17" id="Gyd-8k-nYx"/>

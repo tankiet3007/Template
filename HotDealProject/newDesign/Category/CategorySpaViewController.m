@@ -125,7 +125,7 @@
         UA_log(@"%lu item", [arrDeals count]);
         //        [tableViewSearch reloadData];
         [self initUITableView];
-        [self initTableViewForSort];
+//        [self initTableViewForSort];
     }];
     
 }
@@ -451,11 +451,13 @@
   
     float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
     cell.lblPercentage.text = F(@"%.0f%%", calculatePercent);
-    
-    cell.starRating.backgroundColor = [UIColor clearColor];
-    //        cell.starRating.rating =  item.iRate ;
-    cell.starRating.rating = 4;
-    cell.starRating.userInteractionEnabled = NO;
+    DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(75, 41, 120, 26)];
+    starRating.backgroundColor = [UIColor clearColor];
+    starRating.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleBottomMargin;
+    starRating.isFractionalRatingEnabled = YES;
+    starRating.rating = 4;
+    starRating.userInteractionEnabled = NO;
+    [cell.contentView addSubview:starRating];
     NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
     strStardarPrice = [strStardarPrice formatStringToDecimal];
     NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
@@ -829,7 +831,7 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          if (iIndexMenu == 1) {
-                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight1 + 30+25);
+                             collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight1 + 30+5);
                          }
                          if(iIndexMenu == 3)
                          {

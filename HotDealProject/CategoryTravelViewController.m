@@ -149,7 +149,7 @@
         UA_log(@"%lu item", [arrDeals count]);
         //        [tableViewSearch reloadData];
         [self initUITableView];
-        [self initTableViewForSort];
+//        [self initTableViewForSort];
     }];
     
 }

@@ -142,7 +142,7 @@
         UA_log(@"%lu item", [arrDeals count]);
         //        [tableViewSearch reloadData];
         [self initUITableView];
-        [self initTableViewForSort];
+//        [self initTableViewForSort];
     }];
     
 }
@@ -485,11 +485,13 @@
     //        [cell.imgLogo sd_setImageWithURL:[NSURL URLWithString:@"http://dev.hotdeal.vn/index.php?dispatch=products.image_mapi&product_id=288045&size=250x250"] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
     float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
     cell.lblPercentage.text = F(@"%.0f%%", calculatePercent);
-    
-    cell.starRating.backgroundColor = [UIColor clearColor];
-    //        cell.starRating.rating =  item.iRate ;
-    cell.starRating.rating = 4;
-    cell.starRating.userInteractionEnabled = NO;
+    DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(75, 41, 120, 26)];
+    starRating.backgroundColor = [UIColor clearColor];
+    starRating.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleBottomMargin;
+    starRating.isFractionalRatingEnabled = YES;
+    starRating.rating = 4;
+    starRating.userInteractionEnabled = NO;
+    [cell.contentView addSubview:starRating];
     NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
     strStardarPrice = [strStardarPrice formatStringToDecimal];
     NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
