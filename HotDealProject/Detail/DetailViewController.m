@@ -531,6 +531,9 @@
                 cell = [nib objectAtIndex:0];
             }
             [self configureHeaderCell:cell forRowAtIndexPath:indexPath];
+            [cell.btnDealType1 setImage:[UIImage imageNamed:@"icon_voucher"] forState:UIControlStateNormal];
+            [cell.btnDealType2 setImage:[UIImage imageNamed:@"icon_evoucher"] forState:UIControlStateNormal];
+            [cell.btnDealType3 setImage:[UIImage imageNamed:@"icon_delivery"] forState:UIControlStateNormal];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -657,11 +660,11 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-    vPadding.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
+    vPadding.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
     [cell.contentView addSubview:vPadding];
     
     UIView * vPadding2 = [[UIView alloc]initWithFrame:CGRectMake(0, 50, ScreenWidth, 10)];
-    vPadding2.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
+    vPadding2.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
     [cell.contentView addSubview:vPadding2];
     [cell.numOfComment addTarget:self action:@selector(openCommentView) forControlEvents:UIControlEventTouchUpInside];
     
@@ -696,7 +699,7 @@
     [cell.btnCall addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
     //Do something
     UIView * vPadding2 = [[UIView alloc]initWithFrame:CGRectMake(0, 150, ScreenWidth, 10)];
-    vPadding2.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
+    vPadding2.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
     [cell.contentView addSubview:vPadding2];
     [cell.btnFullList addTarget:self action:@selector(seeMoreLocation) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -752,7 +755,7 @@
     cell.webView.scrollView.scrollEnabled = NO;
     cell.webView.scrollView.bounces = NO;
     UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 190, ScreenWidth, 10)];
-    vPadding.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
+    vPadding.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
     [cell.contentView addSubview:vPadding];
 }
 - (void)seeMoreHTMLCondition
@@ -792,7 +795,7 @@
         [vHeader addSubview:btnComment];
         
         UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 30, ScreenWidth, 10)];
-        vPadding.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
+        vPadding.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
         [vHeader addSubview:vPadding];
         
         return vHeader;
@@ -813,7 +816,7 @@
         imv.image = [UIImage imageNamed:@"icon_small_comment"];
         [vHeader addSubview:imv];
         UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(5, 35, ScreenWidth - 10, 1)];
-        vPadding.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
+        vPadding.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
         [vHeader addSubview:vPadding];
         
         return vHeader;
@@ -827,7 +830,7 @@
         [vHeader addSubview:lblComment];
         
         UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(5, 35, ScreenWidth - 10, 1)];
-        vPadding.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
+        vPadding.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
         [vHeader addSubview:vPadding];
         
         return vHeader;

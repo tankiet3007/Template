@@ -772,7 +772,7 @@
     [viewMenu addSubview:vLineBreak2];
     
     UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 40, ScreenWidth, 10)];
-    vPadding.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
+    vPadding.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
     //    vPadding.backgroundColor = [UIColor lightGrayColor];
     [viewMenu addSubview:vPadding];
     
@@ -1038,14 +1038,14 @@
     if (iIndexMenu == 1) {
         //    if (iIndexMenu == 1){
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, iMenuRow1*CollectionItemHeight1 + 30) collectionViewLayout:flowLayout];
-        [btnKind setTitleColor:[UIColor colorWithHex:@"#0cba06" alpha:1] forState:UIControlStateNormal];
+        [btnKind setTitleColor:[UIColor colorWithHex:@"#6AB917" alpha:1] forState:UIControlStateNormal];
     }
     if (iIndexMenu == 2) {
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, iMenuRow1*CollectionItemHeight1 + 30) collectionViewLayout:flowLayout];
-        [btnDistrict setTitleColor:[UIColor colorWithHex:@"#0cba06" alpha:1] forState:UIControlStateNormal];
+        [btnDistrict setTitleColor:[UIColor colorWithHex:@"#6AB917" alpha:1] forState:UIControlStateNormal];
     }
     if (iIndexMenu == 3)    {
-        [btnFilter setTitleColor:[UIColor colorWithHex:@"#0cba06" alpha:1] forState:UIControlStateNormal];
+        [btnFilter setTitleColor:[UIColor colorWithHex:@"#6AB917" alpha:1] forState:UIControlStateNormal];
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, iMenuRow1*CollectionItemHeight2) collectionViewLayout:flowLayout];
     }
     self.collectionView.alwaysBounceVertical = YES;
@@ -1072,13 +1072,13 @@
             {
                 vSegment2 = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/2-7, 24, 150, 2)];
             }
-            vSegment2.backgroundColor = [UIColor colorWithHex:@"#0cba06" alpha:1];
+            vSegment2.backgroundColor = [UIColor colorWithHex:@"#6AB917" alpha:1];
             [vHeaderLocation addSubview:vSegment2];
         }
         else
         {
             vSegment1 = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/4 - 30, 24, 40, 2)];
-            vSegment1.backgroundColor = [UIColor colorWithHex:@"#0cba06" alpha:1];
+            vSegment1.backgroundColor = [UIColor colorWithHex:@"#6AB917" alpha:1];
             [vHeaderLocation addSubview:vSegment1];
         }
         UIButton * btnDistrict2 = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -1100,7 +1100,7 @@
         [vHeaderLocation addSubview:btnDistrict2];
         
         UIView * viewLine = [[UIView alloc]initWithFrame:CGRectMake(10, 26, ScreenWidth-20, 1)];
-        viewLine.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
+        viewLine.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
         [vHeaderLocation addSubview:viewLine];
         [self.view addSubview:vHeaderLocation];
     }
@@ -1157,7 +1157,7 @@
 {
     CustomCollectionItem * cell = (CustomCollectionItem*)[collectionViews cellForItemAtIndexPath:indexPath];
     [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+    [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
     
     if (iIndexMenu == 1) {
         lastIndexPathMenu1 = indexPath;
@@ -1204,7 +1204,7 @@
         item = [arrMenu1 objectAtIndex:indexPath.row];
         if ([indexPath isEqual:lastIndexPathMenu1]) {
             [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
         }
     }
     if (iIndexMenu == 2) {
@@ -1212,12 +1212,12 @@
             item = [arrMenu2 objectAtIndex:indexPath.row];
             if ([indexPath isEqual:lastIndexPathMenu2]) {
                 [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-                [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+                [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
             }
             else
             {
                 [cell.btnName setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#DCDCDC" alpha:0.3]];
+                [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#F6F6F6" alpha:0.3]];
             }
         }
         else
@@ -1225,12 +1225,12 @@
             item = [arrMenu2_2 objectAtIndex:indexPath.row];
             if ([indexPath isEqual:lastIndexPathMenu2_2]) {
                 [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-                [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+                [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
             }
             else
             {
                 [cell.btnName setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#DCDCDC" alpha:0.3]];
+                [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#F6F6F6" alpha:0.3]];
             }
         }
         
@@ -1239,7 +1239,7 @@
         item = [arrMenu3 objectAtIndex:indexPath.row];
         if ([indexPath isEqual:lastIndexPathMenu3]) {
             [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
         }
     }
     [cell.btnName setTitle:item.strName forState:UIControlStateNormal];

@@ -43,7 +43,7 @@
     
     UIButton * btnDone = [UIButton buttonWithType:UIButtonTypeSystem];
     [btnDone setFrame:CGRectMake(0, ScreenHeight-160, ScreenWidth, 50)];
-    [btnDone setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+    [btnDone setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
     [btnDone setTitle:@"GỬI BÌNH LUẬN MỚI CỦA BẠN" forState:UIControlStateNormal];
     [btnDone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btnDone.titleLabel.font = [UIFont boldSystemFontOfSize:16];

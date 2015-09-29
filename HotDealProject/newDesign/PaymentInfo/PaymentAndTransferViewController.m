@@ -101,7 +101,7 @@
     
     UIButton * btnDone = [UIButton buttonWithType:UIButtonTypeSystem];
     [btnDone setFrame:CGRectMake(0, ScreenHeight-160, ScreenWidth, 50)];
-    [btnDone setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+    [btnDone setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
     [btnDone setTitle:@"ĐỒNG Ý" forState:UIControlStateNormal];
     [btnDone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btnDone.titleLabel.font = [UIFont boldSystemFontOfSize:16];
@@ -189,7 +189,7 @@
         if (indexPath.row == 0) {
             cell.lblTitleScroll.text = @"CHỌN HÌNH THỨC GIAO HÀNG";
             if (i == iLastSelectedShipping) {
-                itemS.backgroundColor = [UIColor colorWithHex:@"#0cba06" alpha:1];
+                itemS.backgroundColor = [UIColor colorWithHex:@"#6AB917" alpha:1];
             }
             else
                 itemS.backgroundColor = [UIColor lightGrayColor];
@@ -198,7 +198,7 @@
         {
             cell.lblTitleScroll.text = @"CHỌN HÌNH THỨC THANH TOÁN";
             if (i == iLastSelectedPayment) {
-                itemS.backgroundColor = [UIColor colorWithHex:@"#0cba06" alpha:1];
+                itemS.backgroundColor = [UIColor colorWithHex:@"#6AB917" alpha:1];
             }
             else
                 itemS.backgroundColor = [UIColor lightGrayColor];
@@ -242,7 +242,7 @@
 
 -(void)btnSelected:(UIButton *)sender
 {
-    sender.backgroundColor = [UIColor colorWithHex:@"#0cba06" alpha:1];
+    sender.backgroundColor = [UIColor colorWithHex:@"#6AB917" alpha:1];
     int iIndexSelected = sender.tag - 20;
     if (iIndexSelected < 0) {
         iIndexSelected = sender.tag;

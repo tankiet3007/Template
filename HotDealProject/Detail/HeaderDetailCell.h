@@ -14,5 +14,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblStandarPrice;
 @property (weak, nonatomic) IBOutlet UILabel *lblDiscountPrice;
 @property (weak, nonatomic) IBOutlet ImageSlide *slideImage;
+@property (weak, nonatomic) IBOutlet UIButton *btnDealType1;
+@property (weak, nonatomic) IBOutlet UIButton *btnDealType2;
+@property (weak, nonatomic) IBOutlet UIButton *btnDealType3;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *lblPercentage;
 @end

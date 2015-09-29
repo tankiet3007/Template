@@ -94,7 +94,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
     [self refresh];
     
-    self.sliderLine.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1].CGColor;
+    self.sliderLine.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1].CGColor;
     self.leftHandle.backgroundColor = [UIColor darkGrayColor].CGColor;
     self.rightHandle.backgroundColor = [UIColor darkGrayColor].CGColor;
     
@@ -411,16 +411,16 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 #pragma mark - Properties
 -(void)setTintColor:(UIColor *)tintColor{
-    [super setTintColor:[UIColor colorWithHex:@"#DCDCDC" alpha:1]];
+    [super setTintColor:[UIColor colorWithHex:@"#F6F6F6" alpha:1]];
 
 //    struct CGColor *color = self.tintColor.CGColor;
-    struct CGColor *color = [UIColor colorWithHex:@"#DCDCDC" alpha:1].CGColor;
+    struct CGColor *color = [UIColor colorWithHex:@"#F6F6F6" alpha:1].CGColor;
     [CATransaction begin];
     [CATransaction setAnimationDuration:0.5];
     [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
-    self.sliderLine.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1].CGColor;
-    self.leftHandle.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1].CGColor;
-    self.rightHandle.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1].CGColor;
+    self.sliderLine.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1].CGColor;
+    self.leftHandle.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1].CGColor;
+    self.rightHandle.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1].CGColor;
 
     if (self.minLabelColour == nil){
         self.minLabel.foregroundColor = color;

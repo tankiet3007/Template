@@ -239,7 +239,7 @@
         tv.textColor = [UIColor lightGrayColor];
         tv.frame = CGRectMake(10, 5, ScreenWidth - 20, 55);
                 cellRe.contentView.backgroundColor = [UIColor clearColor];
-//        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+//        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
 
         [cellRe addSubview:tvDescription];
         return cellRe;
@@ -257,7 +257,7 @@
         // Textfield dimensions
         button.frame = CGRectMake(10, 20, ScreenWidth - 20, 35);
                     cellRe.contentView.backgroundColor = [UIColor clearColor];
-//        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+//        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
         return cellRe;
     }
     else

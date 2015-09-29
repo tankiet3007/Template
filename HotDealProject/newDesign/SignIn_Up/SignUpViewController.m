@@ -124,7 +124,7 @@
         buttonGender = lcell.btnGender;
         [buttonGender addTarget:self action:@selector(genderPicker:) forControlEvents:UIControlEventTouchUpInside];
     }
-    //    lcell.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+    //    lcell.contentView.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
     
 }
 
@@ -132,7 +132,7 @@
 - (void)configureCellInfo:(InfomationCell *)lcell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIColor *color = [UIColor blackColor];
-    //    lcell.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+    //    lcell.contentView.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
     lcell.tfFullname.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Họ tên" attributes:@{NSForegroundColorAttributeName: color}];
     lcell.tfAddress.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Số nhà/Ngõ ngách" attributes:@{NSForegroundColorAttributeName: color}];
     lcell.tfStreet.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Đường" attributes:@{NSForegroundColorAttributeName: color}];

@@ -412,7 +412,7 @@
     [self.view addSubview:viewBackground];
     
     tableViewSubCategory1 = [[UITableView alloc]initWithFrame:CGRectMake(0, 10, 110, [arrMenu1 count] *CellHeight1)];
-    tableViewSubCategory1.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:0.3];
+    tableViewSubCategory1.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:0.3];
     [viewBackground addSubview:tableViewSubCategory1];
     tableViewSubCategory1.layer.shadowOpacity = 1;
     tableViewSubCategory1.layer.shadowRadius = 1.0;
@@ -424,7 +424,7 @@
     tableViewSubCategory1.separatorColor = [UIColor clearColor];
     tableViewSubCategory1.showsVerticalScrollIndicator = NO;
     tableViewSubCategory1.sectionHeaderHeight = 0.0;
-    [btnKind setTitleColor:[UIColor colorWithHex:@"#0cba06" alpha:1] forState:UIControlStateNormal];
+    [btnKind setTitleColor:[UIColor colorWithHex:@"#6AB917" alpha:1] forState:UIControlStateNormal];
     
     btnRollUp = [UIButton buttonWithType:UIButtonTypeCustom];
     btnRollUp.frame = CGRectMake(ScreenWidth/2 - 30, ScreenHeight - 215, 60, 16);
@@ -441,7 +441,7 @@
         tableViewSubCategory2 = nil;
     }
     tableViewSubCategory2 = [[UITableView alloc]initWithFrame:CGRectMake(110,10, 110, [arrMenu1 count] *CellHeight1)];
-    tableViewSubCategory2.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:0.3];
+    tableViewSubCategory2.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:0.3];
     [viewBackground addSubview:tableViewSubCategory2];
     tableViewSubCategory2.layer.shadowOpacity = 1;
     tableViewSubCategory2.layer.shadowRadius = 1.0;
@@ -462,7 +462,7 @@
         tableViewSubCategory3 = nil;
     }
     tableViewSubCategory3 = [[UITableView alloc]initWithFrame:CGRectMake(215, 10, 110, [arrMenu1 count] *CellHeight1)];
-    tableViewSubCategory3.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:0.3];
+    tableViewSubCategory3.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:0.3];
     [viewBackground addSubview:tableViewSubCategory3];
     tableViewSubCategory3.layer.shadowOpacity = 1;
     tableViewSubCategory3.layer.shadowRadius = 1.0;
@@ -510,7 +510,7 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CategoryCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
-         cell.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:0.3];
+         cell.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:0.3];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.btnName.titleLabel.numberOfLines = 2;
         cell.btnName.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -519,7 +519,7 @@
         item = [arrMenu1 objectAtIndex:indexPath.row];
         if ([indexPath isEqual:lastIndexPathMenu1]) {
             [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
         }
         [cell.btnName setTitle:item.strName forState:UIControlStateNormal];
         cell.btnName.tag = indexPath.row;
@@ -544,7 +544,7 @@
         item = [arrMenu1 objectAtIndex:indexPath.row];
         if ([indexPath isEqual:lastIndexPathMenu1_2]) {
             [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
         }
         [cell.btnName setTitle:item.strName forState:UIControlStateNormal];
         cell.btnName.tag = indexPath.row;
@@ -569,7 +569,7 @@
         item = [arrMenu1 objectAtIndex:indexPath.row];
         if ([indexPath isEqual:lastIndexPathMenu1_3]) {
             [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
         }
         [cell.btnName setTitle:item.strName forState:UIControlStateNormal];
         cell.btnName.tag = indexPath.row;
@@ -721,7 +721,7 @@
             
             CategoryCell * cell = (CategoryCell*)[tableView cellForRowAtIndexPath:indexPath];
             [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
             lastIndexPathMenu1 = indexPath;
             isShowSortMenu2 = NO;
             [tableView reloadData];
@@ -733,7 +733,7 @@
             
             lastIndexPathMenu1_3 = nil;
             [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
             lastIndexPathMenu1_2 = indexPath;
             isShowSortMenu2 = NO;
             [tableView reloadData];
@@ -1043,7 +1043,7 @@
     [btnUpdatePrice setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btnUpdatePrice.layer.cornerRadius = 3;
     btnUpdatePrice.layer.masksToBounds = YES;
-    btnUpdatePrice.backgroundColor = [UIColor colorWithHex:@"#0cba06" alpha:1];
+    btnUpdatePrice.backgroundColor = [UIColor colorWithHex:@"#6AB917" alpha:1];
     [btnUpdatePrice addTarget:self action:@selector(updateRangeOfPrice) forControlEvents:UIControlEventTouchUpInside];
     [viewPrice addSubview:btnUpdatePrice];
     
@@ -1129,7 +1129,7 @@
     
     
     UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 40, ScreenWidth, 10)];
-    vPadding.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
+    vPadding.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
     //    vPadding.backgroundColor = [UIColor lightGrayColor];
     [viewMenu addSubview:vPadding];
     
@@ -1325,11 +1325,11 @@
     if (iIndexMenu == 2) {
         //    if (iIndexMenu == 1){
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, iMenuRow1*CollectionItemHeight1 + 30) collectionViewLayout:flowLayout];
-        [btnConvenient setTitleColor:[UIColor colorWithHex:@"#0cba06" alpha:1] forState:UIControlStateNormal];
+        [btnConvenient setTitleColor:[UIColor colorWithHex:@"#6AB917" alpha:1] forState:UIControlStateNormal];
     }
     
     if (iIndexMenu == 4)    {
-        [btnFilter setTitleColor:[UIColor colorWithHex:@"#0cba06" alpha:1] forState:UIControlStateNormal];
+        [btnFilter setTitleColor:[UIColor colorWithHex:@"#6AB917" alpha:1] forState:UIControlStateNormal];
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, iMenuRow1*CollectionItemHeight2) collectionViewLayout:flowLayout];
     }
     self.collectionView.alwaysBounceVertical = YES;
@@ -1372,7 +1372,7 @@
 {
     CustomCollectionItem * cell = (CustomCollectionItem*)[collectionViews cellForItemAtIndexPath:indexPath];
     [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+    [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
     
     if (iIndexMenu == 2) {
         lastIndexPathMenu2 = indexPath;
@@ -1418,14 +1418,14 @@
         item = [arrMenu2 objectAtIndex:indexPath.row];
         if ([indexPath isEqual:lastIndexPathMenu2]) {
             [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
         }
     }
     if (iIndexMenu == 4) {
         item = [arrMenu3 objectAtIndex:indexPath.row];
         if ([indexPath isEqual:lastIndexPathMenu3]) {
             [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+            [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
         }
     }
     [cell.btnName setTitle:item.strName forState:UIControlStateNormal];

@@ -1082,12 +1082,12 @@
     btnHCM.layer.masksToBounds = YES;
     if (iMenuselected == 0) {
         [btnHCM setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btnHCM setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+        [btnHCM setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
     }
     else
     {
         [btnHCM setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btnHCM setBackgroundColor:[UIColor colorWithHex:@"#DCDCDC" alpha:0.3]];
+        [btnHCM setBackgroundColor:[UIColor colorWithHex:@"#F6F6F6" alpha:1]];
     }
     [viewMenu addSubview:btnHCM];
     
@@ -1100,12 +1100,12 @@
     btnHN.layer.masksToBounds = YES;
     if (iMenuselected == 1) {
         [btnHN setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btnHN setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+        [btnHN setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
     }
     else
     {
         [btnHN setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btnHN setBackgroundColor:[UIColor colorWithHex:@"#DCDCDC" alpha:0.3]];
+        [btnHN setBackgroundColor:[UIColor colorWithHex:@"#F6F6F6" alpha:1]];
     }
     
     
@@ -1120,12 +1120,12 @@
     btnOther.layer.masksToBounds = YES;
     if (iMenuselected == 2) {
         [btnOther setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btnOther setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+        [btnOther setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
     }
     else
     {
         [btnOther setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btnOther setBackgroundColor:[UIColor colorWithHex:@"#DCDCDC" alpha:0.3]];
+        [btnOther setBackgroundColor:[UIColor colorWithHex:@"#F6F6F6" alpha:1]];
     }
     
     [viewMenu addSubview:btnOther];
@@ -1152,7 +1152,7 @@
     if ([btnSender isEqual:btnHCM]) {
         iMenuselected = 0;
         [btnHCM setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btnHCM setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+        [btnHCM setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
         
         [btnHN setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [btnHN setBackgroundColor:[UIColor whiteColor]];
@@ -1166,7 +1166,7 @@
     if ([btnSender isEqual:btnHN]) {
         iMenuselected = 1;
         [btnHN setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btnHN setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+        [btnHN setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
         
         [btnHCM setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [btnHCM setBackgroundColor:[UIColor whiteColor]];
@@ -1181,7 +1181,7 @@
     if ([btnSender isEqual:btnOther]) {
         iMenuselected = 2;
         [btnOther setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btnOther setBackgroundColor:[UIColor colorWithHex:@"#0cba06" alpha:1]];
+        [btnOther setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
         
         [btnHN setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [btnHN setBackgroundColor:[UIColor whiteColor]];

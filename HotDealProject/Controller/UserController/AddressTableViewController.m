@@ -163,7 +163,7 @@ typedef enum {
         // Textfield dimensions
         tf.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
         //        cell.contentView.backgroundColor = [UIColor clearColor];
-        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
         // We want to handle textFieldDidEndEditing
         tf.delegate = self ;
         UIImageView * imgLine = [[UIImageView alloc]initWithFrame:CGRectMake(20, 38, ScreenWidth - 40, 2)];
@@ -190,7 +190,7 @@ typedef enum {
                     
                     // Textfield dimensions
                     lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
-                    cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+                    cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
                     
                     UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox2)];
                     // if labelView is not set userInteractionEnabled, you must do so
@@ -211,7 +211,7 @@ typedef enum {
                     
                     // Textfield dimensions
                     lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
-                    cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+                    cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
                     [cellRe addSubview:lbl];
                     UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
                     [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
@@ -247,7 +247,7 @@ typedef enum {
                     
                     // Textfield dimensions
                     lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
-                    cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+                    cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
                     [cellRe addSubview:lbl];
                     UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox3)];
                     // if labelView is not set userInteractionEnabled, you must do so
@@ -265,7 +265,7 @@ typedef enum {
                     lblWard.userInteractionEnabled = NO;
                     
                     lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
-                    cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+                    cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
                     [cellRe addSubview:lbl];
                     UIImageView * imgArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowDown"]];
                     [imgArrow setFrame:CGRectMake(ScreenWidth - 60, 6, 15, 30)];
@@ -304,7 +304,7 @@ typedef enum {
         
         // Textfield dimensions
         lbl.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
-        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
         
         UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDropbox1)];
         // if labelView is not set userInteractionEnabled, you must do so
@@ -332,8 +332,8 @@ typedef enum {
         
         // Textfield dimensions
         button.frame = CGRectMake(20, 0, ScreenWidth - 40, 45);
-        //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
-        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+        //            cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
+        cellRe.contentView.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
         return cellRe;
         
     }
@@ -550,11 +550,11 @@ typedef enum {
 
 -(void)initUITableView
 {
-    self.tableView.backgroundColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+    self.tableView.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     //    [tableViewMain setBounces:NO];
-    //    tableViewMain.separatorColor = [UIColor colorWithHex:@"#dcdcdc" alpha:1];
+    //    tableViewMain.separatorColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.sectionHeaderHeight = 0.0;

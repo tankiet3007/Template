@@ -83,7 +83,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
     UIButton * btnSignin = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnSignin setFrame:CGRectMake(20, 161, ScreenWidth/2-25, 44)];
     [btnSignin addTarget:self action:@selector(normalLogin) forControlEvents:UIControlEventTouchUpInside];
-    btnSignin.backgroundColor = [UIColor colorWithHex:@"#0cba06" alpha:1];
+    btnSignin.backgroundColor = [UIColor colorWithHex:@"#6AB917" alpha:1];
     
     [btnSignin setTitle:@"Đăng nhập" forState:UIControlStateNormal];
     btnSignin.titleLabel.textColor = [UIColor whiteColor];
@@ -94,7 +94,7 @@ static NSString * const kClientId = @"752710685205-sojbki4m33heqv5ntti5i0if26p78
     [btnSignUp setFrame:CGRectMake(30 + ScreenWidth/2-25, 161, ScreenWidth/2-25, 44)];
     [btnSignUp addTarget:self action:@selector(normalLogin) forControlEvents:UIControlEventTouchUpInside];
     btnSignUp.titleLabel.font = [UIFont boldSystemFontOfSize:13];
-    btnSignUp.backgroundColor = [UIColor colorWithHex:@"#0cba06" alpha:1];
+    btnSignUp.backgroundColor = [UIColor colorWithHex:@"#6AB917" alpha:1];
     
     [btnSignUp setTitle:@"Đăng ký" forState:UIControlStateNormal];
     btnSignUp.titleLabel.textColor = [UIColor whiteColor];
