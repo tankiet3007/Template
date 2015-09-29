@@ -26,7 +26,7 @@
 #import "CategoryTravelViewController.h"
 #import "DetailViewController.h"
 #import "DetailHasProductViewController.h"
-#define HEADER_HEIGHT 130
+#define HEADER_HEIGHT 140
 #define PADDING 12
 #define FETCH_COUNT 10
 @interface MainViewController ()
@@ -350,9 +350,8 @@
         
     }
     scrollViewCategory.contentSize = CGSizeMake(x, scrollViewCategory.frame.size.height);
-    UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 90, x, 10)];
-    //        vPadding.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
-    //    vPadding.backgroundColor = [UIColor lightGrayColor];
+    UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 100, x, 10)];
+    vPadding.backgroundColor = [UIColor colorWithHex:@"#C8C8C8" alpha:0.8];
     [scrollViewCategory addSubview:vPadding];
     return scrollViewCategory;
 }
@@ -545,7 +544,7 @@
 {
     if (indexPath.section == 0) {
         //        return headerHeight;
-        return 110;
+        return 120;
     }    if (indexPath.section == 1) {
         //        return 230;
         return headerHeight;
@@ -614,9 +613,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.contentView addSubview:imageSlideTop];
         
-        UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 118, ScreenWidth, 10)];
-        //                vPadding.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
-        //        vPadding.backgroundColor = [UIColor lightGrayColor];
+        UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 130, ScreenWidth, 10)];
+        vPadding.backgroundColor = [UIColor colorWithHex:@"#C8C8C8" alpha:0.8];
         [cell.contentView addSubview:vPadding];
         
         return cell;
@@ -640,7 +638,7 @@
         }
         UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(12, 98, ScreenWidth -20, 1)];
         line.tag = 101;
-        line.backgroundColor = [UIColor darkGrayColor];
+        line.backgroundColor = [UIColor lightGrayColor];
         [cell addSubview:line];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -725,13 +723,16 @@
         [vHead addSubview:lblDeal];
         
         UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 10)];
-        //        vPadding.backgroundColor = [UIColor colorWithHex:@"#DCDCDC" alpha:1];
-        //    vPadding.backgroundColor = [UIColor lightGrayColor];
+        vPadding.backgroundColor = [UIColor colorWithHex:@"#C8C8C8" alpha:0.7];
         [vHead addSubview:vPadding];
         
         UIView * vLine = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/2-80, 46, 140, 4)];
         vLine.backgroundColor = [UIColor redColor];
         [vHead addSubview:vLine];
+        
+        UIView * vLine2 = [[UIView alloc]initWithFrame:CGRectMake(10, 50, ScreenWidth - 20, 1)];
+        vLine2.backgroundColor = [UIColor lightGrayColor];
+        [vHead addSubview:vLine2];
         
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -782,8 +783,8 @@
     //    [btnBanner sd_setImageWithURL:[NSURL URLWithString:@"http://images5.fanpop.com/image/photos/31700000/Link-Zelda-the-legend-of-zelda-31742637-900-678.png"] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
     [btnBanner addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
     
-    btnBanner.layer.borderWidth=0.5f;
-    btnBanner.layer.borderColor=[UIColor grayColor].CGColor;
+    btnBanner.layer.borderWidth = 2.0f;
+    btnBanner.layer.borderColor=[UIColor lightGrayColor].CGColor;
     
     
     
@@ -791,19 +792,20 @@
     
     UIButton * btnBanner2 = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnBanner2 setFrame:CGRectMake(PADDING, HEIGHT(btnBanner)+PADDING+13, ScreenWidth/2-PADDING*2 + PADDING/2,120 )];
-    btnBanner2.layer.borderWidth=0.5f;
-    btnBanner2.layer.borderColor=[UIColor grayColor].CGColor;
     //    [btnBanner2 sd_setImageWithURL:[NSURL URLWithString:@"http://images5.fanpop.com/image/photos/31700000/Link-Zelda-the-legend-of-zelda-31742637-900-678.png"] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
     [btnBanner2 setBackgroundImage:[UIImage imageNamed:@"demo1.jpg"] forState:UIControlStateNormal];
     [btnBanner2 addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
+    btnBanner2.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    btnBanner2.layer.borderWidth = 2;
     [viewLarge addSubview:btnBanner2];
     
     UIButton * btnBanner3 = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnBanner3 setFrame:CGRectMake(ScreenWidth/2 + PADDING/2, HEIGHT(btnBanner)+PADDING+13, ScreenWidth/2-PADDING*2 + PADDING/2,  120)];
-    btnBanner3.layer.borderWidth=0.5f;
     //    btnBanner3.layer.borderColor=[UIColor grayColor].CGColor;    [btnBanner3 sd_setImageWithURL:[NSURL URLWithString:@"http://images5.fanpop.com/image/photos/31700000/Link-Zelda-the-legend-of-zelda-31742637-900-678.png"] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
     [btnBanner3 setBackgroundImage:[UIImage imageNamed:@"demo2.jpg"] forState:UIControlStateNormal];
     [btnBanner3 addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
+    btnBanner3.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    btnBanner3.layer.borderWidth = 2;
     [viewLarge addSubview:btnBanner3];
     
     return viewLarge;
@@ -1018,27 +1020,7 @@
         dimView.alpha = 0;
     }];
 }
-//-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    if (section == 3) {
-//        UIView * vHead = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
-//        UILabel *lblDeal = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth/2-80, 10, 160, 30)];
-//        lblDeal.text = @"DEAL TỔNG HỢP";
-//        lblDeal.font = [UIFont boldSystemFontOfSize:15];
-//        lblDeal.textAlignment = NSTextAlignmentCenter;
-//        lblDeal.textColor = [UIColor blackColor];
-//        [vHead addSubview:lblDeal];
-//        return vHead;
-//    }
-//    return nil;
-//}
-//-(float)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
-//{
-//    if (section == 3) {
-//        return 50;
-//    }
-//    return 0;
-//}
+
 -(void)getLocation
 {
     [[TKAPI sharedInstance]getRequestLocation:nil withURL:URL_GET_LOCATION];

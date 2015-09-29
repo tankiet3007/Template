@@ -123,7 +123,7 @@
 //        UIImage *imageT = [UIImage imageNamed:filePath];
         NSString * photourl = [_galleryImages objectAtIndex:i];
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button.imageView setContentMode:UIViewContentModeCenter];
+        [button.imageView setContentMode:UIViewContentModeScaleToFill];
 //        [button setBackgroundImage:imageT forState:UIControlStateNormal];
          [button sd_setImageWithURL:[NSURL URLWithString:photourl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
         button.tag = i;

@@ -101,7 +101,7 @@
     isShowSortMenu = NO;
     arrDeals = [[NSMutableArray alloc]init];
     [self initDataSort];
-    [self initData2:10 wOffset:1 wType:@"default"];
+    [self initData2:10 wOffset:1 wType:@"default"wSearchText:@""];
 }
 - (void)initHUD {
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
@@ -109,7 +109,7 @@
     //    HUD.labelText = LS(@"LoadingData");
     [HUD hide:YES];
 }
--(void)initData2:(int)iCount wOffset:(int)iOffset wType:(NSString *)sType
+-(void)initData2:(int)iCount wOffset:(int)iOffset wType:(NSString *)sType wSearchText:(NSString *)searchText
 {
     NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     strCateId, @"category",
@@ -117,6 +117,7 @@
                                     [NSNumber numberWithInt:iCount], @"fetch_count",
                                     [NSNumber numberWithInt:iOffset], @"offset",
                                     sType,@"fetch_type",
+                                    searchText,@"q",
                                     nil];
     
     UA_log(@"%@",jsonDictionary);
@@ -1176,8 +1177,10 @@
     if (iIndexMenu == 3) {
         lastIndexPathMenu3 = indexPath;
         [btnFilter setTitle:cell.btnName.titleLabel.text forState:UIControlStateNormal];
-    }    [self dissmissMenu];
+    }
+//    [self initData2:10 wOffset:1 wType:@"default"wSearchText:@""];
     
+    [self dissmissMenu];
     [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btnDistrict setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -1191,29 +1194,6 @@
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
     [[collectionView delegate] collectionView:collectionView didSelectItemAtIndexPath:indexPath];
-    if (iIndexMenu == 1) {
-        lastIndexPathMenu1 = indexPath;
-        [btnKind setTitle:button.titleLabel.text forState:UIControlStateNormal];
-    }
-    if (iIndexMenu == 2) {
-        if (is_segment1 == TRUE) {
-            lastIndexPathMenu2 = indexPath;
-            [btnDistrict setTitle:button.titleLabel.text forState:UIControlStateNormal];
-        }
-        else
-        {
-            lastIndexPathMenu2_2 = indexPath;
-            [btnDistrict setTitle:button.titleLabel.text forState:UIControlStateNormal];
-        }
-    }
-    if (iIndexMenu == 3) {
-        lastIndexPathMenu3 = indexPath;
-        [btnFilter setTitle:button.titleLabel.text forState:UIControlStateNormal];
-    }
-    
-    [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btnDistrict setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionViews cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"CustomCollectionItem";
