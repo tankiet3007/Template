@@ -149,10 +149,23 @@
         NSArray * arrProducts_recommend = [dict objectForKey:@"products_recommend"];
         for (NSDictionary * dictItem in arrProducts_recommend) {
             DealObject * item = [[DealObject alloc]init];
-            item.strTitle = [dictItem objectForKey:@"title"];
+            if ([dictItem objectForKey:@"title"] == [NSNull null]) {
+                item.strTitle = @"";
+            }
+            else
+            {
+                item.strTitle = [dictItem objectForKey:@"title"];
+            }
+
             item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
-            item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            if ([dictItem objectForKey:@"price"] == [NSNull null]) {
+                item.lDiscountPrice = 0;
+            }
+            else
+            {
+                item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            }
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];

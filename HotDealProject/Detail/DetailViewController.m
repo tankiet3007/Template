@@ -208,14 +208,28 @@
         NSArray * arrProducts_recommend = [dict objectForKey:@"products_recommend"];
         for (NSDictionary * dictItem in arrProducts_recommend) {
             DealObject * item = [[DealObject alloc]init];
-            item.strTitle = [dictItem objectForKey:@"title"];
+            if ([dictItem objectForKey:@"title"] == [NSNull null]) {
+                item.strTitle = @"";
+            }
+            else
+            {
+                item.strTitle = [dictItem objectForKey:@"title"];
+            }
+
             item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
-            item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            if ([dictItem objectForKey:@"price"] == [NSNull null]) {
+                item.lDiscountPrice = 0;
+            }
+            else
+            {
+                item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            }
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
             item.iType = [[dictItem objectForKey:@"type"]intValue];
+
             [arrDealRelateds addObject:item];
         }
         //        [self initWebviewExample];
@@ -665,11 +679,11 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-    vPadding.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
+    vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
     [cell.contentView addSubview:vPadding];
     
     UIView * vPadding2 = [[UIView alloc]initWithFrame:CGRectMake(0, 50, ScreenWidth, 10)];
-    vPadding2.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
+    vPadding2.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
     [cell.contentView addSubview:vPadding2];
     [cell.numOfComment addTarget:self action:@selector(openCommentView) forControlEvents:UIControlEventTouchUpInside];
     
@@ -704,7 +718,7 @@
     [cell.btnCall addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
     //Do something
     UIView * vPadding2 = [[UIView alloc]initWithFrame:CGRectMake(0, 150, ScreenWidth, 10)];
-    vPadding2.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
+    vPadding2.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
     [cell.contentView addSubview:vPadding2];
     [cell.btnFullList addTarget:self action:@selector(seeMoreLocation) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -761,7 +775,7 @@
     cell.webView.scrollView.scrollEnabled = NO;
     cell.webView.scrollView.bounces = NO;
     UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 190, ScreenWidth, 10)];
-    vPadding.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
+    vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
     [cell.contentView addSubview:vPadding];
 }
 - (void)seeMoreHTMLCondition
@@ -801,7 +815,7 @@
         [vHeader addSubview:btnComment];
         
         UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 30, ScreenWidth, 10)];
-        vPadding.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
+        vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
         [vHeader addSubview:vPadding];
         
         return vHeader;
@@ -822,7 +836,7 @@
         imv.image = [UIImage imageNamed:@"icon_small_comment"];
         [vHeader addSubview:imv];
         UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(5, 35, ScreenWidth - 10, 1)];
-        vPadding.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
+        vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
         [vHeader addSubview:vPadding];
         
         return vHeader;
@@ -836,7 +850,7 @@
         [vHeader addSubview:lblComment];
         
         UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(5, 35, ScreenWidth - 10, 1)];
-        vPadding.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:1];
+        vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
         [vHeader addSubview:vPadding];
         
         return vHeader;

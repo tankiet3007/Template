@@ -171,10 +171,23 @@
         NSArray * arrProducts = [dict objectForKey:@"product"];
         for (NSDictionary * dictItem in arrProducts) {
             DealObject * item = [[DealObject alloc]init];
-            item.strTitle = [dictItem objectForKey:@"title"];
+//
+            if ([dictItem objectForKey:@"title"] == [NSNull null]) {
+                item.strTitle = @"";
+            }
+            else
+            {
+                item.strTitle = [dictItem objectForKey:@"title"];
+            }
             item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
-            item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            if ([dictItem objectForKey:@"price"] == [NSNull null]) {
+                item.lDiscountPrice = 0;
+            }
+            else
+            {
+                item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            }
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
@@ -216,13 +229,28 @@
         NSArray * arrProducts = [dict objectForKey:@"product"];
         for (NSDictionary * dictItem in arrProducts) {
             DealObject * item = [[DealObject alloc]init];
-            item.strTitle = [dictItem objectForKey:@"title"];
+            if ([dictItem objectForKey:@"title"] == [NSNull null]) {
+                item.strTitle = @"";
+            }
+            else
+            {
+                item.strTitle = [dictItem objectForKey:@"title"];
+            }
+
             item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
-            item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            if ([dictItem objectForKey:@"price"] == [NSNull null]) {
+                item.lDiscountPrice = 0;
+            }
+            else
+            {
+                item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            }
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
+            item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
-            item.iType = [[dictItem objectForKey:@"product_kind"]intValue];
+            item.iType = [[dictItem objectForKey:@"type"]intValue];
+
             if ([arrDeals count]>10) {
                 break;
             }
@@ -258,11 +286,24 @@
         
         for (NSDictionary * dictItem in arrProducts) {
             DealObject * item = [[DealObject alloc]init];
-            item.strTitle = [dictItem objectForKey:@"title"];
+            if ([dictItem objectForKey:@"title"] == [NSNull null]) {
+                item.strTitle = @"";
+            }
+            else
+            {
+                item.strTitle = [dictItem objectForKey:@"title"];
+            }
             item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
-            item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            if ([dictItem objectForKey:@"price"] == [NSNull null]) {
+                item.lDiscountPrice = 0;
+            }
+            else
+            {
+                item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+            }
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
+            item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
             item.iType = [[dictItem objectForKey:@"type"]intValue];
             [arrDeals addObject:item];
@@ -351,7 +392,7 @@
     }
     scrollViewCategory.contentSize = CGSizeMake(x, scrollViewCategory.frame.size.height);
     UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 100, x, 10)];
-    vPadding.backgroundColor = [UIColor colorWithHex:@"#C8C8C8" alpha:0.8];
+    vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
     [scrollViewCategory addSubview:vPadding];
     return scrollViewCategory;
 }
@@ -469,10 +510,15 @@
     menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [menuBtn setTitle:@"HCM" forState:UIControlStateNormal];
     menuBtn.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+    menuBtn.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    menuBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
+    menuBtn.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    menuBtn.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    [menuBtn setImage:[UIImage imageNamed:@"ic_down"] forState:UIControlStateNormal];
     [menuBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [menuBtn addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
     //    [rBtest setBackgroundImage:image forState:UIControlStateNormal];
-    [menuBtn setFrame:CGRectMake(0, 0, 40, 30)];
+    [menuBtn setFrame:CGRectMake(0, 0, 50, 30)];
     
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc]initWithCustomView:menuBtn];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
@@ -614,7 +660,7 @@
         [cell.contentView addSubview:imageSlideTop];
         
         UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 130, ScreenWidth, 10)];
-        vPadding.backgroundColor = [UIColor colorWithHex:@"#C8C8C8" alpha:0.8];
+        vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
         [cell.contentView addSubview:vPadding];
         
         return cell;
@@ -643,7 +689,7 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
-        
+        UA_log(@"indexPath.row %d", indexPath.row);
         DealObject * item = [arrDeals objectAtIndex:indexPath.row];
         cell.lblTitle.text = item.strTitle;
         UIView *backgroundView = [[UIView alloc]initWithFrame:cell.bounds];
@@ -706,6 +752,10 @@
         if (bForceStop == TRUE) {
             return cell;
         }
+        if (indexPath.row == 8) {
+            UA_log(@"%ld --- %ld--- %@ --- %d", item.lStandarPrice, item.lDiscountPrice, item.strTitle, item.buy_number);
+        }
+        
         if (indexPath.row == [arrDeals count] - 1)
         {
             [self loadMoreDeal];
@@ -723,7 +773,7 @@
         [vHead addSubview:lblDeal];
         
         UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 10)];
-        vPadding.backgroundColor = [UIColor colorWithHex:@"#C8C8C8" alpha:0.7];
+        vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
         [vHead addSubview:vPadding];
         
         UIView * vLine = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/2-80, 46, 140, 4)];

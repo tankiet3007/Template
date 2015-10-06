@@ -27,8 +27,8 @@ static NSString * const URL_ADD_PROFILE = @"http://dev.hotdeal.vn/mapi/create_pr
 
 #pragma mark for deal
 static NSString * const URL_GET_ODER_LIST = @"http://dev.hotdeal.vn/mapi/get-order-list";
-static NSString * const URL_DEAL_LIST = @"http://dev.hotdeal.vn/mapi/get-latest-deals";
-static NSString * const URL_SEARCH_DEAL = @"http://dev.hotdeal.vn/mapi/get_latest_deals";
+static NSString * const URL_DEAL_LIST = @"http://dev.hotdeal.vn/mapi/get-latest-deals";//get-latest-deals
+static NSString * const URL_SEARCH_DEAL = @"http://dev.hotdeal.vn/mapi/get-latest-deals";
 
 static NSString * const URL_GET_DEAL_CONTENT = @"http://dev.hotdeal.vn/mapi/get-deal-content";
 static NSString * const URL_ADD_TO_CART = @"http://dev.hotdeal.vn/mapi/add_to_cart";
