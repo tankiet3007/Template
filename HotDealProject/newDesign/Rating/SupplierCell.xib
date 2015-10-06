@@ -38,7 +38,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7680" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmm-Aa-Mhj">
-                        <rect key="frame" x="295" y="67" width="23" height="21"/>
+                        <rect key="frame" x="287" y="67" width="23" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="30" id="jps-oc-CKE"/>
                         </constraints>
@@ -47,7 +47,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_sold" translatesAutoresizingMaskIntoConstraints="NO" id="h9Z-Xv-2Ar">
-                        <rect key="frame" x="277" y="67" width="15" height="15"/>
+                        <rect key="frame" x="269" y="67" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="15" id="Aa0-rw-Ro1"/>
                             <constraint firstAttribute="height" constant="15" id="PtJ-fE-jAn"/>
@@ -85,7 +85,7 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ToI-6y-mMT" customClass="DLStarRatingControl">
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ToI-6y-mMT">
                         <rect key="frame" x="97" y="37" width="72" height="26"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -120,7 +120,7 @@
                     <constraint firstItem="1Ex-2h-Ek9" firstAttribute="leading" secondItem="wSd-Zx-sCG" secondAttribute="trailing" constant="8" id="omD-2H-mQ2"/>
                     <constraint firstItem="ToI-6y-mMT" firstAttribute="centerY" secondItem="xhI-cA-1Gs" secondAttribute="centerY" id="q0v-vq-rYl"/>
                     <constraint firstAttribute="centerY" secondItem="wSd-Zx-sCG" secondAttribute="centerY" constant="1" id="rgb-B4-ZYV"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="tmm-Aa-Mhj" secondAttribute="trailing" constant="-6" id="sUL-dr-RMc"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="tmm-Aa-Mhj" secondAttribute="trailing" constant="2" id="sUL-dr-RMc"/>
                     <constraint firstItem="HYA-x4-5Zr" firstAttribute="leading" secondItem="wSd-Zx-sCG" secondAttribute="trailing" constant="9" id="vec-1j-VZB"/>
                     <constraint firstItem="wSd-Zx-sCG" firstAttribute="top" secondItem="Afl-xB-A5z" secondAttribute="topMargin" constant="-1" id="zYY-Ib-H9L"/>
                 </constraints>

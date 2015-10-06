@@ -26,7 +26,6 @@
 #import "PaymentTemplate.h"
 #import "PaymentInfoObject.h"
 #import "SignInViewController.h"
-
 @interface DetailViewController ()
 
 @end
@@ -431,8 +430,13 @@
 }
 -(void)buyDirectly
 {
+    user = [[TKDatabase sharedInstance]getUserInfo];
+    if (user == nil) {
+        SignInViewController * signInV = [[SignInViewController alloc]init];
+        [self.navigationController pushViewController:signInV animated:YES];
+    }
 //    [self shoppingCart];
-    [self animateViewConfirm];
+//    [self animateViewConfirm];
 }
 -(void)shoppingCart
 {
