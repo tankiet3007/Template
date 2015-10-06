@@ -528,11 +528,15 @@
         float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
         cell.lblPercentage.text = F(@"%.0f%%", calculatePercent);
         
-        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(75, 41, 120, 26)];
+        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(110, 41, 100, 26)];
+        if (IS_IPHONE_6_PLUS) {
+            [starRating setFrame:CGRectMake(115, 41, 100, 26)];
+        }
+        starRating.tag = indexPath.row +101;
         starRating.backgroundColor = [UIColor clearColor];
         //        cell.starRating.rating =  item.iRate ;
         starRating.rating = 3.5;
-        starRating.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleBottomMargin;
+        //        starRating.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleBottomMargin;
         starRating.isFractionalRatingEnabled = YES;
         starRating.userInteractionEnabled = NO;
         [cell.contentView addSubview:starRating];

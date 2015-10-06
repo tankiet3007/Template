@@ -28,7 +28,13 @@
             star = [self croppedImage:star];
         }
 //        self.frame = CGRectMake((star.size.width*index), 0, 1.3*((star.size.width/3)-0.2), 1.3*(star.size.height/3+kEdgeInsetBottom-1.5));
+        if ([UIScreen mainScreen].scale > 2.9) {
+            self.frame = CGRectMake((star.size.width*index), 0, 0.44*(star.size.width)-0.5, 0.44*(star.size.height+kEdgeInsetBottom));
+        }
+        else
+        {
         self.frame = CGRectMake((star.size.width*index), 0, 0.4*(star.size.width)-0.5, 0.4*(star.size.height+kEdgeInsetBottom));
+        }
 //        self.frame = CGRectMake((star.size.width*index), 0, (star.size.width), (star.size.height+kEdgeInsetBottom));
         [self setStarImage:star highlightedStarImage:highlightedStar];
 		[self setImageEdgeInsets:UIEdgeInsetsMake(0, 0, kEdgeInsetBottom, 0)];

@@ -85,17 +85,17 @@
     //    [self showDialog];
     //    lblNetwordStatus.text = @"Có lỗi trong quá trình lấy dữ liệu";
     
-    if (IS_IPHONE_6) {
-        headerHeight = HEADER_HEIGHT + 30;
-    }
-    if (IS_IPHONE_6_PLUS) {
-        headerHeight = HEADER_HEIGHT + 50;
-    }
-    else
-    {
-        headerHeight = HEADER_HEIGHT;
-    }
-    
+//    if (IS_IPHONE_6) {
+//        headerHeight = HEADER_HEIGHT + 30;
+//    }
+//    if (IS_IPHONE_6_PLUS) {
+//        headerHeight = HEADER_HEIGHT + 50;
+//    }
+//    else
+//    {
+//        headerHeight = HEADER_HEIGHT;
+//    }
+    headerHeight = HEADER_HEIGHT;
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
     bForceStop = FALSE;
     
@@ -718,11 +718,22 @@
         float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
         cell.lblPercentage.text = F(@"%.0f%%", calculatePercent);
 //        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(82, 37, 120, 26) andStars:5 isFractional:YES];
-        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(75, 41, 120, 26)];
+        NSArray * arrSupView = [cell.contentView subviews];
+        for (UIView * vItem in arrSupView) {
+            if ([vItem isKindOfClass:[DLStarRatingControl class]]) {
+                [vItem removeFromSuperview];
+            }
+        }
+        
+        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(85, 41, 100, 26)];
+        if (IS_IPHONE_6_PLUS) {
+            [starRating setFrame:CGRectMake(115, 41, 100, 26)];
+        }
+        starRating.tag = indexPath.row +101;
         starRating.backgroundColor = [UIColor clearColor];
         //        cell.starRating.rating =  item.iRate ;
         starRating.rating = 3.5;
-        starRating.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleBottomMargin;
+        //        starRating.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleBottomMargin;
         starRating.isFractionalRatingEnabled = YES;
         starRating.userInteractionEnabled = NO;
         [cell.contentView addSubview:starRating];

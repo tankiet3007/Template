@@ -71,8 +71,18 @@
 
 -(void)initNavigationbar:(NSString *)strTitle
 {
-    AppDelegate * appdelegate = ApplicationDelegate;
-    [appdelegate initNavigationbar:self withTitle:strTitle];
+//    AppDelegate * appdelegate = ApplicationDelegate;
+//    [appdelegate initNavigationbar:self withTitle:strTitle];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero] ;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    label.textAlignment = NSTextAlignmentCenter;
+    // ^-Use UITextAlignmentCenter for older SDKs.
+    label.textColor = [UIColor whiteColor]; // change this color
+    self.navigationItem.titleView = label;
+    label.text = strTitle;
+    [label sizeToFit];
 }
 
 - (void)didReceiveMemoryWarning {
