@@ -115,16 +115,31 @@
             DealObject * item = [[DealObject alloc]init];
             if ([dictItem objectForKey:@"title"] == [NSNull null]) {
                 item.strTitle = @"";
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
                 item.strTitle = [dictItem objectForKey:@"title"];
             }
-
-            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            
+            if ([dictItem objectForKey:@"product_id"] == [NSNull null]) {
+                item.product_id = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
+            }
+            else
+            {
+                item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            }
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
             if ([dictItem objectForKey:@"price"] == [NSNull null]) {
                 item.lDiscountPrice = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
@@ -135,12 +150,12 @@
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
             item.iType = [[dictItem objectForKey:@"type"]intValue];
             [arrDeals addObject:item];
-
+            
         }
         UA_log(@"%lu item", [arrDeals count]);
         //        [tableViewSearch reloadData];
         [self initUITableView];
-//        [self initTableViewForSort];
+        //        [self initTableViewForSort];
     }];
     
 }
@@ -453,7 +468,7 @@
     backgroundView.layer.borderWidth = 10.0f;
     cell.selectedBackgroundView = backgroundView;
     cell.backgroundColor = [UIColor clearColor];
-
+    
     if (indexPath.row % 3 == 0) {
         [cell.imgLogo sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/714/151493-BUFFET-NHAT-SLIDE-_(1).jpg"] placeholderImage:nil];
     }
@@ -463,7 +478,7 @@
     if (indexPath.row % 3 == 2) {
         [cell.imgLogo sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/754/79692_slide__(3).jpg"] placeholderImage:nil];
     }
-  
+    
     float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
     cell.lblPercentage.text = F(@"%.0f%%", calculatePercent);
     DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(100, 41, 100, 26)];
@@ -536,16 +551,31 @@
             DealObject * item = [[DealObject alloc]init];
             if ([dictItem objectForKey:@"title"] == [NSNull null]) {
                 item.strTitle = @"";
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
                 item.strTitle = [dictItem objectForKey:@"title"];
             }
-
-            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            
+            if ([dictItem objectForKey:@"product_id"] == [NSNull null]) {
+                item.product_id = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
+            }
+            else
+            {
+                item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            }
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
             if ([dictItem objectForKey:@"price"] == [NSNull null]) {
                 item.lDiscountPrice = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
@@ -556,7 +586,7 @@
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
             item.iType = [[dictItem objectForKey:@"type"]intValue];
             [arrDeals addObject:item];
-
+            
         }
         
         [tableviewCategory reloadData];
@@ -918,17 +948,17 @@
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
     [[collectionView delegate] collectionView:collectionView didSelectItemAtIndexPath:indexPath];
-//    if (iIndexMenu == 1) {
-//        lastIndexPathMenu1 = indexPath;
-//        [btnKind setTitle:button.titleLabel.text forState:UIControlStateNormal];
-//    }
-//    if (iIndexMenu == 3) {
-//        lastIndexPathMenu3 = indexPath;
-//        [btnFilter setTitle:button.titleLabel.text forState:UIControlStateNormal];
-//    }
-//    
-//    [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //    if (iIndexMenu == 1) {
+    //        lastIndexPathMenu1 = indexPath;
+    //        [btnKind setTitle:button.titleLabel.text forState:UIControlStateNormal];
+    //    }
+    //    if (iIndexMenu == 3) {
+    //        lastIndexPathMenu3 = indexPath;
+    //        [btnFilter setTitle:button.titleLabel.text forState:UIControlStateNormal];
+    //    }
+    //
+    //    [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //    [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionViews cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"CustomCollectionItem";

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/newDesign/Category/CategoryFashionViewController.m"
-            timestampString = "465727440.855716"
+            timestampString = "465886087.035506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "-initTableViewForSort"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/newDesign/Category/CategoryFashionViewController.m"
-            timestampString = "465813143.394753"
+            timestampString = "465886087.035506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1115"
-            endingLineNumber = "1115"
+            startingLineNumber = "1144"
+            endingLineNumber = "1144"
             landmarkName = "-buttonClicked2:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HotDealProject/CategoryTravelViewController.m"
-            timestampString = "465813143.394753"
+            timestampString = "465886087.035506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "876"
-            endingLineNumber = "876"
+            startingLineNumber = "906"
+            endingLineNumber = "906"
             landmarkName = "-kindSelect:"
             landmarkType = "5">
          </BreakpointContent>

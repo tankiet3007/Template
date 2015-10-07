@@ -85,16 +85,26 @@
     //    [self showDialog];
     //    lblNetwordStatus.text = @"Có lỗi trong quá trình lấy dữ liệu";
     
-//    if (IS_IPHONE_6) {
-//        headerHeight = HEADER_HEIGHT + 30;
-//    }
-//    if (IS_IPHONE_6_PLUS) {
-//        headerHeight = HEADER_HEIGHT + 50;
-//    }
-//    else
-//    {
-//        headerHeight = HEADER_HEIGHT;
-//    }
+    //    if (IS_IPHONE_6) {
+    //        headerHeight = HEADER_HEIGHT + 30;
+    //    }
+    //    if (IS_IPHONE_6_PLUS) {
+    //        headerHeight = HEADER_HEIGHT + 50;
+    //    }
+    //    else
+    //    {
+    //        headerHeight = HEADER_HEIGHT;
+    //    }
+    for (NSString* family in [UIFont familyNames])
+    {
+        NSLog(@"%@", family);
+        
+        for (NSString* name in [UIFont fontNamesForFamilyName: family])
+        {
+            NSLog(@"  %@", name);
+        }
+    }
+    
     headerHeight = HEADER_HEIGHT;
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
     bForceStop = FALSE;
@@ -171,18 +181,34 @@
         NSArray * arrProducts = [dict objectForKey:@"product"];
         for (NSDictionary * dictItem in arrProducts) {
             DealObject * item = [[DealObject alloc]init];
-//
+            //
             if ([dictItem objectForKey:@"title"] == [NSNull null]) {
                 item.strTitle = @"";
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
+                
             }
             else
             {
                 item.strTitle = [dictItem objectForKey:@"title"];
             }
-            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            if ([dictItem objectForKey:@"product_id"] == [NSNull null]) {
+                item.product_id = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
+            }
+            else
+            {
+                item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            }
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
             if ([dictItem objectForKey:@"price"] == [NSNull null]) {
                 item.lDiscountPrice = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
@@ -231,16 +257,33 @@
             DealObject * item = [[DealObject alloc]init];
             if ([dictItem objectForKey:@"title"] == [NSNull null]) {
                 item.strTitle = @"";
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
                 item.strTitle = [dictItem objectForKey:@"title"];
             }
-
-            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            
+            if ([dictItem objectForKey:@"product_id"] == [NSNull null]) {
+                item.product_id = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
+            }
+            else
+            {
+                item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            }
+            
+            
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
             if ([dictItem objectForKey:@"price"] == [NSNull null]) {
                 item.lDiscountPrice = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
@@ -250,7 +293,7 @@
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
             item.iType = [[dictItem objectForKey:@"type"]intValue];
-
+            
             if ([arrDeals count]>10) {
                 break;
             }
@@ -288,15 +331,30 @@
             DealObject * item = [[DealObject alloc]init];
             if ([dictItem objectForKey:@"title"] == [NSNull null]) {
                 item.strTitle = @"";
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
                 item.strTitle = [dictItem objectForKey:@"title"];
             }
-            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            if ([dictItem objectForKey:@"product_id"] == [NSNull null]) {
+                item.product_id = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
+            }
+            else
+            {
+                item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            }
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
             if ([dictItem objectForKey:@"price"] == [NSNull null]) {
                 item.lDiscountPrice = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
@@ -366,19 +424,20 @@
         categoryItem = [arrCategory objectAtIndex:i];
         UIButton * btnCategory = [UIButton buttonWithType:UIButtonTypeCustom];
         [btnCategory setFrame:CGRectMake(x, 0, 52, 52)];
-//        [btnCategory setBackgroundImage:[UIImage imageNamed:categoryItem.strImage] forState:UIControlStateNormal];
+        //        [btnCategory setBackgroundImage:[UIImage imageNamed:categoryItem.strImage] forState:UIControlStateNormal];
         [btnCategory setImage:[UIImage imageNamed:categoryItem.strImage] forState:UIControlStateNormal];
         btnCategory.imageView.contentMode = UIViewContentModeScaleAspectFit;
         btnCategory.tag = i;
         [btnCategory addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
-//        btnCategory.layer.borderColor = [UIColor colorWithHex:@"#D2D7D3" alpha:1].CGColor;
-//        btnCategory.layer.cornerRadius = btnCategory.bounds.size.width/2;;
-//        btnCategory.layer.borderWidth=1.0f;
-//        btnCategory.layer.masksToBounds = YES;
+        //        btnCategory.layer.borderColor = [UIColor colorWithHex:@"#D2D7D3" alpha:1].CGColor;
+        //        btnCategory.layer.cornerRadius = btnCategory.bounds.size.width/2;;
+        //        btnCategory.layer.borderWidth=1.0f;
+        //        btnCategory.layer.masksToBounds = YES;
         [scrollViewCategory addSubview:btnCategory];
         
         UILabel * lblName = [[UILabel alloc]initWithFrame:CGRectMake(x, 52, 52, 30)];
-        lblName.font = [UIFont boldSystemFontOfSize:10	];
+        //        lblName.font = [UIFont boldSystemFontOfSize:10	];
+        lblName.font = [UIFont fontWithName:@"Roboto-Regular" size:10];
         lblName.text = categoryItem.strTitle;
         lblName.textAlignment = NSTextAlignmentCenter;
         lblName.userInteractionEnabled = NO;
@@ -409,7 +468,7 @@
     //    [scrollView setBounces:NO];
     
     int x = 0;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < [arrDeals count]; i++) {
         DealItem *itemS = [[[NSBundle mainBundle] loadNibNamed:@"DealItem" owner:self options:nil] objectAtIndex:0];
         [itemS setFrame:CGRectMake(x, 0, 250, 180)];
         [itemS.btnTemp addTarget:self action:@selector(clickOnItem:) forControlEvents:UIControlEventTouchUpInside];
@@ -497,7 +556,8 @@
     UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, self.navigationController.navigationBar.frame.size.width - 80, 28.0)];
     textField.backgroundColor = [UIColor whiteColor];
     textField.delegate = self;
-    textField.font = [UIFont systemFontOfSize:12];
+    //    textField.font = [UIFont systemFontOfSize:12];
+    textField.font = [UIFont fontWithName:@"Roboto-Regular" size:12];
     textField.layer.cornerRadius = 15;
     textField.placeholder = @"Tìm kiếm";
     UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 12, textField.frame.size.height)];
@@ -509,7 +569,8 @@
     //    UIImage *image = [UIImage imageNamed:@"menu_n.png"];
     menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [menuBtn setTitle:@"HCM" forState:UIControlStateNormal];
-    menuBtn.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+    //    menuBtn.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+    menuBtn.titleLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:12];
     menuBtn.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     menuBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
     menuBtn.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
@@ -528,7 +589,7 @@
     [customButton addTarget:self action:@selector(shoppingCart) forControlEvents:UIControlEventTouchUpInside];
     // Customize your button as you want, with an image if you have a pictogram to display for example
     [customButton setImage:[UIImage imageNamed:@"icon_cart.png"] forState:UIControlStateNormal];
-//    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithCustomView:customButton];
+    //    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithCustomView:customButton];
     barButton = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:customButton];
     barButton.badgeOriginX = 25;
     barButton.badgeOriginY = -5;
@@ -537,7 +598,7 @@
         iBadge += item.iCurrentQuantity;
     }
     barButton.badgeValue = F(@"%d",iBadge);
-//    self.navigationItem.rightBarButtonItem = barButton;
+    //    self.navigationItem.rightBarButtonItem = barButton;
     
     
     UIButton *customButton2 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
@@ -546,11 +607,11 @@
     // Customize your button as you want, with an image if you have a pictogram to display for example
     [customButton2 setImage:[UIImage imageNamed:@"icon_location"] forState:UIControlStateNormal];
     UIBarButtonItem *rightButton2 = [[UIBarButtonItem alloc]initWithCustomView:customButton2];
-
+    
     
     NSArray *myButtonArray = [[NSArray alloc] initWithObjects:barButton,rightButton2,nil];
     [self.navigationItem setRightBarButtonItems:myButtonArray];
-//    self.navigationItem.rightBarButtonItem = rightButton;
+    //    self.navigationItem.rightBarButtonItem = rightButton;
     
 }
 -(void)mapAction
@@ -717,7 +778,7 @@
         //        [cell.imgLogo sd_setImageWithURL:[NSURL URLWithString:@"http://dev.hotdeal.vn/index.php?dispatch=products.image_mapi&product_id=288045&size=250x250"] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
         float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
         cell.lblPercentage.text = F(@"%.0f%%", calculatePercent);
-//        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(82, 37, 120, 26) andStars:5 isFractional:YES];
+        //        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(82, 37, 120, 26) andStars:5 isFractional:YES];
         NSArray * arrSupView = [cell.contentView subviews];
         for (UIView * vItem in arrSupView) {
             if ([vItem isKindOfClass:[DLStarRatingControl class]]) {
@@ -741,8 +802,8 @@
         strStardarPrice = [strStardarPrice formatStringToDecimal];
         NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
         NSMutableAttributedString *attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
-        [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Helvetica" size:10]
-                                          , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strStardarPrice length], 1)];
+        [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Roboto-Regular" size:10]
+                                           , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strStardarPrice length], 1)];
         
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         cell.lblStandarPrice.attributedText = attributedString2;
@@ -752,9 +813,9 @@
         
         NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
         strDiscountPrice = [strDiscountPrice formatStringToDecimal];
-//        strDiscountPrice = F(@"%@đ", strDiscountPrice);
+        //        strDiscountPrice = F(@"%@đ", strDiscountPrice);
         attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strDiscountPrice) attributes:nil];
-        [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Helvetica" size:10]
+        [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Roboto-Regular" size:10]
                                            , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strDiscountPrice length], 1)];
         
         cell.lblDiscountPrice.attributedText = attributedString2;
@@ -778,7 +839,8 @@
         UIView * vHead = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
         UILabel *lblDeal = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth/2-80, 25, 140, 20)];
         lblDeal.text = @"DEAL TỔNG HỢP";
-        lblDeal.font = [UIFont boldSystemFontOfSize:15];
+        //        lblDeal.font = [UIFont boldSystemFontOfSize:15];
+        lblDeal.font = [UIFont fontWithName:@"Roboto-Regular" size:15];
         lblDeal.textAlignment = NSTextAlignmentCenter;
         lblDeal.textColor = [UIColor blackColor];
         [vHead addSubview:lblDeal];
@@ -898,20 +960,25 @@
     if ([self isInternetReachable]) {
         if (indexPath.section == 4) {
             [tableView deselectRowAtIndexPath:indexPath animated:NO];
-//            if (indexPath.row == 0) {
-//                DetailHasProductViewController * detail = [[DetailHasProductViewController alloc]init];
-//                DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
-//                detail.iProductID = dealObj.product_id;
-//                [self.navigationController pushViewController:detail animated:YES];
-//                
-//            }
-//            else
-//            {
-                DetailViewController * detail = [[DetailViewController alloc]init];
-                DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
-                detail.iProductID = dealObj.product_id;
-                [self.navigationController pushViewController:detail animated:YES];
-//            }
+            //            if (indexPath.row == 0) {
+            //                DetailHasProductViewController * detail = [[DetailHasProductViewController alloc]init];
+            //                DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
+            //                detail.iProductID = dealObj.product_id;
+            //                [self.navigationController pushViewController:detail animated:YES];
+            //
+            //            }
+            //            else
+            //            {
+            DetailViewController * detail = [[DetailViewController alloc]init];
+            DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
+            detail.iProductID = dealObj.product_id;
+            if (dealObj.product_id == 0 || [dealObj.strTitle isEqualToString:@""]) {
+                ALERT(LS(@"MessageBoxTitle"), @"Lỗi dữ liệu");
+                return;
+            }
+            UA_log(@"%ld --- %ld--- %@ --- %d dealObj.product_id %d", dealObj.lStandarPrice, dealObj.lDiscountPrice, dealObj.strTitle, dealObj.buy_number, dealObj.product_id);
+            [self.navigationController pushViewController:detail animated:YES];
+            //            }
         }
     }
     else
@@ -1138,7 +1205,8 @@
     [btnHCM setTitle:@"TP HỒ CHÍ MINH" forState:UIControlStateNormal];
     [btnHCM addTarget:self action:@selector(provinceSelect:) forControlEvents:UIControlEventTouchUpInside];
     btnHCM.frame = CGRectMake(10, 15, ScreenWidth/3 - 20, 30);
-    [btnHCM.titleLabel setFont:[UIFont systemFontOfSize:10]];
+    //    [btnHCM.titleLabel setFont:[UIFont systemFontOfSize:10]];
+    btnHCM.titleLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:10];
     btnHCM.layer.cornerRadius = 3;
     btnHCM.layer.masksToBounds = YES;
     if (iMenuselected == 0) {
@@ -1156,7 +1224,9 @@
     [btnHN setTitle:@"HÀ NỘI" forState:UIControlStateNormal];
     [btnHN addTarget:self action:@selector(provinceSelect:) forControlEvents:UIControlEventTouchUpInside];
     btnHN.frame = CGRectMake(ScreenWidth/3 - 15 + 25, 15, ScreenWidth/3 - 20, 30);
-    [btnHN.titleLabel setFont:[UIFont systemFontOfSize:10]];
+    //    [btnHN.titleLabel setFont:[UIFont systemFontOfSize:10]];
+    
+    btnHN.titleLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:10];
     btnHN.layer.cornerRadius = 3;
     btnHN.layer.masksToBounds = YES;
     if (iMenuselected == 1) {
@@ -1176,7 +1246,8 @@
     [btnOther setTitle:@"KHÁC" forState:UIControlStateNormal];
     [btnOther addTarget:self action:@selector(provinceSelect:) forControlEvents:UIControlEventTouchUpInside];
     btnOther.frame = CGRectMake((ScreenWidth/3 - 15 + 20)*2, 15, ScreenWidth/3 - 20, 30);
-    [btnOther.titleLabel setFont:[UIFont systemFontOfSize:10]];
+    //    [btnOther.titleLabel setFont:[UIFont systemFontOfSize:10]];
+    btnOther.titleLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:10];
     btnOther.layer.cornerRadius = 3;
     btnOther.layer.masksToBounds = YES;
     if (iMenuselected == 2) {

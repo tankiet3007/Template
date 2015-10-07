@@ -129,7 +129,8 @@
 //    [appdelegate initNavigationbar:self withTitle:strTitle];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero] ;
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont boldSystemFontOfSize:20.0];
+//    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.font = [UIFont fontWithName:@"Roboto-Bold" size:20];
     label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
     label.textAlignment = NSTextAlignmentCenter;
     // ^-Use UITextAlignmentCenter for older SDKs.

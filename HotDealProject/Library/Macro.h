@@ -7,6 +7,7 @@
 //
 #ifndef HeoBay_Macro_h
 #define HeoBay_Macro_h
+#define FLAG_EMPTY_PARAMETER 0
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))

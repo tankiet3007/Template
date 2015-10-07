@@ -127,32 +127,48 @@
             DealObject * item = [[DealObject alloc]init];
             if ([dictItem objectForKey:@"title"] == [NSNull null]) {
                 item.strTitle = @"";
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
                 item.strTitle = [dictItem objectForKey:@"title"];
             }
-
-            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            
+            if ([dictItem objectForKey:@"product_id"] == [NSNull null]) {
+                item.product_id = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
+            }
+            else
+            {
+                item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            }
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
             if ([dictItem objectForKey:@"price"] == [NSNull null]) {
                 item.lDiscountPrice = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
                 item.lDiscountPrice = [[dictItem objectForKey:@"price"]doubleValue];
+                
             }
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
             item.iType = [[dictItem objectForKey:@"type"]intValue];
             [arrDeals addObject:item];
-
+            
         }
         UA_log(@"%lu item", [arrDeals count]);
         //        [tableViewSearch reloadData];
         [self initUITableView];
-//        [self initTableViewForSort];
+        //        [self initTableViewForSort];
     }];
     
 }//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -466,7 +482,7 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CategoryCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
-       
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.btnName.titleLabel.numberOfLines = 2;
         cell.btnName.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -477,12 +493,12 @@
         if ([indexPath isEqual:lastIndexPathMenu1]) {
             [cell.btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [cell.btnName setBackgroundColor:[UIColor colorWithHex:@"#6AB917" alpha:1]];
-//            [self lastIndexSelect:indexPath];
-//            [[tableView delegate]tableView:tableView didSelectRowAtIndexPath:indexPath];
+            //            [self lastIndexSelect:indexPath];
+            //            [[tableView delegate]tableView:tableView didSelectRowAtIndexPath:indexPath];
         }
         [cell.btnName setTitle:item.strName forState:UIControlStateNormal];
-//        cell.btnName.layer.cornerRadius = 3;
-//        cell.btnName.layer.masksToBounds = YES;
+        //        cell.btnName.layer.cornerRadius = 3;
+        //        cell.btnName.layer.masksToBounds = YES;
         cell.btnName.tag = indexPath.row;
         
         
@@ -602,16 +618,31 @@
             DealObject * item = [[DealObject alloc]init];
             if ([dictItem objectForKey:@"title"] == [NSNull null]) {
                 item.strTitle = @"";
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
                 item.strTitle = [dictItem objectForKey:@"title"];
             }
-
-            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            
+            if ([dictItem objectForKey:@"product_id"] == [NSNull null]) {
+                item.product_id = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
+            }
+            else
+            {
+                item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            }
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
             if ([dictItem objectForKey:@"price"] == [NSNull null]) {
                 item.lDiscountPrice = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
@@ -622,7 +653,7 @@
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
             item.iType = [[dictItem objectForKey:@"type"]intValue];
             [arrDeals addObject:item];
-
+            
         }
         
         [tableviewCategory reloadData];
@@ -753,7 +784,7 @@
         isShowSortMenu2 = YES;
         [self setDimView:YES];
         [self initTableViewForSort];
-//        [self showFilterMenu];only show
+        //        [self showFilterMenu];only show
         if (lastIndexPathMenu1_1 != nil) {
             [self lastIndexSelect:lastIndexPathMenu1];
         }
@@ -928,7 +959,7 @@
 {
     [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    tableViewSubCategory.hidden = YES;
+    //    tableViewSubCategory.hidden = YES;
     viewBackground.hidden = YES;
     isShowSortMenu3 = YES;
     [UIView animateWithDuration:0
@@ -966,7 +997,7 @@
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(110, 41, 2*ScreenWidth/3, iMenuRow1*CellHeight1 + 30) collectionViewLayout:flowLayout];
         [btnKind setTitleColor:[UIColor colorWithHex:@"#6AB917" alpha:1] forState:UIControlStateNormal];
     }
-
+    
     if (iIndexMenu == 3)    {
         [btnFilter setTitleColor:[UIColor colorWithHex:@"#6AB917" alpha:1] forState:UIControlStateNormal];
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight2) collectionViewLayout:flowLayout];
@@ -983,7 +1014,7 @@
                          if (iIndexMenu == 1) {
                              collectionView.frame = CGRectMake(110, 5, 2*ScreenWidth/3, iMenuRow1*CellHeight1 + 30 +20);
                          }
-                        if(iIndexMenu == 3)
+                         if(iIndexMenu == 3)
                          {
                              collectionView.frame = CGRectMake(0, 41, ScreenWidth, iMenuRow1*CollectionItemHeight2 + 30+15);
                          }
@@ -1040,17 +1071,17 @@
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
     [[collectionView delegate] collectionView:collectionView didSelectItemAtIndexPath:indexPath];
-//    if (iIndexMenu == 1) {
-//        lastIndexPathMenu1_1 = indexPath;
-//        [btnKind setTitle:button.titleLabel.text forState:UIControlStateNormal];
-//    }
-//    if (iIndexMenu == 3) {
-//        lastIndexPathMenu3 = indexPath;
-//        [btnFilter setTitle:button.titleLabel.text forState:UIControlStateNormal];
-//    }
-//    
-//    [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //    if (iIndexMenu == 1) {
+    //        lastIndexPathMenu1_1 = indexPath;
+    //        [btnKind setTitle:button.titleLabel.text forState:UIControlStateNormal];
+    //    }
+    //    if (iIndexMenu == 3) {
+    //        lastIndexPathMenu3 = indexPath;
+    //        [btnFilter setTitle:button.titleLabel.text forState:UIControlStateNormal];
+    //    }
+    //
+    //    [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //    [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionViews cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"CustomCollectionItem";
@@ -1129,9 +1160,9 @@
     }
     else
     {
-    [[tableViewSubCategory delegate] tableView:tableViewSubCategory didSelectRowAtIndexPath:indexPath];
-    [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [[tableViewSubCategory delegate] tableView:tableViewSubCategory didSelectRowAtIndexPath:indexPath];
+        [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
 }
 

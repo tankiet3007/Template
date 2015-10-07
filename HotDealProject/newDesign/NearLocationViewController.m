@@ -70,16 +70,31 @@
             DealObject * item = [[DealObject alloc]init];
             if ([dictItem objectForKey:@"title"] == [NSNull null]) {
                 item.strTitle = @"";
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
                 item.strTitle = [dictItem objectForKey:@"title"];
             }
 
-            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            if ([dictItem objectForKey:@"product_id"] == [NSNull null]) {
+                item.product_id = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
+            }
+            else
+            {
+                item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            }
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
             if ([dictItem objectForKey:@"price"] == [NSNull null]) {
                 item.lDiscountPrice = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
@@ -344,16 +359,31 @@
             DealObject * item = [[DealObject alloc]init];
             if ([dictItem objectForKey:@"title"] == [NSNull null]) {
                 item.strTitle = @"";
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
                 item.strTitle = [dictItem objectForKey:@"title"];
             }
 
-            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            if ([dictItem objectForKey:@"product_id"] == [NSNull null]) {
+                item.product_id = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
+            }
+            else
+            {
+                item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            }
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
             if ([dictItem objectForKey:@"price"] == [NSNull null]) {
                 item.lDiscountPrice = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {

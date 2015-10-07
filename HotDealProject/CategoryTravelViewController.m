@@ -139,16 +139,31 @@
             DealObject * item = [[DealObject alloc]init];
             if ([dictItem objectForKey:@"title"] == [NSNull null]) {
                 item.strTitle = @"";
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
                 item.strTitle = [dictItem objectForKey:@"title"];
             }
-
-            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            
+            if ([dictItem objectForKey:@"product_id"] == [NSNull null]) {
+                item.product_id = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
+            }
+            else
+            {
+                item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            }
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
             if ([dictItem objectForKey:@"price"] == [NSNull null]) {
                 item.lDiscountPrice = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
@@ -159,12 +174,12 @@
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
             item.iType = [[dictItem objectForKey:@"type"]intValue];
             [arrDeals addObject:item];
-
+            
         }
         UA_log(@"%lu item", [arrDeals count]);
         //        [tableViewSearch reloadData];
         [self initUITableView];
-//        [self initTableViewForSort];
+        //        [self initTableViewForSort];
     }];
     
 }
@@ -446,7 +461,7 @@
     [btnRollUp setImage:[UIImage imageNamed:@"bt_roll"] forState:UIControlStateNormal];
     [viewBackground addSubview:btnRollUp];
     [btnRollUp addTarget:self action:@selector(dissmissMenu) forControlEvents:UIControlEventTouchUpInside];
-
+    
 }
 
 -(void)initTableViewSub2
@@ -525,7 +540,7 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CategoryCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
-         cell.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:0.3];
+        cell.backgroundColor = [UIColor colorWithHex:@"#F6F6F6" alpha:0.3];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.btnName.titleLabel.numberOfLines = 2;
         cell.btnName.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -704,16 +719,31 @@
             DealObject * item = [[DealObject alloc]init];
             if ([dictItem objectForKey:@"title"] == [NSNull null]) {
                 item.strTitle = @"";
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
                 item.strTitle = [dictItem objectForKey:@"title"];
             }
-
-            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            
+            if ([dictItem objectForKey:@"product_id"] == [NSNull null]) {
+                item.product_id = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
+            }
+            else
+            {
+                item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            }
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
             if ([dictItem objectForKey:@"price"] == [NSNull null]) {
                 item.lDiscountPrice = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
@@ -997,7 +1027,7 @@
     lblPrice.text = @"0";
     lblPrice.textAlignment = NSTextAlignmentCenter;
     lblPrice.font = [UIFont systemFontOfSize:9];
-//    [lblPrice sizeToFit];
+    //    [lblPrice sizeToFit];
     [viewPrice addSubview:lblPrice];
     
     UIView * vLine = [[UIView alloc]initWithFrame:CGRectMake(10+16, 57, 1, 15)];
@@ -1008,7 +1038,7 @@
     vLine.backgroundColor = [UIColor darkGrayColor];
     [viewPrice addSubview:vLine];
     
-     vLine = [[UIView alloc]initWithFrame:CGRectMake(10+2*range- 15+20, 57, 1, 15)];
+    vLine = [[UIView alloc]initWithFrame:CGRectMake(10+2*range- 15+20, 57, 1, 15)];
     vLine.backgroundColor = [UIColor darkGrayColor];
     [viewPrice addSubview:vLine];
     
@@ -1023,15 +1053,15 @@
     vLine = [[UIView alloc]initWithFrame:CGRectMake(10+5*range- 35+20+4, 57, 1, 15)];
     vLine.backgroundColor = [UIColor darkGrayColor];
     [viewPrice addSubview:vLine];
-
+    
     vLine = [[UIView alloc]initWithFrame:CGRectMake(10+6*range- 45+30 , 57, 1, 15)];
     vLine.backgroundColor = [UIColor darkGrayColor];
     [viewPrice addSubview:vLine];
-
+    
     
     UILabel * lblPrice1 = [[UILabel alloc]initWithFrame:CGRectMake(range, 40, 40, 20)];
     lblPrice1.text = @"500";
-//    [lblPrice1 sizeToFit];
+    //    [lblPrice1 sizeToFit];
     lblPrice1.textAlignment = NSTextAlignmentCenter;
     lblPrice1.font = [UIFont systemFontOfSize:9];
     [viewPrice addSubview:lblPrice1];
@@ -1041,12 +1071,12 @@
     lblPrice2.text = @"1.000";
     lblPrice2.font = [UIFont systemFontOfSize:9];
     lblPrice2.textAlignment = NSTextAlignmentCenter;
-//    [lblPrice2 sizeToFit];
+    //    [lblPrice2 sizeToFit];
     [viewPrice addSubview:lblPrice2];
     
     UILabel * lblPrice3 = [[UILabel alloc]initWithFrame:CGRectMake(10+3*range-15+3, 40, 40, 20)];
     lblPrice3.text = @"2.000";
-//    [lblPrice3 sizeToFit];
+    //    [lblPrice3 sizeToFit];
     lblPrice3.font = [UIFont systemFontOfSize:9];
     [viewPrice addSubview:lblPrice3];
     
@@ -1054,12 +1084,12 @@
     lblPrice4.text = @"3.000";
     lblPrice4.textAlignment = NSTextAlignmentCenter;
     lblPrice4.font = [UIFont systemFontOfSize:9];
-//    [lblPrice4 sizeToFit];
+    //    [lblPrice4 sizeToFit];
     [viewPrice addSubview:lblPrice4];
     
     UILabel * lblPrice5 = [[UILabel alloc]initWithFrame:CGRectMake(10+5*range- 35+5, 40, 40, 20)];
     lblPrice5.text = @"5.000";
-//    [lblPrice5 sizeToFit];
+    //    [lblPrice5 sizeToFit];
     lblPrice5.textAlignment = NSTextAlignmentCenter;
     lblPrice5.font = [UIFont systemFontOfSize:9];
     [viewPrice addSubview:lblPrice5];
@@ -1117,7 +1147,7 @@
     btnConvenient = [UIButton buttonWithType:UIButtonTypeSystem];
     [btnConvenient setTitle:@"TIỆN NGHI" forState:UIControlStateNormal];
     [btnConvenient addTarget:self action:@selector(convenientSelect:) forControlEvents:UIControlEventTouchUpInside];
-        btnConvenient.titleLabel.textAlignment = NSTextAlignmentCenter;
+    btnConvenient.titleLabel.textAlignment = NSTextAlignmentCenter;
     btnConvenient.frame = CGRectMake(ScreenWidth/4, 5, ScreenWidth/4 - 20, 30);
     [btnConvenient.titleLabel setFont:[UIFont boldSystemFontOfSize:9]];
     btnConvenient.titleLabel.numberOfLines = 2;
@@ -1428,17 +1458,17 @@
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
     [[collectionView delegate] collectionView:collectionView didSelectItemAtIndexPath:indexPath];
-//    if (iIndexMenu == 2) {
-//        lastIndexPathMenu2 = indexPath;
-//        [btnConvenient setTitle:button.titleLabel.text forState:UIControlStateNormal];
-//    }
-//    if (iIndexMenu == 3) {
-//        lastIndexPathMenu3 = indexPath;
-//        [btnFilter setTitle:button.titleLabel.text forState:UIControlStateNormal];
-//    }
-//    
-//    [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //    if (iIndexMenu == 2) {
+    //        lastIndexPathMenu2 = indexPath;
+    //        [btnConvenient setTitle:button.titleLabel.text forState:UIControlStateNormal];
+    //    }
+    //    if (iIndexMenu == 3) {
+    //        lastIndexPathMenu3 = indexPath;
+    //        [btnFilter setTitle:button.titleLabel.text forState:UIControlStateNormal];
+    //    }
+    //
+    //    [btnFilter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //    [btnKind setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionViews cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"CustomCollectionItem";

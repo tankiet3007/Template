@@ -109,6 +109,9 @@
 		51BDD97A1B8574030034252E /* CartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDD9791B8574030034252E /* CartViewController.m */; };
 		51BDD97E1B857C7A0034252E /* CartDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDD97C1B857C7A0034252E /* CartDealCell.m */; };
 		51BDD97F1B857C7A0034252E /* CartDealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51BDD97D1B857C7A0034252E /* CartDealCell.xib */; };
+		51BEBB681BC4B96A00601553 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 51BEBB651BC4B96A00601553 /* Roboto-Bold.ttf */; };
+		51BEBB691BC4B96A00601553 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 51BEBB661BC4B96A00601553 /* Roboto-Italic.ttf */; };
+		51BEBB6A1BC4B96A00601553 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 51BEBB671BC4B96A00601553 /* Roboto-Regular.ttf */; };
 		51C664411B82D97A00725F6E /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C6643F1B82D97A00725F6E /* SignInViewController.m */; };
 		51C664421B82D97A00725F6E /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51C664401B82D97A00725F6E /* SignInViewController.xib */; };
 		51C664461B82D9C600725F6E /* CellWithWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C664441B82D9C600725F6E /* CellWithWebView.m */; };
@@ -503,6 +506,9 @@
 		51BDD97B1B857C7A0034252E /* CartDealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CartDealCell.h; path = newDesign/Cart/CartDealCell.h; sourceTree = "<group>"; };
 		51BDD97C1B857C7A0034252E /* CartDealCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CartDealCell.m; path = newDesign/Cart/CartDealCell.m; sourceTree = "<group>"; };
 		51BDD97D1B857C7A0034252E /* CartDealCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CartDealCell.xib; path = newDesign/Cart/CartDealCell.xib; sourceTree = "<group>"; };
+		51BEBB651BC4B96A00601553 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "Font/Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		51BEBB661BC4B96A00601553 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Italic.ttf"; path = "Font/Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		51BEBB671BC4B96A00601553 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "Font/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		51C6643E1B82D97A00725F6E /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignInViewController.h; path = newDesign/SignIn_Up/SignInViewController.h; sourceTree = "<group>"; };
 		51C6643F1B82D97A00725F6E /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignInViewController.m; path = newDesign/SignIn_Up/SignInViewController.m; sourceTree = "<group>"; };
 		51C664401B82D97A00725F6E /* SignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SignInViewController.xib; path = newDesign/SignIn_Up/SignInViewController.xib; sourceTree = "<group>"; };
@@ -1173,6 +1179,16 @@
 			name = Cart;
 			sourceTree = "<group>";
 		};
+		51BEBB5B1BC4B86000601553 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				51BEBB651BC4B96A00601553 /* Roboto-Bold.ttf */,
+				51BEBB661BC4B96A00601553 /* Roboto-Italic.ttf */,
+				51BEBB671BC4B96A00601553 /* Roboto-Regular.ttf */,
+			);
+			name = Font;
+			sourceTree = "<group>";
+		};
 		51C664381B82D4F700725F6E /* SignUp+In */ = {
 			isa = PBXGroup;
 			children = (
@@ -1813,6 +1829,7 @@
 		E9AE20931AD80BE2002E11AC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				51BEBB5B1BC4B86000601553 /* Font */,
 				E9AE20941AD80BF6002E11AC /* Startup */,
 			);
 			name = Resources;
@@ -2063,6 +2080,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51BEBB681BC4B96A00601553 /* Roboto-Bold.ttf in Resources */,
+				51BEBB691BC4B96A00601553 /* Roboto-Italic.ttf in Resources */,
+				51BEBB6A1BC4B96A00601553 /* Roboto-Regular.ttf in Resources */,
 				51BAA7151B8C107400D69C19 /* ProductDetailCell.xib in Resources */,
 				E95945561ADB6A3200CDA3FF /* APLQuoteCell.xib in Resources */,
 				510215401BA67ED600726F3C /* profile-150x150.png in Resources */,

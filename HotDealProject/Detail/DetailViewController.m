@@ -209,16 +209,31 @@
             DealObject * item = [[DealObject alloc]init];
             if ([dictItem objectForKey:@"title"] == [NSNull null]) {
                 item.strTitle = @"";
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
                 item.strTitle = [dictItem objectForKey:@"title"];
             }
 
-            item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            if ([dictItem objectForKey:@"product_id"] == [NSNull null]) {
+                item.product_id = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
+            }
+            else
+            {
+                item.product_id = [[dictItem objectForKey:@"product_id"]intValue];
+            }
             item.buy_number = [[dictItem objectForKey:@"buy_number"]intValue];
             if ([dictItem objectForKey:@"price"] == [NSNull null]) {
                 item.lDiscountPrice = 0;
+                if (FLAG_EMPTY_PARAMETER) {
+                    continue;
+                }
             }
             else
             {
@@ -336,7 +351,8 @@
     btnThree.backgroundColor = [UIColor blueColor];
     [btnThree addTarget:self action:@selector(addToCart) forControlEvents:UIControlEventTouchUpInside];
     [btnThree  setImage:[UIImage imageNamed:@"icon_addtocart"] forState:UIControlStateNormal];
-    [btnThree.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
+//    [btnThree.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    btnThree.titleLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:10];
     [btnThree setTitle:@"  GIỎ HÀNG" forState:UIControlStateNormal];
     [btnThree setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [viewBottom addSubview:btnThree];
@@ -752,7 +768,7 @@
     strStardarPrice = [strStardarPrice formatStringToDecimal];
     NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
     NSMutableAttributedString *attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
-    [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Helvetica" size:10]
+    [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Roboto-Regular" size:10]
                                        , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strStardarPrice length], 1)];
     cell.lblStandarPrice.attributedText = attributedString2;
     
@@ -760,24 +776,24 @@
     NSString * strDiscountPrice = F(@"%d",  list_price);
     strDiscountPrice = [strDiscountPrice formatStringToDecimal];
     attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strDiscountPrice) attributes:nil];
-    [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Helvetica" size:10]
+    [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Roboto-Regular" size:10]
                                        , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strDiscountPrice length], 1)];
     
     cell.lblDiscountPrice.attributedText = attributedString2;
-    cell.lblDiscountPrice.font = [UIFont boldSystemFontOfSize:13];
+    cell.lblDiscountPrice.font = [UIFont fontWithName:@"Roboto-Bold" size:13];
 }
 - (void)configureWebCell:(WebDetailCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [cell.webView setDelegate:self];
     if (indexPath.row == 4) {
         cell.lblTitle.text = @"ĐIỀU KIỆN SỬ DỤNG";
-        NSString * strHTMLContain = [NSString stringWithFormat:@"<div style='text-align:justify; font-size:%@;font-family:Helvetica;color:#ffff;'>%@",@40,[dictDetail objectForKey:@"condition"] ];
+        NSString * strHTMLContain = [NSString stringWithFormat:@"<div style='text-align:justify; font-size:%@;font-family:Roboto-Regular;color:#ffff;'>%@",@40,[dictDetail objectForKey:@"condition"] ];
         [cell.webView loadHTMLString:strHTMLContain baseURL:nil];
         [cell.btnFullList addTarget:self action:@selector(seeMoreHTMLCondition) forControlEvents:UIControlEventTouchUpInside];
     }
     if (indexPath.row == 3) {
         cell.lblTitle.text = @"GIỚI THIỆU CHI TIẾT";
-        NSString * strHTMLContain = [NSString stringWithFormat:@"<div style='text-align:justify; font-size:%@;font-family:Helvetica;color:#ffff;'>%@",@40,[dictDetail objectForKey:@"detail"] ];
+        NSString * strHTMLContain = [NSString stringWithFormat:@"<div style='text-align:justify; font-size:%@;font-family:Roboto-Regular;color:#ffff;'>%@",@40,[dictDetail objectForKey:@"detail"] ];
         [cell.webView loadHTMLString:strHTMLContain baseURL:nil];
         [cell.btnFullList addTarget:self action:@selector(seeMoreHTMLDetail) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -790,7 +806,7 @@
 - (void)seeMoreHTMLCondition
 {
     WebViewController * web = [[WebViewController alloc]init];
-    NSString * strHTMLContain = [NSString stringWithFormat:@"<div style='text-align:justify; font-size:%@;font-family:Helvetica;color:#ffff;'>%@",@40,[dictDetail objectForKey:@"condition"] ];
+    NSString * strHTMLContain = [NSString stringWithFormat:@"<div style='text-align:justify; font-size:%@;font-family:Roboto-Regular;color:#ffff;'>%@",@40,[dictDetail objectForKey:@"condition"] ];
     web.sTitle = LS(@"condition");
     web.strContent = strHTMLContain;
     [self.navigationController pushViewController:web animated:YES];
@@ -798,7 +814,7 @@
 - (void)seeMoreHTMLDetail
 {
     WebViewController * web = [[WebViewController alloc]init];
-    NSString * strHTMLContain = [NSString stringWithFormat:@"<div style='text-align:justify; font-size:%@;font-family:Helvetica;color:#ffff;'>%@",@40,[dictDetail objectForKey:@"detail"] ];
+    NSString * strHTMLContain = [NSString stringWithFormat:@"<div style='text-align:justify; font-size:%@;font-family:Roboto-Regular;color:#ffff;'>%@",@40,[dictDetail objectForKey:@"detail"] ];
     web.sTitle = LS(@"feature");
     web.strContent = strHTMLContain;
     [self.navigationController pushViewController:web animated:YES];
@@ -817,7 +833,8 @@
         UIView * vHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
         UIButton * btnComment = [[UIButton alloc]initWithFrame:CGRectMake(20, 5, 300, 25)];
         [btnComment setTitle:@"XEM TẤT CẢ 28 BÌNH LUẬN" forState:UIControlStateNormal];
-        btnComment.titleLabel.font = [UIFont systemFontOfSize:15];
+//        btnComment.titleLabel.font = [UIFont systemFontOfSize:15];
+        btnComment.titleLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:15];
         [btnComment setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         btnComment.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [btnComment addTarget:self action:@selector(commentAction) forControlEvents:UIControlEventTouchUpInside];
@@ -838,7 +855,8 @@
         UIView * vHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
         UILabel * lblComment = [[UILabel alloc]initWithFrame:CGRectMake(35, 5, 150, 25)];
         lblComment.text = @"BÌNH LUẬN";
-        lblComment.font = [UIFont boldSystemFontOfSize:15];
+//        lblComment.font = [UIFont boldSystemFontOfSize:15];
+        lblComment.font = [UIFont fontWithName:@"Roboto-Bold" size:15];
         lblComment.textColor = [UIColor blackColor];
         [vHeader addSubview:lblComment];
         UIImageView * imv = [[UIImageView alloc]initWithFrame:CGRectMake(7, 8, 15, 15)];
@@ -854,7 +872,8 @@
         UIView * vHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
         UILabel * lblComment = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, 150, 25)];
         lblComment.text = @"DEAL LIÊN QUAN";
-        lblComment.font = [UIFont boldSystemFontOfSize:15];
+//        lblComment.font = [UIFont boldSystemFontOfSize:15];
+        lblComment.font = [UIFont fontWithName:@"Roboto-Bold" size:15];
         lblComment.textColor = [UIColor blackColor];
         [vHeader addSubview:lblComment];
         
