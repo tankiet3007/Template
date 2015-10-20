@@ -704,7 +704,7 @@
         [scrollView removeFromSuperview];
         scrollView = nil;
     }
-    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 40, ScreenWidth, 180)];
+    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 40, ScreenWidth, 225)];
     scrollView.backgroundColor = [UIColor clearColor];
     scrollView.showsHorizontalScrollIndicator = NO;
     //    [scrollView setBounces:NO];
@@ -712,7 +712,7 @@
     int x = 0;
     for (int i = 0; i < [arrDealRelateds count]; i++) {
         DealItem *itemS = [[[NSBundle mainBundle] loadNibNamed:@"DealItem" owner:self options:nil] objectAtIndex:0];
-        [itemS setFrame:CGRectMake(x, 0, 250, 180)];
+        [itemS setFrame:CGRectMake(x, 0, 250, 225)];
         [itemS.btnTemp addTarget:self action:@selector(clickOnItem:) forControlEvents:UIControlEventTouchUpInside];
         itemS.btnTemp.tag = i;
         //        itemS.backgroundColor = [UIColor greenColor];
@@ -731,15 +731,6 @@
         strDiscountPrice = F(@"%@đ", strDiscountPrice);
         itemS.lblDiscountPrice.text = strDiscountPrice;
         itemS.lblTitle.text = item.strTitle;
-        
-        if (item.isNew == FALSE) {
-            itemS.lblNew.hidden = YES;
-        }
-        if (item.iKind == 1) {
-            itemS.lblEVoucher.hidden = YES;
-        }
-        
-        
         x += itemS.frame.size.width + PADDING;
         [scrollView addSubview:itemS];
     }

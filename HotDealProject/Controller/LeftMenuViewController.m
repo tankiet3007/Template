@@ -138,7 +138,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         if (savedValue != nil) {
             iIndexLocation = [savedValue integerValue];
         }
-        NSArray * arrLocation = [NSArray arrayWithObjects:@"Hà Nội",@"Hồ Chí Minh", nil];
+        NSArray * arrLocation = [NSArray arrayWithObjects:@"Hà Nội",@"Hồ Chí Minh",@"Tỉnh thành khác", nil];
         NSString * location = [arrLocation objectAtIndex:iIndexLocation];
         arrMenu = [[NSMutableArray alloc]init];
         MenuItem * menuItem = [[MenuItem alloc]init];

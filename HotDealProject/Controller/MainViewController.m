@@ -498,7 +498,7 @@
         [scrollViewNew removeFromSuperview];
         scrollViewNew = nil;
     }
-    scrollViewNew = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 210)];
+    scrollViewNew = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 230)];
     scrollViewNew.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.3];
     scrollViewNew.showsHorizontalScrollIndicator = NO;
     //    [scrollView setBounces:NO];
@@ -506,7 +506,7 @@
     int x = 10;
     for (int i = 0; i < [arrDeals count]; i++) {
         DealItem *itemS = [[[NSBundle mainBundle] loadNibNamed:@"DealItem" owner:self options:nil] objectAtIndex:0];
-        [itemS setFrame:CGRectMake(x, 0, 100, 200)];
+        [itemS setFrame:CGRectMake(x, 0, 125, 225)];
         [itemS.btnTemp addTarget:self action:@selector(clickOnItem:) forControlEvents:UIControlEventTouchUpInside];
         itemS.btnTemp.tag = i;
         //        itemS.backgroundColor = [UIColor greenColor];
@@ -525,6 +525,18 @@
         strDiscountPrice = F(@"%@đ", strDiscountPrice);
         itemS.lblDiscountPrice.text = strDiscountPrice;
         itemS.lblTitle.text = item.strTitle;
+        float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
+        itemS.lblPercentage.text = F(@"%.0f%%", calculatePercent);
+        
+        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(0, 160, 90, 26)];
+        if (IS_IPHONE_6_PLUS || IS_IPHONE_6_PLUS_) {
+            [starRating setFrame:CGRectMake(0, 160, 90, 26)];
+        }
+        starRating.backgroundColor = [UIColor clearColor];
+        starRating.rating = 3.5;
+        starRating.isFractionalRatingEnabled = YES;
+        starRating.userInteractionEnabled = NO;
+        [itemS addSubview:starRating];
         if (i % 3 == 0) {
             [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/714/151493-BUFFET-NHAT-SLIDE-_(1).jpg"] placeholderImage:nil];
         }
@@ -547,7 +559,7 @@
         [scrollViewHot removeFromSuperview];
         scrollViewHot = nil;
     }
-    scrollViewHot = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 210)];
+    scrollViewHot = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 230)];
     scrollViewHot.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.3];
     scrollViewHot.showsHorizontalScrollIndicator = NO;
     //    [scrollView setBounces:NO];
@@ -555,7 +567,7 @@
     int x = 10;
     for (int i = 0; i < [arrDeals count]; i++) {
         DealItem *itemS = [[[NSBundle mainBundle] loadNibNamed:@"DealItem" owner:self options:nil] objectAtIndex:0];
-        [itemS setFrame:CGRectMake(x, 0, 100, 200)];
+        [itemS setFrame:CGRectMake(x, 0, 125, 225)];
         [itemS.btnTemp addTarget:self action:@selector(clickOnItem:) forControlEvents:UIControlEventTouchUpInside];
         itemS.btnTemp.tag = i;
         //        itemS.backgroundColor = [UIColor greenColor];
@@ -574,6 +586,18 @@
         strDiscountPrice = F(@"%@đ", strDiscountPrice);
         itemS.lblDiscountPrice.text = strDiscountPrice;
         itemS.lblTitle.text = item.strTitle;
+        float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
+        itemS.lblPercentage.text = F(@"%.0f%%", calculatePercent);
+        
+        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(0, 160, 90, 26)];
+        if (IS_IPHONE_6_PLUS || IS_IPHONE_6_PLUS_) {
+            [starRating setFrame:CGRectMake(0, 160, 90, 26)];
+        }
+        starRating.backgroundColor = [UIColor clearColor];
+        starRating.rating = 3.5;
+        starRating.isFractionalRatingEnabled = YES;
+        starRating.userInteractionEnabled = NO;
+        [itemS addSubview:starRating];
         if (i % 3 == 0) {
             [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/714/151493-BUFFET-NHAT-SLIDE-_(1).jpg"] placeholderImage:nil];
         }
@@ -799,7 +823,7 @@
         return 130;
     }
     if (indexPath.section == 3 ||indexPath.section == 4) {
-        return 210;
+        return 230;
     }
     return 50;
 }
@@ -1039,27 +1063,42 @@
 {
     if (section == 3) {
         UIView * vHead = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
-        UILabel *lblDeal = [[UILabel alloc]initWithFrame:CGRectMake(10, 25, 140, 20)];
+        UILabel *lblDeal = [[UILabel alloc]initWithFrame:CGRectMake(10, 15, 140, 20)];
         lblDeal.text = @"DEAL HOT";
         lblDeal.font = [UIFont fontWithName:@"Roboto-Regular" size:15];
         lblDeal.textAlignment = NSTextAlignmentLeft;
         lblDeal.textColor = [UIColor blackColor];
         [vHead addSubview:lblDeal];
-        
         vHead.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.3];
+        
+        UIView * vLine = [[UIView alloc]initWithFrame:CGRectMake(10, 35, 70, 4)];
+        vLine.backgroundColor = [UIColor redColor];
+        [vHead addSubview:vLine];
+        
+        UIView * vLine2 = [[UIView alloc]initWithFrame:CGRectMake(10, 38, ScreenWidth - 20, 1)];
+        vLine2.backgroundColor = [UIColor lightGrayColor];
+        [vHead addSubview:vLine2];
+        
         return vHead;
     }
     if (section == 4)
     {
         UIView * vHead = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
-        UILabel *lblDeal = [[UILabel alloc]initWithFrame:CGRectMake(10, 25, 140, 20)];
+        UILabel *lblDeal = [[UILabel alloc]initWithFrame:CGRectMake(10, 15, 140, 20)];
         lblDeal.text = @"DEAL MỚI NHẤT";
         lblDeal.font = [UIFont fontWithName:@"Roboto-Regular" size:15];
         lblDeal.textAlignment = NSTextAlignmentLeft;
         lblDeal.textColor = [UIColor blackColor];
         [vHead addSubview:lblDeal];
-        
         vHead.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.3];
+        UIView * vLine = [[UIView alloc]initWithFrame:CGRectMake(10, 35, 110, 4)];
+        vLine.backgroundColor = [UIColor redColor];
+        [vHead addSubview:vLine];
+        
+        UIView * vLine2 = [[UIView alloc]initWithFrame:CGRectMake(10, 38, ScreenWidth - 20, 1)];
+        vLine2.backgroundColor = [UIColor lightGrayColor];
+        [vHead addSubview:vLine2];
+
         return vHead;
     }
     return nil;
