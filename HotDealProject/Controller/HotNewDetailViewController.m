@@ -184,7 +184,8 @@
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
-            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            item.iKind = [[dictItem objectForKey:@"product_kind"]intValue];
+            item.strType = [dictItem objectForKey:@"type"];
             [arrDealRelateds addObject:item];
             
         }
@@ -573,7 +574,7 @@
             }
             else
             {
-                if (dealObj.iType == 0) {
+                if (dealObj.iKind == 0) {
                     if (iSelectedItem == 0) {
                         cell.lblNumofVoucher.text = @"Chọn số lượng";
                     }
@@ -734,7 +735,7 @@
         if (item.isNew == FALSE) {
             itemS.lblNew.hidden = YES;
         }
-        if (item.iType == 1) {
+        if (item.iKind == 1) {
             itemS.lblEVoucher.hidden = YES;
         }
         

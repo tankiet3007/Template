@@ -114,7 +114,8 @@
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
-            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            item.iKind = [[dictItem objectForKey:@"product_kind"]intValue];
+            item.strType = [dictItem objectForKey:@"type"];
             [arrDealRelateds addObject:item];
 
         }

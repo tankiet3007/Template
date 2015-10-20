@@ -148,7 +148,8 @@
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
-            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            item.iKind = [[dictItem objectForKey:@"product_kind"]intValue];
+            item.strType = [dictItem objectForKey:@"type"];
             [arrDeals addObject:item];
             
         }
@@ -483,7 +484,7 @@
     cell.lblPercentage.text = F(@"%.0f%%", calculatePercent);
     DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(100, 41, 100, 26)];
     if (IS_IPHONE_6_PLUS) {
-        [starRating setFrame:CGRectMake(115, 41, 100, 26)];
+        [starRating setFrame:CGRectMake(92, 41, 100, 26)];
     }
     starRating.tag = indexPath.row +101;
     starRating.backgroundColor = [UIColor clearColor];
@@ -584,7 +585,8 @@
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
-            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            item.iKind = [[dictItem objectForKey:@"product_kind"]intValue];
+            item.strType = [dictItem objectForKey:@"type"];
             [arrDeals addObject:item];
             
         }

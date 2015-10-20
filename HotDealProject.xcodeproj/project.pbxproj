@@ -35,6 +35,13 @@
 		51249B9D1B7489E8007B9623 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51249B9B1B7489E8007B9623 /* CategoryCell.xib */; };
 		513609141B8D9CA600F0CC08 /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 513609121B8D9CA600F0CC08 /* CommentHeaderView.m */; };
 		513609151B8D9CA600F0CC08 /* CommentHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 513609131B8D9CA600F0CC08 /* CommentHeaderView.xib */; };
+		5144772E1BD5DD4B005C3C57 /* StartAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144772C1BD5DD4B005C3C57 /* StartAnimationViewController.m */; settings = {ASSET_TAGS = (); }; };
+		5144772F1BD5DD4B005C3C57 /* StartAnimationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5144772D1BD5DD4B005C3C57 /* StartAnimationViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		514477311BD5E8C7005C3C57 /* LogoHD.png in Resources */ = {isa = PBXBuildFile; fileRef = 514477301BD5E8C7005C3C57 /* LogoHD.png */; settings = {ASSET_TAGS = (); }; };
+		51490F0C1BD4920600EC8466 /* FLAnimatedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 51490F081BD4920600EC8466 /* FLAnimatedImage.m */; settings = {ASSET_TAGS = (); }; };
+		51490F0D1BD4920600EC8466 /* FLAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51490F0A1BD4920600EC8466 /* FLAnimatedImageView.m */; settings = {ASSET_TAGS = (); }; };
+		51490F0E1BD4920600EC8466 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51490F0B1BD4920600EC8466 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
+		51490F111BD4F90200EC8466 /* GiFHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 51490F101BD4F90200EC8466 /* GiFHUD.m */; settings = {ASSET_TAGS = (); }; };
 		51497B951B8C568B00F25DD1 /* CommentRatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51497B941B8C568B00F25DD1 /* CommentRatingViewController.m */; };
 		5149F8421B85AE8400D780A0 /* CartTravelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5149F8401B85AE8400D780A0 /* CartTravelCell.m */; };
 		5149F8431B85AE8400D780A0 /* CartTravelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5149F8411B85AE8400D780A0 /* CartTravelCell.xib */; };
@@ -122,6 +129,7 @@
 		51CB0E401B830CCE000E7DAF /* SignUpTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51CB0E3E1B830CCE000E7DAF /* SignUpTableViewController.xib */; };
 		51CB0E441B832B1D000E7DAF /* InfomationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51CB0E421B832B1D000E7DAF /* InfomationCell.m */; };
 		51CB0E451B832B1D000E7DAF /* InfomationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51CB0E431B832B1D000E7DAF /* InfomationCell.xib */; };
+		51CD0CA81BC51AF6000D4828 /* DetailTravelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51CD0CA71BC51AF6000D4828 /* DetailTravelViewController.m */; settings = {ASSET_TAGS = (); }; };
 		51D1BA1D1B81842200359B6B /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D1BA1C1B81842200359B6B /* PaymentInfoViewController.m */; };
 		51D1BA261B81853600359B6B /* PaymentInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D1BA241B81853600359B6B /* PaymentInfoCell.m */; };
 		51D1BA271B81853600359B6B /* PaymentInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51D1BA251B81853600359B6B /* PaymentInfoCell.xib */; };
@@ -388,6 +396,17 @@
 		513609111B8D9CA600F0CC08 /* CommentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentHeaderView.h; path = newDesign/CommentHeaderView.h; sourceTree = "<group>"; };
 		513609121B8D9CA600F0CC08 /* CommentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentHeaderView.m; path = newDesign/CommentHeaderView.m; sourceTree = "<group>"; };
 		513609131B8D9CA600F0CC08 /* CommentHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentHeaderView.xib; path = newDesign/CommentHeaderView.xib; sourceTree = "<group>"; };
+		5144772B1BD5DD4B005C3C57 /* StartAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartAnimationViewController.h; path = FLAnimatedImage/StartAnimationViewController.h; sourceTree = "<group>"; };
+		5144772C1BD5DD4B005C3C57 /* StartAnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartAnimationViewController.m; path = FLAnimatedImage/StartAnimationViewController.m; sourceTree = "<group>"; };
+		5144772D1BD5DD4B005C3C57 /* StartAnimationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StartAnimationViewController.xib; path = FLAnimatedImage/StartAnimationViewController.xib; sourceTree = "<group>"; };
+		514477301BD5E8C7005C3C57 /* LogoHD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoHD.png; sourceTree = "<group>"; };
+		51490F071BD4920600EC8466 /* FLAnimatedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAnimatedImage.h; sourceTree = "<group>"; };
+		51490F081BD4920600EC8466 /* FLAnimatedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImage.m; sourceTree = "<group>"; };
+		51490F091BD4920600EC8466 /* FLAnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAnimatedImageView.h; sourceTree = "<group>"; };
+		51490F0A1BD4920600EC8466 /* FLAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImageView.m; sourceTree = "<group>"; };
+		51490F0B1BD4920600EC8466 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51490F0F1BD4F90200EC8466 /* GiFHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiFHUD.h; sourceTree = "<group>"; };
+		51490F101BD4F90200EC8466 /* GiFHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiFHUD.m; sourceTree = "<group>"; };
 		51497B931B8C568B00F25DD1 /* CommentRatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentRatingViewController.h; path = Detail/CommentRatingViewController.h; sourceTree = "<group>"; };
 		51497B941B8C568B00F25DD1 /* CommentRatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentRatingViewController.m; path = Detail/CommentRatingViewController.m; sourceTree = "<group>"; };
 		5149F83F1B85AE8400D780A0 /* CartTravelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CartTravelCell.h; path = newDesign/Cart/CartTravelCell.h; sourceTree = "<group>"; };
@@ -525,6 +544,8 @@
 		51CB0E411B832B1D000E7DAF /* InfomationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfomationCell.h; path = newDesign/SignIn_Up/InfomationCell.h; sourceTree = "<group>"; };
 		51CB0E421B832B1D000E7DAF /* InfomationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfomationCell.m; path = newDesign/SignIn_Up/InfomationCell.m; sourceTree = "<group>"; };
 		51CB0E431B832B1D000E7DAF /* InfomationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfomationCell.xib; path = newDesign/SignIn_Up/InfomationCell.xib; sourceTree = "<group>"; };
+		51CD0CA61BC51AF6000D4828 /* DetailTravelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailTravelViewController.h; path = Detail/DetailTravelViewController.h; sourceTree = "<group>"; };
+		51CD0CA71BC51AF6000D4828 /* DetailTravelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailTravelViewController.m; path = Detail/DetailTravelViewController.m; sourceTree = "<group>"; };
 		51D1BA1B1B81842200359B6B /* PaymentInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaymentInfoViewController.h; path = newDesign/PaymentInfo/PaymentInfoViewController.h; sourceTree = "<group>"; };
 		51D1BA1C1B81842200359B6B /* PaymentInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaymentInfoViewController.m; path = newDesign/PaymentInfo/PaymentInfoViewController.m; sourceTree = "<group>"; };
 		51D1BA231B81853600359B6B /* PaymentInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaymentInfoCell.h; path = newDesign/PaymentInfo/PaymentInfoCell.h; sourceTree = "<group>"; };
@@ -1020,6 +1041,20 @@
 			path = Library/Yahoo/YOSSocial;
 			sourceTree = "<group>";
 		};
+		51490F061BD4920600EC8466 /* FLAnimatedImage */ = {
+			isa = PBXGroup;
+			children = (
+				51490F0F1BD4F90200EC8466 /* GiFHUD.h */,
+				51490F101BD4F90200EC8466 /* GiFHUD.m */,
+				51490F071BD4920600EC8466 /* FLAnimatedImage.h */,
+				51490F081BD4920600EC8466 /* FLAnimatedImage.m */,
+				51490F091BD4920600EC8466 /* FLAnimatedImageView.h */,
+				51490F0A1BD4920600EC8466 /* FLAnimatedImageView.m */,
+				51490F0B1BD4920600EC8466 /* Info.plist */,
+			);
+			path = FLAnimatedImage;
+			sourceTree = "<group>";
+		};
 		515392A21B86DB92004A495B /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1048,6 +1083,8 @@
 				51BAA7111B8C107400D69C19 /* ProductDetailCell.h */,
 				51BAA7121B8C107400D69C19 /* ProductDetailCell.m */,
 				51BAA7131B8C107400D69C19 /* ProductDetailCell.xib */,
+				51CD0CA61BC51AF6000D4828 /* DetailTravelViewController.h */,
+				51CD0CA71BC51AF6000D4828 /* DetailTravelViewController.m */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -1829,6 +1866,7 @@
 		E9AE20931AD80BE2002E11AC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				51490F061BD4920600EC8466 /* FLAnimatedImage */,
 				51BEBB5B1BC4B86000601553 /* Font */,
 				E9AE20941AD80BF6002E11AC /* Startup */,
 			);
@@ -1838,9 +1876,13 @@
 		E9AE20941AD80BF6002E11AC /* Startup */ = {
 			isa = PBXGroup;
 			children = (
+				514477301BD5E8C7005C3C57 /* LogoHD.png */,
 				E98FCF411AD8CBBC00992BF0 /* Macro.h */,
 				E9D3BD791AD6BA5400F7429B /* Images.xcassets */,
 				E9D3BD7B1AD6BA5400F7429B /* LaunchScreen.xib */,
+				5144772B1BD5DD4B005C3C57 /* StartAnimationViewController.h */,
+				5144772C1BD5DD4B005C3C57 /* StartAnimationViewController.m */,
+				5144772D1BD5DD4B005C3C57 /* StartAnimationViewController.xib */,
 			);
 			name = Startup;
 			sourceTree = "<group>";
@@ -2102,6 +2144,7 @@
 				E9BAB7801AE8D8E9009BC234 /* ProductInfoStoredCell.xib in Resources */,
 				5182A89A1B32BBE800A271E7 /* GooglePlus.bundle in Resources */,
 				51CB0E401B830CCE000E7DAF /* SignUpTableViewController.xib in Resources */,
+				51490F0E1BD4920600EC8466 /* Info.plist in Resources */,
 				51A9DEA61BB3B02B00F2ACAD /* MenuFooter.xib in Resources */,
 				5170252F1B81CC71001B54D8 /* ScrollableCell.xib in Resources */,
 				E9C049F41AE0F9360017C5CE /* DealCell.xib in Resources */,
@@ -2113,6 +2156,7 @@
 				518C09941B8D71B20067331C /* SNPicker.storyboard in Resources */,
 				51BDD97F1B857C7A0034252E /* CartDealCell.xib in Resources */,
 				E9F3AB911B00A03F00A91D9C /* Localizable.strings in Resources */,
+				5144772F1BD5DD4B005C3C57 /* StartAnimationViewController.xib in Resources */,
 				518C098C1B8D71B20067331C /* check.png in Resources */,
 				5149F8431B85AE8400D780A0 /* CartTravelCell.xib in Resources */,
 				519BBD491B7069EC0057DE73 /* CustomCollectionItem.xib in Resources */,
@@ -2126,6 +2170,7 @@
 				51D1BA271B81853600359B6B /* PaymentInfoCell.xib in Resources */,
 				E95945511ADB661F00CDA3FF /* carat.png in Resources */,
 				518918F51B687A2E0026727B /* SearchSupplierViewController.xib in Resources */,
+				514477311BD5E8C7005C3C57 /* LogoHD.png in Resources */,
 				514B87081B8AEF6700219DA7 /* CommentDetailCell.xib in Resources */,
 				51C664421B82D97A00725F6E /* SignInViewController.xib in Resources */,
 				E9B24BDA1AF85C6000322C0F /* PayItemTableViewCell.xib in Resources */,
@@ -2205,6 +2250,7 @@
 				E9F179A81AE79D0A004D743E /* ProductListViewController.m in Sources */,
 				E98FCF3B1AD8CA9100992BF0 /* BasicMapAnnotation.m in Sources */,
 				E9239A4B1AF7496B00CC4977 /* ChangePasswordViewController.m in Sources */,
+				51490F0D1BD4920600EC8466 /* FLAnimatedImageView.m in Sources */,
 				E959455F1ADB7F9900CDA3FF /* PromotionViewController.m in Sources */,
 				E9C049FD1AE143B80017C5CE /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				E9D9B5A31B2023B0002C8E92 /* PaymentMethod.m in Sources */,
@@ -2243,6 +2289,7 @@
 				51D1BA261B81853600359B6B /* PaymentInfoCell.m in Sources */,
 				E9F179AC1AE7A195004D743E /* ShortDealInfoCell.m in Sources */,
 				518B08031B842CD500E0812B /* IQActionSheetViewController.m in Sources */,
+				5144772E1BD5DD4B005C3C57 /* StartAnimationViewController.m in Sources */,
 				E9B24BE11AF873E400322C0F /* BookSuccessViewController.m in Sources */,
 				519BBD481B7069EC0057DE73 /* CustomCollectionItem.m in Sources */,
 				510215521BA67ED600726F3C /* YOSResponseData.m in Sources */,
@@ -2271,6 +2318,7 @@
 				510215471BA67ED600726F3C /* YOAuthSignatureMethod_HMAC-SHA1.m in Sources */,
 				E9AE1FB21AD80455002E11AC /* StartupViewController.m in Sources */,
 				E9AE20191AD80A5E002E11AC /* MagicalImportFunctions.m in Sources */,
+				51490F0C1BD4920600EC8466 /* FLAnimatedImage.m in Sources */,
 				E9485B9F1AE006E2005D1688 /* AFURLSessionManager.m in Sources */,
 				E9AE20231AD80A5E002E11AC /* NSManagedObject+MagicalRecord.m in Sources */,
 				E98FCF3E1AD8CA9100992BF0 /* JingDianMapCell.m in Sources */,
@@ -2328,6 +2376,7 @@
 				E9AE20331AD80A5E002E11AC /* NSData+ImageContentType.m in Sources */,
 				E9AE20901AD80B68002E11AC /* RadioButton.m in Sources */,
 				51DA07301B8472D900271871 /* TPKeyboardAvoidingCollectionView.m in Sources */,
+				51490F111BD4F90200EC8466 /* GiFHUD.m in Sources */,
 				E95A23E31AE380B70050DCB1 /* SearchViewController.m in Sources */,
 				51C664461B82D9C600725F6E /* CellWithWebView.m in Sources */,
 				E9AE20811AD80B68002E11AC /* INTULocationRequest.m in Sources */,
@@ -2355,6 +2404,7 @@
 				5149F8461B85C23D00D780A0 /* ProductItem.m in Sources */,
 				E9485B991AE006E2005D1688 /* AFHTTPSessionManager.m in Sources */,
 				E9485B9E1AE006E2005D1688 /* AFURLResponseSerialization.m in Sources */,
+				51CD0CA81BC51AF6000D4828 /* DetailTravelViewController.m in Sources */,
 				E9D3BD6C1AD6BA5400F7429B /* main.m in Sources */,
 				E9C0FE301ADCB8E30042502C /* LocationTableViewCell.m in Sources */,
 				E9F3AB8B1B00639A00A91D9C /* AddressCell.m in Sources */,

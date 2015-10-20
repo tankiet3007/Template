@@ -98,7 +98,8 @@
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
-            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            item.iKind = [[dictItem objectForKey:@"product_kind"]intValue];
+            item.strType = [dictItem objectForKey:@"type"];
 
             if ([arrDeals count]>10) {
                 break;
@@ -197,7 +198,8 @@
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
-            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            item.iKind = [[dictItem objectForKey:@"product_kind"]intValue];
+            item.strType = [dictItem objectForKey:@"type"];
             [arrDeals addObject:item];
 
         }
@@ -293,7 +295,7 @@
     if (item.isNew == FALSE) {
         cell.lblNew.hidden = YES;
     }
-    if (item.iType == 1) {
+    if (item.iKind == 1) {
         cell.lblEVoucher.hidden = YES;
     }
     //        [cell.imgBrand sd_setImageWithURL:[NSURL URLWithString:item.strBrandImage] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];

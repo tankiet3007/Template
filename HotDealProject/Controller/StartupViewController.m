@@ -161,6 +161,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationUpdateLocation" object:nil];
     MainViewController * mainVC = [[MainViewController alloc]init];
     [self.navigationController pushViewController:mainVC animated:YES];
+//    [self presentViewController:mainVC animated:YES completion:nil];
 }
 
 //1 item --> height = 20 --> 10 item height = 200  // filter

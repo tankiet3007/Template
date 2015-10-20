@@ -26,8 +26,9 @@
 #import "CategoryTravelViewController.h"
 #import "DetailViewController.h"
 #import "DetailHasProductViewController.h"
+#import "GiFHUD.h"
 #define HEADER_HEIGHT 140
-#define PADDING 12
+#define PADDING 10
 #define FETCH_COUNT 10
 @interface MainViewController ()
 
@@ -45,7 +46,8 @@
     
     SWRevealViewController *revealController;
     ImageSlide *imageSlideTop;
-    UIScrollView * scrollView;
+    UIScrollView * scrollViewHot;
+    UIScrollView * scrollViewNew;
     UIScrollView * scrollViewCategory;
     NSMutableArray * arrNewDeals;
     UISegmentedControl *segmentedControl;
@@ -70,6 +72,7 @@
     UILabel * lblLastestDeal;
     
     NSMutableArray * arrCategory;
+    UIImageView *_explosion;
 }
 @synthesize tableViewMain;
 #pragma mark init Method
@@ -80,6 +83,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     isShowSortMenu= NO;
     iMenuselected = 0;
+    [self.tabBarController.tabBar setHidden:NO];
     //    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:LS(@"MessageBoxTitle") message:@"Có lỗi trong quá trình lấy dữ liệu" delegate:self cancelButtonTitle:@"Tải lại" otherButtonTitles:@"Huỷ", nil];
     //    [alert show];
     //    [self showDialog];
@@ -95,15 +99,6 @@
     //    {
     //        headerHeight = HEADER_HEIGHT;
     //    }
-    for (NSString* family in [UIFont familyNames])
-    {
-        NSLog(@"%@", family);
-        
-        for (NSString* name in [UIFont fontNamesForFamilyName: family])
-        {
-            NSLog(@"  %@", name);
-        }
-    }
     
     headerHeight = HEADER_HEIGHT;
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
@@ -132,7 +127,40 @@
     [self.navigationController.view addSubview:HUD];
     //    HUD.labelText = LS(@"LoadingData");
     [HUD hide:YES];
+    
+    
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    HUD.mode = MBProgressHUDModeCustomView;
+//    _explosion =  [self explosion];
+//    HUD.customView = _explosion;
 }
+
+
+
+- (UIImageView *) explosion{
+    //Position the explosion image view somewhere in the middle of your current view. In my case, I want it to take the whole view.Try to make the png to mach the view size, don't stretch it
+    _explosion = [[UIImageView alloc] initWithFrame:HUD.bounds];
+    
+    //Add images which will be used for the animation using an array. Here I have created an array on the fly
+    _explosion.animationImages =  @[[UIImage imageNamed:@"tab_home_a.png"], [UIImage imageNamed:@"tab_profile_a.png"],[UIImage imageNamed:@"tab_search_a.png"], [UIImage imageNamed:@"tab_setting_a.png"]];
+    
+    //Set the duration of the entire animation
+    _explosion.animationDuration = 0.5;
+    
+    //Set the repeat count. If you don't set that value, by default will be a loop (infinite)
+    _explosion.animationRepeatCount = 1;
+    
+    //Start the animationrepeatcount
+    [_explosion startAnimating];
+    
+    return _explosion;
+}
+
+//Call this method for start explosion animation
+//- (void) attachExplosionAnimation {
+//    [self addSubview:self.explosion];
+//}
+
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"notiDealCount" object:nil];
@@ -168,6 +196,8 @@
     arrDeals = [[NSMutableArray alloc]init];
     UA_log(@"%@",jsonDictionary);
     [HUD show:YES];
+//    [GiFHUD setGifWithImageName:@"jgr.gif"];
+//    [GiFHUD show];
     HUD.labelText = @"";
     [self getLocation];
     [[TKAPI sharedInstance]getRequestAF:jsonDictionary withURL:URL_DEAL_LIST completion:^(NSDictionary * dict, NSError *error) {
@@ -216,8 +246,10 @@
             }
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.isNew = YES;
+            UA_log(@"image link: %@",[dictItem objectForKey:@"image_link"]);
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
-            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            item.iKind = [[dictItem objectForKey:@"product_kind"]intValue];
+            item.strType = [dictItem objectForKey:@"type"];
             [arrDeals addObject:item];
         }
         if ([arrDeals count] == 0) {
@@ -227,7 +259,9 @@
         [self initUITableView];
         
         [self setupNewDeal];
+        [self setupHotDeal];
         [HUD hide:YES];
+//        [GiFHUD dismiss];
     }];
     
 }
@@ -292,7 +326,8 @@
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
-            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            item.iKind = [[dictItem objectForKey:@"product_kind"]intValue];
+            item.strType = [dictItem objectForKey:@"type"];
             
             if ([arrDeals count]>10) {
                 break;
@@ -363,7 +398,8 @@
             item.lStandarPrice = [[dictItem objectForKey:@"list_price"]doubleValue];
             item.isNew = YES;
             item.strBrandImage = [dictItem objectForKey:@"image_link"];
-            item.iType = [[dictItem objectForKey:@"type"]intValue];
+            item.iKind = [[dictItem objectForKey:@"product_kind"]intValue];
+            item.strType = [dictItem objectForKey:@"type"];
             [arrDeals addObject:item];
         }
         [tableViewMain reloadData];
@@ -414,10 +450,10 @@
         [scrollViewCategory removeFromSuperview];
         scrollViewCategory = nil;
     }
-    scrollViewCategory = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 110)];
+    scrollViewCategory = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 90)];
     scrollViewCategory.showsHorizontalScrollIndicator = NO;
     scrollViewCategory.backgroundColor = [UIColor whiteColor];
-    
+//    [scrollViewCategory setBounces:NO];
     //    [scrollViewCategory setBounces:NO];
     int x = 20;
     for (int i = 0; i < [arrCategory count]; i++) {
@@ -450,27 +486,27 @@
         
     }
     scrollViewCategory.contentSize = CGSizeMake(x, scrollViewCategory.frame.size.height);
-    UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 100, x, 10)];
-    vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
-    [scrollViewCategory addSubview:vPadding];
+//    UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 100, x, 10)];
+//    vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
+//    [scrollViewCategory addSubview:vPadding];
     return scrollViewCategory;
 }
 
 -(UIScrollView *)setupNewDeal
 {
-    if (scrollView != nil) {
-        [scrollView removeFromSuperview];
-        scrollView = nil;
+    if (scrollViewNew != nil) {
+        [scrollViewNew removeFromSuperview];
+        scrollViewNew = nil;
     }
-    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(PADDING, 40, ScreenWidth, 180)];
-    scrollView.backgroundColor = [UIColor clearColor];
-    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollViewNew = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 210)];
+    scrollViewNew.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.3];
+    scrollViewNew.showsHorizontalScrollIndicator = NO;
     //    [scrollView setBounces:NO];
     
-    int x = 0;
+    int x = 10;
     for (int i = 0; i < [arrDeals count]; i++) {
         DealItem *itemS = [[[NSBundle mainBundle] loadNibNamed:@"DealItem" owner:self options:nil] objectAtIndex:0];
-        [itemS setFrame:CGRectMake(x, 0, 250, 180)];
+        [itemS setFrame:CGRectMake(x, 0, 100, 200)];
         [itemS.btnTemp addTarget:self action:@selector(clickOnItem:) forControlEvents:UIControlEventTouchUpInside];
         itemS.btnTemp.tag = i;
         //        itemS.backgroundColor = [UIColor greenColor];
@@ -489,21 +525,72 @@
         strDiscountPrice = F(@"%@đ", strDiscountPrice);
         itemS.lblDiscountPrice.text = strDiscountPrice;
         itemS.lblTitle.text = item.strTitle;
-        //        [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:item.strBrandImage] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
-        [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://www.fightersgeneration.com/characters2/link-wind11.jpg"] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
-        if (item.isNew == FALSE) {
-            itemS.lblNew.hidden = YES;
+        if (i % 3 == 0) {
+            [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/714/151493-BUFFET-NHAT-SLIDE-_(1).jpg"] placeholderImage:nil];
         }
-        if (item.iType == 1) {
-            itemS.lblEVoucher.hidden = YES;
+        if (i % 3 == 1) {
+            [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/755/166986-mat-lanh-ngay-he-cung-moon-galeto-crem-slide_(4).jpg"] placeholderImage:nil];
         }
-        
+        if (i % 3 == 2) {
+            [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/754/79692_slide__(3).jpg"] placeholderImage:nil];
+        }
         x += itemS.frame.size.width + PADDING;
-        [scrollView addSubview:itemS];
+        [scrollViewNew addSubview:itemS];
     }
-    scrollView.contentSize = CGSizeMake(x, scrollView.frame.size.height);
-    return scrollView;
+    scrollViewNew.contentSize = CGSizeMake(x, scrollViewNew.frame.size.height);
+    return scrollViewNew;
 }
+
+-(UIScrollView *)setupHotDeal
+{
+    if (scrollViewHot != nil) {
+        [scrollViewHot removeFromSuperview];
+        scrollViewHot = nil;
+    }
+    scrollViewHot = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 210)];
+    scrollViewHot.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.3];
+    scrollViewHot.showsHorizontalScrollIndicator = NO;
+    //    [scrollView setBounces:NO];
+    
+    int x = 10;
+    for (int i = 0; i < [arrDeals count]; i++) {
+        DealItem *itemS = [[[NSBundle mainBundle] loadNibNamed:@"DealItem" owner:self options:nil] objectAtIndex:0];
+        [itemS setFrame:CGRectMake(x, 0, 100, 200)];
+        [itemS.btnTemp addTarget:self action:@selector(clickOnItem:) forControlEvents:UIControlEventTouchUpInside];
+        itemS.btnTemp.tag = i;
+        //        itemS.backgroundColor = [UIColor greenColor];
+        
+        DealObject * item = [arrDeals objectAtIndex:i];
+        NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
+        strStardarPrice = [strStardarPrice formatStringToDecimal];
+        NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+        NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
+        itemS.lblStandarPrice.attributedText = attributedString;
+        [itemS.lblStandarPrice sizeToFit];
+        itemS.lblNumOfBook.text = F(@"%d",item.buy_number);
+        
+        NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
+        strDiscountPrice = [strDiscountPrice formatStringToDecimal];
+        strDiscountPrice = F(@"%@đ", strDiscountPrice);
+        itemS.lblDiscountPrice.text = strDiscountPrice;
+        itemS.lblTitle.text = item.strTitle;
+        if (i % 3 == 0) {
+            [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/714/151493-BUFFET-NHAT-SLIDE-_(1).jpg"] placeholderImage:nil];
+        }
+        if (i % 3 == 1) {
+            [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/755/166986-mat-lanh-ngay-he-cung-moon-galeto-crem-slide_(4).jpg"] placeholderImage:nil];
+        }
+        if (i % 3 == 2) {
+            [itemS.imgBrand sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/754/79692_slide__(3).jpg"] placeholderImage:nil];
+        }
+        x += itemS.frame.size.width + PADDING;
+        [scrollViewHot addSubview:itemS];
+    }
+    scrollViewHot.contentSize = CGSizeMake(x, scrollViewHot.frame.size.height);
+    return scrollViewHot;
+}
+
+
 - (void)refresh:(id)sender
 {
     NSLog(@"Refreshing");
@@ -515,6 +602,7 @@
     // Initialize Refresh Control
     tableViewMain.dataSource = self;
     tableViewMain.delegate = self;
+    [tableViewMain setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [tableViewMain setAllowsSelection:YES];
     tableViewMain.separatorColor = [UIColor clearColor];
     
@@ -552,36 +640,58 @@
 -(void)initNavigationbar
 {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    
-    UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, self.navigationController.navigationBar.frame.size.width - 80, 28.0)];
-    textField.backgroundColor = [UIColor whiteColor];
-    textField.delegate = self;
-    //    textField.font = [UIFont systemFontOfSize:12];
-    textField.font = [UIFont fontWithName:@"Roboto-Regular" size:12];
-    textField.layer.cornerRadius = 15;
-    textField.placeholder = @"Tìm kiếm";
-    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 12, textField.frame.size.height)];
-    leftView.backgroundColor = textField.backgroundColor;
-    textField.leftView = leftView;
-    textField.leftViewMode = UITextFieldViewModeAlways;
-    
-    self.navigationItem.titleView = textField;
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero] ;
+    label.backgroundColor = [UIColor clearColor];
+    //    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.font = [UIFont fontWithName:@"Roboto-Bold" size:20];
+    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    label.textAlignment = NSTextAlignmentCenter;
+    // ^-Use UITextAlignmentCenter for older SDKs.
+    label.textColor = [UIColor whiteColor]; // change this color
+    self.navigationItem.titleView = label;
+    label.text = NSLocalizedString(@"HOTDEAL", @"");
+    [label sizeToFit];
+//    UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, self.navigationController.navigationBar.frame.size.width - 80, 28.0)];
+//    textField.backgroundColor = [UIColor whiteColor];
+//    textField.delegate = self;
+//    //    textField.font = [UIFont systemFontOfSize:12];
+//    textField.font = [UIFont fontWithName:@"Roboto-Regular" size:12];
+//    textField.layer.cornerRadius = 15;
+//    textField.placeholder = @"Tìm kiếm";
+//    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 12, textField.frame.size.height)];
+//    leftView.backgroundColor = textField.backgroundColor;
+//    textField.leftView = leftView;
+//    textField.leftViewMode = UITextFieldViewModeAlways;
+//    
+//    self.navigationItem.titleView = textField;
     //    UIImage *image = [UIImage imageNamed:@"menu_n.png"];
-    menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [menuBtn setTitle:@"HCM" forState:UIControlStateNormal];
-    //    menuBtn.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-    menuBtn.titleLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:12];
-    menuBtn.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-    menuBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
-    menuBtn.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-    menuBtn.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-    [menuBtn setImage:[UIImage imageNamed:@"ic_down"] forState:UIControlStateNormal];
-    [menuBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [menuBtn addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
-    //    [rBtest setBackgroundImage:image forState:UIControlStateNormal];
-    [menuBtn setFrame:CGRectMake(0, 0, 50, 30)];
+//    menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [menuBtn setTitle:@"HCM" forState:UIControlStateNormal];
+//    //    menuBtn.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+//    menuBtn.titleLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:12];
+//    menuBtn.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+//    menuBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
+//    menuBtn.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+//    menuBtn.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+//    [menuBtn setImage:[UIImage imageNamed:@"ic_down"] forState:UIControlStateNormal];
+//    [menuBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [menuBtn addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+//    //    [rBtest setBackgroundImage:image forState:UIControlStateNormal];
+//    [menuBtn setFrame:CGRectMake(0, 0, 50, 30)];
     
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc]initWithCustomView:menuBtn];
+//    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc]initWithCustomView:menuBtn];
+//    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    UIImage *image = [UIImage imageNamed:@"menu_n.png"];
+    UIButton * rBtest = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rBtest addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    [rBtest setBackgroundImage:image forState:UIControlStateNormal];
+    [rBtest setFrame:CGRectMake(0, 0, 30, 30)];
+    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rBtest];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
     UIButton *customButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
@@ -624,6 +734,7 @@
     //    NearLocationViewController * nearLC = [[NearLocationViewController alloc]init];
     //    [self.navigationController pushViewController:nearLC animated:YES];
     if ([arrProduct count] == 0) {
+        ALERT(LS(@"MessageBoxTitle"), @"Chưa có sản`` phẩm nào trong giỏ hàng");
         return;
     }
     CartViewController * shopping = [[CartViewController alloc]init];
@@ -641,9 +752,9 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 4) {
-        return [arrDeals count];
-    }
+//    if (section == 4) {
+//        return [arrDeals count];
+//    }
     return 1;
 }
 
@@ -651,7 +762,7 @@
 {
     if (indexPath.section == 0) {
         //        return headerHeight;
-        return 120;
+        return 90;
     }    if (indexPath.section == 1) {
         //        return 230;
         return headerHeight;
@@ -661,10 +772,10 @@
     //    }
     if (indexPath.section == 2) {
         //        return 40;
-        return 265;
+        return 130;
     }
-    if (indexPath.section == 4) {
-        return 100;
+    if (indexPath.section == 3 ||indexPath.section == 4) {
+        return 210;
     }
     return 50;
 }
@@ -702,7 +813,7 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.contentView.backgroundColor = [UIColor whiteColor];
-        cell.backgroundColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
         [cell.contentView addSubview:scrollViewCategory];
         return cell;
     }
@@ -720,9 +831,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.contentView addSubview:imageSlideTop];
         
-        UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 130, ScreenWidth, 10)];
-        vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
-        [cell.contentView addSubview:vPadding];
+//        UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 130, ScreenWidth, 10)];
+//        vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
+//        [cell.contentView addSubview:vPadding];
         
         return cell;
     }
@@ -734,137 +845,207 @@
         
         return cell;
     }
-    if (indexPath.section == 4) {
-        static NSString *simpleTableIdentifier = @"SupplierCell";
+//    if (indexPath.section == 4) {
+//        static NSString *simpleTableIdentifier = @"SupplierCell";
+//        
+//        SupplierCell *cell = (SupplierCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+//        if (cell == nil)
+//        {
+//            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SupplierCell" owner:self options:nil];
+//            cell = [nib objectAtIndex:0];
+//        }
+//        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(12, 98, ScreenWidth -20, 1)];
+//        line.tag = 101;
+//        line.backgroundColor = [UIColor lightGrayColor];
+//        [cell addSubview:line];
+//        
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
+//        DealObject * item = [arrDeals objectAtIndex:indexPath.row];
+//        cell.lblTitle.text = item.strTitle;
+//        UIView *backgroundView = [[UIView alloc]initWithFrame:cell.bounds];
+//        backgroundView.layer.borderColor = [[UIColor clearColor]CGColor];
+//        backgroundView.layer.borderWidth = 10.0f;
+//        cell.selectedBackgroundView = backgroundView;
+//        cell.backgroundColor = [UIColor clearColor];
+//        NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//        documentsPath = [documentsPath stringByAppendingPathComponent:@"PublicFolder"];
+//        //        cell.imgLogo.contentMode = UIViewContentModeScaleAspectFit;
+//        //        NSString *photourl = F(@"%@&size=250x250", item.strBrandImage);;
+//        //    if (isNetworkConnected == TRUE) {
+//        //        [[SDImageCache sharedImageCache] removeImageForKey:photourl fromDisk:YES];
+//        //    }
+//        //    [cell.imgLogo setImageWithURL:[NSURL URLWithString:photourl]usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//        if (indexPath.row % 3 == 0) {
+//            [cell.imgLogo sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/714/151493-BUFFET-NHAT-SLIDE-_(1).jpg"] placeholderImage:nil];
+//        }
+//        if (indexPath.row % 3 == 1) {
+//            [cell.imgLogo sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/755/166986-mat-lanh-ngay-he-cung-moon-galeto-crem-slide_(4).jpg"] placeholderImage:nil];
+//        }
+//        if (indexPath.row % 3 == 2) {
+//            [cell.imgLogo sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/754/79692_slide__(3).jpg"] placeholderImage:nil];
+//        }
+//        //        [cell.imgLogo sd_setImageWithURL:[NSURL URLWithString:@"http://dev.hotdeal.vn/index.php?dispatch=products.image_mapi&product_id=288045&size=250x250"] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
+//        float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
+//        cell.lblPercentage.text = F(@"%.0f%%", calculatePercent);
+//        //        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(82, 37, 120, 26) andStars:5 isFractional:YES];
+//        NSArray * arrSupView = [cell.contentView subviews];
+//        for (UIView * vItem in arrSupView) {
+//            if ([vItem isKindOfClass:[DLStarRatingControl class]]) {
+//                [vItem removeFromSuperview];
+//            }
+//        }
+//        
+//        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(85, 41, 100, 26)];
+//        if (IS_IPHONE_6_PLUS || IS_IPHONE_6_PLUS_) {
+//            [starRating setFrame:CGRectMake(92, 41, 100, 26)];
+//        }
+//        starRating.tag = indexPath.row +101;
+//        starRating.backgroundColor = [UIColor clearColor];
+//        //        cell.starRating.rating =  item.iRate ;
+//        starRating.rating = 3.5;
+//        //        starRating.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleBottomMargin;
+//        starRating.isFractionalRatingEnabled = YES;
+//        starRating.userInteractionEnabled = NO;
+//        [cell.contentView addSubview:starRating];
+//        NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
+//        strStardarPrice = [strStardarPrice formatStringToDecimal];
+//        NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+//        NSMutableAttributedString *attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
+//        [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Roboto-Regular" size:10]
+//                                           , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strStardarPrice length], 1)];
+//        
+//        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+//        cell.lblStandarPrice.attributedText = attributedString2;
+//        [cell.lblStandarPrice sizeToFit];
+//        cell.lblNumOfBook.text = F(@"%d",item.buy_number);
+//        //        cell.lblNumOfBook.text = F(@"%d",23595);
+//        
+//        NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
+//        strDiscountPrice = [strDiscountPrice formatStringToDecimal];
+//        //        strDiscountPrice = F(@"%@đ", strDiscountPrice);
+//        attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strDiscountPrice) attributes:nil];
+//        [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Roboto-Regular" size:10]
+//                                           , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strDiscountPrice length], 1)];
+//        
+//        cell.lblDiscountPrice.attributedText = attributedString2;
+//        cell.lblTitle.text = item.strTitle;
+//        
+//        if (bForceStop == TRUE) {
+//            return cell;
+//        }
+//        if (indexPath.row == 8) {
+//            UA_log(@"%ld --- %ld--- %@ --- %d", item.lStandarPrice, item.lDiscountPrice, item.strTitle, item.buy_number);
+//        }
+//        
+//        if (indexPath.row == [arrDeals count] - 1)
+//        {
+//            [self loadMoreDeal];
+//        }
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        return cell;
+//    }
+    if (indexPath.section == 3) {
+        static NSString *CellIdentifier = @"CellIdentifier";
         
-        SupplierCell *cell = (SupplierCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        
+        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:nil];
         if (cell == nil)
         {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SupplierCell" owner:self options:nil];
-            cell = [nib objectAtIndex:0];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
-        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(12, 98, ScreenWidth -20, 1)];
-        line.tag = 101;
-        line.backgroundColor = [UIColor lightGrayColor];
-        [cell addSubview:line];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
-        UA_log(@"indexPath.row %d", indexPath.row);
-        DealObject * item = [arrDeals objectAtIndex:indexPath.row];
-        cell.lblTitle.text = item.strTitle;
-        UIView *backgroundView = [[UIView alloc]initWithFrame:cell.bounds];
-        backgroundView.layer.borderColor = [[UIColor clearColor]CGColor];
-        backgroundView.layer.borderWidth = 10.0f;
-        cell.selectedBackgroundView = backgroundView;
-        cell.backgroundColor = [UIColor clearColor];
-        NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        documentsPath = [documentsPath stringByAppendingPathComponent:@"PublicFolder"];
-        //        cell.imgLogo.contentMode = UIViewContentModeScaleAspectFit;
-        //        NSString *photourl = F(@"%@&size=250x250", item.strBrandImage);;
-        //    if (isNetworkConnected == TRUE) {
-        //        [[SDImageCache sharedImageCache] removeImageForKey:photourl fromDisk:YES];
-        //    }
-        //    [cell.imgLogo setImageWithURL:[NSURL URLWithString:photourl]usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        if (indexPath.row % 3 == 0) {
-            [cell.imgLogo sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/714/151493-BUFFET-NHAT-SLIDE-_(1).jpg"] placeholderImage:nil];
-        }
-        if (indexPath.row % 3 == 1) {
-            [cell.imgLogo sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/755/166986-mat-lanh-ngay-he-cung-moon-galeto-crem-slide_(4).jpg"] placeholderImage:nil];
-        }
-        if (indexPath.row % 3 == 2) {
-            [cell.imgLogo sd_setImageWithURL:[NSURL URLWithString:@"http://images.hotdeals.vn/images/detailed/754/79692_slide__(3).jpg"] placeholderImage:nil];
-        }
-        //        [cell.imgLogo sd_setImageWithURL:[NSURL URLWithString:@"http://dev.hotdeal.vn/index.php?dispatch=products.image_mapi&product_id=288045&size=250x250"] placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
-        float calculatePercent = (1-(float)((float)item.lDiscountPrice/(float)item.lStandarPrice)) *100;
-        cell.lblPercentage.text = F(@"%.0f%%", calculatePercent);
-        //        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(82, 37, 120, 26) andStars:5 isFractional:YES];
-        NSArray * arrSupView = [cell.contentView subviews];
-        for (UIView * vItem in arrSupView) {
-            if ([vItem isKindOfClass:[DLStarRatingControl class]]) {
-                [vItem removeFromSuperview];
-            }
-        }
-        
-        DLStarRatingControl *starRating = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(85, 41, 100, 26)];
-        if (IS_IPHONE_6_PLUS) {
-            [starRating setFrame:CGRectMake(115, 41, 100, 26)];
-        }
-        starRating.tag = indexPath.row +101;
-        starRating.backgroundColor = [UIColor clearColor];
-        //        cell.starRating.rating =  item.iRate ;
-        starRating.rating = 3.5;
-        //        starRating.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleBottomMargin;
-        starRating.isFractionalRatingEnabled = YES;
-        starRating.userInteractionEnabled = NO;
-        [cell.contentView addSubview:starRating];
-        NSString * strStardarPrice = F(@"%ld", item.lStandarPrice);
-        strStardarPrice = [strStardarPrice formatStringToDecimal];
-        NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-        NSMutableAttributedString *attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strStardarPrice) attributes:attributes];
-        [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Roboto-Regular" size:10]
-                                           , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strStardarPrice length], 1)];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-        cell.lblStandarPrice.attributedText = attributedString2;
-        [cell.lblStandarPrice sizeToFit];
-        cell.lblNumOfBook.text = F(@"%d",item.buy_number);
-        //        cell.lblNumOfBook.text = F(@"%d",23595);
-        
-        NSString * strDiscountPrice = F(@"%ld", item.lDiscountPrice);
-        strDiscountPrice = [strDiscountPrice formatStringToDecimal];
-        //        strDiscountPrice = F(@"%@đ", strDiscountPrice);
-        attributedString2 = [[NSMutableAttributedString alloc] initWithString:F(@"%@đ",strDiscountPrice) attributes:nil];
-        [attributedString2 setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Roboto-Regular" size:10]
-                                           , NSBaselineOffsetAttributeName : @5} range:NSMakeRange([strDiscountPrice length], 1)];
-        
-        cell.lblDiscountPrice.attributedText = attributedString2;
-        cell.lblTitle.text = item.strTitle;
-        
-        if (bForceStop == TRUE) {
-            return cell;
-        }
-        if (indexPath.row == 8) {
-            UA_log(@"%ld --- %ld--- %@ --- %d", item.lStandarPrice, item.lDiscountPrice, item.strTitle, item.buy_number);
-        }
-        
-        if (indexPath.row == [arrDeals count] - 1)
-        {
-            [self loadMoreDeal];
-        }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor whiteColor];
+        [cell.contentView addSubview:scrollViewNew];
         return cell;
     }
-    if (indexPath.section == 3) {
+    if (indexPath.section == 4) {
+        static NSString *CellIdentifier = @"CellIdentifier";
+        
+        
+        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:nil];
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor whiteColor];
+        [cell.contentView addSubview:scrollViewHot];
+        return cell;
+        
+    }
+
+    
+//    if (indexPath.section == 3) {
+//        UIView * vHead = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
+//        UILabel *lblDeal = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth/2-80, 25, 140, 20)];
+//        lblDeal.text = @"DEAL TỔNG HỢP";
+//        //        lblDeal.font = [UIFont boldSystemFontOfSize:15];
+//        lblDeal.font = [UIFont fontWithName:@"Roboto-Regular" size:15];
+//        lblDeal.textAlignment = NSTextAlignmentCenter;
+//        lblDeal.textColor = [UIColor blackColor];
+//        [vHead addSubview:lblDeal];
+//        
+////        UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 10)];
+////        vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
+////        [vHead addSubview:vPadding];
+////        
+////        UIView * vLine = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/2-80, 46, 140, 4)];
+////        vLine.backgroundColor = [UIColor redColor];
+////        [vHead addSubview:vLine];
+////        
+////        UIView * vLine2 = [[UIView alloc]initWithFrame:CGRectMake(10, 50, ScreenWidth - 20, 1)];
+////        vLine2.backgroundColor = [UIColor lightGrayColor];
+////        [vHead addSubview:vLine2];
+//        
+//        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        //        [cell.contentView addSubview:viewHeader];
+//        [cell.contentView addSubview:vHead];
+//        return cell;
+//    }
+    
+    return nil;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 3) {
         UIView * vHead = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
-        UILabel *lblDeal = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth/2-80, 25, 140, 20)];
-        lblDeal.text = @"DEAL TỔNG HỢP";
-        //        lblDeal.font = [UIFont boldSystemFontOfSize:15];
+        UILabel *lblDeal = [[UILabel alloc]initWithFrame:CGRectMake(10, 25, 140, 20)];
+        lblDeal.text = @"DEAL HOT";
         lblDeal.font = [UIFont fontWithName:@"Roboto-Regular" size:15];
-        lblDeal.textAlignment = NSTextAlignmentCenter;
+        lblDeal.textAlignment = NSTextAlignmentLeft;
         lblDeal.textColor = [UIColor blackColor];
         [vHead addSubview:lblDeal];
         
-        UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 10)];
-        vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
-        [vHead addSubview:vPadding];
-        
-        UIView * vLine = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/2-80, 46, 140, 4)];
-        vLine.backgroundColor = [UIColor redColor];
-        [vHead addSubview:vLine];
-        
-        UIView * vLine2 = [[UIView alloc]initWithFrame:CGRectMake(10, 50, ScreenWidth - 20, 1)];
-        vLine2.backgroundColor = [UIColor lightGrayColor];
-        [vHead addSubview:vLine2];
-        
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //        [cell.contentView addSubview:viewHeader];
-        [cell.contentView addSubview:vHead];
-        return cell;
+        vHead.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.3];
+        return vHead;
     }
-    
+    if (section == 4)
+    {
+        UIView * vHead = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
+        UILabel *lblDeal = [[UILabel alloc]initWithFrame:CGRectMake(10, 25, 140, 20)];
+        lblDeal.text = @"DEAL MỚI NHẤT";
+        lblDeal.font = [UIFont fontWithName:@"Roboto-Regular" size:15];
+        lblDeal.textAlignment = NSTextAlignmentLeft;
+        lblDeal.textColor = [UIColor blackColor];
+        [vHead addSubview:lblDeal];
+        
+        vHead.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.3];
+        return vHead;
+    }
     return nil;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 3 || section == 4) {
+        return 50;
+    }
+    return 0;
 }
 -(UIView *)setupSegment
 {
@@ -899,9 +1080,9 @@
         [viewLarge removeFromSuperview];
         viewLarge = nil;
     }
-    viewLarge = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 255)];
+    viewLarge = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 120)];
     UIButton * btnBanner = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnBanner setFrame:CGRectMake(PADDING, 13, ScreenWidth-PADDING*2, 120)];
+    [btnBanner setFrame:CGRectMake(PADDING, 0, ScreenWidth-PADDING*2, 120)];
     [btnBanner setBackgroundImage:[UIImage imageNamed:@"demo0.jpg"] forState:UIControlStateNormal];
     //    [btnBanner sd_setImageWithURL:[NSURL URLWithString:@"http://images5.fanpop.com/image/photos/31700000/Link-Zelda-the-legend-of-zelda-31742637-900-678.png"] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
     [btnBanner addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
@@ -913,23 +1094,23 @@
     
     [viewLarge addSubview:btnBanner];
     
-    UIButton * btnBanner2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnBanner2 setFrame:CGRectMake(PADDING, HEIGHT(btnBanner)+PADDING+13, ScreenWidth/2-PADDING*2 + PADDING/2,120 )];
-    //    [btnBanner2 sd_setImageWithURL:[NSURL URLWithString:@"http://images5.fanpop.com/image/photos/31700000/Link-Zelda-the-legend-of-zelda-31742637-900-678.png"] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
-    [btnBanner2 setBackgroundImage:[UIImage imageNamed:@"demo1.jpg"] forState:UIControlStateNormal];
-    [btnBanner2 addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
-    btnBanner2.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    btnBanner2.layer.borderWidth = 2;
-    [viewLarge addSubview:btnBanner2];
-    
-    UIButton * btnBanner3 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnBanner3 setFrame:CGRectMake(ScreenWidth/2 + PADDING/2, HEIGHT(btnBanner)+PADDING+13, ScreenWidth/2-PADDING*2 + PADDING/2,  120)];
-    //    btnBanner3.layer.borderColor=[UIColor grayColor].CGColor;    [btnBanner3 sd_setImageWithURL:[NSURL URLWithString:@"http://images5.fanpop.com/image/photos/31700000/Link-Zelda-the-legend-of-zelda-31742637-900-678.png"] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
-    [btnBanner3 setBackgroundImage:[UIImage imageNamed:@"demo2.jpg"] forState:UIControlStateNormal];
-    [btnBanner3 addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
-    btnBanner3.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    btnBanner3.layer.borderWidth = 2;
-    [viewLarge addSubview:btnBanner3];
+//    UIButton * btnBanner2 = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btnBanner2 setFrame:CGRectMake(PADDING, HEIGHT(btnBanner)+PADDING+13, ScreenWidth/2-PADDING*2 + PADDING/2,120 )];
+//    //    [btnBanner2 sd_setImageWithURL:[NSURL URLWithString:@"http://images5.fanpop.com/image/photos/31700000/Link-Zelda-the-legend-of-zelda-31742637-900-678.png"] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
+//    [btnBanner2 setBackgroundImage:[UIImage imageNamed:@"demo1.jpg"] forState:UIControlStateNormal];
+//    [btnBanner2 addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
+//    btnBanner2.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//    btnBanner2.layer.borderWidth = 2;
+//    [viewLarge addSubview:btnBanner2];
+//    
+//    UIButton * btnBanner3 = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btnBanner3 setFrame:CGRectMake(ScreenWidth/2 + PADDING/2, HEIGHT(btnBanner)+PADDING+13, ScreenWidth/2-PADDING*2 + PADDING/2,  120)];
+//    //    btnBanner3.layer.borderColor=[UIColor grayColor].CGColor;    [btnBanner3 sd_setImageWithURL:[NSURL URLWithString:@"http://images5.fanpop.com/image/photos/31700000/Link-Zelda-the-legend-of-zelda-31742637-900-678.png"] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
+//    [btnBanner3 setBackgroundImage:[UIImage imageNamed:@"demo2.jpg"] forState:UIControlStateNormal];
+//    [btnBanner3 addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
+//    btnBanner3.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//    btnBanner3.layer.borderWidth = 2;
+//    [viewLarge addSubview:btnBanner3];
     
     return viewLarge;
     
@@ -960,25 +1141,28 @@
     if ([self isInternetReachable]) {
         if (indexPath.section == 4) {
             [tableView deselectRowAtIndexPath:indexPath animated:NO];
-            //            if (indexPath.row == 0) {
-            //                DetailHasProductViewController * detail = [[DetailHasProductViewController alloc]init];
-            //                DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
-            //                detail.iProductID = dealObj.product_id;
-            //                [self.navigationController pushViewController:detail animated:YES];
-            //
-            //            }
-            //            else
-            //            {
-            DetailViewController * detail = [[DetailViewController alloc]init];
             DealObject * dealObj = [arrDeals objectAtIndex:indexPath.row];
-            detail.iProductID = dealObj.product_id;
+            if (dealObj.iKind == 3) {
+                
+            }
             if (dealObj.product_id == 0 || [dealObj.strTitle isEqualToString:@""]) {
                 ALERT(LS(@"MessageBoxTitle"), @"Lỗi dữ liệu");
                 return;
             }
-            UA_log(@"%ld --- %ld--- %@ --- %d dealObj.product_id %d", dealObj.lStandarPrice, dealObj.lDiscountPrice, dealObj.strTitle, dealObj.buy_number, dealObj.product_id);
-            [self.navigationController pushViewController:detail animated:YES];
-            //            }
+            if ([dealObj.strType isEqualToString:@"P"]) {
+                DetailHasProductViewController * detail = [[DetailHasProductViewController alloc]init];
+                detail.iProductID = dealObj.product_id;
+                [self.navigationController pushViewController:detail animated:YES];
+                return;
+            }
+            else
+            {
+                DetailViewController * detail = [[DetailViewController alloc]init];
+                detail.iProductID = dealObj.product_id;
+                [self.navigationController pushViewController:detail animated:YES];
+                return;
+            }
+            
         }
     }
     else
@@ -1055,10 +1239,10 @@
     if ([self isInternetReachable]) {
         UIButton * btnTag = (UIButton *)sender;
         UA_log(@"button is at %ld index", (long)btnTag.tag);
-        HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
-        DealObject * dealObj = [arrDeals objectAtIndex:(long)btnTag.tag];
-        detail.iProductID = dealObj.product_id;
-        [self.navigationController pushViewController:detail animated:YES];
+//        HotNewDetailViewController * detail = [[HotNewDetailViewController alloc]init];
+//        DealObject * dealObj = [arrDeals objectAtIndex:(long)btnTag.tag];
+//        detail.iProductID = dealObj.product_id;
+//        [self.navigationController pushViewController:detail animated:YES];
     }
     else
     {

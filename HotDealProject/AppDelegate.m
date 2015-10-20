@@ -21,18 +21,19 @@
 #import "PaymentAndTransferViewController.h"
 #import "PostCommentAndRatingViewController.h"
 #import "PaymentInfoViewController.h"
+#import "StartAnimationViewController.h"
 static NSString * const kRecipesStoreName = @"HotDealProject.sqlite";//HotDealProject.sqlite
 @interface AppDelegate ()<SWRevealViewControllerDelegate>
 
 @property (strong, nonatomic)UIViewController *masterViewController;
-
+@property (strong, nonatomic)StartAnimationViewController *splashScreenController;
 @end
 
 @implementation AppDelegate
 {
     LeftMenuViewController *rearViewController;
 }
-
+@synthesize splashScreenController;
 
 - (NSUInteger)application:(UIApplication*)application
 supportedInterfaceOrientationsForWindow:(UIWindow*)window
@@ -48,131 +49,265 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
     
 }
 
-- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-
+/*- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+ UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+ [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+ UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+ UIGraphicsEndImageContext();
+ return newImage;
+ }
+ */
+/*
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self setupDB];
-    NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                               [UIColor whiteColor],UITextAttributeTextColor
-                                               , nil];
-    
-    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
-    
-    [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
-    UINavigationController *nc1;
-    nc1 = [[UINavigationController alloc] init];
-    [nc1.navigationBar setTintColor:[UIColor blackColor]];
-    nc1.tabBarItem.title = @"Home";
-//    UIImage *image1 = [UIImage imageNamed:@"tab_home"];
-//    nc1.tabBarItem.image = [self imageWithImage:image1 scaledToSize:CGSizeMake(30, 30)];
-    nc1.tabBarItem.image = [UIImage imageNamed:@"tab_home"];
-    nc1.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_home_a"];
-    
-    MainViewController *viewController1 = [[MainViewController alloc]init];
-    nc1.viewControllers = [NSArray arrayWithObjects:viewController1, nil];
-    
-    UINavigationController *nc2;
-    nc2 = [[UINavigationController alloc] init];
-    nc2.tabBarItem.title = @"Account";
-//    UIImage *image2 = [UIImage imageNamed:@"tab_profile"];
-//    nc2.tabBarItem.image = [self imageWithImage:image2 scaledToSize:CGSizeMake(30, 30)];
-    nc2.tabBarItem.image = [UIImage imageNamed:@"tab_profile"];
-    nc2.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_profile_a"];
-    [nc2.navigationBar setTintColor:[UIColor blackColor]];
-    SignInViewController *viewController2 = [[SignInViewController alloc]init];
-    nc2.viewControllers = [NSArray arrayWithObjects:viewController2, nil];
-    
-    
-    SignUpViewController *viewController3 = [[SignUpViewController alloc]init];
-    UINavigationController *nc3;
-    nc3 = [[UINavigationController alloc] init];
-//    UIImage *image3 = [UIImage imageNamed:@"tab_search"];
-//    nc3.tabBarItem.image = [self imageWithImage:image3 scaledToSize:CGSizeMake(30, 30)];
-    nc3.tabBarItem.image = [UIImage imageNamed:@"tab_search"];
-    nc3.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_search_a"];
-    [nc3.navigationBar setTintColor:[UIColor blackColor]];
-    nc3.tabBarItem.title = @"Login";
-    nc3.viewControllers = [NSArray arrayWithObjects:viewController3, nil];
-    
-    PaymentInfoViewController *viewController4 = [[PaymentInfoViewController alloc]init];
-    UINavigationController *nc4;
-    nc4 = [[UINavigationController alloc] init];
-    [nc4.navigationBar setTintColor:[UIColor blackColor]];
-    nc4.tabBarItem.title = @"Help";
-    nc4.tabBarItem.image = [UIImage imageNamed:@"tab_setting"];
-    nc4.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_setting_a"];
+    if (1) {
+        NSArray *objects = [[NSBundle mainBundle] loadNibNamed:@"LaunchScreen" owner:self options:nil];
+        UIView *view = [objects objectAtIndex:0];
+        _masterViewController = [[StartupViewController alloc]init];
+        
+        NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                   [UIColor whiteColor],UITextAttributeTextColor
+                                                   , nil];
+        
+        [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
+        
+        [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+        UINavigationController *nc1;
+        nc1 = [[UINavigationController alloc] init];
+        [nc1.navigationBar setTintColor:[UIColor blackColor]];
+        nc1.tabBarItem.title = @"Home";
+        //    UIImage *image1 = [UIImage imageNamed:@"tab_home"];
+        //    nc1.tabBarItem.image = [self imageWithImage:image1 scaledToSize:CGSizeMake(30, 30)];
+        nc1.tabBarItem.image = [UIImage imageNamed:@"tab_home"];
+        nc1.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_home_a"];
+        
+//        MainViewController *viewController1 = [[MainViewController alloc]init];
+        nc1.viewControllers = [NSArray arrayWithObjects:_masterViewController, nil];
+        
+        UINavigationController *nc2;
+        nc2 = [[UINavigationController alloc] init];
+        nc2.tabBarItem.title = @"Account";
+        //    UIImage *image2 = [UIImage imageNamed:@"tab_profile"];
+        //    nc2.tabBarItem.image = [self imageWithImage:image2 scaledToSize:CGSizeMake(30, 30)];
+        nc2.tabBarItem.image = [UIImage imageNamed:@"tab_profile"];
+        nc2.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_profile_a"];
+        [nc2.navigationBar setTintColor:[UIColor blackColor]];
+        SignInViewController *viewController2 = [[SignInViewController alloc]init];
+        nc2.viewControllers = [NSArray arrayWithObjects:viewController2, nil];
+        
+        
+        SignUpViewController *viewController3 = [[SignUpViewController alloc]init];
+        UINavigationController *nc3;
+        nc3 = [[UINavigationController alloc] init];
+        //    UIImage *image3 = [UIImage imageNamed:@"tab_search"];
+        //    nc3.tabBarItem.image = [self imageWithImage:image3 scaledToSize:CGSizeMake(30, 30)];
+        nc3.tabBarItem.image = [UIImage imageNamed:@"tab_search"];
+        nc3.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_search_a"];
+        [nc3.navigationBar setTintColor:[UIColor blackColor]];
+        nc3.tabBarItem.title = @"Login";
+        nc3.viewControllers = [NSArray arrayWithObjects:viewController3, nil];
+        
+        PaymentInfoViewController *viewController4 = [[PaymentInfoViewController alloc]init];
+        UINavigationController *nc4;
+        nc4 = [[UINavigationController alloc] init];
+        [nc4.navigationBar setTintColor:[UIColor blackColor]];
+        nc4.tabBarItem.title = @"Help";
+        nc4.tabBarItem.image = [UIImage imageNamed:@"tab_setting"];
+        nc4.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_setting_a"];
+        
+        //    UIImage *image4 = [UIImage imageNamed:@"tab_setting"];
+        //    nc4.tabBarItem.image = [self imageWithImage:image4 scaledToSize:CGSizeMake(30, 30)];
+        
+        nc4.viewControllers = [NSArray arrayWithObjects:viewController4, nil];
+        
+        
+        self.tabBarController = [[UITabBarController alloc] init];
+        self.tabBarController.viewControllers = [NSArray arrayWithObjects:nc1, nc2,nc3,nc4 ,nil];
+        
+        
+        [[UITabBar appearance] setSelectedImageTintColor:[UIColor redColor]];
+        [[UITabBar appearance]setBarTintColor:[UIColor whiteColor]];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        self.window.rootViewController = self.tabBarController;
+        [self.window makeKeyAndVisible];
+        [self checkNetwork];
+        [self.tabBarController.tabBar setHidden:YES];
+        return YES;
+    }
+    else
+    {
+        NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                   [UIColor whiteColor],UITextAttributeTextColor
+                                                   , nil];
+        
+        [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
+        
+        [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+        UINavigationController *nc1;
+        nc1 = [[UINavigationController alloc] init];
+        [nc1.navigationBar setTintColor:[UIColor blackColor]];
+        nc1.tabBarItem.title = @"Home";
+        //    UIImage *image1 = [UIImage imageNamed:@"tab_home"];
+        //    nc1.tabBarItem.image = [self imageWithImage:image1 scaledToSize:CGSizeMake(30, 30)];
+        nc1.tabBarItem.image = [UIImage imageNamed:@"tab_home"];
+        nc1.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_home_a"];
+        
+        MainViewController *viewController1 = [[MainViewController alloc]init];
+        nc1.viewControllers = [NSArray arrayWithObjects:viewController1, nil];
+        
+        UINavigationController *nc2;
+        nc2 = [[UINavigationController alloc] init];
+        nc2.tabBarItem.title = @"Account";
+        //    UIImage *image2 = [UIImage imageNamed:@"tab_profile"];
+        //    nc2.tabBarItem.image = [self imageWithImage:image2 scaledToSize:CGSizeMake(30, 30)];
+        nc2.tabBarItem.image = [UIImage imageNamed:@"tab_profile"];
+        nc2.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_profile_a"];
+        [nc2.navigationBar setTintColor:[UIColor blackColor]];
+        SignInViewController *viewController2 = [[SignInViewController alloc]init];
+        nc2.viewControllers = [NSArray arrayWithObjects:viewController2, nil];
+        
+        
+        SignUpViewController *viewController3 = [[SignUpViewController alloc]init];
+        UINavigationController *nc3;
+        nc3 = [[UINavigationController alloc] init];
+        //    UIImage *image3 = [UIImage imageNamed:@"tab_search"];
+        //    nc3.tabBarItem.image = [self imageWithImage:image3 scaledToSize:CGSizeMake(30, 30)];
+        nc3.tabBarItem.image = [UIImage imageNamed:@"tab_search"];
+        nc3.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_search_a"];
+        [nc3.navigationBar setTintColor:[UIColor blackColor]];
+        nc3.tabBarItem.title = @"Login";
+        nc3.viewControllers = [NSArray arrayWithObjects:viewController3, nil];
+        
+        PaymentInfoViewController *viewController4 = [[PaymentInfoViewController alloc]init];
+        UINavigationController *nc4;
+        nc4 = [[UINavigationController alloc] init];
+        [nc4.navigationBar setTintColor:[UIColor blackColor]];
+        nc4.tabBarItem.title = @"Help";
+        nc4.tabBarItem.image = [UIImage imageNamed:@"tab_setting"];
+        nc4.tabBarItem.selectedImage = [UIImage imageNamed:@"tab_setting_a"];
+        
+        //    UIImage *image4 = [UIImage imageNamed:@"tab_setting"];
+        //    nc4.tabBarItem.image = [self imageWithImage:image4 scaledToSize:CGSizeMake(30, 30)];
+        
+        nc4.viewControllers = [NSArray arrayWithObjects:viewController4, nil];
+        
+        
+        self.tabBarController = [[UITabBarController alloc] init];
+        self.tabBarController.viewControllers = [NSArray arrayWithObjects:nc1, nc2,nc3,nc4 ,nil];
+        
+        [[UITabBar appearance] setSelectedImageTintColor:[UIColor redColor]];
+        [[UITabBar appearance]setBarTintColor:[UIColor whiteColor]];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        self.window.rootViewController = self.tabBarController;
+        [self.window makeKeyAndVisible];
+        [self checkNetwork];
+        return YES;
+    }
+}
+*/
 
-//    UIImage *image4 = [UIImage imageNamed:@"tab_setting"];
-//    nc4.tabBarItem.image = [self imageWithImage:image4 scaledToSize:CGSizeMake(30, 30)];
-    
-    nc4.viewControllers = [NSArray arrayWithObjects:viewController4, nil];
-    
-    
-    self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:nc1, nc2,nc3,nc4 ,nil];
-    
-    [[UITabBar appearance] setSelectedImageTintColor:[UIColor redColor]];
-    [[UITabBar appearance]setBarTintColor:[UIColor whiteColor]];
-     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    self.window.rootViewController = self.tabBarController;
+//- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    [self setupDB];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//    if ((1)) {
+//        _masterViewController = [[StartupViewController alloc]init];
+//        //
+//        rearViewController = [[LeftMenuViewController alloc] init];
+//        
+//        UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:_masterViewController];
+//        UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
+//        
+//        SWRevealViewController *mainRevealController = [[SWRevealViewController alloc]
+//                                                        initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
+//        //    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHex:@"#bd0d18" alpha:1]];
+//        mainRevealController.delegate = self;
+//        
+//        self.viewController = mainRevealController;
+//        [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+//        
+//        self.window.rootViewController = self.viewController;
+//        [self.window makeKeyAndVisible];
+//        [self checkNetwork];
+//        return YES;
+//    }
+//    else
+//    {
+//        _masterViewController = [[MainViewController alloc]init];
+//        rearViewController = [[LeftMenuViewController alloc] init];
+//        UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:_masterViewController];
+//        UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
+//        
+//        SWRevealViewController *mainRevealController = [[SWRevealViewController alloc]
+//                                                        initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
+//        [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+//        mainRevealController.delegate = self;
+//        self.viewController = mainRevealController;
+//        self.window.rootViewController = self.viewController;
+//
+//        [self checkNetwork];
+//        return YES;
+//    }
+// }
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    splashScreenController = [[StartAnimationViewController alloc]init];
     [self.window makeKeyAndVisible];
-    [self checkNetwork];
+    [self.window addSubview:splashScreenController.view];
+    self.window.rootViewController = splashScreenController;
     return YES;
 }
+-(void)doneLoading {
+//    ProductionsController *controller = [[ProductionsController alloc] initWithStyle:UITableViewStylePlain];
+//    navController = [[UINavigationController alloc] initWithRootViewController:controller];
+//    navController.navigationBar.tintColor = [UIColor blackColor];
+//    [window insertSubview:navController.view belowSubview:splashScreenController.view];
+    [self setupDB];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    if ((1)) {
+        _masterViewController = [[StartupViewController alloc]init];
+        //
+        rearViewController = [[LeftMenuViewController alloc] init];
+        
+        UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:_masterViewController];
+        UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
+        
+        SWRevealViewController *mainRevealController = [[SWRevealViewController alloc]
+                                                        initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
+        mainRevealController.delegate = self;
+        
+        self.viewController = mainRevealController;
+        [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+        
+        self.window.rootViewController = self.viewController;
+        [self.window makeKeyAndVisible];
+        [self checkNetwork];
+    }
+    else
+    {
+        _masterViewController = [[MainViewController alloc]init];
+        rearViewController = [[LeftMenuViewController alloc] init];
+        UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:_masterViewController];
+        UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
+        
+        SWRevealViewController *mainRevealController = [[SWRevealViewController alloc]
+                                                        initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
+        [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+        mainRevealController.delegate = self;
+        self.viewController = mainRevealController;
+        self.window.rootViewController = self.viewController;
+        [self checkNetwork];
+    }
+    
+    [UIView beginAnimations:@"fadeIn" context:nil];
+    [UIView setAnimationDuration:1.5];
+    splashScreenController.view.alpha = 0;
+    [UIView commitAnimations];
 
-/*- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
- self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
- [self setupDB];
- [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
- if ((1)) {
- _masterViewController = [[StartupViewController alloc]init];
- //
- rearViewController = [[LeftMenuViewController alloc] init];
- 
- UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:_masterViewController];
- UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
- 
- SWRevealViewController *mainRevealController = [[SWRevealViewController alloc]
- initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
- //    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHex:@"#bd0d18" alpha:1]];
- mainRevealController.delegate = self;
- 
- self.viewController = mainRevealController;
- [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
- 
- self.window.rootViewController = self.viewController;
- [self.window makeKeyAndVisible];
- [self checkNetwork];
- return YES;
- }
- else
- {
- _masterViewController = [[MainViewController alloc]init];
- rearViewController = [[LeftMenuViewController alloc] init];
- 
- UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:_masterViewController];
- UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
- 
- SWRevealViewController *mainRevealController = [[SWRevealViewController alloc]
- initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
- [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
- mainRevealController.delegate = self;
- self.viewController = mainRevealController;
- self.window.rootViewController = self.viewController;
- [self.window makeKeyAndVisible];
- [self checkNetwork];
- return YES;
- }
- }
- */
+}
 -(void)checkNetwork
 {
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
@@ -201,7 +336,7 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero] ;
     label.backgroundColor = [UIColor clearColor];
-//    label.font = [UIFont boldSystemFontOfSize:20.0];
+    //    label.font = [UIFont boldSystemFontOfSize:20.0];
     label.font = [UIFont fontWithName:@"Roboto-Bold" size:20];
     label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
     label.textAlignment = NSTextAlignmentCenter;

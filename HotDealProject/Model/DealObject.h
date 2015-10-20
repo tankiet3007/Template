@@ -14,9 +14,11 @@
 @property (nonatomic,strong)NSString * strDescription;
 @property (nonatomic,assign)int buy_number;
 @property (nonatomic,assign)int product_id;
-@property (nonatomic, assign) int iType;//product or voucher
+
 @property (nonatomic ,assign) BOOL isNew;
 @property (nonatomic,assign)long  lStandarPrice;
 @property (nonatomic,assign)long  lDiscountPrice;
 @property (nonatomic,assign)double  iRate;
+@property (nonatomic, assign) int iKind;//1:voucher 2:product 3:travel
+@property (nonatomic,strong)NSString * strType;//P or H
 @end
