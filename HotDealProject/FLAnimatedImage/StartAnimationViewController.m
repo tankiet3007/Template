@@ -20,11 +20,11 @@
 -(void)viewDidLoad {
     progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
     int width = 200;
-    progressView.frame = CGRectMake((320-width)/2, (480-10)/2 + 20, width, 10);
+    progressView.frame = CGRectMake(40, SCREEN_HEIGHT -80, width, 10);
     progressView.tintColor = [UIColor whiteColor];
     [self.view addSubview:progressView];
-    myTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateUI:) userInfo:nil repeats: YES];
-    [self initHUD];
+    myTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(updateUI:) userInfo:nil repeats: YES];
+//    [self initHUD];
 }
 
 - (void)initHUD {
@@ -41,7 +41,8 @@
     if (count <=3)
     {
         self.progressView.progress = (float)count/3.0f;
-    } else
+    }
+    else
     {
         [myTimer invalidate];
         [HUD hide:YES];

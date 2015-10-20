@@ -104,7 +104,7 @@
     arrProduct = [[TKDatabase sharedInstance]getAllProductStored];
     bForceStop = FALSE;
     
-    
+    [self initSearchbar];
     [self initNavigationbar];
     [self initHUD];
     strCategory = @"default";
@@ -595,9 +595,30 @@
 {
     NSLog(@"Refreshing");
 }
+-(void)initSearchbar
+{
+    UIView * viewSearch = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 48)];
+    viewSearch.backgroundColor = [UIColor redColor];
+    [self.view addSubview:viewSearch];
+    UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(10, 10, ScreenWidth-20, 28.0)];
+    textField.backgroundColor = [UIColor whiteColor];
+    textField.delegate = self;
+    textField.font = [UIFont fontWithName:@"Roboto-Regular" size:12];
+    textField.layer.cornerRadius = 15;
+    textField.placeholder = @"Tìm kiếm";
+    UIImageView * imv = [[UIImageView alloc]initWithFrame:CGRectMake(20, 15, 15, 15)];
+    imv.image = [UIImage imageNamed:@"tab_search"];
+    
+    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, textField.frame.size.height)];
+    leftView.backgroundColor = textField.backgroundColor;
+    textField.leftView = leftView;
+    textField.leftViewMode = UITextFieldViewModeAlways;
+    [viewSearch addSubview:textField];
+    [viewSearch addSubview:imv];
+}
 -(void)initUITableView
 {
-    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 66) style:UITableViewStylePlain];
+    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(0, 48, ScreenWidth, ScreenHeight - 110) style:UITableViewStylePlain];//UITableViewStylePlain
     [self.view addSubview:tableViewMain];
     // Initialize Refresh Control
     tableViewMain.dataSource = self;
@@ -608,7 +629,10 @@
     
     tableViewMain.showsVerticalScrollIndicator = NO;
     //    tableViewMain.sectionHeaderHeight = 0.0;
-    
+    CGFloat dummyViewHeight = 40;
+    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableViewMain.bounds.size.width, dummyViewHeight)];
+    self.tableViewMain.tableHeaderView = dummyView;
+    self.tableViewMain.contentInset = UIEdgeInsetsMake(-dummyViewHeight, 0, 0, 0);
     __weak MainViewController *weakSelf = self;
     
     // setup pull-to-refresh
