@@ -622,18 +622,18 @@
 -(void)initSearchbar
 {
     UIView * viewSearch = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 48)];
-    viewSearch.backgroundColor = [UIColor redColor];
+    viewSearch.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
     [self.view addSubview:viewSearch];
     UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(10, 10, ScreenWidth-20, 28.0)];
     textField.backgroundColor = [UIColor whiteColor];
     textField.delegate = self;
     textField.font = [UIFont fontWithName:@"Roboto-Regular" size:12];
-    textField.layer.cornerRadius = 15;
+    textField.layer.cornerRadius = 13;
     textField.placeholder = @"Tìm kiếm";
-    UIImageView * imv = [[UIImageView alloc]initWithFrame:CGRectMake(20, 15, 15, 15)];
+    UIImageView * imv = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth-36, 15, 15, 15)];
     imv.image = [UIImage imageNamed:@"tab_search"];
     
-    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, textField.frame.size.height)];
+    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, textField.frame.size.height)];
     leftView.backgroundColor = textField.backgroundColor;
     textField.leftView = leftView;
     textField.leftViewMode = UITextFieldViewModeAlways;
@@ -653,8 +653,9 @@
     
     tableViewMain.showsVerticalScrollIndicator = NO;
     //    tableViewMain.sectionHeaderHeight = 0.0;
-    CGFloat dummyViewHeight = 40;
+    CGFloat dummyViewHeight = 50;
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableViewMain.bounds.size.width, dummyViewHeight)];
+    
     self.tableViewMain.tableHeaderView = dummyView;
     self.tableViewMain.contentInset = UIEdgeInsetsMake(-dummyViewHeight, 0, 0, 0);
     __weak MainViewController *weakSelf = self;
@@ -878,7 +879,9 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.contentView addSubview:imageSlideTop];
-        
+        cell.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+        cell.layer.shouldRasterize = YES;
+
 //        UIView * vPadding = [[UIView alloc]initWithFrame:CGRectMake(0, 130, ScreenWidth, 10)];
 //        vPadding.backgroundColor = [UIColor colorWithHex:@"#C0C0C0" alpha:0.5];
 //        [cell.contentView addSubview:vPadding];
@@ -890,7 +893,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         //        [cell.contentView addSubview:viewHeader];
         [cell.contentView addSubview:viewLarge];
-        
+        cell.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+        cell.layer.shouldRasterize = YES;
+
         return cell;
     }
 //    if (indexPath.section == 4) {
@@ -1007,6 +1012,9 @@
         cell.contentView.backgroundColor = [UIColor whiteColor];
         cell.backgroundColor = [UIColor whiteColor];
         [cell.contentView addSubview:scrollViewNew];
+        cell.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+        cell.layer.shouldRasterize = YES;
+
         return cell;
     }
     if (indexPath.section == 4) {
@@ -1023,6 +1031,9 @@
         cell.contentView.backgroundColor = [UIColor whiteColor];
         cell.backgroundColor = [UIColor whiteColor];
         [cell.contentView addSubview:scrollViewHot];
+        cell.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+        cell.layer.shouldRasterize = YES;
+
         return cell;
         
     }
@@ -1145,13 +1156,13 @@
     }
     viewLarge = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 120)];
     UIButton * btnBanner = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnBanner setFrame:CGRectMake(PADDING, 0, ScreenWidth-PADDING*2, 120)];
+    [btnBanner setFrame:CGRectMake(0, 0, ScreenWidth, 120)];
     [btnBanner setBackgroundImage:[UIImage imageNamed:@"demo0.jpg"] forState:UIControlStateNormal];
     //    [btnBanner sd_setImageWithURL:[NSURL URLWithString:@"http://images5.fanpop.com/image/photos/31700000/Link-Zelda-the-legend-of-zelda-31742637-900-678.png"] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"clickme-1-320x200"]];
     [btnBanner addTarget:self action:@selector(clickOnCategory:) forControlEvents:UIControlEventTouchUpInside];
     
-    btnBanner.layer.borderWidth = 2.0f;
-    btnBanner.layer.borderColor=[UIColor lightGrayColor].CGColor;
+//    btnBanner.layer.borderWidth = 2.0f;
+//    btnBanner.layer.borderColor=[UIColor lightGrayColor].CGColor;
     
     
     

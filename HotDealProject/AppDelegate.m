@@ -5,7 +5,7 @@
 //  Created by Tran Tan Kiet on 4/9/15.
 //  Copyright (c) 2015 Tran Tan Kiet. All rights reserved.
 //
-
+#import "RAViewController.h"
 #import "AppDelegate.h"
 #import "StartupViewController.h"
 #import "MainViewController.h"
@@ -31,7 +31,7 @@ static NSString * const kRecipesStoreName = @"HotDealProject.sqlite";//HotDealPr
 
 @implementation AppDelegate
 {
-    LeftMenuViewController *rearViewController;
+    RAViewController *rearViewController;
 }
 @synthesize splashScreenController;
 
@@ -270,7 +270,7 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
     if ((1)) {
         _masterViewController = [[StartupViewController alloc]init];
         //
-        rearViewController = [[LeftMenuViewController alloc] init];
+        rearViewController = [[RAViewController alloc] init];
         
         UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:_masterViewController];
         UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
@@ -289,7 +289,7 @@ supportedInterfaceOrientationsForWindow:(UIWindow*)window
     else
     {
         _masterViewController = [[MainViewController alloc]init];
-        rearViewController = [[LeftMenuViewController alloc] init];
+        rearViewController = [[RAViewController alloc] init];
         UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:_masterViewController];
         UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
         
