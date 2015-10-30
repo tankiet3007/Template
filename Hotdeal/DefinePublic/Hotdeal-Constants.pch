@@ -1,0 +1,88 @@
+//
+//  Hotdeal-Constants.pch
+//  Hotdeal
+//
+//  Created by IOS Hotdeal on 10/23/15.
+//  Copyright © 2015 IOS Hotdeal. All rights reserved.
+//
+
+#ifndef Hotdeal_Constants_pch
+#define Hotdeal_Constants_pch
+
+#import "AFAppDotNetAPIClient.h"
+#import "UIImage+AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
+#import "UIButton+AFNetworking.h"
+#import "MBProgressHUD.h"
+#import "NSString+MD5.h"
+#import "AppDelegate.h"
+#import "UIColor+CreateMethods.h"
+#import "CategoryHome.h"
+#import "ProductObj.h"
+#import "SWRevealViewController.h"
+#import "LocationObj.h"
+#import "NSString+Helper.h"
+#import "SWRevealViewController.h"
+#import "MVYSideMenuController.h"
+#define UA_log( s, ... ) NSLog( @"<%@:%d, Func: %s> %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__,__FUNCTION__,  [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#define ALERT(title, msg) [[[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show]
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define WIDTH(view) view.frame.size.width
+#define HEIGHT(view) view.frame.size.height
+#define X(view) view.frame.origin.x
+#define Y(view) view.frame.origin.y
+#define F(string, args...) [NSString stringWithFormat:string, args]
+
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+#define NotifCenter                     [NSNotificationCenter defaultCenter]
+
+#define NotifReg(o,s,n)                 [NotifCenter addObserver:o selector:s name:n object:nil]
+#define NotifRegMe(o,s,n)               [NotifCenter addObserver:o selector:s name:n object:o]
+#define NotifRegObj(t,s,n,o)            [NotifCenter addObserver:t selector:s name:n object:o]
+#define NotifUnreg(o,n)                 [NotifCenter removeObserver:o name:n object:nil]
+#define NotifUnregAll(o)                [NotifCenter removeObserver:o]
+
+#define NotifPost2Obj4Info(n,o,i)       [NotifCenter postNotificationName:n object:o userInfo:i]
+#define NotifPost2Obj(n,o)              NotifPost2Obj4Info(n,o,nil)
+#define NotifPost(n)                    NotifPost2Obj(n,nil)
+
+#define NotifPostNotif(n)               [NotifCenter postNotification:n]
+#define IS_IPHONE                       (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_IPHONE5                      (([[UIScreen mainScreen] bounds].size.height-568)?NO:YES)
+#define IS_IPHONE6                      (([[UIScreen mainScreen] bounds].size.height-667)?NO:YES)
+
+#define kSystemFonSizeRevert(sizeF)     [UIFont systemFontOfSize:sizeF]//[UIFont fontWithName:@"Roboto-Regular" size:sizeF]
+#define kBoldsyStemFonSizeRevert(sizeF)  [UIFont boldSystemFontOfSize:sizeF]//[UIFont fontWithName:@"Roboto-Bold" size:sizeF]
+#define kItalicStemFonSizeRevert(sizeF)  [UIFont fontWithName:@"Roboto-Italic" size:sizeF]
+#define SetStringFromDataServer(s)       [NSString stringWithFormat:@"%@",s]
+
+#define kDocumentDirectory              [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
+
+#define kListCategoryFromCache          @"From-List-Category.plist"
+#define kHomePageFromCache              @"From-Home-Page.plist"
+#define kBannerPageFromCache            @"From-Banner-Home-Page.plist"
+
+#define kKeyPrivateAPI                  @"hd_iOS_2015_10_22"
+
+#define API_Domain                      @"http://dev-mapi.hotdeal.vn"
+
+#define kBOGetInfoApp                   @"info.get"
+#define kBOGetListCategory              @"category.getList"
+#define kBOGetHomePage                  @"category.getHomeProduct"
+#define kBOGetBannerPage                @"banner.getList"
+#define kBOGetLocationList              @"location.getList"
+#define kBOGetProductInCategory         @"product.getList"
+#define kBOGetDetailPage                @"product.getDetail"
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* Hotdeal_Constants_pch */
